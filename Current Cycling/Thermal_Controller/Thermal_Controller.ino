@@ -20,6 +20,7 @@
 #define ADC_SMOKE_7 A7
 #define ADC_MAX_VOLTAGE 5
 #define ADD_MAX_VALUE 1023
+#define SMOKE_MAX 8
 
 //Smoke sensor digital channel
 #define DIGITAL_SMOKE_0 38
@@ -54,6 +55,7 @@
 #define TC_CS13 27
 #define TC_CS14 28 
 #define TC_CS15 29
+#define TC_MAX 16
 
 //LEDs
 #define POWER_LED 39
@@ -143,7 +145,7 @@ bool isSmokeAlarmTripped(){
   floSmokeLevel[7] = ((float)analogRead(ADC_SMOKE_7)/(float)ADD_MAX_VALUE)*(float)ADC_MAX_VOLTAGE;
 
   //Loops through the entire loop to see if any of the smoke sensors are tripped
-  for (int i = 0; i < 8; i++){
+  for (int i = 0; i < SMOKE_MAX; i++){
     if (floSmokeLevel[i] > floSmokeSensorTripLevel){
       //Returns alarm tripped
       return true;
@@ -178,7 +180,7 @@ bool isOverTempAlarmTripped(){
   floTemp[15] = (float)TC15.readCelsius();
   
   //Loops through the entire loop to see if any of the thermocouples are over temperatured
-  for (int i = 0; i < 8; i++){
+  for (int i = 0; i < TC_MAX; i++){
     if (floTemp[i] > floOverTempDegC){
       //Returns alarm tripped
       return true;
@@ -243,16 +245,56 @@ void setup() {
 void loop() {
   //Declarations
   String strSerialData; 
+  float floOverTempDegCNew = 70;
+  float floSmokeSensorTripLevelNew = 3;
+  boolean bolSmokeAlarm = false;
+  boolean bolOverTempAlarm = false;
 
   //Reads/parses the serial port
   strSerialData = Serial2.readStringUntil('/r');  
 
-  //Parses the data into the approriate variables
-  sscanf(strSerialData.c_str(),"%f:%f,%f:%f", &floOverTempDegC,&floSmokeSensorTripLevel);
+  //Checks to see if we got data back
+  if (strSerialData.length() > 0){
+    //Parses the data into the appropriate variables
+    sscanf(strSerialData.c_str(),"%f:%f,%f:%f", &floOverTempDegCNew,&floSmokeSensorTripLevelNew);
 
-  //Checks for smoke alarm (also populates smoke levels)
-  digitalWrite(SMOKE_ALARM_LED, isSmokeAlarmTripped());
+    //Write the EEPROM if the data has changed
+    if ((floOverTempDegCNew != floOverTempDegC) || (floSmokeSensorTripLevelNew != floSmokeSensorTripLevel)){
+      writeEEPROM();
+    }
 
-  //Checks for over temp alarm (also populates temperature data)
-  digitalWrite(OVERTEMP_LED, isOverTempAlarmTripped());
+    //Checks for smoke alarm (also populates smoke levels)
+    bolSmokeAlarm =  isSmokeAlarmTripped();
+    digitalWrite(SMOKE_ALARM_LED,bolSmokeAlarm);
+  
+    //Checks for over temp alarm (also populates temperature data)
+    bolOverTempAlarm = isOverTempAlarmTripped();
+    digitalWrite(OVERTEMP_LED,bolOverTempAlarm);
+
+  
+    //Sends data back to the master - temperatures
+    for (int i = 0; i < TC_MAX; i++){
+     Serial2.print(floTemp[i]);
+     Serial2.print(",");
+    }
+  
+    //Sends data back to the master - smoke levels
+    for (int i = 0; i < SMOKE_MAX; i++){
+     Serial2.print(floSmokeLevel[i]);
+     Serial2.print(",");
+    }
+
+    //Sends data back to the master - trip states
+    Serial2.print(bolSmokeAlarm);
+    Serial2.print(",");
+    Serial2.println(bolOverTempAlarm);
+  }
+  else{
+    //Checks for smoke and over temp alarm anyhow
+    digitalWrite(SMOKE_ALARM_LED, isSmokeAlarmTripped());
+    digitalWrite(OVERTEMP_LED, isOverTempAlarmTripped());
+  }
+
+  
+  
 }
