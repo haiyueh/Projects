@@ -34,7 +34,7 @@
 
 //Smoke sensor trip threshold
 #define SMOKE_SENSOR_TRIP_LEVEL_ADDRESS 0
-#define OVER_TEMP_LEVEL_ADDRESS 4095
+#define OVER_TEMP_LEVEL_ADDRESS 4
 
 //Thermocouple conditioners
 #define TC_MISO 50
@@ -65,6 +65,8 @@
 //Misc
 #define EEPROM_USED_ADDRESS 4093
 #define EEPROM_USED_CHECKNUMBER 42
+#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5
+#define BAUD_RATE_MASTER 115200
 
 
 //============================================================================
@@ -78,7 +80,7 @@ bool bolSmokeTripped[8];
 
 //Trip levels
 float floSmokeSensorTripLevel = 3.0; 
-float floOverTempDegC = 70; 
+float floOverTempDegC = 100; 
 
 //Thermocouple conditioners
 MAX6675 TC0(TC_SCK, TC_CS0, TC_MISO);
@@ -198,8 +200,8 @@ bool isOverTempAlarmTripped(){
 //============================================================================
 void setup() {
   //Sets up the serial port
-  Serial2.begin(115200);
-  Serial2.setTimeout(5); 
+  Serial.begin(BAUD_RATE_MASTER);
+  Serial.setTimeout(THERMAL_CONTROL_HEARTBEAT_LENGTH); 
 
   //Sets the data direction
   pinMode(TC_SCK, OUTPUT);
@@ -234,6 +236,8 @@ void setup() {
   //Sets the power LED to on
   digitalWrite(POWER_LED, HIGH);
 
+  //Reads the EEPROM
+  readEEPROM();
 }
 
 
@@ -245,18 +249,18 @@ void setup() {
 void loop() {
   //Declarations
   String strSerialData; 
-  float floOverTempDegCNew = 70;
+  float floOverTempDegCNew = 100;
   float floSmokeSensorTripLevelNew = 3;
   boolean bolSmokeAlarm = false;
   boolean bolOverTempAlarm = false;
 
-  //Reads/parses the serial port
-  strSerialData = Serial2.readStringUntil('/r');  
+  //Reads the serial port
+  strSerialData = Serial.readStringUntil('/r');  
 
   //Checks to see if we got data back
   if (strSerialData.length() > 0){
     //Parses the data into the appropriate variables
-    sscanf(strSerialData.c_str(),"%f:%f,%f:%f", &floOverTempDegCNew,&floSmokeSensorTripLevelNew);
+    sscanf(strSerialData.c_str(),"%f,%f", &floOverTempDegCNew,&floSmokeSensorTripLevelNew);
 
     //Write the EEPROM if the data has changed
     if ((floOverTempDegCNew != floOverTempDegC) || (floSmokeSensorTripLevelNew != floSmokeSensorTripLevel)){
@@ -274,20 +278,20 @@ void loop() {
   
     //Sends data back to the master - temperatures
     for (int i = 0; i < TC_MAX; i++){
-     Serial2.print(floTemp[i]);
-     Serial2.print(",");
+     Serial.print(floTemp[i]);
+     Serial.print(",");
     }
   
     //Sends data back to the master - smoke levels
     for (int i = 0; i < SMOKE_MAX; i++){
-     Serial2.print(floSmokeLevel[i]);
-     Serial2.print(",");
+     Serial.print(floSmokeLevel[i]);
+     Serial.print(",");
     }
 
     //Sends data back to the master - trip states
-    Serial2.print(bolSmokeAlarm);
-    Serial2.print(",");
-    Serial2.println(bolOverTempAlarm);
+    Serial.print(bolSmokeAlarm);
+    Serial.print(",");
+    Serial.println(bolOverTempAlarm);
   }
   else{
     //Checks for smoke and over temp alarm anyhow
