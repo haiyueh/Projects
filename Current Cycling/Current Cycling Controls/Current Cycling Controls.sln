@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currenty Cycling Controls", "Currenty Cycling Controls\Currenty Cycling Controls.csproj", "{2A19B507-6B1F-4890-B5D8-7F30AAC058B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Current Cycling Controls", "Current Cycling Controls\Current Cycling Controls.csproj", "{2A19B507-6B1F-4890-B5D8-7F30AAC058B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
