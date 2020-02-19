@@ -1,0 +1,14 @@
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.csprojAssemblyReference.cache
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK_Lambda_Communications.frmMain.resources
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK_Lambda_Communications.Properties.Resources.resources
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.csproj.GenerateResource.cache
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\bin\Debug\TDK Lambda Communications.exe.config
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\bin\Debug\TDK Lambda Communications.exe
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\bin\Debug\TDK Lambda Communications.pdb
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.exe
+C:\OneDrive - Sunpower Corporation\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.pdb
+C:\Git\Projects\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.exe
+C:\Git\Projects\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.pdb
+C:\Git\Projects\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.csprojAssemblyReference.cache
+C:\Git\Projects\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK_Lambda_Communications.frmMain.resources
+C:\Git\Projects\Current Cycling\TDK Lambda Communications\TDK Lambda Communications\obj\Debug\TDK Lambda Communications.csproj.GenerateResource.cache
