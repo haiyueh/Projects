@@ -52,7 +52,7 @@
 #define new_max(x,y) ((x) >= (y)) ? (x) : (y)
 #define NUMBER_OF_SMOKE_SENSORS 8
 #define NUMBER_OF_TEMP_SENSORS 16
-
+#define MINIMUM_UART_BUFFER_LENGTH 5
 
 //============================================================================
 //Declarations
@@ -236,40 +236,63 @@ void CalculatePWM(void){
 void readWriteDataFromThermalController(){
   //Declarations
   String strSerialData;
+  char chrSerialData[256];
+  int x = 0;
   
   //Sends data to the thermal controller
   Serial2.print(floOverTempDegC);
   Serial2.print(",");
   Serial2.println(floSmokeSensorTripLevel);
-  //Serial2.println("&");
 
-   //Reads data back from the thermal controller
+  //Reads data back from the thermal controller
   strSerialData = Serial2.readStringUntil('\n');
-
+  
   //Checks to see if we got data back
-  if (strSerialData.length() > 0){
+  if (strSerialData.length() > MINIMUM_UART_BUFFER_LENGTH){
     //Heartbeat success
     bolThermalControllerHeartBeatGood = true;
 
-   
-    
-    //Parses the data into the appropriate variables
-    sscanf(strSerialData.c_str(),"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%s,%s",
-      &floTemp[0],&floTemp[1],&floTemp[2],&floTemp[3],&floTemp[4],&floTemp[5],&floTemp[6],&floTemp[7],&floTemp[8],&floTemp[9],&floTemp[10],&floTemp[11],&floTemp[12],&floTemp[13],&floTemp[14],&floTemp[15],
-      &floSmokeLevel[0],&floSmokeLevel[1],&floSmokeLevel[2],&floSmokeLevel[3],&floSmokeLevel[4],&floSmokeLevel[5],&floSmokeLevel[6],&floSmokeLevel[7],&strSmokeAlarm,&strOverTempAlarm);
+    //Converts the string to character array
+    strSerialData.toCharArray(chrSerialData,256);
 
+    //Uses string tokenizer to parse the character array for temperature
+    floTemp[0] = atof(strtok(chrSerialData,","));  
+    for (x = 1; x < 16; x++){
+       floTemp[1] = atof(strtok(NULL, ",")); 
     }
+
+    //Parses smoke level
+    for (x = 0; x < 8; x++){
+       floSmokeLevel[x] = atof(strtok(NULL, ",")); 
+    }
+
+    //Parses the smoke alarm
+    if (atoi(strtok(NULL, ",")) == 0){
+      //No smoke alarm
+      bolSmokeAlarmOn = false;
+    }
+    else{
+      //Smoke alarm
+      bolSmokeAlarmOn = true;
+    }
+
+    //Parses the temperature alarm
+    if (atoi(strtok(NULL, ",")) == 0){
+      //No smoke alarm
+      bolOverTempAlarmOn = false;
+    }
+    else{
+      //Smoke alarm
+      bolOverTempAlarmOn = true;
+    }
+  }
   else {
     //Heartbeat fails - disables power supplies and fans
     bolThermalControllerHeartBeatGood = false;
     execEmergencyAction(true);
   }
 
- //Serial.println(floTemp[0]);
-  
-      
-  
-  //Converts alarms to booleans [TODO]
+
 }
 
 //============================================================================
