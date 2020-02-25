@@ -1,3 +1,11 @@
+//============================================================================
+//Notes
+//============================================================================
+// 1. Please set UART buffer to 256 before uploading. Refer to
+//    http://www.hobbytronics.co.uk/arduino-serial-buffer-size
+//    for reference. The files might be in a different location depending on
+//    what version of Arduino you use. 
+
 
 //============================================================================
 //Includes
@@ -36,11 +44,11 @@
 #define FAN_POWER_INTERLOCK 15
 
 //Misc
-#define PC_HEARTBEAT_LENGTH 5
-#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5
+#define PC_HEARTBEAT_LENGTH 5000
+#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5000
 #define BAUD_RATE_THERMAL_CONTROLLER 115200
 #define BAUD_RATE_PC 115200
-#define TIMED_LOOP_DURATION_US 100000
+#define TIMED_LOOP_DURATION_US 1000000
 #define new_max(x,y) ((x) >= (y)) ? (x) : (y)
 #define NUMBER_OF_SMOKE_SENSORS 8
 #define NUMBER_OF_TEMP_SENSORS 16
@@ -233,20 +241,23 @@ void readWriteDataFromThermalController(){
   Serial2.print(floOverTempDegC);
   Serial2.print(",");
   Serial2.println(floSmokeSensorTripLevel);
+  //Serial2.println("&");
 
    //Reads data back from the thermal controller
-  strSerialData = Serial2.readStringUntil('/r');
+  strSerialData = Serial2.readStringUntil('\n');
 
   //Checks to see if we got data back
   if (strSerialData.length() > 0){
     //Heartbeat success
     bolThermalControllerHeartBeatGood = true;
+
+   
     
     //Parses the data into the appropriate variables
     sscanf(strSerialData.c_str(),"%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%s,%s",
-      floTemp[0],floTemp[1],floTemp[2],floTemp[3],floTemp[4],floTemp[5],floTemp[6],floTemp[7],floTemp[8],floTemp[9],floTemp[10],floTemp[11],floTemp[12],floTemp[13],floTemp[14],floTemp[15],
-      floSmokeLevel[0],floSmokeLevel[1],floSmokeLevel[2],floSmokeLevel[3],floSmokeLevel[4],floSmokeLevel[5],floSmokeLevel[6],floSmokeLevel[7],strSmokeAlarm,strOverTempAlarm);
-    
+      &floTemp[0],&floTemp[1],&floTemp[2],&floTemp[3],&floTemp[4],&floTemp[5],&floTemp[6],&floTemp[7],&floTemp[8],&floTemp[9],&floTemp[10],&floTemp[11],&floTemp[12],&floTemp[13],&floTemp[14],&floTemp[15],
+      &floSmokeLevel[0],&floSmokeLevel[1],&floSmokeLevel[2],&floSmokeLevel[3],&floSmokeLevel[4],&floSmokeLevel[5],&floSmokeLevel[6],&floSmokeLevel[7],&strSmokeAlarm,&strOverTempAlarm);
+
     }
   else {
     //Heartbeat fails - disables power supplies and fans
@@ -254,7 +265,7 @@ void readWriteDataFromThermalController(){
     execEmergencyAction(true);
   }
 
- 
+ //Serial.println(floTemp[0]);
   
       
   
@@ -371,7 +382,7 @@ void InitLED(){
 //======================================================================
 void TimedLoop(){
     //Reads and writes the data from the thermal controller
-    //readWriteDataFromThermalController();
+    readWriteDataFromThermalController();
 
     //Checks to see if E-Stop is pressed
     execEmergencyAction(isEMOPressed);
@@ -409,8 +420,8 @@ void setup() {
   InitLED();
 
   //Timer that calls function TimedLoop every TIMED_LOOP_DURATION_US uS 
-  Timer1.initialize(TIMED_LOOP_DURATION_US);
-  Timer1.attachInterrupt(TimedLoop);
+  //Timer1.initialize(TIMED_LOOP_DURATION_US);
+  //Timer1.attachInterrupt(TimedLoop);
 
 }
 
@@ -422,8 +433,11 @@ void loop() {
   //Declarations
   String strSerialPC;
   
-  //Reads data from the PC
-  strSerialPC = Serial.readStringUntil('/r');
+  readWriteDataFromThermalController();
+  sendDataToPC();
+  delay(100);
+  /*//Reads data from the PC
+  strSerialPC = Serial.readStringUntil('\n');
 
   //Checks to see if we got data back
   if (strSerialPC.length() > 0){
@@ -436,5 +450,5 @@ void loop() {
   else {
     //Heartbeat fails - disables power supplies and fans
     execEmergencyAction(true);
-  }
+  }*/
 }

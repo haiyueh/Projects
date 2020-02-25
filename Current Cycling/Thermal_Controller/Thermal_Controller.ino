@@ -1,4 +1,13 @@
 //============================================================================
+//Notes
+//============================================================================
+// 1. Please set UART buffer to 256 before uploading. Refer to
+//    http://www.hobbytronics.co.uk/arduino-serial-buffer-size
+//    for reference. The files might be in a different location depending on
+//    what version of Arduino you use. 
+
+
+//============================================================================
 //Includes
 //============================================================================
 #include <max6675.h>
@@ -65,7 +74,7 @@
 //Misc
 #define EEPROM_USED_ADDRESS 4093
 #define EEPROM_USED_CHECKNUMBER 42
-#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5
+#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5000
 #define BAUD_RATE_MASTER 115200
 
 
@@ -199,9 +208,9 @@ bool isOverTempAlarmTripped(){
 //Notes: code runs once
 //============================================================================
 void setup() {
-  //Sets up the serial port
-  Serial.begin(BAUD_RATE_MASTER);
-  Serial.setTimeout(THERMAL_CONTROL_HEARTBEAT_LENGTH); 
+  //Sets up the Serial port
+  Serial2.begin(BAUD_RATE_MASTER);
+  Serial2.setTimeout(THERMAL_CONTROL_HEARTBEAT_LENGTH); 
 
   //Sets the data direction
   pinMode(TC_SCK, OUTPUT);
@@ -255,7 +264,7 @@ void loop() {
   boolean bolOverTempAlarm = false;
 
   //Reads the serial port
-  strSerialData = Serial.readStringUntil('/r');  
+  strSerialData = Serial2.readStringUntil('\n');  
 
   //Checks to see if we got data back
   if (strSerialData.length() > 0){
@@ -278,27 +287,27 @@ void loop() {
   
     //Sends data back to the master - temperatures
     for (int i = 0; i < TC_MAX; i++){
-     Serial.print(floTemp[i]);
-     Serial.print(",");
+     Serial2.print(floTemp[i]);
+     Serial2.print(",");
     }
-  
+    
     //Sends data back to the master - smoke levels
     for (int i = 0; i < SMOKE_MAX; i++){
-     Serial.print(floSmokeLevel[i]);
-     Serial.print(",");
+     Serial2.print(floSmokeLevel[i]);
+     Serial2.print(",");
     }
 
     //Sends data back to the master - trip states
-    Serial.print(bolSmokeAlarm);
-    Serial.print(",");
-    Serial.println(bolOverTempAlarm);
+    Serial2.print(bolSmokeAlarm);
+    Serial2.print(",");
+    Serial2.println(bolOverTempAlarm);
+    //Serial2.println("&");
   }
   else{
     //Checks for smoke and over temp alarm anyhow
     digitalWrite(SMOKE_ALARM_LED, isSmokeAlarmTripped());
     digitalWrite(OVERTEMP_LED, isOverTempAlarmTripped());
   }
-
   
   
 }
