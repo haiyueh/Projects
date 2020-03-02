@@ -268,7 +268,7 @@ void ParseDataFromThermalController(char chrSerialData[UART_BUFFER]){
   //Uses string tokenizer to parse the character array for temperature
   floTemp[0] = atof(strtok(chrSerialData,","));  
   for (x = 1; x < 16; x++){
-     floTemp[1] = atof(strtok(NULL, ",")); 
+     floTemp[x] = atof(strtok(NULL, ",")); 
   }
 
   //Parses smoke level
@@ -515,7 +515,7 @@ void TestHeartBeat(){
   //Checks to see if we have an expired heart beat for the PC
   if (intPCHeartbeatCounter > HEARTBEAT_LENGTH){
     //Heartbeat fails - disables power supplies and fans
-    Serial.println("Heartbeat fail");
+    //Serial.println("Heartbeat fail");
     execEmergencyAction(true);;
   }
 }

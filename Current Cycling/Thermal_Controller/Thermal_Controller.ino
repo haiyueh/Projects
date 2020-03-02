@@ -208,6 +208,30 @@ bool isOverTempAlarmTripped(){
 
 
 //============================================================================
+//Function: void PrintSensorDataDebug()
+//Notes: prints the sensor data on USB for debug
+//============================================================================
+void PrintSensorDataDebug(){
+  //Sends the beginning of string character
+  Serial.print(startMarker);
+
+  //Sends data back to the master - temperatures
+  for (int i = 0; i < TC_MAX; i++){
+   Serial.print(floTemp[i]);
+   Serial.print(",");
+  }
+  
+  //Sends data back to the master - smoke levels
+  for (int i = 0; i < SMOKE_MAX; i++){
+   Serial.print(floSmokeLevel[i]);
+   Serial.print(",");
+  }
+  
+  //Sends the end of string character
+  Serial.println(endMarker);
+}
+
+//============================================================================
 //Function: void setup()
 //Notes: code runs once
 //============================================================================
@@ -329,5 +353,5 @@ void loop() {
   //Sends the end of string character
   Serial2.println(endMarker);
   
-  
+  PrintSensorDataDebug();
 }
