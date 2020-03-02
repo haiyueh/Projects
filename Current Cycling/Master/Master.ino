@@ -43,16 +43,22 @@
 #define POWER_SUPPLY_INTERLOCK 14
 #define FAN_POWER_INTERLOCK 15
 
-//Misc
-#define PC_HEARTBEAT_LENGTH 5000
-#define THERMAL_CONTROL_HEARTBEAT_LENGTH 5000
+
+//UART
+#define MINIMUM_UART_BUFFER_LENGTH 5
+#define UART_BUFFER 256
+#define HEARTBEAT_LENGTH 5
 #define BAUD_RATE_THERMAL_CONTROLLER 115200
 #define BAUD_RATE_PC 115200
+
+//Misc
 #define TIMED_LOOP_DURATION_US 1000000
 #define new_max(x,y) ((x) >= (y)) ? (x) : (y)
 #define NUMBER_OF_SMOKE_SENSORS 8
 #define NUMBER_OF_TEMP_SENSORS 16
-#define MINIMUM_UART_BUFFER_LENGTH 5
+
+
+
 
 //============================================================================
 //Declarations
@@ -83,8 +89,19 @@ int intBiasCurrentOffTemp = 25;
 int intBiasCurrentStatus = 0;
 int intPauseFans = 0;
 
+//UART
+char chrPCData[UART_BUFFER];
+char chrThermalControllerData[UART_BUFFER];
+boolean newData = false;
+char startMarker = '<';
+char endMarker = '>';
+int intPCHeartbeatCounter = 0;
+int intThermalControllerHeartbeatCounter = 0;
+
+
 //Misc
 int intStart = 0;
+
 
 //============================================================================
 //Function: void execEmergencyAction (bool isEmergency)
@@ -230,81 +247,59 @@ void CalculatePWM(void){
 
 
 //============================================================================
-//Function: void readWriteDataFromThermalController()
-//Notes: reads and writes the data from the thermal controller
+//Function: void SendDataToThermalController()
+//Notes:  writes the data from the thermal controller
 //============================================================================
-void readWriteDataFromThermalController(){
-  //Declarations
-  String strSerialData;
-  char chrSerialData[256];
-  int x = 0;
-  
+void SendDataToThermalController(){
   //Sends data to the thermal controller
   Serial2.print(floOverTempDegC);
   Serial2.print(",");
   Serial2.println(floSmokeSensorTripLevel);
-
-  //Reads data back from the thermal controller
-  strSerialData = Serial2.readStringUntil('\n');
-  
-  //Checks to see if we got data back
-  if (strSerialData.length() > MINIMUM_UART_BUFFER_LENGTH){
-    //Heartbeat success
-    bolThermalControllerHeartBeatGood = true;
-
-    //Converts the string to character array
-    strSerialData.toCharArray(chrSerialData,256);
-
-    //Uses string tokenizer to parse the character array for temperature
-    floTemp[0] = atof(strtok(chrSerialData,","));  
-    for (x = 1; x < 16; x++){
-       floTemp[1] = atof(strtok(NULL, ",")); 
-    }
-
-    //Parses smoke level
-    for (x = 0; x < 8; x++){
-       floSmokeLevel[x] = atof(strtok(NULL, ",")); 
-    }
-
-    //Parses the smoke alarm
-    if (atoi(strtok(NULL, ",")) == 0){
-      //No smoke alarm
-      bolSmokeAlarmOn = false;
-    }
-    else{
-      //Smoke alarm
-      bolSmokeAlarmOn = true;
-    }
-
-    //Parses the temperature alarm
-    if (atoi(strtok(NULL, ",")) == 0){
-      //No smoke alarm
-      bolOverTempAlarmOn = false;
-    }
-    else{
-      //Smoke alarm
-      bolOverTempAlarmOn = true;
-    }
-  }
-  else {
-    //Heartbeat fails - disables power supplies and fans
-    bolThermalControllerHeartBeatGood = false;
-    execEmergencyAction(true);
-  }
-
-
 }
 
 //============================================================================
-//Function: void readDataFromPC(String strSerialPC)
-//Notes: reads the data from the PC
+//Function: void ParseDataFromThermalController()
+//Notes: parses the data from the thermal controller
 //============================================================================
-void readDataFromPC(String strSerialPC){
-  //Parses the data into the appropriate variables [FIX THIS]
-  sscanf(strSerialPC.c_str(),"%f,%f,%f,%f,%d,%d",floOverTempDegC,floSmokeSensorTripLevel,intBiasCurrentOnTemp,intBiasCurrentOffTemp,intBiasCurrentStatus,intPauseFans,intStart);
+void ParseDataFromThermalController(char chrSerialData[UART_BUFFER]){
+  //Declarations
+  int x = 0;
 
-}
+  //Uses string tokenizer to parse the character array for temperature
+  floTemp[0] = atof(strtok(chrSerialData,","));  
+  for (x = 1; x < 16; x++){
+     floTemp[1] = atof(strtok(NULL, ",")); 
+  }
 
+  //Parses smoke level
+  for (x = 0; x < 8; x++){
+     floSmokeLevel[x] = atof(strtok(NULL, ",")); 
+  }
+
+  //Parses the smoke alarm
+  if (atoi(strtok(NULL, ",")) == 0){
+    //No smoke alarm
+    bolSmokeAlarmOn = false;
+  }
+  else{
+    //Smoke alarm
+    bolSmokeAlarmOn = true;
+  }
+
+  //Parses the temperature alarm
+  if (atoi(strtok(NULL, ",")) == 0){
+    //No smoke alarm
+    bolOverTempAlarmOn = false;
+  }
+  else{
+    //Smoke alarm
+    bolOverTempAlarmOn = true;
+  }
+
+  //Clears the heart beat
+  intThermalControllerHeartbeatCounter = 0;
+  bolThermalControllerHeartBeatGood = true;
+ }
 
 //============================================================================
 //Function: void sendDataToPC ()
@@ -399,13 +394,140 @@ void InitLED(){
   digitalWrite(LED_SMOKE_ALARM,LOW);
 }
 
+//============================================================================
+//Function: void ParseDataFromPC(char chrSerialData[UART_BUFFER])
+//Notes:  parses data from the PC
+//============================================================================
+void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
+  //Uses string tokenizer to parse the data from the PC (sample: <75.0,3.5,70,50,1,0,0>)
+  floOverTempDegC = atof(strtok(chrSerialData,","));  
+  floSmokeSensorTripLevel = atof(strtok(NULL, ",")); 
+  intBiasCurrentOnTemp = atoi(strtok(NULL, ",")); 
+  intBiasCurrentOffTemp = atoi(strtok(NULL, ",")); 
+  intBiasCurrentStatus = atoi(strtok(NULL, ",")); 
+  intPauseFans = atoi(strtok(NULL, ",")); 
+  intStart = atoi(strtok(NULL, ",")); 
+
+  //Clears the PC heart beat
+  intPCHeartbeatCounter = 0;
+}
+
+
+
+//============================================================================
+//Function: void ReadDatafromPC()
+//Notes:  reads data from the PC
+//============================================================================
+void ReadDatafromPC() {
+
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char rc;
+
+    //Reads the data from the serial port if there is data
+    while (Serial.available() > 0 && newData == false) {
+        //Gets a byte back from the serial port
+        rc = Serial.read();
+
+        //Checks to see if we are at a new line or in progress of constructing a line
+        if (recvInProgress == true) {
+            //Checks for end marker
+            if (rc != endMarker) {
+                chrPCData[ndx] = rc;
+                ndx++;
+                if (ndx >= UART_BUFFER) {
+                    ndx = UART_BUFFER - 1;
+                }
+            }
+            else {
+                chrPCData[ndx] = '\0'; 
+                recvInProgress = false;
+                ndx = 0;
+
+                //Parses the data
+                ParseDataFromPC(chrPCData);
+            }
+        }
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
+}
+
+//============================================================================
+//Function: void ReadDatafromThermalController()
+//Notes:  reads data from the thermal controller
+//============================================================================
+void ReadDatafromThermalController() {
+
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char rc;
+
+    //Reads the data from the serial port if there is data
+    while (Serial2.available() > 0 && newData == false) {
+        //Gets a byte back from the serial port
+        rc = Serial2.read();
+
+        //Checks to see if we are at a new line or in progress of constructing a line
+        if (recvInProgress == true) {
+            //Checks for end marker
+            if (rc != endMarker) {
+                chrThermalControllerData[ndx] = rc;
+                ndx++;
+                if (ndx >= UART_BUFFER) {
+                    ndx = UART_BUFFER - 1;
+                }
+            }
+            else {
+                chrThermalControllerData[ndx] = '\0'; 
+                recvInProgress = false;
+                ndx = 0;
+
+                //Parses the data
+                ParseDataFromThermalController(chrThermalControllerData);
+            }
+        }
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
+}
+
+
+//======================================================================
+//Function: TestHeartBeat
+//Description: This tests the heart beat 
+//======================================================================
+void TestHeartBeat(){
+
+  //Increments the heart beat
+  intPCHeartbeatCounter++;
+  intThermalControllerHeartbeatCounter++;
+
+  //Checks to see if we have an expired heart beat for the thermal controller
+  if (intThermalControllerHeartbeatCounter > HEARTBEAT_LENGTH){
+    //Heartbeat fails - disables power supplies and fans
+    bolThermalControllerHeartBeatGood = false;
+    execEmergencyAction(true);
+  }
+
+  //Checks to see if we have an expired heart beat for the PC
+  if (intPCHeartbeatCounter > HEARTBEAT_LENGTH){
+    //Heartbeat fails - disables power supplies and fans
+    Serial.println("Heartbeat fail");
+    execEmergencyAction(true);;
+  }
+}
+
+
 //======================================================================
 //Function: TimedLoop
 //Description: This function runs at the specified timer interval
 //======================================================================
 void TimedLoop(){
-    //Reads and writes the data from the thermal controller
-    readWriteDataFromThermalController();
+    //Writes the data from the thermal controller
+    SendDataToThermalController();
 
     //Checks to see if E-Stop is pressed
     execEmergencyAction(isEMOPressed);
@@ -415,7 +537,13 @@ void TimedLoop(){
 
     //Sends the data to the PC
     sendDataToPC();
+
+    //Tests the heart beat
+    TestHeartBeat();
 }
+
+
+
 
 //============================================================================
 //Function: void setup()
@@ -425,8 +553,6 @@ void setup() {
   //Serial ports
   Serial.begin(BAUD_RATE_PC);
   Serial2.begin(BAUD_RATE_THERMAL_CONTROLLER);
-  Serial.setTimeout(PC_HEARTBEAT_LENGTH);
-  Serial2.setTimeout(THERMAL_CONTROL_HEARTBEAT_LENGTH); 
 
   //Data direction
   pinMode(EMO_SW,INPUT);
@@ -443,8 +569,8 @@ void setup() {
   InitLED();
 
   //Timer that calls function TimedLoop every TIMED_LOOP_DURATION_US uS 
-  //Timer1.initialize(TIMED_LOOP_DURATION_US);
-  //Timer1.attachInterrupt(TimedLoop);
+  Timer1.initialize(TIMED_LOOP_DURATION_US);
+  Timer1.attachInterrupt(TimedLoop);
 
 }
 
@@ -453,25 +579,11 @@ void setup() {
 //Notes: main loop, continually loops
 //============================================================================
 void loop() {
-  //Declarations
-  String strSerialPC;
-  
-  readWriteDataFromThermalController();
-  sendDataToPC();
-  delay(100);
-  /*//Reads data from the PC
-  strSerialPC = Serial.readStringUntil('\n');
+  //Recieve data from PC  
+  ReadDatafromPC();
 
-  //Checks to see if we got data back
-  if (strSerialPC.length() > 0){
-    //Heartbeat success
-
-    //Parses data from the PC
-    readDataFromPC(strSerialPC);
-    
-    }
-  else {
-    //Heartbeat fails - disables power supplies and fans
-    execEmergencyAction(true);
-  }*/
+  //Recieve data from the thermal controller  
+  ReadDatafromThermalController();
 }
+
+ 

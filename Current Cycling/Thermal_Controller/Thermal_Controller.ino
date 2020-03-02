@@ -77,6 +77,9 @@
 #define THERMAL_CONTROL_HEARTBEAT_LENGTH 5000
 #define BAUD_RATE_MASTER 115200
 #define MINIMUM_UART_BUFFER_LENGTH 0
+char startMarker = '<';
+char endMarker = '>';
+
 
 
 //============================================================================
@@ -303,6 +306,8 @@ void loop() {
   bolOverTempAlarm = isOverTempAlarmTripped();
   digitalWrite(OVERTEMP_LED,bolOverTempAlarm);
 
+  //Sends the beginning of string character
+  Serial2.print(startMarker);
 
   //Sends data back to the master - temperatures
   for (int i = 0; i < TC_MAX; i++){
@@ -319,7 +324,10 @@ void loop() {
   //Sends data back to the master - trip states
   Serial2.print(bolSmokeAlarm);
   Serial2.print(",");
-  Serial2.println(bolOverTempAlarm);
+  Serial2.print(bolOverTempAlarm);
+
+  //Sends the end of string character
+  Serial2.println(endMarker);
   
   
 }
