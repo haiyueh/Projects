@@ -126,8 +126,10 @@ namespace Current_Cycling_Controls
             txtPauseFans.Text = Properties.Settings.Default.PauseFanTime;
             if (Properties.Settings.Default.CheckBoxes != null) {
                 var iii = 0;
+                var chks = Properties.Settings.Default.CheckBoxes;
                 foreach (var chk in _checkBoxes) {
-                    chk.Checked = Properties.Settings.Default.CheckBoxes[iii];
+                    chk.Checked = chks[iii];
+                    iii++;
                 }
             }
             else {
