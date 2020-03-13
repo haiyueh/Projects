@@ -113,6 +113,7 @@ void execEmergencyAction (bool bolIsEmergency){
     //Executes emergency action
     setPowerSupplyInterlock(false);
     setFanPowerInterlock(false);
+    SetFanPWM (0,0,0,0,0,0,0,0);
     bolCurrentOn = false;
     bolCycleOn = false;
     bolCooling = false;
@@ -413,6 +414,33 @@ void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
 }
 
 
+//============================================================================
+//Function: void StartStopCycle(void)
+//Notes:  checks to see if a start is called from the PC
+//============================================================================
+void StartStopCycle(void){
+  //Checks to see if the PC has initiated a start or a stop
+  if (intStart == 1){
+    //Executes start action
+    setPowerSupplyInterlock(true);
+    setFanPowerInterlock(true);
+    SetFanPWM (0,0,0,0,0,0,0,0);
+    bolCurrentOn = false;
+    bolCycleOn = false;
+    bolCooling = false;
+  }
+  else{
+    //Executes stop action
+    setPowerSupplyInterlock(false);
+    setFanPowerInterlock(false);
+    SetFanPWM (0,0,0,0,0,0,0,0);
+    bolCurrentOn = false;
+    bolCycleOn = false;
+    bolCooling = false;
+  }
+  
+}
+
 
 //============================================================================
 //Function: void ReadDatafromPC()
@@ -532,6 +560,12 @@ void TimedLoop(){
     //Checks to see if E-Stop is pressed
     execEmergencyAction(isEMOPressed);
 
+    //Checks to see if user is requesting a start or a stop
+    StartStopCycle();
+
+    //Calculates the fan PWM speed
+    CalculatePWM();
+
     //Turns on the LEDs based on their state
     UpdateLEDDisplay();    
 
@@ -564,6 +598,9 @@ void setup() {
   pinMode(LED_CYCLE_ON,OUTPUT);
   pinMode(LED_COOLING,OUTPUT);
   pinMode(LED_SMOKE_ALARM,OUTPUT);
+
+  //Makes sure the fan turns off
+  SetFanPWM(0,0,0,0,0,0,0,0);
 
   //Initializes the LEDs
   InitLED();
