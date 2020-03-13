@@ -7,7 +7,8 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.Collections.Generic;
+using System.Windows.Forms;
 namespace Current_Cycling_Controls.Properties {
     
     
@@ -128,6 +129,18 @@ namespace Current_Cycling_Controls.Properties {
             }
             set {
                 this["PauseFanTime"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        public List<bool> CheckBoxes {
+            get {
+                return ((List<bool>)(this["CheckBoxes"]));
+            }
+            set {
+                this["CheckBoxes"] = value;
             }
         }
     }

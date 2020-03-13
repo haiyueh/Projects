@@ -52,18 +52,6 @@ namespace Current_Cycling_Controls
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
 
-            // reload default settings to GUI
-            txtDirectory.Text = Properties.Settings.Default.DataFolder;
-            txtOperator.Text = Properties.Settings.Default.Operator;
-            txtBiasOn.Text = Properties.Settings.Default.BiasON;
-            txtBiasOff.Text = Properties.Settings.Default.BiasOFF;
-            txtCurrOnTempSet.Text = Properties.Settings.Default.BiasONTempSet;
-            txtCurrOffTempSet.Text = Properties.Settings.Default.BiasOFFTempSet;
-            txtOverTempSet.Text = Properties.Settings.Default.OverTempSet;
-            txtSmokeOverSet.Text = Properties.Settings.Default.OverSmokeSet;
-            txtPauseFans.Text = Properties.Settings.Default.PauseFanTime;
-
-
             _commWorker.DoWork += RunCommMachine;
             _commWorker.WorkerReportsProgress = true;
             _commWorker.ProgressChanged += UpdateUi;
@@ -125,6 +113,29 @@ namespace Current_Cycling_Controls
 
             // set all port info to disabled
             //btnLoad1.Enabled = false;
+
+            // reload default settings to GUI
+            txtDirectory.Text = Properties.Settings.Default.DataFolder;
+            txtOperator.Text = Properties.Settings.Default.Operator;
+            txtBiasOn.Text = Properties.Settings.Default.BiasON;
+            txtBiasOff.Text = Properties.Settings.Default.BiasOFF;
+            txtCurrOnTempSet.Text = Properties.Settings.Default.BiasONTempSet;
+            txtCurrOffTempSet.Text = Properties.Settings.Default.BiasOFFTempSet;
+            txtOverTempSet.Text = Properties.Settings.Default.OverTempSet;
+            txtSmokeOverSet.Text = Properties.Settings.Default.OverSmokeSet;
+            txtPauseFans.Text = Properties.Settings.Default.PauseFanTime;
+            if (Properties.Settings.Default.CheckBoxes != null) {
+                var iii = 0;
+                foreach (var chk in _checkBoxes) {
+                    chk.Checked = Properties.Settings.Default.CheckBoxes[iii];
+                }
+            }
+            else {
+                Properties.Settings.Default.CheckBoxes = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false };
+            }
+            
+
+            txtDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
@@ -424,6 +435,11 @@ namespace Current_Cycling_Controls
             Properties.Settings.Default.OverTempSet = txtOverTempSet.Text;
             Properties.Settings.Default.OverSmokeSet = txtSmokeOverSet.Text;
             Properties.Settings.Default.PauseFanTime = txtPauseFans.Text;
+            var iii = 0;
+            foreach (var chk in _checkBoxes) {
+                Properties.Settings.Default.CheckBoxes[iii] = chk.Checked;
+                iii++;
+            }
             Properties.Settings.Default.Save();
 
         }
@@ -606,7 +622,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample1.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -635,7 +651,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample2.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -663,7 +679,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample3.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -691,7 +707,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample4.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -719,7 +735,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample5.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -747,7 +763,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample6.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -775,7 +791,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample7.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -803,7 +819,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample8.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -831,7 +847,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample9.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -859,7 +875,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample10.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -887,7 +903,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample11.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
@@ -915,7 +931,7 @@ namespace Current_Cycling_Controls
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
+            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample12.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);

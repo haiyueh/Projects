@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Current Cycling/TDK Lambda Communications/TDK Lambda Communications/obj/Debug/TDK Lambda Communications.csproj.CoreCompileInputs.cache
+*.cache
+*.suo
+*.json
+*.sqlite
