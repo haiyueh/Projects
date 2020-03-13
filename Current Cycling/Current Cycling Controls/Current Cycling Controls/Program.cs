@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Currenty_Cycling_Controls
+namespace Current_Cycling_Controls
 {
     static class Program
     {

@@ -8,22 +8,126 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Currenty_Cycling_Controls.Properties
-{
-
-
+namespace Current_Cycling_Controls.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\")]
+        public string DataFolder {
+            get {
+                return ((string)(this["DataFolder"]));
+            }
+            set {
+                this["DataFolder"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Operator")]
+        public string Operator {
+            get {
+                return ((string)(this["Operator"]));
+            }
+            set {
+                this["Operator"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public string BiasON {
+            get {
+                return ((string)(this["BiasON"]));
+            }
+            set {
+                this["BiasON"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public string BiasOFF {
+            get {
+                return ((string)(this["BiasOFF"]));
+            }
+            set {
+                this["BiasOFF"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("85")]
+        public string BiasONTempSet {
+            get {
+                return ((string)(this["BiasONTempSet"]));
+            }
+            set {
+                this["BiasONTempSet"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public string BiasOFFTempSet {
+            get {
+                return ((string)(this["BiasOFFTempSet"]));
+            }
+            set {
+                this["BiasOFFTempSet"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public string OverTempSet {
+            get {
+                return ((string)(this["OverTempSet"]));
+            }
+            set {
+                this["OverTempSet"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public string OverSmokeSet {
+            get {
+                return ((string)(this["OverSmokeSet"]));
+            }
+            set {
+                this["OverSmokeSet"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public string PauseFanTime {
+            get {
+                return ((string)(this["PauseFanTime"]));
+            }
+            set {
+                this["PauseFanTime"] = value;
             }
         }
     }

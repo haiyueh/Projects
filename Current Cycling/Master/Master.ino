@@ -100,7 +100,7 @@ int intThermalControllerHeartbeatCounter = 0;
 
 
 //Misc
-int intStart = 0;
+int intOperating = 0;
 
 
 //============================================================================
@@ -407,7 +407,7 @@ void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
   intBiasCurrentOffTemp = atoi(strtok(NULL, ",")); 
   intBiasCurrentStatus = atoi(strtok(NULL, ",")); 
   intPauseFans = atoi(strtok(NULL, ",")); 
-  intStart = atoi(strtok(NULL, ",")); 
+  intOperating = atoi(strtok(NULL, ",")); 
 
   //Clears the PC heart beat
   intPCHeartbeatCounter = 0;
@@ -420,7 +420,7 @@ void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
 //============================================================================
 void StartStopCycle(void){
   //Checks to see if the PC has initiated a start or a stop
-  if (intStart == 1){
+  if (intOperating == 1){
     //Executes start action
     setPowerSupplyInterlock(true);
     setFanPowerInterlock(true);
