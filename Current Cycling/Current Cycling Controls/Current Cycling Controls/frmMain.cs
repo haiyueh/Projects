@@ -367,7 +367,7 @@ namespace Current_Cycling_Controls
                     string biasON = _cycling.BIASON ? "1" : "0";
                     if (_TDKWorker.IsBusy) Cycling = "1"; 
                     _heartBeatPacket = new TransmitPacket(txtOverTempSet.Text, txtSmokeOverSet.Text,
-                        txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, biasON, "", tempBin, smokeBin, Cycling);
+                        txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, biasON, "0", tempBin, smokeBin, Cycling);
                     _arduinoWorker.ReportProgress(1);
                 }
                 // update connection strings from connection worker

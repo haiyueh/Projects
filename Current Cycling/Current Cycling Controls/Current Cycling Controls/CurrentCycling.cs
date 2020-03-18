@@ -54,8 +54,9 @@ namespace Current_Cycling_Controls {
 
         public void StartCycling(StartCyclingArgs args) {
             _serTDK = new SerialPort();
-            OpenPorts();
             var tdk = args.TDK;
+            if (tdk.Count < 1) return;
+            OpenPorts();
             try {
                 foreach (var t in tdk) {
                     try {
