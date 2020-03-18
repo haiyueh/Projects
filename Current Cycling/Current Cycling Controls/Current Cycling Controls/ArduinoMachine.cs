@@ -17,6 +17,7 @@ namespace Current_Cycling_Controls {
         public RecievePacket _recievedPacket;
         public event CoreCommandEvent NewCoreCommand;
         public TransmitPacket _transmitPacket;
+        public bool Connected;
         public ArduinoMachine() {
             _transmitPacket = new TransmitPacket("200","200","85","25","0","0","0000000000000000","00000000", "0");
         }
@@ -47,11 +48,11 @@ namespace Current_Cycling_Controls {
 
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
-            bool connected = false;
+            //bool connected = false;
             _serArduino.Close();
             Console.WriteLine($"Connecting to Arduino");
             // loop through each port forever until we get the correct arduino response
-            while (!connected) {
+            while (!Connected) {
                 _serArduino.BaudRate = 115200;
                 _serArduino.NewLine = "\r";
                 _serArduino.ReadTimeout = 2000;
@@ -64,7 +65,7 @@ namespace Current_Cycling_Controls {
                         if (str.Count == 28) {
                             _serArduino.DiscardOutBuffer();
                             _serArduino.DiscardInBuffer();
-                            connected = true;
+                            Connected = true;
                             Console.WriteLine($"Arduino connection successful");
                             break;
                         }

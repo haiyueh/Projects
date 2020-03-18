@@ -31,6 +31,7 @@ namespace Current_Cycling_Controls
         private readonly object _lock = new object();
         private List<TDK> _TDKS;
         private List<CheckBox> _checkBoxes;
+        private List<Label> _samples;
         private List<TextBox> _tempSensors;
         private List<TextBox> _setCurrents;
         private List<Label> _tempLabels;
@@ -74,6 +75,8 @@ namespace Current_Cycling_Controls
 
             _TDKconnection = new List<bool> { false, false, false, false, false, false,
                 false, false, false, false, false, false, };
+            _samples = new List<Label> { lblSample1, lblSample2, lblSample3, lblSample4,
+            lblSample5,lblSample6,lblSample7,lblSample8,lblSample9,lblSample10,lblSample11,lblSample12};
             _checkBoxes = new List<CheckBox> { chkbxPort1 , chkbxPort2, chkbxPort3,
             chkbxPort4, chkbxPort5, chkbxPort6, chkbxPort7, chkbxPort8, chkbxPort9,
             chkbxPort10, chkbxPort11, chkbxPort12};
@@ -409,7 +412,10 @@ namespace Current_Cycling_Controls
             if (!_TDKconnection.Any(b => b == true)) {
                 Console.WriteLine($"TDK has no connections!");
                 return;
-            } 
+            }
+            if (!_arduino.Connected) {
+                Console.WriteLine($"Arduino not connected!");
+            }
             CheckPorts();
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.SetCurrent != null).ToList(), 
                 Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text), txtDirectory.Text);
@@ -646,9 +652,8 @@ namespace Current_Cycling_Controls
             Properties.Settings.Default.Save();
         }
 
-        // TODO: Create control class that has the whole row of buttons,labels, and txtboxes that can be called for each TDK
-        // then make one New_click and Load event function that uses the sender to grab the correct TDK object (:
-        private void BtnNew1_Click(object sender, EventArgs e) {
+        // TODO: Real Devs would Create control class 
+        private void BtnNew_Click(object sender, EventArgs e) {
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
@@ -659,13 +664,19 @@ namespace Current_Cycling_Controls
             using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
-            lblSample1.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
+
+            // use btn props to parse through control lists
+            string txt = ((Button)sender).Name;
+            int index;
+            if (txt.Length == 7) index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
+            else index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
+            _samples[index].Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
             Properties.Settings.Default.DataFolder = Directory.GetParent(saveFile.FileName).FullName;
             Properties.Settings.Default.Save();
             txtDirectory.Text = Directory.GetParent(saveFile.FileName).FullName;
         }
 
-        private void BtnLoad1_Click(object sender, EventArgs e) {
+        private void BtnLoad_Click(object sender, EventArgs e) {
             // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
             var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (loadFile.ShowDialog() == DialogResult.Cancel) return;
@@ -675,333 +686,32 @@ namespace Current_Cycling_Controls
             var last = File.ReadLines(loadFile.FileName).Last();
             var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
 
-            lblSample1.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
+            // use btn props to parse through control lists
+            string txt = ((Button)sender).Name;
+            int index = 0;
+            if (txt.Length == 8) {
+                index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
+            }
+            else {
+                index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
+            }
+
+            _samples[index].Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
             if (File.ReadLines(loadFile.FileName).Count() < 2) {
-                lblCycle1.Text = "0";
-                txtNumCells1.Text = "22";
-                txtVoc1.Text = ".655";
-                txtTempSensSample1.Text = "0";
-                txtSetCurr1.Text = "0";
+                _cycleLabels[index].Text = "0";
+                _numCells[index].Text = "22";
+                _voc[index].Text = "0.655";
+                _tempSensors[index].Text = (index+1).ToString();
+                _setCurrents[index].Text = "0";
                 return;
             }
-            lblCycle1.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells1.Text = values[8];
-            txtVoc1.Text = values[9];
-            txtTempSensSample1.Text = values[10];
-            txtSetCurr1.Text = values[11];
+            _cycleLabels[index].Text = values[0];
+            _numCells[index].Text = values[8];
+            _voc[index].Text = values[9];
+            _tempSensors[index].Text = values[10];
+            _setCurrents[index].Text = values[11];
 
         }
-
-# region "Bloated Button Code"
-        private void BtnNew2_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample2.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad2_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample2.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle2.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells2.Text = values[8];
-            txtVoc2.Text = values[9];
-            txtTempSensSample2.Text = values[10];
-            txtSetCurr2.Text = values[11];
-
-        }
-
-        private void BtnNew3_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample3.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad3_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample3.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle3.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells3.Text = values[8];
-            txtVoc3.Text = values[9];
-            txtTempSensSample3.Text = values[10];
-            txtSetCurr3.Text = values[11];
-
-        }
-
-        private void BtnNew4_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample4.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad4_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample4.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle4.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells4.Text = values[8];
-            txtVoc4.Text = values[9];
-            txtTempSensSample4.Text = values[10];
-            txtSetCurr4.Text = values[11];
-
-        }
-
-        private void BtnNew5_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample5.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad5_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample5.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle5.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells5.Text = values[8];
-            txtVoc5.Text = values[9];
-            txtTempSensSample5.Text = values[10];
-            txtSetCurr5.Text = values[11];
-
-        }
-
-        private void BtnNew6_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample6.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad6_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample6.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle6.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells6.Text = values[8];
-            txtVoc6.Text = values[9];
-            txtTempSensSample6.Text = values[10];
-            txtSetCurr6.Text = values[11];
-
-        }
-
-        private void BtnNew7_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample7.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad7_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample7.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle7.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells7.Text = values[8];
-            txtVoc7.Text = values[9];
-            txtTempSensSample7.Text = values[10];
-            txtSetCurr7.Text = values[11];
-
-        }
-
-        private void BtnNew8_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample8.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad8_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample8.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle8.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells8.Text = values[8];
-            txtVoc8.Text = values[9];
-            txtTempSensSample8.Text = values[10];
-            txtSetCurr8.Text = values[11];
-
-        }
-
-        private void BtnNew9_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample9.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad9_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample9.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle9.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells9.Text = values[8];
-            txtVoc9.Text = values[9];
-            txtTempSensSample9.Text = values[10];
-            txtSetCurr9.Text = values[11];
-
-        }
-
-        private void BtnNew10_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample10.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad10_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample10.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle10.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells10.Text = values[8];
-            txtVoc10.Text = values[9];
-            txtTempSensSample10.Text = values[10];
-            txtSetCurr10.Text = values[11];
-
-        }
-
-        private void BtnNew11_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample11.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad11_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample11.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle11.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells11.Text = values[8];
-            txtVoc11.Text = values[9];
-            txtTempSensSample11.Text = values[10];
-            txtSetCurr11.Text = values[11];
-
-        }
-
-        private void BtnNew12_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-            lblSample12.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-        }
-
-        private void BtnLoad12_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            lblSample12.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
-            lblCycle12.Text = values[0]; //TODO: find a better way than indexing
-            txtNumCells12.Text = values[8];
-            txtVoc12.Text = values[9];
-            txtTempSensSample12.Text = values[10];
-            txtSetCurr12.Text = values[11];
-
-        }
-        #endregion
 
     }
 }

@@ -72,7 +72,6 @@
   <ItemGroup>
     <Compile Include="ArduinoMachine.cs" />
     <Compile Include="ArduinoUpdates.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DataFile.cs" />
     <Compile Include="CurrentCycling.cs" />
     <Compile Include="TDK.cs" />

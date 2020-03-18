@@ -41,7 +41,7 @@ namespace Current_Cycling_Controls {
                 (_intoCycleTimer.ElapsedMilliseconds / 60000.0).ToString(), // time into current cycle
                 (BIASON) ? "ON" : "OFF",
                 t.SampleName, t.Current, t.Voltage, t.NumCells, t.Voc,
-                t.TempSensor, t.SetCurrent, "",
+                t.TempSensor, t.SetCurrent, "-99.99",
                 $"{_temps[0].ToString("F1")}",$"{_temps[1].ToString("F1")}",$"{_temps[2].ToString("F1")}",
                 $"{_temps[3].ToString("F1")}",$"{_temps[4].ToString("F1")}",$"{_temps[5].ToString("F1")}",
                 $"{_temps[6].ToString("F1")}",$"{_temps[7].ToString("F1")}",$"{_temps[8].ToString("F1")}",

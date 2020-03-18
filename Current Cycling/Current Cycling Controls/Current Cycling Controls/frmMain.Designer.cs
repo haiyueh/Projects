@@ -573,7 +573,7 @@ namespace Current_Cycling_Controls {
             this.btnNew1.TabIndex = 61;
             this.btnNew1.Text = "New";
             this.btnNew1.UseVisualStyleBackColor = true;
-            this.btnNew1.Click += new System.EventHandler(this.BtnNew1_Click);
+            this.btnNew1.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // lblSetCurrent
             // 
@@ -933,7 +933,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad1.TabIndex = 49;
             this.btnLoad1.Text = "Load";
             this.btnLoad1.UseVisualStyleBackColor = true;
-            this.btnLoad1.Click += new System.EventHandler(this.BtnLoad1_Click);
+            this.btnLoad1.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad2
             // 
@@ -944,7 +944,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad2.TabIndex = 50;
             this.btnLoad2.Text = "Load";
             this.btnLoad2.UseVisualStyleBackColor = true;
-            this.btnLoad2.Click += new System.EventHandler(this.BtnLoad2_Click);
+            this.btnLoad2.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad3
             // 
@@ -955,7 +955,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad3.TabIndex = 51;
             this.btnLoad3.Text = "Load";
             this.btnLoad3.UseVisualStyleBackColor = true;
-            this.btnLoad3.Click += new System.EventHandler(this.BtnLoad3_Click);
+            this.btnLoad3.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad4
             // 
@@ -966,7 +966,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad4.TabIndex = 52;
             this.btnLoad4.Text = "Load";
             this.btnLoad4.UseVisualStyleBackColor = true;
-            this.btnLoad4.Click += new System.EventHandler(this.BtnLoad4_Click);
+            this.btnLoad4.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad5
             // 
@@ -977,7 +977,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad5.TabIndex = 53;
             this.btnLoad5.Text = "Load";
             this.btnLoad5.UseVisualStyleBackColor = true;
-            this.btnLoad5.Click += new System.EventHandler(this.BtnLoad5_Click);
+            this.btnLoad5.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad6
             // 
@@ -988,7 +988,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad6.TabIndex = 54;
             this.btnLoad6.Text = "Load";
             this.btnLoad6.UseVisualStyleBackColor = true;
-            this.btnLoad6.Click += new System.EventHandler(this.BtnLoad6_Click);
+            this.btnLoad6.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad7
             // 
@@ -999,7 +999,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad7.TabIndex = 55;
             this.btnLoad7.Text = "Load";
             this.btnLoad7.UseVisualStyleBackColor = true;
-            this.btnLoad7.Click += new System.EventHandler(this.BtnLoad7_Click);
+            this.btnLoad7.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad8
             // 
@@ -1010,7 +1010,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad8.TabIndex = 56;
             this.btnLoad8.Text = "Load";
             this.btnLoad8.UseVisualStyleBackColor = true;
-            this.btnLoad8.Click += new System.EventHandler(this.BtnLoad8_Click);
+            this.btnLoad8.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad9
             // 
@@ -1021,7 +1021,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad9.TabIndex = 58;
             this.btnLoad9.Text = "Load";
             this.btnLoad9.UseVisualStyleBackColor = true;
-            this.btnLoad9.Click += new System.EventHandler(this.BtnLoad9_Click);
+            this.btnLoad9.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad10
             // 
@@ -1032,7 +1032,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad10.TabIndex = 57;
             this.btnLoad10.Text = "Load";
             this.btnLoad10.UseVisualStyleBackColor = true;
-            this.btnLoad10.Click += new System.EventHandler(this.BtnLoad10_Click);
+            this.btnLoad10.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad11
             // 
@@ -1043,7 +1043,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad11.TabIndex = 59;
             this.btnLoad11.Text = "Load";
             this.btnLoad11.UseVisualStyleBackColor = true;
-            this.btnLoad11.Click += new System.EventHandler(this.BtnLoad11_Click);
+            this.btnLoad11.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnLoad12
             // 
@@ -1054,7 +1054,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad12.TabIndex = 60;
             this.btnLoad12.Text = "Load";
             this.btnLoad12.UseVisualStyleBackColor = true;
-            this.btnLoad12.Click += new System.EventHandler(this.BtnLoad12_Click);
+            this.btnLoad12.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // btnNew2
             // 
@@ -1065,7 +1065,7 @@ namespace Current_Cycling_Controls {
             this.btnNew2.TabIndex = 62;
             this.btnNew2.Text = "New";
             this.btnNew2.UseVisualStyleBackColor = true;
-            this.btnNew2.Click += new System.EventHandler(this.BtnNew2_Click);
+            this.btnNew2.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew3
             // 
@@ -1076,7 +1076,7 @@ namespace Current_Cycling_Controls {
             this.btnNew3.TabIndex = 63;
             this.btnNew3.Text = "New";
             this.btnNew3.UseVisualStyleBackColor = true;
-            this.btnNew3.Click += new System.EventHandler(this.BtnNew3_Click);
+            this.btnNew3.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew4
             // 
@@ -1087,7 +1087,7 @@ namespace Current_Cycling_Controls {
             this.btnNew4.TabIndex = 64;
             this.btnNew4.Text = "New";
             this.btnNew4.UseVisualStyleBackColor = true;
-            this.btnNew4.Click += new System.EventHandler(this.BtnNew4_Click);
+            this.btnNew4.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew5
             // 
@@ -1098,7 +1098,7 @@ namespace Current_Cycling_Controls {
             this.btnNew5.TabIndex = 65;
             this.btnNew5.Text = "New";
             this.btnNew5.UseVisualStyleBackColor = true;
-            this.btnNew5.Click += new System.EventHandler(this.BtnNew5_Click);
+            this.btnNew5.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew6
             // 
@@ -1109,7 +1109,7 @@ namespace Current_Cycling_Controls {
             this.btnNew6.TabIndex = 66;
             this.btnNew6.Text = "New";
             this.btnNew6.UseVisualStyleBackColor = true;
-            this.btnNew6.Click += new System.EventHandler(this.BtnNew6_Click);
+            this.btnNew6.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew7
             // 
@@ -1120,7 +1120,7 @@ namespace Current_Cycling_Controls {
             this.btnNew7.TabIndex = 68;
             this.btnNew7.Text = "New";
             this.btnNew7.UseVisualStyleBackColor = true;
-            this.btnNew7.Click += new System.EventHandler(this.BtnNew7_Click);
+            this.btnNew7.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew8
             // 
@@ -1131,7 +1131,7 @@ namespace Current_Cycling_Controls {
             this.btnNew8.TabIndex = 67;
             this.btnNew8.Text = "New";
             this.btnNew8.UseVisualStyleBackColor = true;
-            this.btnNew8.Click += new System.EventHandler(this.BtnNew8_Click);
+            this.btnNew8.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew9
             // 
@@ -1142,7 +1142,7 @@ namespace Current_Cycling_Controls {
             this.btnNew9.TabIndex = 69;
             this.btnNew9.Text = "New";
             this.btnNew9.UseVisualStyleBackColor = true;
-            this.btnNew9.Click += new System.EventHandler(this.BtnNew9_Click);
+            this.btnNew9.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew10
             // 
@@ -1153,7 +1153,7 @@ namespace Current_Cycling_Controls {
             this.btnNew10.TabIndex = 70;
             this.btnNew10.Text = "New";
             this.btnNew10.UseVisualStyleBackColor = true;
-            this.btnNew10.Click += new System.EventHandler(this.BtnNew10_Click);
+            this.btnNew10.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew11
             // 
@@ -1164,7 +1164,7 @@ namespace Current_Cycling_Controls {
             this.btnNew11.TabIndex = 71;
             this.btnNew11.Text = "New";
             this.btnNew11.UseVisualStyleBackColor = true;
-            this.btnNew11.Click += new System.EventHandler(this.BtnNew11_Click);
+            this.btnNew11.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnNew12
             // 
@@ -1175,7 +1175,7 @@ namespace Current_Cycling_Controls {
             this.btnNew12.TabIndex = 72;
             this.btnNew12.Text = "New";
             this.btnNew12.UseVisualStyleBackColor = true;
-            this.btnNew12.Click += new System.EventHandler(this.BtnNew12_Click);
+            this.btnNew12.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // txtNumCells1
             // 
