@@ -38,7 +38,7 @@ namespace Current_Cycling_Controls {
         private string CompileDataStr(TDK t) {
             string[] str = { t.CycleCount.ToString(), (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds.ToString(),
                 (_totalTimer.ElapsedMilliseconds / 3.6E+6).ToString(), // total time (hrs)
-                (_intoCycleTimer.ElapsedMilliseconds / 60000.0).ToString(),
+                (_intoCycleTimer.ElapsedMilliseconds / 60000.0).ToString(), // time into current cycle
                 (BIASON) ? "ON" : "OFF",
                 t.SampleName, t.Current, t.Voltage, t.NumCells, t.Voc,
                 t.TempSensor, t.SetCurrent, "",
@@ -173,7 +173,8 @@ namespace Current_Cycling_Controls {
 
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
-            foreach (var port in ports) { // ping each port and see if we get the correct response
+            // ping each port and see if we get the TDK response
+            foreach (var port in ports) { 
                 try {
                     _serTDK.BaudRate = U.BaudRate;
                     _serTDK.PortName = port; // com3

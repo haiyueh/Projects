@@ -40,24 +40,24 @@ namespace Current_Cycling_Controls {
                         Console.WriteLine($"{ex}");
                     }
                 }
-
                 SendPackets();
             }
         }
-
         
 
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
             bool connected = false;
             _serArduino.Close();
+            Console.WriteLine($"Connecting to Arduino");
+            // loop through each port forever until we get the correct arduino response
             while (!connected) {
-                foreach (var port in ports) { // ping each port and see if we get the correct response
+                _serArduino.BaudRate = 115200;
+                _serArduino.NewLine = "\r";
+                _serArduino.ReadTimeout = 2000;
+                foreach (var port in ports) {
                     try {
-                        _serArduino.BaudRate = 115200;
-                        _serArduino.PortName = port; // com4
-                        _serArduino.NewLine = "\r";
-                        _serArduino.ReadTimeout = 2000;
+                        _serArduino.PortName = port;
                         _serArduino.Open();
 
                         var str = _serArduino.ReadLine().Split(',').Select(sValue => sValue.Trim()).ToList();
@@ -65,6 +65,7 @@ namespace Current_Cycling_Controls {
                             _serArduino.DiscardOutBuffer();
                             _serArduino.DiscardInBuffer();
                             connected = true;
+                            Console.WriteLine($"Arduino connection successful");
                             break;
                         }
                     }
@@ -72,10 +73,8 @@ namespace Current_Cycling_Controls {
                         //Console.WriteLine($"{exc}");
                         _serArduino.Close();
                     }
-                        
                 }
             }
-            
         }
 
         private void ReadPackets() {
@@ -87,7 +86,6 @@ namespace Current_Cycling_Controls {
 
         private void SendPackets() {
             _serArduino.WriteLine(_transmitPacket.ToStringPacket());
-
         }
 
 

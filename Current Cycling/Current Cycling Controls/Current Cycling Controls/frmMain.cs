@@ -43,6 +43,7 @@ namespace Current_Cycling_Controls
         private List<Button> _newButtons;
         private List<TextBox> _voc;
         private List<TextBox> _numCells;
+        private List<bool> _TDKconnection;
         private string Cycling;
 
         private DateTime _cycleTimer = DateTime.Now;
@@ -71,7 +72,8 @@ namespace Current_Cycling_Controls
             _cycling.NewCoreCommand += NewCoreCommand;
             _arduino.NewCoreCommand += NewCoreCommand;
 
-
+            _TDKconnection = new List<bool> { false, false, false, false, false, false,
+                false, false, false, false, false, false, };
             _checkBoxes = new List<CheckBox> { chkbxPort1 , chkbxPort2, chkbxPort3,
             chkbxPort4, chkbxPort5, chkbxPort6, chkbxPort7, chkbxPort8, chkbxPort9,
             chkbxPort10, chkbxPort11, chkbxPort12};
@@ -135,9 +137,11 @@ namespace Current_Cycling_Controls
             else {
                 Properties.Settings.Default.CheckBoxes = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false };
             }
-            
 
-            txtDirectory.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            // set checkboxes to disabled until the connnection is good
+            foreach (var chk in _checkBoxes) {
+                chk.Enabled = false;
+            }
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
@@ -158,6 +162,9 @@ namespace Current_Cycling_Controls
                 txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, "0", "0", tempBin, smokeBin, "0");
 
             _connectionWorker.RunWorkerAsync();
+            Console.WriteLine($"Checking TDK connections");
+            btnStart.Enabled = false;
+            btnCheckConnection.Enabled = false;
         }
 
         private void RunCurrentCycling (object s, DoWorkEventArgs e) {
@@ -307,8 +314,10 @@ namespace Current_Cycling_Controls
                 }
                 // re-enable GUI buttons
                 else if (e.ProgressPercentage == 1) {
+                    var ii = 0;
                     foreach (var chk in _checkBoxes) {
-                        chk.Enabled = true;
+                        chk.Enabled = _TDKconnection[ii];
+                        ii++;
                     }
                     foreach (var temp in _tempSensors) {
                         temp.Enabled = true;
@@ -332,7 +341,7 @@ namespace Current_Cycling_Controls
                     chkTemp.Enabled = true;
                     chkSmoke.Enabled = true;
                     button1.Enabled = true;
-                    buttonCheckConnection.Enabled = true;
+                    btnCheckConnection.Enabled = true;
                     return;
                 }
                 // update temp/smoke/alarm readings
@@ -378,6 +387,14 @@ namespace Current_Cycling_Controls
                         _connectedLabels[i].Text = str;
                         i++;
                     }
+                    var ii = 0;
+                    foreach (var chk in _checkBoxes) {
+                        chk.Enabled = _TDKconnection[ii];
+                        ii++;
+                    }
+
+                    btnCheckConnection.Enabled = true;
+                    btnStart.Enabled = true;
                 }
             }
             catch { }
@@ -389,6 +406,10 @@ namespace Current_Cycling_Controls
         }
 
         private void BtnStart_Click(object sender, EventArgs e) {
+            if (!_TDKconnection.Any(b => b == true)) {
+                Console.WriteLine($"TDK has no connections!");
+                return;
+            } 
             CheckPorts();
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.SetCurrent != null).ToList(), 
                 Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text), txtDirectory.Text);
@@ -424,7 +445,7 @@ namespace Current_Cycling_Controls
             chkTemp.Enabled = false;
             chkSmoke.Enabled = false;
             btnStart.Enabled = false;
-            buttonCheckConnection.Enabled = false;
+            btnCheckConnection.Enabled = false;
             button1.Enabled = false;
 
             // save GUI inputs to default settings
@@ -454,7 +475,6 @@ namespace Current_Cycling_Controls
                 _TDKS.Where(t => t.Port == 1).FirstOrDefault().Voc = txtVoc1.Text;
                 _TDKS.Where(t => t.Port == 1).FirstOrDefault().NumCells = txtNumCells1.Text;
                 _TDKS.Where(t => t.Port == 1).FirstOrDefault().CycleCount = int.Parse(lblCycle1.Text);
-                lblPSStatus1.Text = "Connected";
             }
             if (chkbxPort2.Checked) {
                 _TDKS.Where(t => t.Port == 2).FirstOrDefault().SetCurrent = txtSetCurr2.Text;
@@ -559,18 +579,21 @@ namespace Current_Cycling_Controls
 
         private void ButtonCheckConnection_Click(object sender, EventArgs e) {
             NewCoreCommand(this, new CoreCommand { Type = U.CmdType.CheckConnection });
+            btnCheckConnection.Enabled = false;
+            btnStart.Enabled = false;
         }
 
         public List<string> CheckConnection() {
             var ser = new SerialPort();
             var connectLabels = new List<string>();
             string[] ports = SerialPort.GetPortNames();
-            foreach (var port in ports) { // ping each port and see if we get the correct response
+            // ping each port and see if we get the TDK response
+            foreach (var port in ports) { 
                 try {
                     ser.BaudRate = U.BaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 1000;
+                    ser.ReadTimeout = 500;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
@@ -587,10 +610,12 @@ namespace Current_Cycling_Controls
             for (var i = 1; i < 13; i++) {
                 try {
                     ser.Write("ADR " + $"0{i.ToString()}" + "\r\n");
+                    // TDK address is connected
                     if (ser.ReadLine() == "OK") {
                         connectLabels.Add("Connected");
                         ser.DiscardOutBuffer();
                         ser.DiscardInBuffer();
+                        _TDKconnection[i - 1] = true;
                         continue;
                     }                    
                 }
@@ -603,10 +628,10 @@ namespace Current_Cycling_Controls
 
 
         private void ChkbxPort1_CheckedChanged(object sender, EventArgs e) {
-            if (chkbxPort1.Checked) {
-                btnLoad1.Enabled = true;
-                btnNew1.Enabled = true;
-            }
+            //if (chkbxPort1.Checked) {
+            //    btnLoad1.Enabled = true;
+            //    btnNew1.Enabled = true;
+            //}
         }
 
         private void BtnStop_Click(object sender, EventArgs e) {
@@ -618,28 +643,47 @@ namespace Current_Cycling_Controls
             if (folderPath.ShowDialog() == DialogResult.Cancel) return;
             Properties.Settings.Default.DataFolder = folderPath.SelectedPath;
             txtDirectory.Text = folderPath.SelectedPath;
+            Properties.Settings.Default.Save();
         }
 
+        // TODO: Create control class that has the whole row of buttons,labels, and txtboxes that can be called for each TDK
+        // then make one New_click and Load event function that uses the sender to grab the correct TDK object (:
         private void BtnNew1_Click(object sender, EventArgs e) {
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
+            if (File.Exists(saveFile.FileName + ".txt")) {
+                Console.WriteLine($"File already exists!");
+                return;
+            }
             using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
             lblSample1.Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
+            Properties.Settings.Default.DataFolder = Directory.GetParent(saveFile.FileName).FullName;
+            Properties.Settings.Default.Save();
+            txtDirectory.Text = Directory.GetParent(saveFile.FileName).FullName;
         }
 
         private void BtnLoad1_Click(object sender, EventArgs e) {
             // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
             var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
             if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            
+            Properties.Settings.Default.DataFolder = Directory.GetParent(loadFile.FileName).FullName;
+            Properties.Settings.Default.Save();
+            txtDirectory.Text = Directory.GetParent(loadFile.FileName).FullName;
             var last = File.ReadLines(loadFile.FileName).Last();
             var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
 
             lblSample1.Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            if (File.ReadLines(loadFile.FileName).Count() < 2) return;
+            if (File.ReadLines(loadFile.FileName).Count() < 2) {
+                lblCycle1.Text = "0";
+                txtNumCells1.Text = "22";
+                txtVoc1.Text = ".655";
+                txtTempSensSample1.Text = "0";
+                txtSetCurr1.Text = "0";
+                return;
+            }
             lblCycle1.Text = values[0]; //TODO: find a better way than indexing
             txtNumCells1.Text = values[8];
             txtVoc1.Text = values[9];
