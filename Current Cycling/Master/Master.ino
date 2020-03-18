@@ -24,7 +24,7 @@
 #define FAN4_CTRL 6
 #define FAN5_CTRL 7
 #define FAN6_CTRL 8
-#define FAN7_CTRL 8
+#define FAN7_CTRL 9
 #define FAN8_CTRL 10
 
 //LEDs
@@ -78,6 +78,8 @@ bool bolCooling = false;
 String strSmokeAlarm;
 String strOverTempAlarm;
 bool bolThermalControllerHeartBeatGood = false;
+String strTempSensorToUse;
+String strSmokeSensorToUse;
 
 //Trip levels
 float floSmokeSensorTripLevel = 3.0; 
@@ -97,7 +99,7 @@ char startMarker = '<';
 char endMarker = '>';
 int intPCHeartbeatCounter = 0;
 int intThermalControllerHeartbeatCounter = 0;
-
+String strDebug;
 
 //Misc
 int intOperating = 0;
@@ -236,12 +238,21 @@ void CalculatePWM(void){
     Fan8PWM = ((new_max(floTemp[14],floTemp[15]))  - intBiasCurrentOnTemp + 5)*10;
   }
   
-  //Sets the PWM of all the fans
-  if (intPauseFans == 1){
-    SetFanPWM(Fan1PWM, Fan2PWM,Fan3PWM,Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM);
+  //Sets the PWM of all the fans if the fans are not in pause mode and we are operating
+  if (intPauseFans == 1) {
+    //Pauses the fans
+    SetFanPWM(0,0,0,0,0,0,0,0);  
   }
   else{
-    SetFanPWM(0,0,0,0,0,0,0,0);  
+    //strDebug = "0.00";
+    //strDebug = intOperating;
+    //Not paused, and check to see if we are operating
+    if (intOperating == 1){
+      //Set fans to the proper speed
+      SetFanPWM(Fan1PWM, Fan2PWM,Fan3PWM,Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM);
+
+      //strDebug = "1.00";
+    }
   }
   
 }
@@ -328,6 +339,11 @@ void sendDataToPC(){
   Serial.print(",");
   Serial.println(bolThermalControllerHeartBeatGood);
   
+  //Prints the debug
+  /*Serial.print(",");
+  Serial.println(strDebug);*/
+  
+
 }
 
 //============================================================================
@@ -406,7 +422,9 @@ void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
   intBiasCurrentOnTemp = atoi(strtok(NULL, ",")); 
   intBiasCurrentOffTemp = atoi(strtok(NULL, ",")); 
   intBiasCurrentStatus = atoi(strtok(NULL, ",")); 
-  intPauseFans = atoi(strtok(NULL, ",")); 
+  intPauseFans = atoi(strtok(NULL, ","));  
+  strTempSensorToUse = strtok(NULL, ",");
+  strSmokeSensorToUse = strtok(NULL, ",");
   intOperating = atoi(strtok(NULL, ",")); 
 
   //Clears the PC heart beat
@@ -424,7 +442,6 @@ void StartStopCycle(void){
     //Executes start action
     setPowerSupplyInterlock(true);
     setFanPowerInterlock(true);
-    SetFanPWM (0,0,0,0,0,0,0,0);
     bolCurrentOn = false;
     bolCycleOn = false;
     bolCooling = false;
