@@ -77,6 +77,9 @@
 #define THERMAL_CONTROL_HEARTBEAT_LENGTH 5000
 #define BAUD_RATE_MASTER 115200
 #define MINIMUM_UART_BUFFER_LENGTH 0
+#define NUMBER_OF_SMOKE_SENSORS 8
+#define NUMBER_OF_TEMP_SENSORS 16
+
 char startMarker = '<';
 char endMarker = '>';
 
@@ -90,6 +93,11 @@ char endMarker = '>';
 float floTemp[16];
 float floSmokeLevel[8];
 bool bolSmokeTripped[8];
+String strTempSensorToUse;
+String strSmokeSensorToUse;
+bool bolTempSensorToUse[NUMBER_OF_TEMP_SENSORS];
+bool bolSmokeSensorToUse[NUMBER_OF_SMOKE_SENSORS];
+
 
 //Trip levels
 float floSmokeSensorTripLevel = 3.0; 
@@ -161,7 +169,7 @@ bool isSmokeAlarmTripped(){
 
   //Loops through the entire loop to see if any of the smoke sensors are tripped
   for (int i = 0; i < SMOKE_MAX; i++){
-    if (floSmokeLevel[i] > floSmokeSensorTripLevel){
+    if ((floSmokeLevel[i] > floSmokeSensorTripLevel) && (bolSmokeSensorToUse[i] == true)){
       //Returns alarm tripped
       return true;
     }
@@ -193,10 +201,11 @@ bool isOverTempAlarmTripped(){
   floTemp[13] = (float)TC13.readCelsius();
   floTemp[14] = (float)TC14.readCelsius();
   floTemp[15] = (float)TC15.readCelsius();
+
   
   //Loops through the entire loop to see if any of the thermocouples are over temperatured
   for (int i = 0; i < TC_MAX; i++){
-    if (floTemp[i] > floOverTempDegC){
+    if ((floTemp[i] > floOverTempDegC) && (bolTempSensorToUse[i] == true)){
       //Returns alarm tripped
       return true;
     }
@@ -304,11 +313,19 @@ void loop() {
     //Parses the data
     floOverTempDegCNew = atof(strtok(chrSerialData,","));
     floSmokeSensorTripLevelNew = atof(strtok(NULL, ","));
+    strTempSensorToUse = strtok(NULL, ",");
+    strSmokeSensorToUse = strtok(NULL, ",");
 
     //Echos the data on USB
     Serial.print(floOverTempDegCNew);
     Serial.print(",");
-    Serial.println(floSmokeSensorTripLevelNew);
+    Serial.print(floSmokeSensorTripLevelNew);
+    Serial.print(",");
+    Serial.print(strTempSensorToUse);
+    Serial.print(",");
+    Serial.println(strSmokeSensorToUse);
+    
+    
 
     //Write the EEPROM if the data has changed
     if ((floOverTempDegCNew != floOverTempDegC) || (floSmokeSensorTripLevelNew != floSmokeSensorTripLevel)){
@@ -319,6 +336,27 @@ void loop() {
       //EEPROM write
       Serial.println("New EEPROM write");
       writeEEPROM();
+    }
+    
+    //Parses the temp sensor to use
+    for (int i = 0; i < NUMBER_OF_TEMP_SENSORS; i++){
+      if (strTempSensorToUse[i] == '1'){
+        bolTempSensorToUse[i] = true;
+        
+      }
+      else{
+        bolTempSensorToUse[i] = false;
+      }
+    }
+
+    //Parses the smoke sensor to use
+    for (int i = 0; i < NUMBER_OF_SMOKE_SENSORS; i++){
+      if (strSmokeSensorToUse[i] == '1'){
+        bolSmokeSensorToUse[i] = true;
+      }
+      else{
+        bolSmokeSensorToUse[i] = false;
+      }
     }
   }
 
