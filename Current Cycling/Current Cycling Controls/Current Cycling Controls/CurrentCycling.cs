@@ -258,6 +258,7 @@ namespace Current_Cycling_Controls {
                 
             }
             StartTimer();
+            // wait and get updated measured value from TDKs for the GUI
             Wait(500);
             foreach (var tt in tdk) {
                 _serTDK.Write("MV?\r\n");

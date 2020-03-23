@@ -143,5 +143,29 @@ namespace Current_Cycling_Controls.Properties {
                 this["CheckBoxes"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        public List<bool> ActiveTemps {
+            get {
+                return ((List<bool>)(this["ActiveTemps"]));
+            }
+            set {
+                this["ActiveTemps"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        public List<bool> ActiveSmokes {
+            get {
+                return ((List<bool>)(this["ActiveSmokes"]));
+            }
+            set {
+                this["ActiveSmokes"] = value;
+            }
+        }
     }
 }

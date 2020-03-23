@@ -116,9 +116,6 @@ namespace Current_Cycling_Controls
             txtNumCells4,txtNumCells5,txtNumCells6,txtNumCells7,txtNumCells8,txtNumCells9
             ,txtNumCells10,txtNumCells11,txtNumCells12};
 
-            // set all port info to disabled
-            //btnLoad1.Enabled = false;
-
             // reload default settings to GUI
             txtDirectory.Text = Properties.Settings.Default.DataFolder;
             txtOperator.Text = Properties.Settings.Default.Operator;
@@ -140,11 +137,31 @@ namespace Current_Cycling_Controls
             else {
                 Properties.Settings.Default.CheckBoxes = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false };
             }
-
-            // set checkboxes to disabled until the connnection is good
-            foreach (var chk in _checkBoxes) {
-                chk.Enabled = false;
+            if (Properties.Settings.Default.ActiveTemps != null) {
+                var temps = chkTemp.Items;
+                var ii = 0;
+                foreach (var temp in Properties.Settings.Default.ActiveTemps) {
+                    chkTemp.SetItemChecked(temps.IndexOf(temps[ii]), temp); 
+                    ii++;
+                }         
             }
+            else {
+                Properties.Settings.Default.ActiveTemps = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+            }
+            if (Properties.Settings.Default.ActiveSmokes != null) {
+                var smokes = chkSmoke.Items;
+                var ii = 0;
+                foreach (var smoke in Properties.Settings.Default.ActiveSmokes) {
+                    chkSmoke.SetItemChecked(smokes.IndexOf(smokes[ii]), smoke);
+                    ii++;
+                }
+            }
+            else {
+                Properties.Settings.Default.ActiveSmokes = new List<bool> { false, false, false, false, false, false, false, false };
+            }
+
+            // set TDK rows to disabled until the connnection is good
+            CheckTDKRows();
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
@@ -234,7 +251,6 @@ namespace Current_Cycling_Controls
                     }
                 }
                 catch (Exception exc) {
-                    
                 }
             }
         }
@@ -317,29 +333,30 @@ namespace Current_Cycling_Controls
                 }
                 // re-enable GUI buttons
                 else if (e.ProgressPercentage == 1) {
-                    var ii = 0;
-                    foreach (var chk in _checkBoxes) {
-                        chk.Enabled = _TDKconnection[ii];
-                        ii++;
-                    }
-                    foreach (var temp in _tempSensors) {
-                        temp.Enabled = true;
-                    }
-                    foreach (var curr in _setCurrents) {
-                        curr.Enabled = true;
-                    }
-                    foreach (var load in _loadButtons) {
-                        load.Enabled = true;
-                    }
-                    foreach (var neww in _newButtons) {
-                        neww.Enabled = true;
-                    }
-                    foreach (var neww in _voc) {
-                        neww.Enabled = true;
-                    }
-                    foreach (var neww in _numCells) {
-                        neww.Enabled = true;
-                    }
+                    CheckTDKRows();
+                    //var ii = 0;
+                    //foreach (var chk in _checkBoxes) {
+                    //    chk.Enabled = _TDKconnection[ii];
+                    //    ii++;
+                    //}
+                    //foreach (var temp in _tempSensors) {
+                    //    temp.Enabled = true;
+                    //}
+                    //foreach (var curr in _setCurrents) {
+                    //    curr.Enabled = true;
+                    //}
+                    //foreach (var load in _loadButtons) {
+                    //    load.Enabled = true;
+                    //}
+                    //foreach (var neww in _newButtons) {
+                    //    neww.Enabled = true;
+                    //}
+                    //foreach (var neww in _voc) {
+                    //    neww.Enabled = true;
+                    //}
+                    //foreach (var neww in _numCells) {
+                    //    neww.Enabled = true;
+                    //}
                     btnStart.Enabled = true;
                     chkTemp.Enabled = true;
                     chkSmoke.Enabled = true;
@@ -390,17 +407,50 @@ namespace Current_Cycling_Controls
                         _connectedLabels[i].Text = str;
                         i++;
                     }
-                    var ii = 0;
-                    foreach (var chk in _checkBoxes) {
-                        chk.Enabled = _TDKconnection[ii];
-                        ii++;
-                    }
-
+                    CheckTDKRows();
                     btnCheckConnection.Enabled = true;
                     btnStart.Enabled = true;
                 }
             }
             catch { }
+        }
+
+        public void CheckTDKRows() {
+            var ii = 0;
+            foreach (var chk in _checkBoxes) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _tempSensors) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _setCurrents) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _loadButtons) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _newButtons) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _voc) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
+            ii = 0;
+            foreach (var chk in _numCells) {
+                chk.Enabled = _TDKconnection[ii];
+                ii++;
+            }
         }
 
 
@@ -411,10 +461,13 @@ namespace Current_Cycling_Controls
         private void BtnStart_Click(object sender, EventArgs e) {
             if (!_TDKconnection.Any(b => b == true)) {
                 Console.WriteLine($"TDK has no connections!");
+                MessageBox.Show($"TDK has no connections!");
                 return;
             }
             if (!_arduino.Connected) {
                 Console.WriteLine($"Arduino not connected!");
+                MessageBox.Show($"Arduino not connected!");
+                return;
             }
             CheckPorts();
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.SetCurrent != null).ToList(), 
@@ -469,106 +522,35 @@ namespace Current_Cycling_Controls
                 Properties.Settings.Default.CheckBoxes[iii] = chk.Checked;
                 iii++;
             }
+            var ii = 0;
+            foreach (object chk in chkTemp.Items) {
+                Properties.Settings.Default.ActiveTemps[ii] = chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk));
+                ii++;
+            }
+            ii = 0;
+            foreach (object chk in chkSmoke.Items) {
+                Properties.Settings.Default.ActiveSmokes[ii] = chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk));
+                ii++;
+            }
             Properties.Settings.Default.Save();
+
 
         }
 
+        /// <summary>
+        /// Loop through 12 TDK port check boxes. If checked, then initialize TDK object
+        /// </summary>
         private void CheckPorts() {
-            if (chkbxPort1.Checked) {
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().SetCurrent = txtSetCurr1.Text;
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().TempSensor = txtTempSensSample1.Text;
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().SampleName = lblSample1.Text;
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().Voc = txtVoc1.Text;
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().NumCells = txtNumCells1.Text;
-                _TDKS.Where(t => t.Port == 1).FirstOrDefault().CycleCount = int.Parse(lblCycle1.Text);
-            }
-            if (chkbxPort2.Checked) {
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().SetCurrent = txtSetCurr2.Text;
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().TempSensor = txtTempSensSample2.Text;
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().SampleName = lblSample2.Text;
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().Voc = txtVoc2.Text;
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().NumCells = txtNumCells2.Text;
-                _TDKS.Where(t => t.Port == 2).FirstOrDefault().CycleCount = int.Parse(lblCycle2.Text);
-            }
-            if (chkbxPort3.Checked) {
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().SetCurrent = txtSetCurr3.Text;
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().TempSensor = txtTempSensSample3.Text;
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().SampleName = lblSample3.Text;
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().Voc = txtVoc3.Text;
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().NumCells = txtNumCells3.Text;
-                _TDKS.Where(t => t.Port == 3).FirstOrDefault().CycleCount = int.Parse(lblCycle3.Text);
-            }
-            if (chkbxPort4.Checked) {
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().SetCurrent = txtSetCurr4.Text;
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().TempSensor = txtTempSensSample4.Text;
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().SampleName = lblSample4.Text;
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().Voc = txtVoc4.Text;
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().NumCells = txtNumCells4.Text;
-                _TDKS.Where(t => t.Port == 4).FirstOrDefault().CycleCount = int.Parse(lblCycle4.Text);
-            }
-            if (chkbxPort5.Checked) {
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().SetCurrent = txtSetCurr5.Text;
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().TempSensor = txtTempSensSample5.Text;
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().SampleName = lblSample5.Text;
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().Voc = txtVoc5.Text;
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().NumCells = txtNumCells5.Text;
-                _TDKS.Where(t => t.Port == 5).FirstOrDefault().CycleCount = int.Parse(lblCycle5.Text);
-            }
-            if (chkbxPort6.Checked) {
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().SetCurrent = txtSetCurr6.Text;
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().TempSensor = txtTempSensSample6.Text;
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().SampleName = lblSample6.Text;
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().Voc = txtVoc6.Text;
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().NumCells = txtNumCells6.Text;
-                _TDKS.Where(t => t.Port == 6).FirstOrDefault().CycleCount = int.Parse(lblCycle6.Text);
-            }
-            if (chkbxPort7.Checked) {
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().SetCurrent = txtSetCurr7.Text;
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().TempSensor = txtTempSensSample7.Text;
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().SampleName = lblSample7.Text;
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().Voc = txtVoc7.Text;
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().NumCells = txtNumCells7.Text;
-                _TDKS.Where(t => t.Port == 7).FirstOrDefault().CycleCount = int.Parse(lblCycle7.Text);
-            }
-            if (chkbxPort8.Checked) {
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().SetCurrent = txtSetCurr8.Text;
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().TempSensor = txtTempSensSample8.Text;
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().SampleName = lblSample8.Text;
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().Voc = txtVoc8.Text;
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().NumCells = txtNumCells8.Text;
-                _TDKS.Where(t => t.Port == 8).FirstOrDefault().CycleCount = int.Parse(lblCycle8.Text);
-            }
-            if (chkbxPort9.Checked) {
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().SetCurrent = txtSetCurr9.Text;
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().TempSensor = txtTempSensSample9.Text;
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().SampleName = lblSample9.Text;
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().Voc = txtVoc9.Text;
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().NumCells = txtNumCells9.Text;
-                _TDKS.Where(t => t.Port == 9).FirstOrDefault().CycleCount = int.Parse(lblCycle9.Text);
-            }
-            if (chkbxPort10.Checked) {
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().SetCurrent = txtSetCurr10.Text;
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().TempSensor = txtTempSensSample10.Text;
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().SampleName = lblSample10.Text;
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().Voc = txtVoc10.Text;
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().NumCells = txtNumCells10.Text;
-                _TDKS.Where(t => t.Port == 10).FirstOrDefault().CycleCount = int.Parse(lblCycle10.Text);
-            }
-            if (chkbxPort11.Checked) {
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().SetCurrent = txtSetCurr11.Text;
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().TempSensor = txtTempSensSample11.Text;
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().SampleName = lblSample11.Text;
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().Voc = txtVoc11.Text;
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().NumCells = txtNumCells11.Text;
-                _TDKS.Where(t => t.Port == 11).FirstOrDefault().CycleCount = int.Parse(lblCycle11.Text);
-            }
-            if (chkbxPort12.Checked) {
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().SetCurrent = txtSetCurr12.Text;
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().TempSensor = txtTempSensSample12.Text;
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().SampleName = lblSample12.Text;
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().Voc = txtVoc12.Text;
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().NumCells = txtNumCells12.Text;
-                _TDKS.Where(t => t.Port == 12).FirstOrDefault().CycleCount = int.Parse(lblCycle12.Text);
+            for (var i = 0; i < 12; i++) {
+                bool checkked = _checkBoxes[i].Checked;
+                if (checkked) {
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SetCurrent = _setCurrents[i].Text;
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().TempSensor = _tempSensors[i].Text;
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SampleName = _samples[i].Text;
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().Voc = _voc[i].Text;
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().NumCells = _numCells[i].Text;
+                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().CycleCount = int.Parse(_cycleLabels[i].Text);
+                }
             }
         }
 
@@ -612,7 +594,7 @@ namespace Current_Cycling_Controls
                 catch { }
             }
 
-
+            // loop through each TDK, wait for response if connected
             for (var i = 1; i < 13; i++) {
                 try {
                     ser.Write("ADR " + $"0{i.ToString()}" + "\r\n");
@@ -623,7 +605,7 @@ namespace Current_Cycling_Controls
                         ser.DiscardInBuffer();
                         _TDKconnection[i - 1] = true;
                         continue;
-                    }                    
+                    }
                 }
                 catch { } // timed out
                 connectLabels.Add("Not Connected");
@@ -652,7 +634,7 @@ namespace Current_Cycling_Controls
             Properties.Settings.Default.Save();
         }
 
-        // TODO: Real Devs would Create control class 
+        // TODO: Real Devs would create a control class 
         private void BtnNew_Click(object sender, EventArgs e) {
             // create new file upload dialog and user choose folder then put in sample name.txt
             var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
