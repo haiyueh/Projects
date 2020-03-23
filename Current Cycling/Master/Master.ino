@@ -266,7 +266,11 @@ void SendDataToThermalController(){
   //Sends data to the thermal controller
   Serial2.print(floOverTempDegC);
   Serial2.print(",");
-  Serial2.println(floSmokeSensorTripLevel);
+  Serial2.print(floSmokeSensorTripLevel);
+  Serial2.print(",");
+  Serial2.print(strTempSensorToUse);
+  Serial2.print(",");
+  Serial2.println(strSmokeSensorToUse);
 }
 
 //============================================================================
@@ -331,9 +335,9 @@ void sendDataToPC(){
   }
 
   //Sends all the booleans
-  Serial.print(bolSmokeAlarmOn);
-  Serial.print(",");
   Serial.print(bolOverTempAlarmOn);
+  Serial.print(",");
+  Serial.print(bolSmokeAlarmOn);
   Serial.print(",");
   Serial.print(isEMOPressed());
   Serial.print(",");
