@@ -181,6 +181,10 @@ namespace Current_Cycling_Controls
             _heartBeatPacket = new TransmitPacket(txtOverTempSet.Text, txtSmokeOverSet.Text,
                 txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, "0", "0", tempBin, smokeBin, "0");
 
+            while (!_arduino.Connected)
+            {
+
+            }
             _connectionWorker.RunWorkerAsync();
             Console.WriteLine($"Checking TDK connections");
             btnStart.Enabled = false;
@@ -581,7 +585,7 @@ namespace Current_Cycling_Controls
                     ser.BaudRate = U.BaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 500;
+                    ser.ReadTimeout = 25;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
