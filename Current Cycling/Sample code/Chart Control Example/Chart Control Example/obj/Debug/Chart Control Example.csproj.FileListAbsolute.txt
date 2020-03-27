@@ -1,0 +1,9 @@
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.exe.config
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.exe
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.pdb
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csprojAssemblyReference.cache
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart_Control_Example.Form1.resources
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart_Control_Example.Properties.Resources.resources
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csproj.GenerateResource.cache
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.exe
+C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.pdb
