@@ -48,10 +48,9 @@ namespace Current_Cycling_Controls {
 
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
-            //bool connected = false;
             _serArduino.Close();
             Console.WriteLine($"Connecting to Arduino");
-            // loop through each port forever until we get the correct arduino response
+            // loop through each port forever until we get the correct arduino packet
             while (!Connected) {
                 _serArduino.BaudRate = 115200;
                 _serArduino.NewLine = "\r";
@@ -60,7 +59,8 @@ namespace Current_Cycling_Controls {
                     try {
                         _serArduino.PortName = port;
                         _serArduino.Open();
-
+                        _serArduino.DiscardOutBuffer();
+                        _serArduino.DiscardInBuffer();
                         var str = _serArduino.ReadLine().Split(',').Select(sValue => sValue.Trim()).ToList();
                         if (str.Count == 28) {
                             _serArduino.DiscardOutBuffer();
