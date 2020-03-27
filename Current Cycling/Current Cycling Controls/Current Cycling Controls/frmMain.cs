@@ -159,9 +159,13 @@ namespace Current_Cycling_Controls
             else {
                 Properties.Settings.Default.ActiveSmokes = new List<bool> { false, false, false, false, false, false, false, false };
             }
+            if (Properties.Settings.Default.Samples == null) {
+                Properties.Settings.Default.Samples = new List<string> { null, null, null, null, null, null, null, null, null, null, null, null };
+                btnLoadSamples.Enabled = false;
+            }
 
             // set TDK rows to disabled until the connnection is good
-            CheckTDKRows();
+            EnableTDKRows();
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
@@ -181,10 +185,8 @@ namespace Current_Cycling_Controls
             _heartBeatPacket = new TransmitPacket(txtOverTempSet.Text, txtSmokeOverSet.Text,
                 txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, "0", "0", tempBin, smokeBin, "0");
 
-            while (!_arduino.Connected)
-            {
-
-            }
+            // wait until arduino is connected to start connecting TDKs
+            while (!_arduino.Connected) { }
             _connectionWorker.RunWorkerAsync();
             Console.WriteLine($"Checking TDK connections");
             btnStart.Enabled = false;
@@ -333,34 +335,12 @@ namespace Current_Cycling_Controls
 
                     var ts = (args.CycleTime - DateTime.Now);
                     labelCount.Text = $@"{ts.Minutes:D2}:{ts.Seconds:D2}";
+                    lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
                     return;
                 }
                 // re-enable GUI buttons
                 else if (e.ProgressPercentage == 1) {
-                    CheckTDKRows();
-                    //var ii = 0;
-                    //foreach (var chk in _checkBoxes) {
-                    //    chk.Enabled = _TDKconnection[ii];
-                    //    ii++;
-                    //}
-                    //foreach (var temp in _tempSensors) {
-                    //    temp.Enabled = true;
-                    //}
-                    //foreach (var curr in _setCurrents) {
-                    //    curr.Enabled = true;
-                    //}
-                    //foreach (var load in _loadButtons) {
-                    //    load.Enabled = true;
-                    //}
-                    //foreach (var neww in _newButtons) {
-                    //    neww.Enabled = true;
-                    //}
-                    //foreach (var neww in _voc) {
-                    //    neww.Enabled = true;
-                    //}
-                    //foreach (var neww in _numCells) {
-                    //    neww.Enabled = true;
-                    //}
+                    EnableTDKRows();
                     btnStart.Enabled = true;
                     chkTemp.Enabled = true;
                     chkSmoke.Enabled = true;
@@ -411,7 +391,7 @@ namespace Current_Cycling_Controls
                         _connectedLabels[i].Text = str;
                         i++;
                     }
-                    CheckTDKRows();
+                    EnableTDKRows();
                     btnCheckConnection.Enabled = true;
                     btnStart.Enabled = true;
                 }
@@ -419,7 +399,7 @@ namespace Current_Cycling_Controls
             catch { }
         }
 
-        public void CheckTDKRows() {
+        public void EnableTDKRows() {
             var ii = 0;
             foreach (var chk in _checkBoxes) {
                 chk.Enabled = _TDKconnection[ii];
@@ -538,7 +518,6 @@ namespace Current_Cycling_Controls
             }
             Properties.Settings.Default.Save();
 
-
         }
 
         /// <summary>
@@ -585,7 +564,7 @@ namespace Current_Cycling_Controls
                     ser.BaudRate = U.BaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 25;
+                    ser.ReadTimeout = 50;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
@@ -613,6 +592,7 @@ namespace Current_Cycling_Controls
                 }
                 catch { } // timed out
                 connectLabels.Add("Not Connected");
+                _TDKconnection[i - 1] = false;
             }
             ser.Close();
             return connectLabels;
@@ -641,13 +621,31 @@ namespace Current_Cycling_Controls
         // TODO: Real Devs would create a control class 
         private void BtnNew_Click(object sender, EventArgs e) {
             // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
+            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder,
+                DefaultExt = ".txt", AddExtension = true };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-            if (File.Exists(saveFile.FileName + ".txt")) {
-                Console.WriteLine($"File already exists!");
+
+            //// user overwrites
+            //if (File.Exists(saveFile.FileName)) {
+            //    saveFile.FileName = Path.GetDirectoryName(saveFile.FileName) + "\\" + Path.GetFileNameWithoutExtension(saveFile.FileName);
+            //    saveFile.FileName = saveFile.FileName + $"_old[{DateTime.Now.ToString("yyyy-M-dd--HH")}].txt";
+            //}
+            //else {
+            //    if (Path.GetFileName(saveFile.FileName).Contains(".")) {
+            //        MessageBox.Show("Don't add file extension to filename!");
+            //        return;
+            //    }
+            //}
+            if (File.Exists(saveFile.FileName)) {
+                MessageBox.Show("Cannot overwrite data files!");
                 return;
             }
-            using (var writer = new StreamWriter(saveFile.FileName + ".txt", true)) {
+            if (Path.GetFileNameWithoutExtension(saveFile.FileName).Contains(".")) {
+                MessageBox.Show("Don't add file extension to filename!");
+                return;
+            }
+
+            using (var writer = new StreamWriter(saveFile.FileName, true)) {
                 writer.WriteLine(U.SampleTxtHeader);
             }
 
@@ -658,8 +656,11 @@ namespace Current_Cycling_Controls
             else index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
             _samples[index].Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
             Properties.Settings.Default.DataFolder = Directory.GetParent(saveFile.FileName).FullName;
+            Properties.Settings.Default.Samples[index] = Path.GetFileNameWithoutExtension(saveFile.FileName);
+            btnLoadSamples.Enabled = true;
             Properties.Settings.Default.Save();
             txtDirectory.Text = Directory.GetParent(saveFile.FileName).FullName;
+
         }
 
         private void BtnLoad_Click(object sender, EventArgs e) {
@@ -672,7 +673,7 @@ namespace Current_Cycling_Controls
             var last = File.ReadLines(loadFile.FileName).Last();
             var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
 
-            // use btn props to parse through control lists
+            // use Btn sender to parse through control lists
             string txt = ((Button)sender).Name;
             int index = 0;
             if (txt.Length == 8) {
@@ -682,7 +683,13 @@ namespace Current_Cycling_Controls
                 index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
             }
 
+            // save sample name to TDK row
+            Properties.Settings.Default.Samples[index] = loadFile.FileName;
+            btnLoadSamples.Enabled = true;
+            Properties.Settings.Default.Save();
+
             _samples[index].Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
+            // default populate if no data
             if (File.ReadLines(loadFile.FileName).Count() < 2) {
                 _cycleLabels[index].Text = "0";
                 _numCells[index].Text = "22";
@@ -691,6 +698,7 @@ namespace Current_Cycling_Controls
                 _setCurrents[index].Text = "0";
                 return;
             }
+            // populate from load file
             _cycleLabels[index].Text = values[0];
             _numCells[index].Text = values[8];
             _voc[index].Text = values[9];
@@ -699,5 +707,39 @@ namespace Current_Cycling_Controls
 
         }
 
+        private void BtnLoadSamples_Click(object sender, EventArgs e) {
+            var i = -1;
+            foreach (var s in Properties.Settings.Default.Samples) {
+                i++;
+                try {
+                    if (s == null) continue;
+                    var last = File.ReadLines(s).Last();
+                    var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
+                    _samples[i].Text = Path.GetFileNameWithoutExtension(s);
+                    if (File.ReadLines(s).Count() < 2) {
+                        _cycleLabels[i].Text = "0";
+                        _numCells[i].Text = "22";
+                        _voc[i].Text = "0.655";
+                        _tempSensors[i].Text = (i + 1).ToString();
+                        _setCurrents[i].Text = "0";
+                        continue;
+                    }
+                    // populate from load file
+                    _cycleLabels[i].Text = values[0];
+                    _numCells[i].Text = values[8];
+                    _voc[i].Text = values[9];
+                    _tempSensors[i].Text = values[10];
+                    _setCurrents[i].Text = values[11];
+                }
+                catch (Exception exc) {
+                    MessageBox.Show(exc.ToString());
+                }
+            }
+        }
+
+        private void BtnClearSamples_Click(object sender, EventArgs e) {
+            Properties.Settings.Default.Samples = new List<string> { null, null, null, null, null, null, null, null, null, null, null, null };
+            Properties.Settings.Default.Save();
+        }
     }
 }

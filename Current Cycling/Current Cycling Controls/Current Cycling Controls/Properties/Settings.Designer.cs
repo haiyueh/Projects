@@ -167,5 +167,17 @@ namespace Current_Cycling_Controls.Properties {
                 this["ActiveSmokes"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        public List<string> Samples {
+            get {
+                return ((List<string>)(this["Samples"]));
+            }
+            set {
+                this["Samples"] = value;
+            }
+        }
     }
 }

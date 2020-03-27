@@ -69,6 +69,10 @@ namespace Current_Cycling_Controls {
                         throw new Exception(exc.Message);
                     }
                 }
+                // start bias cycle
+                foreach (var t in tdk) {
+                    t.CycleCount++;
+                }
                 _TDK = tdk;
                 _resultsDir = args.ResultsDirectory;
                 _totalTimer = new Stopwatch();
