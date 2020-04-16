@@ -8,6 +8,7 @@ using System.Timers;
 using System.IO.Ports;
 using System.ComponentModel;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Current_Cycling_Controls {
     public delegate void TDKEvent(object sender, GUIArgs e);
@@ -30,27 +31,11 @@ namespace Current_Cycling_Controls {
         public bool BIASON;
         public bool SAVE;
         public List<double> _temps;
+        public List<double> _voltages;
         public event CoreCommandEvent NewCoreCommand;
         public CurrentCycling() {
 
         }
-
-        private string CompileDataStr(TDK t) {
-            string[] str = { t.CycleCount.ToString(), (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds.ToString(),
-                (_totalTimer.ElapsedMilliseconds / 3.6E+6).ToString(), // total time (hrs)
-                (_intoCycleTimer.ElapsedMilliseconds / 60000.0).ToString(), // time into current cycle
-                (BIASON) ? "ON" : "OFF",
-                t.SampleName, t.Current, t.Voltage, t.NumCells, t.Voc,
-                t.TempSensor, t.SetCurrent, "-99.99",
-                $"{_temps[0].ToString("F1")}",$"{_temps[1].ToString("F1")}",$"{_temps[2].ToString("F1")}",
-                $"{_temps[3].ToString("F1")}",$"{_temps[4].ToString("F1")}",$"{_temps[5].ToString("F1")}",
-                $"{_temps[6].ToString("F1")}",$"{_temps[7].ToString("F1")}",$"{_temps[8].ToString("F1")}",
-                $"{_temps[9].ToString("F1")}",$"{_temps[10].ToString("F1")}",$"{_temps[11].ToString("F1")}",
-                $"{_temps[12].ToString("F1")}",$"{_temps[13].ToString("F1")}",$"{_temps[14].ToString("F1")}",
-                $"{_temps[15].ToString("F1")}" };
-            return string.Join(",", str);
-        }
-
 
         public void StartCycling(StartCyclingArgs args) {
             _serTDK = new SerialPort();
@@ -175,6 +160,22 @@ namespace Current_Cycling_Controls {
             }
         }
 
+        private string CompileDataStr(TDK t) {
+            string[] str = { t.CycleCount.ToString(), (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds.ToString(),
+                (_totalTimer.ElapsedMilliseconds / 3.6E+6).ToString(), // total time (hrs)
+                (_intoCycleTimer.ElapsedMilliseconds / 60000.0).ToString(), // time into current cycle
+                (BIASON) ? "ON" : "OFF",
+                t.SampleName, t.Current, t.Voltage, t.NumCells, t.Voc,
+                t.TempSensor, t.SetCurrent, "-99.99",
+                $"{_temps[0].ToString("F1")}",$"{_temps[1].ToString("F1")}",$"{_temps[2].ToString("F1")}",
+                $"{_temps[3].ToString("F1")}",$"{_temps[4].ToString("F1")}",$"{_temps[5].ToString("F1")}",
+                $"{_temps[6].ToString("F1")}",$"{_temps[7].ToString("F1")}",$"{_temps[8].ToString("F1")}",
+                $"{_temps[9].ToString("F1")}",$"{_temps[10].ToString("F1")}",$"{_temps[11].ToString("F1")}",
+                $"{_temps[12].ToString("F1")}",$"{_temps[13].ToString("F1")}",$"{_temps[14].ToString("F1")}",
+                $"{_temps[15].ToString("F1")}" };
+            return string.Join(",", str);
+        }
+
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
             // ping each port and see if we get the TDK response
@@ -296,6 +297,19 @@ namespace Current_Cycling_Controls {
         private void WaitResults(int t) {
             long elapsed = _resultsTimer.ElapsedMilliseconds;
             while (_resultsTimer.ElapsedMilliseconds - elapsed < t) { }
+        }
+
+        private void GraphVoltages() {
+            Chart chart1 = new Chart();
+            chart1.Series.Clear();
+            var series = new Series();
+
+            //foreach (int i in enumerable) {
+            //    series.Points.Add((double)i);
+            //}
+
+            chart1.Series.Add(series);
+
         }
 
     }

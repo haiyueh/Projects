@@ -29,6 +29,16 @@ namespace Current_Cycling_Controls {
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSetCurr12 = new System.Windows.Forms.TextBox();
             this.txtSetCurr11 = new System.Windows.Forms.TextBox();
@@ -213,38 +223,6 @@ namespace Current_Cycling_Controls {
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.labelCount = new System.Windows.Forms.Label();
-            this.labelTempReadings = new System.Windows.Forms.Label();
-            this.labelTemp1 = new System.Windows.Forms.Label();
-            this.labelTemp2 = new System.Windows.Forms.Label();
-            this.labelTemp4 = new System.Windows.Forms.Label();
-            this.labelTemp3 = new System.Windows.Forms.Label();
-            this.labelTemp7 = new System.Windows.Forms.Label();
-            this.labelTemp8 = new System.Windows.Forms.Label();
-            this.labelTemp6 = new System.Windows.Forms.Label();
-            this.labelTemp5 = new System.Windows.Forms.Label();
-            this.labelTemp11 = new System.Windows.Forms.Label();
-            this.labelTemp12 = new System.Windows.Forms.Label();
-            this.labelTemp10 = new System.Windows.Forms.Label();
-            this.labelTemp9 = new System.Windows.Forms.Label();
-            this.labelTemp15 = new System.Windows.Forms.Label();
-            this.labelTemp16 = new System.Windows.Forms.Label();
-            this.labelTemp14 = new System.Windows.Forms.Label();
-            this.labelTemp13 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.labelSmoke7 = new System.Windows.Forms.Label();
-            this.labelSmoke8 = new System.Windows.Forms.Label();
-            this.labelSmoke6 = new System.Windows.Forms.Label();
-            this.labelSmoke5 = new System.Windows.Forms.Label();
-            this.labelSmoke3 = new System.Windows.Forms.Label();
-            this.labelSmoke4 = new System.Windows.Forms.Label();
-            this.labelSmoke2 = new System.Windows.Forms.Label();
-            this.labelSmoke1 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSmokeOverSet = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -254,7 +232,11 @@ namespace Current_Cycling_Controls {
             this.btnLoadSamples = new System.Windows.Forms.Button();
             this.lblBiasStatus = new System.Windows.Forms.Label();
             this.btnClearSamples = new System.Windows.Forms.Button();
+            this.chartTemp = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartSmoke = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -2200,7 +2182,7 @@ namespace Current_Cycling_Controls {
             this.chkSmoke.Location = new System.Drawing.Point(1171, 219);
             this.chkSmoke.Margin = new System.Windows.Forms.Padding(4);
             this.chkSmoke.Name = "chkSmoke";
-            this.chkSmoke.Size = new System.Drawing.Size(60, 140);
+            this.chkSmoke.Size = new System.Drawing.Size(69, 140);
             this.chkSmoke.TabIndex = 65;
             // 
             // chkTemp
@@ -2226,7 +2208,7 @@ namespace Current_Cycling_Controls {
             this.chkTemp.Location = new System.Drawing.Point(1171, 444);
             this.chkTemp.Margin = new System.Windows.Forms.Padding(4);
             this.chkTemp.Name = "chkTemp";
-            this.chkTemp.Size = new System.Drawing.Size(63, 293);
+            this.chkTemp.Size = new System.Drawing.Size(69, 293);
             this.chkTemp.TabIndex = 66;
             // 
             // label4
@@ -2261,320 +2243,6 @@ namespace Current_Cycling_Controls {
             this.labelCount.TabIndex = 69;
             this.labelCount.Text = "00:00";
             this.labelCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTempReadings
-            // 
-            this.labelTempReadings.AutoSize = true;
-            this.labelTempReadings.BackColor = System.Drawing.SystemColors.Control;
-            this.labelTempReadings.Location = new System.Drawing.Point(4, 591);
-            this.labelTempReadings.Name = "labelTempReadings";
-            this.labelTempReadings.Size = new System.Drawing.Size(154, 17);
-            this.labelTempReadings.TabIndex = 70;
-            this.labelTempReadings.Text = "Temperature Readings";
-            // 
-            // labelTemp1
-            // 
-            this.labelTemp1.AutoSize = true;
-            this.labelTemp1.Location = new System.Drawing.Point(40, 633);
-            this.labelTemp1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp1.Name = "labelTemp1";
-            this.labelTemp1.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp1.TabIndex = 126;
-            this.labelTemp1.Text = "0.0";
-            // 
-            // labelTemp2
-            // 
-            this.labelTemp2.AutoSize = true;
-            this.labelTemp2.Location = new System.Drawing.Point(40, 658);
-            this.labelTemp2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp2.Name = "labelTemp2";
-            this.labelTemp2.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp2.TabIndex = 128;
-            this.labelTemp2.Text = "0.0";
-            // 
-            // labelTemp4
-            // 
-            this.labelTemp4.AutoSize = true;
-            this.labelTemp4.Location = new System.Drawing.Point(40, 711);
-            this.labelTemp4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp4.Name = "labelTemp4";
-            this.labelTemp4.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp4.TabIndex = 129;
-            this.labelTemp4.Text = "0.0";
-            // 
-            // labelTemp3
-            // 
-            this.labelTemp3.AutoSize = true;
-            this.labelTemp3.Location = new System.Drawing.Point(40, 686);
-            this.labelTemp3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp3.Name = "labelTemp3";
-            this.labelTemp3.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp3.TabIndex = 130;
-            this.labelTemp3.Text = "0.0";
-            // 
-            // labelTemp7
-            // 
-            this.labelTemp7.AutoSize = true;
-            this.labelTemp7.Location = new System.Drawing.Point(117, 686);
-            this.labelTemp7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp7.Name = "labelTemp7";
-            this.labelTemp7.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp7.TabIndex = 134;
-            this.labelTemp7.Text = "0.0";
-            // 
-            // labelTemp8
-            // 
-            this.labelTemp8.AutoSize = true;
-            this.labelTemp8.Location = new System.Drawing.Point(117, 711);
-            this.labelTemp8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp8.Name = "labelTemp8";
-            this.labelTemp8.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp8.TabIndex = 133;
-            this.labelTemp8.Text = "0.0";
-            // 
-            // labelTemp6
-            // 
-            this.labelTemp6.AutoSize = true;
-            this.labelTemp6.Location = new System.Drawing.Point(117, 658);
-            this.labelTemp6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp6.Name = "labelTemp6";
-            this.labelTemp6.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp6.TabIndex = 132;
-            this.labelTemp6.Text = "0.0";
-            // 
-            // labelTemp5
-            // 
-            this.labelTemp5.AutoSize = true;
-            this.labelTemp5.Location = new System.Drawing.Point(117, 633);
-            this.labelTemp5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp5.Name = "labelTemp5";
-            this.labelTemp5.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp5.TabIndex = 131;
-            this.labelTemp5.Text = "0.0";
-            // 
-            // labelTemp11
-            // 
-            this.labelTemp11.AutoSize = true;
-            this.labelTemp11.Location = new System.Drawing.Point(191, 686);
-            this.labelTemp11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp11.Name = "labelTemp11";
-            this.labelTemp11.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp11.TabIndex = 138;
-            this.labelTemp11.Text = "0.0";
-            // 
-            // labelTemp12
-            // 
-            this.labelTemp12.AutoSize = true;
-            this.labelTemp12.Location = new System.Drawing.Point(191, 711);
-            this.labelTemp12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp12.Name = "labelTemp12";
-            this.labelTemp12.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp12.TabIndex = 137;
-            this.labelTemp12.Text = "0.0";
-            // 
-            // labelTemp10
-            // 
-            this.labelTemp10.AutoSize = true;
-            this.labelTemp10.Location = new System.Drawing.Point(191, 658);
-            this.labelTemp10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp10.Name = "labelTemp10";
-            this.labelTemp10.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp10.TabIndex = 136;
-            this.labelTemp10.Text = "0.0";
-            // 
-            // labelTemp9
-            // 
-            this.labelTemp9.AutoSize = true;
-            this.labelTemp9.Location = new System.Drawing.Point(191, 633);
-            this.labelTemp9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp9.Name = "labelTemp9";
-            this.labelTemp9.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp9.TabIndex = 135;
-            this.labelTemp9.Text = "0.0";
-            // 
-            // labelTemp15
-            // 
-            this.labelTemp15.AutoSize = true;
-            this.labelTemp15.Location = new System.Drawing.Point(259, 686);
-            this.labelTemp15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp15.Name = "labelTemp15";
-            this.labelTemp15.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp15.TabIndex = 142;
-            this.labelTemp15.Text = "0.0";
-            // 
-            // labelTemp16
-            // 
-            this.labelTemp16.AutoSize = true;
-            this.labelTemp16.Location = new System.Drawing.Point(259, 711);
-            this.labelTemp16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp16.Name = "labelTemp16";
-            this.labelTemp16.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp16.TabIndex = 141;
-            this.labelTemp16.Text = "0.0";
-            // 
-            // labelTemp14
-            // 
-            this.labelTemp14.AutoSize = true;
-            this.labelTemp14.Location = new System.Drawing.Point(259, 658);
-            this.labelTemp14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp14.Name = "labelTemp14";
-            this.labelTemp14.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp14.TabIndex = 140;
-            this.labelTemp14.Text = "0.0";
-            // 
-            // labelTemp13
-            // 
-            this.labelTemp13.AutoSize = true;
-            this.labelTemp13.Location = new System.Drawing.Point(259, 633);
-            this.labelTemp13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTemp13.Name = "labelTemp13";
-            this.labelTemp13.Size = new System.Drawing.Size(28, 17);
-            this.labelTemp13.TabIndex = 139;
-            this.labelTemp13.Text = "0.0";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(39, 608);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(29, 17);
-            this.label27.TabIndex = 143;
-            this.label27.Text = "1-4";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(117, 608);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(29, 17);
-            this.label28.TabIndex = 144;
-            this.label28.Text = "5-8";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(189, 608);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(37, 17);
-            this.label29.TabIndex = 145;
-            this.label29.Text = "9-12";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(259, 608);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(45, 17);
-            this.label30.TabIndex = 146;
-            this.label30.Text = "13-16";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(447, 608);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 17);
-            this.label6.TabIndex = 157;
-            this.label6.Text = "5-8";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(369, 608);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 17);
-            this.label7.TabIndex = 156;
-            this.label7.Text = "1-4";
-            // 
-            // labelSmoke7
-            // 
-            this.labelSmoke7.AutoSize = true;
-            this.labelSmoke7.Location = new System.Drawing.Point(448, 686);
-            this.labelSmoke7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke7.Name = "labelSmoke7";
-            this.labelSmoke7.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke7.TabIndex = 155;
-            this.labelSmoke7.Text = "0.0";
-            // 
-            // labelSmoke8
-            // 
-            this.labelSmoke8.AutoSize = true;
-            this.labelSmoke8.Location = new System.Drawing.Point(448, 711);
-            this.labelSmoke8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke8.Name = "labelSmoke8";
-            this.labelSmoke8.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke8.TabIndex = 154;
-            this.labelSmoke8.Text = "0.0";
-            // 
-            // labelSmoke6
-            // 
-            this.labelSmoke6.AutoSize = true;
-            this.labelSmoke6.Location = new System.Drawing.Point(448, 658);
-            this.labelSmoke6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke6.Name = "labelSmoke6";
-            this.labelSmoke6.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke6.TabIndex = 153;
-            this.labelSmoke6.Text = "0.0";
-            // 
-            // labelSmoke5
-            // 
-            this.labelSmoke5.AutoSize = true;
-            this.labelSmoke5.Location = new System.Drawing.Point(448, 633);
-            this.labelSmoke5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke5.Name = "labelSmoke5";
-            this.labelSmoke5.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke5.TabIndex = 152;
-            this.labelSmoke5.Text = "0.0";
-            // 
-            // labelSmoke3
-            // 
-            this.labelSmoke3.AutoSize = true;
-            this.labelSmoke3.Location = new System.Drawing.Point(371, 686);
-            this.labelSmoke3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke3.Name = "labelSmoke3";
-            this.labelSmoke3.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke3.TabIndex = 151;
-            this.labelSmoke3.Text = "0.0";
-            // 
-            // labelSmoke4
-            // 
-            this.labelSmoke4.AutoSize = true;
-            this.labelSmoke4.Location = new System.Drawing.Point(371, 711);
-            this.labelSmoke4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke4.Name = "labelSmoke4";
-            this.labelSmoke4.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke4.TabIndex = 150;
-            this.labelSmoke4.Text = "0.0";
-            // 
-            // labelSmoke2
-            // 
-            this.labelSmoke2.AutoSize = true;
-            this.labelSmoke2.Location = new System.Drawing.Point(371, 658);
-            this.labelSmoke2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke2.Name = "labelSmoke2";
-            this.labelSmoke2.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke2.TabIndex = 149;
-            this.labelSmoke2.Text = "0.0";
-            // 
-            // labelSmoke1
-            // 
-            this.labelSmoke1.AutoSize = true;
-            this.labelSmoke1.Location = new System.Drawing.Point(371, 633);
-            this.labelSmoke1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelSmoke1.Name = "labelSmoke1";
-            this.labelSmoke1.Size = new System.Drawing.Size(28, 17);
-            this.labelSmoke1.TabIndex = 148;
-            this.labelSmoke1.Text = "0.0";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.SystemColors.Control;
-            this.label16.Location = new System.Drawing.Point(333, 591);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(115, 17);
-            this.label16.TabIndex = 147;
-            this.label16.Text = "Smoke Readings";
             // 
             // label1
             // 
@@ -2669,11 +2337,77 @@ namespace Current_Cycling_Controls {
             this.btnClearSamples.UseVisualStyleBackColor = true;
             this.btnClearSamples.Click += new System.EventHandler(this.BtnClearSamples_Click);
             // 
+            // chartTemp
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chartTemp.ChartAreas.Add(chartArea3);
+            legend3.AutoFitMinFontSize = 9;
+            legend3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend3.IsTextAutoFit = false;
+            legend3.Name = "Legend1";
+            legend3.Position.Auto = false;
+            legend3.Position.Height = 16.6065F;
+            legend3.Position.Width = 30F;
+            legend3.Position.X = 70F;
+            this.chartTemp.Legends.Add(legend3);
+            this.chartTemp.Location = new System.Drawing.Point(7, 584);
+            this.chartTemp.Name = "chartTemp";
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Temp";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.Red;
+            series6.Legend = "Legend1";
+            series6.Name = "MaxTemp";
+            this.chartTemp.Series.Add(series5);
+            this.chartTemp.Series.Add(series6);
+            this.chartTemp.Size = new System.Drawing.Size(571, 278);
+            this.chartTemp.TabIndex = 167;
+            this.chartTemp.Text = "chart1";
+            title3.Name = "Title1";
+            title3.Text = "Temperature Sensors";
+            this.chartTemp.Titles.Add(title3);
+            // 
+            // chartSmoke
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chartSmoke.ChartAreas.Add(chartArea4);
+            legend4.AutoFitMinFontSize = 9;
+            legend4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend4.IsTextAutoFit = false;
+            legend4.Name = "Legend1";
+            legend4.Position.Auto = false;
+            legend4.Position.Height = 16.6065F;
+            legend4.Position.Width = 30F;
+            legend4.Position.X = 70F;
+            this.chartSmoke.Legends.Add(legend4);
+            this.chartSmoke.Location = new System.Drawing.Point(584, 584);
+            this.chartSmoke.Name = "chartSmoke";
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Smoke Level";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.Red;
+            series8.Legend = "Legend1";
+            series8.Name = "MaxSmoke";
+            this.chartSmoke.Series.Add(series7);
+            this.chartSmoke.Series.Add(series8);
+            this.chartSmoke.Size = new System.Drawing.Size(561, 278);
+            this.chartSmoke.TabIndex = 168;
+            this.chartSmoke.Text = "chart1";
+            title4.Name = "Title1";
+            title4.Text = "Smoke Sensors";
+            this.chartSmoke.Titles.Add(title4);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1239, 750);
+            this.ClientSize = new System.Drawing.Size(1263, 874);
+            this.Controls.Add(this.chartSmoke);
+            this.Controls.Add(this.chartTemp);
             this.Controls.Add(this.btnClearSamples);
             this.Controls.Add(this.lblBiasStatus);
             this.Controls.Add(this.btnLoadSamples);
@@ -2683,38 +2417,6 @@ namespace Current_Cycling_Controls {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSmokeOverSet);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.labelSmoke7);
-            this.Controls.Add(this.labelSmoke8);
-            this.Controls.Add(this.labelSmoke6);
-            this.Controls.Add(this.labelSmoke5);
-            this.Controls.Add(this.labelSmoke3);
-            this.Controls.Add(this.labelSmoke4);
-            this.Controls.Add(this.labelSmoke2);
-            this.Controls.Add(this.labelSmoke1);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label30);
-            this.Controls.Add(this.label29);
-            this.Controls.Add(this.label28);
-            this.Controls.Add(this.label27);
-            this.Controls.Add(this.labelTemp15);
-            this.Controls.Add(this.labelTemp16);
-            this.Controls.Add(this.labelTemp14);
-            this.Controls.Add(this.labelTemp13);
-            this.Controls.Add(this.labelTemp11);
-            this.Controls.Add(this.labelTemp12);
-            this.Controls.Add(this.labelTemp10);
-            this.Controls.Add(this.labelTemp9);
-            this.Controls.Add(this.labelTemp7);
-            this.Controls.Add(this.labelTemp8);
-            this.Controls.Add(this.labelTemp6);
-            this.Controls.Add(this.labelTemp5);
-            this.Controls.Add(this.labelTemp3);
-            this.Controls.Add(this.labelTemp4);
-            this.Controls.Add(this.labelTemp2);
-            this.Controls.Add(this.labelTemp1);
-            this.Controls.Add(this.labelTempReadings);
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -2748,6 +2450,8 @@ namespace Current_Cycling_Controls {
             this.Text = "Current Cycling Controls";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2938,38 +2642,6 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelCount;
-        private System.Windows.Forms.Label labelTempReadings;
-        private System.Windows.Forms.Label labelTemp1;
-        private System.Windows.Forms.Label labelTemp2;
-        private System.Windows.Forms.Label labelTemp4;
-        private System.Windows.Forms.Label labelTemp3;
-        private System.Windows.Forms.Label labelTemp7;
-        private System.Windows.Forms.Label labelTemp8;
-        private System.Windows.Forms.Label labelTemp6;
-        private System.Windows.Forms.Label labelTemp5;
-        private System.Windows.Forms.Label labelTemp11;
-        private System.Windows.Forms.Label labelTemp12;
-        private System.Windows.Forms.Label labelTemp10;
-        private System.Windows.Forms.Label labelTemp9;
-        private System.Windows.Forms.Label labelTemp15;
-        private System.Windows.Forms.Label labelTemp16;
-        private System.Windows.Forms.Label labelTemp14;
-        private System.Windows.Forms.Label labelTemp13;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelSmoke7;
-        private System.Windows.Forms.Label labelSmoke8;
-        private System.Windows.Forms.Label labelSmoke6;
-        private System.Windows.Forms.Label labelSmoke5;
-        private System.Windows.Forms.Label labelSmoke3;
-        private System.Windows.Forms.Label labelSmoke4;
-        private System.Windows.Forms.Label labelSmoke2;
-        private System.Windows.Forms.Label labelSmoke1;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSmokeOverSet;
         private System.Windows.Forms.Label label2;
@@ -2979,6 +2651,8 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Button btnLoadSamples;
         private System.Windows.Forms.Label lblBiasStatus;
         private System.Windows.Forms.Button btnClearSamples;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartTemp;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartSmoke;
     }
 }
 

@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
-
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Diagnostics;
+using System.Timers;
 
 namespace Current_Cycling_Controls
 {
@@ -45,6 +47,7 @@ namespace Current_Cycling_Controls
         private List<TextBox> _voc;
         private List<TextBox> _numCells;
         private List<bool> _TDKconnection;
+        private int yy = 0;
         private string Cycling;
 
         private DateTime _cycleTimer = DateTime.Now;
@@ -87,13 +90,13 @@ namespace Current_Cycling_Controls
             txtTempSensSample3,txtTempSensSample4,txtTempSensSample5,txtTempSensSample6,
             txtTempSensSample7,txtTempSensSample8,txtTempSensSample9,
             txtTempSensSample10,txtTempSensSample11,txtTempSensSample12};
-            _tempLabels = new List<Label> { labelTemp1, labelTemp2,
-            labelTemp3,labelTemp4,labelTemp5,labelTemp6,
-            labelTemp7,labelTemp8,labelTemp9,labelTemp10,
-            labelTemp11,labelTemp12, labelTemp13, labelTemp14, labelTemp15, labelTemp16};
-            _smokeLabels = new List<Label> { labelSmoke1, labelSmoke2,
-            labelSmoke3,labelSmoke4,labelSmoke5,labelSmoke6,
-            labelSmoke7,labelSmoke8};
+            //_tempLabels = new List<Label> { labelTemp1, labelTemp2,
+            //labelTemp3,labelTemp4,labelTemp5,labelTemp6,
+            //labelTemp7,labelTemp8,labelTemp9,labelTemp10,
+            //labelTemp11,labelTemp12, labelTemp13, labelTemp14, labelTemp15, labelTemp16};
+            //_smokeLabels = new List<Label> { labelSmoke1, labelSmoke2,
+            //labelSmoke3,labelSmoke4,labelSmoke5,labelSmoke6,
+            //labelSmoke7,labelSmoke8};
             _voltageLabels = new List<Label> { lblVoltage1, lblVoltage2 , lblVoltage3 ,
                 lblVoltage4,lblVoltage5,lblVoltage6,lblVoltage7,lblVoltage8,lblVoltage9,
                 lblVoltage10,lblVoltage11,lblVoltage12};
@@ -169,8 +172,8 @@ namespace Current_Cycling_Controls
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
-            for (int i = 1; i <13; i++) {
-                _TDKS.Add(new TDK("0" + i, i));
+            for (int j = 1; j <13; j++) {
+                _TDKS.Add(new TDK("0" + j, j));
             }
 
             // initialize heartbeatpacket before arduino declarations
@@ -185,13 +188,57 @@ namespace Current_Cycling_Controls
             _heartBeatPacket = new TransmitPacket(txtOverTempSet.Text, txtSmokeOverSet.Text,
                 txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, "0", "0", tempBin, smokeBin, "0");
 
+            // initialize temp/smoke graphs
+            chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+            chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+            StripLine stripline = new StripLine();
+            stripline.Interval = 0;
+            stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
+            stripline.StripWidth = 3;
+            stripline.BackColor = Color.Red;
+            chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+            var i = 1;
+            foreach (object chk in chkTemp.Items) {
+                if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
+                    var y = 25;
+                    chartTemp.Series["Temp"].Points.AddXY(i, y);
+                    i++;
+                }
+            }
+            chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+            chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+            stripline = new StripLine();
+            stripline.Interval = 0;
+            stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
+            stripline.StripWidth = 3;
+            stripline.BackColor = Color.Red;
+            chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+            i = 1;
+            foreach (object chk in chkSmoke.Items) {
+                if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
+                    var y = 25;
+                    chartSmoke.Series["Smoke Level"].Points.AddXY(i, y);
+                    i++;
+                }
+            }
+
             // wait until arduino is connected to start connecting TDKs
-            while (!_arduino.Connected) { }
+#if RELEASE
+            //while (!_arduino.Connected) { }
+#endif
             _connectionWorker.RunWorkerAsync();
             Console.WriteLine($"Checking TDK connections");
             btnStart.Enabled = false;
             btnCheckConnection.Enabled = false;
+
+#if DEBUG
+            var timer = new System.Timers.Timer();
+            timer.Elapsed += OnTimedEvent;
+            timer.Interval = 1000;
+            timer.Start();
+#endif
         }
+
 
         private void RunCurrentCycling (object s, DoWorkEventArgs e) {
             var tdk = (StartCyclingArgs)e.Argument;
@@ -351,15 +398,40 @@ namespace Current_Cycling_Controls
                 // update temp/smoke/alarm readings
                 else if (e.ProgressPercentage == 2) {
                     var ardArgs = _arduino._recievedPacket;
-                    var i = 0;
-                    foreach (var lb in _tempLabels) {
-                        lb.Text = ardArgs.TempList[i].ToString("F1"); 
-                        i++;
+
+                    var i = 1;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+                    StripLine stripline = new StripLine();
+                    stripline.Interval = 0;
+                    stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
+                    stripline.StripWidth = 3;
+                    stripline.BackColor = Color.Red;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+                    chartTemp.Series["Temp"].Points.Clear();
+                    foreach (object chk in chkTemp.Items) {
+                        if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
+                            var y = ardArgs.TempList[i];
+                            chartTemp.Series["Temp"].Points.AddXY(i, y);
+                            i++;
+                        }
                     }
-                    i = 0;
-                    foreach (var lb in _smokeLabels) {
-                        lb.Text = ardArgs.SmokeList[i].ToString("F1");
-                        i++;
+                    i = 1;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+                    stripline = new StripLine();
+                    stripline.Interval = 0;
+                    stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
+                    stripline.StripWidth = 3;
+                    stripline.BackColor = Color.Red;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+                    chartSmoke.Series["Smoke Level"].Points.Clear();
+                    foreach (object chk in chkSmoke.Items) {
+                        if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
+                            var y = ardArgs.SmokeList[i];
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(i, y);
+                            i++;
+                        }
                     }
 
                     labelTempAlarm.BackColor = ardArgs.TempAlarm ? Color.Red : Color.Empty;
@@ -394,6 +466,41 @@ namespace Current_Cycling_Controls
                     EnableTDKRows();
                     btnCheckConnection.Enabled = true;
                     btnStart.Enabled = true;
+                }
+                // update smoke/temp charts TESTING
+                else if (e.ProgressPercentage == 6) {
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+                    StripLine stripline = new StripLine();
+                    stripline.Interval = 0;
+                    stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
+                    stripline.StripWidth = 3;
+                    stripline.BackColor = Color.Red;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+                    var i = 1;
+                    chartTemp.Series["Temp"].Points.Clear();
+                    foreach (object chk in chkTemp.Items) {
+                        if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
+                            chartTemp.Series["Temp"].Points.AddXY(i, yy);
+                            i++;
+                        }
+                    }
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
+                    stripline = new StripLine();
+                    stripline.Interval = 0;
+                    stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
+                    stripline.StripWidth = 3;
+                    stripline.BackColor = Color.Red;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
+                    chartSmoke.Series["Smoke Level"].Points.Clear();
+                    i = 1;
+                    foreach (object chk in chkSmoke.Items) {
+                        if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(i, yy);
+                            i++;
+                        }
+                    }
                 }
             }
             catch { }
@@ -740,6 +847,11 @@ namespace Current_Cycling_Controls
         private void BtnClearSamples_Click(object sender, EventArgs e) {
             Properties.Settings.Default.Samples = new List<string> { null, null, null, null, null, null, null, null, null, null, null, null };
             Properties.Settings.Default.Save();
+        }
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e) {
+            yy++;
+            _commWorker.ReportProgress(6);
         }
     }
 }
