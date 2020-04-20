@@ -29,16 +29,16 @@ namespace Current_Cycling_Controls {
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSetCurr12 = new System.Windows.Forms.TextBox();
             this.txtSetCurr11 = new System.Windows.Forms.TextBox();
@@ -2182,7 +2182,7 @@ namespace Current_Cycling_Controls {
             this.chkSmoke.Location = new System.Drawing.Point(1171, 219);
             this.chkSmoke.Margin = new System.Windows.Forms.Padding(4);
             this.chkSmoke.Name = "chkSmoke";
-            this.chkSmoke.Size = new System.Drawing.Size(69, 140);
+            this.chkSmoke.Size = new System.Drawing.Size(69, 157);
             this.chkSmoke.TabIndex = 65;
             // 
             // chkTemp
@@ -2208,7 +2208,7 @@ namespace Current_Cycling_Controls {
             this.chkTemp.Location = new System.Drawing.Point(1171, 444);
             this.chkTemp.Margin = new System.Windows.Forms.Padding(4);
             this.chkTemp.Name = "chkTemp";
-            this.chkTemp.Size = new System.Drawing.Size(69, 293);
+            this.chkTemp.Size = new System.Drawing.Size(69, 310);
             this.chkTemp.TabIndex = 66;
             // 
             // label4
@@ -2339,67 +2339,67 @@ namespace Current_Cycling_Controls {
             // 
             // chartTemp
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartTemp.ChartAreas.Add(chartArea3);
-            legend3.AutoFitMinFontSize = 9;
-            legend3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            legend3.Position.Auto = false;
-            legend3.Position.Height = 16.6065F;
-            legend3.Position.Width = 30F;
-            legend3.Position.X = 70F;
-            this.chartTemp.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chartTemp.ChartAreas.Add(chartArea1);
+            legend1.AutoFitMinFontSize = 9;
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.Position.Auto = false;
+            legend1.Position.Height = 16.6065F;
+            legend1.Position.Width = 30F;
+            legend1.Position.X = 70F;
+            this.chartTemp.Legends.Add(legend1);
             this.chartTemp.Location = new System.Drawing.Point(7, 584);
             this.chartTemp.Name = "chartTemp";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Temp";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Color = System.Drawing.Color.Red;
-            series6.Legend = "Legend1";
-            series6.Name = "MaxTemp";
-            this.chartTemp.Series.Add(series5);
-            this.chartTemp.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Temp";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "MaxTemp";
+            this.chartTemp.Series.Add(series1);
+            this.chartTemp.Series.Add(series2);
             this.chartTemp.Size = new System.Drawing.Size(571, 278);
             this.chartTemp.TabIndex = 167;
             this.chartTemp.Text = "chart1";
-            title3.Name = "Title1";
-            title3.Text = "Temperature Sensors";
-            this.chartTemp.Titles.Add(title3);
+            title1.Name = "Title1";
+            title1.Text = "Temperature Sensors";
+            this.chartTemp.Titles.Add(title1);
             // 
             // chartSmoke
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartSmoke.ChartAreas.Add(chartArea4);
-            legend4.AutoFitMinFontSize = 9;
-            legend4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend4.IsTextAutoFit = false;
-            legend4.Name = "Legend1";
-            legend4.Position.Auto = false;
-            legend4.Position.Height = 16.6065F;
-            legend4.Position.Width = 30F;
-            legend4.Position.X = 70F;
-            this.chartSmoke.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chartSmoke.ChartAreas.Add(chartArea2);
+            legend2.AutoFitMinFontSize = 9;
+            legend2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.Position.Auto = false;
+            legend2.Position.Height = 16.6065F;
+            legend2.Position.Width = 30F;
+            legend2.Position.X = 70F;
+            this.chartSmoke.Legends.Add(legend2);
             this.chartSmoke.Location = new System.Drawing.Point(584, 584);
             this.chartSmoke.Name = "chartSmoke";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Smoke Level";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Color = System.Drawing.Color.Red;
-            series8.Legend = "Legend1";
-            series8.Name = "MaxSmoke";
-            this.chartSmoke.Series.Add(series7);
-            this.chartSmoke.Series.Add(series8);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Smoke Level";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Red;
+            series4.Legend = "Legend1";
+            series4.Name = "MaxSmoke";
+            this.chartSmoke.Series.Add(series3);
+            this.chartSmoke.Series.Add(series4);
             this.chartSmoke.Size = new System.Drawing.Size(561, 278);
             this.chartSmoke.TabIndex = 168;
             this.chartSmoke.Text = "chart1";
-            title4.Name = "Title1";
-            title4.Text = "Smoke Sensors";
-            this.chartSmoke.Titles.Add(title4);
+            title2.Name = "Title1";
+            title2.Text = "Smoke Sensors";
+            this.chartSmoke.Titles.Add(title2);
             // 
             // frmMain
             // 

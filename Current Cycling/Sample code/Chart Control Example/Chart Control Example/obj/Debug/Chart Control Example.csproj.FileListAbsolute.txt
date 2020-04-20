@@ -7,3 +7,13 @@ C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control 
 C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csproj.GenerateResource.cache
 C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.exe
 C:\Git\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.exe.config
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.exe
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\bin\Debug\Chart Control Example.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csprojAssemblyReference.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart_Control_Example.Form1.resources
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart_Control_Example.Properties.Resources.resources
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csproj.GenerateResource.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.csproj.CoreCompileInputs.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.exe
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\Chart Control Example\Chart Control Example\obj\Debug\Chart Control Example.pdb

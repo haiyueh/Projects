@@ -16,10 +16,11 @@ namespace Current_Cycling_Controls {
         public event TDKEvent UpdateUI;
         private SerialPort _serTDK;
         private DateTime _cycleTimer = DateTime.Now;
-        private Stopwatch _timer;
+        private Stopwatch _biasTimer;
         private Stopwatch _resultsTimer;
         private Stopwatch _totalTimer;
         private Stopwatch _intoCycleTimer;
+        private Stopwatch _voltageTimer;
         private bool _timeOut;
         public List<TDK> _TDK;
         public bool _updateRun;
@@ -31,6 +32,7 @@ namespace Current_Cycling_Controls {
         public bool BIASON;
         public bool SAVE;
         public List<double> _temps;
+        public List<double> _smokes;
         public List<double> _voltages;
         public event CoreCommandEvent NewCoreCommand;
         public CurrentCycling() {
@@ -57,11 +59,14 @@ namespace Current_Cycling_Controls {
                 // start bias cycle
                 foreach (var t in tdk) {
                     t.CycleCount++;
+                    t.PastVoltages = new List<string>();
                 }
                 _TDK = tdk;
                 _resultsDir = args.ResultsDirectory;
                 _totalTimer = new Stopwatch();
                 _totalTimer.Start();
+                _voltageTimer = new Stopwatch();
+                _voltageTimer.Start();
 
                 // Loop forever until we get a stop command from main thread
                 while (true) {
@@ -77,7 +82,7 @@ namespace Current_Cycling_Controls {
                     StartTimer();
                     StartResultsTimer();
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOnTime);
-                    while (_timer.ElapsedMilliseconds < args.BiasOnTime
+                    while (_biasTimer.ElapsedMilliseconds < args.BiasOnTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
                         if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
                         foreach (var tt in tdk) {
@@ -93,6 +98,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
+                            tt.PastVoltages.Add(tt.Voltage);
                         }
                         // if we have saved then restart timer
                         if (SAVE) {
@@ -108,7 +114,7 @@ namespace Current_Cycling_Controls {
                     StartTimer();
                     StartResultsTimer();
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOffTime);
-                    while (_timer.ElapsedMilliseconds < args.BiasOffTime
+                    while (_biasTimer.ElapsedMilliseconds < args.BiasOffTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
                         if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
                         foreach (var tt in tdk) {
@@ -122,6 +128,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
+                            tt.PastVoltages.Add(tt.Voltage);
                         }
 
                         // if we have saved then restart timer
@@ -132,6 +139,14 @@ namespace Current_Cycling_Controls {
                         
                     }
                     if (STOP || SMOKEALARM || TEMPALARM) break;
+
+                    // save voltage graphs every 3 hours, 8 times a day
+                    if (_voltageTimer.ElapsedMilliseconds > 10800000) {
+                        foreach (var t in tdk) {
+                            GraphVoltages(t);
+                        }
+                        _voltageTimer.Restart();
+                    }
 
                     // completed a bias on/off cycle
                     foreach (var ttt in tdk) {
@@ -280,8 +295,8 @@ namespace Current_Cycling_Controls {
         }
 
         private void StartTimer() {
-            _timer = new Stopwatch();
-            _timer.Start();
+            _biasTimer = new Stopwatch();
+            _biasTimer.Start();
         }
 
         private void StartResultsTimer() {
@@ -290,8 +305,8 @@ namespace Current_Cycling_Controls {
         }
 
         private void Wait(int t) {
-            long elapsed = _timer.ElapsedMilliseconds;
-            while (_timer.ElapsedMilliseconds - elapsed < t) { }
+            long elapsed = _biasTimer.ElapsedMilliseconds;
+            while (_biasTimer.ElapsedMilliseconds - elapsed < t) { }
         }
 
         private void WaitResults(int t) {
@@ -299,17 +314,44 @@ namespace Current_Cycling_Controls {
             while (_resultsTimer.ElapsedMilliseconds - elapsed < t) { }
         }
 
-        private void GraphVoltages() {
+        private void GraphVoltages(TDK t) {
             Chart chart1 = new Chart();
             chart1.Series.Clear();
-            var series = new Series();
-
-            //foreach (int i in enumerable) {
-            //    series.Points.Add((double)i);
-            //}
-
+            var series = new Series("Volts");
+            series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series.Enabled = true;
             chart1.Series.Add(series);
+            chart1.Visible = true;
+            ChartArea chA = new ChartArea();
+            chA.AxisX.RoundAxisValues();
+            chA.AxisX.Title = "Cycle";
+            chA.AxisY.Title = "Voltage";
+            chart1.ChartAreas.Add(chA);
+            var lin = Linespace(1, t.CycleCount, t.PastVoltages.Count - 2);
+            var ii = 0;
+            foreach (var val in t.PastVoltages) {
+                chart1.Series["Volts"].Points.AddXY(lin[ii], val);
+                ii++;
+            }
+            chart1.Invalidate();
 
+            chart1.SaveImage($"{_resultsDir}\\charts\\{t.SampleName}_C{t.CycleCount}.png", System.Drawing.Imaging.ImageFormat.Png);
+
+        }
+
+        /// <summary>
+        /// Mimic MatLab's LinSpace function (:
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="sections"></param>
+        /// <returns></returns>
+        private List<double> Linespace(double start, double end, int sections) {
+            List<double> lst = new List<double>();
+            for (var i = 0; i < sections + 2; i++) {
+                lst.Add(start + ((end - start) / (sections + 1)) * i);
+            }
+            return lst;
         }
 
     }

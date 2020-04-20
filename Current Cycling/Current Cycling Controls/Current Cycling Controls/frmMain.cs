@@ -189,7 +189,7 @@ namespace Current_Cycling_Controls
                 txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, "0", "0", tempBin, smokeBin, "0");
 
             // initialize temp/smoke graphs
-            chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+            chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 30;
             chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
             StripLine stripline = new StripLine();
             stripline.Interval = 0;
@@ -205,7 +205,7 @@ namespace Current_Cycling_Controls
                     i++;
                 }
             }
-            chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+            chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 1;
             chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
             stripline = new StripLine();
             stripline.Interval = 0;
@@ -347,9 +347,10 @@ namespace Current_Cycling_Controls
                         _cycling.TEMPALARM = packet.TempAlarm;
                         _cycling.STOP = packet.EMSSTOP;
                         _cycling._temps = new List<double>(packet.TempList);
+                        _cycling._smokes = new List<double>(packet.SmokeList);
                     }
 
-                    if (packet.SmokeAlarm || packet.TempAlarm || packet.EMSSTOP) {
+                    if (packet.SmokeAlarm) {// || packet.TempAlarm || packet.EMSSTOP) {
                         SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
                         audio.Play();
                     }
@@ -399,37 +400,37 @@ namespace Current_Cycling_Controls
                 else if (e.ProgressPercentage == 2) {
                     var ardArgs = _arduino._recievedPacket;
 
-                    var i = 1;
-                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+                    var i = 0;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 20;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     StripLine stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
-                    stripline.StripWidth = 3;
+                    stripline.StripWidth = stripline.IntervalOffset / 25;
                     stripline.BackColor = Color.Red;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartTemp.Series["Temp"].Points.Clear();
                     foreach (object chk in chkTemp.Items) {
                         if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
                             var y = ardArgs.TempList[i];
-                            chartTemp.Series["Temp"].Points.AddXY(i, y);
+                            chartTemp.Series["Temp"].Points.AddXY(i+1, y);
                             i++;
                         }
                     }
-                    i = 1;
-                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+                    i = 0;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 2;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
-                    stripline.StripWidth = 3;
+                    stripline.StripWidth = stripline.IntervalOffset / 25;
                     stripline.BackColor = Color.Red;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartSmoke.Series["Smoke Level"].Points.Clear();
                     foreach (object chk in chkSmoke.Items) {
                         if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
                             var y = ardArgs.SmokeList[i];
-                            chartSmoke.Series["Smoke Level"].Points.AddXY(i, y);
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(i+1, y);
                             i++;
                         }
                     }
@@ -469,12 +470,12 @@ namespace Current_Cycling_Controls
                 }
                 // update smoke/temp charts TESTING
                 else if (e.ProgressPercentage == 6) {
-                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 50;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 30;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     StripLine stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
-                    stripline.StripWidth = 3;
+                    stripline.StripWidth = stripline.IntervalOffset/25;
                     stripline.BackColor = Color.Red;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     var i = 1;
@@ -485,12 +486,12 @@ namespace Current_Cycling_Controls
                             i++;
                         }
                     }
-                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 50;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 1;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
-                    stripline.StripWidth = 3;
+                    stripline.StripWidth = stripline.IntervalOffset / 25;
                     stripline.BackColor = Color.Red;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartSmoke.Series["Smoke Level"].Points.Clear();
@@ -767,6 +768,11 @@ namespace Current_Cycling_Controls
             btnLoadSamples.Enabled = true;
             Properties.Settings.Default.Save();
             txtDirectory.Text = Directory.GetParent(saveFile.FileName).FullName;
+            _cycleLabels[index].Text = "0";
+            _numCells[index].Text = "22";
+            _voc[index].Text = "0.655";
+            _tempSensors[index].Text = (index + 1).ToString();
+            _setCurrents[index].Text = "0";
 
         }
 

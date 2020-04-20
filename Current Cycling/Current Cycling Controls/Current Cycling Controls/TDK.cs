@@ -17,6 +17,7 @@ namespace Current_Cycling_Controls {
         public string NumCells { get; set; }
         public string Voc { get; set; }
         public string SampleName { get; set; }
+        public List<string> PastVoltages { get; set; }
 
         public TDK(string address, int port) {
             Port = port;
