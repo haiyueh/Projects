@@ -412,7 +412,7 @@ namespace Current_Cycling_Controls {
             this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample11, 10, 11);
             this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample12, 10, 12);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 129);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 13;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
@@ -540,7 +540,7 @@ namespace Current_Cycling_Controls {
             // btnNew1
             // 
             this.btnNew1.Location = new System.Drawing.Point(283, 38);
-            this.btnNew1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew1.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew1.Name = "btnNew1";
             this.btnNew1.Size = new System.Drawing.Size(44, 19);
             this.btnNew1.TabIndex = 61;
@@ -672,7 +672,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort1.AutoSize = true;
             this.chkbxPort1.Location = new System.Drawing.Point(2, 38);
-            this.chkbxPort1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort1.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort1.Name = "chkbxPort1";
             this.chkbxPort1.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort1.TabIndex = 14;
@@ -684,7 +684,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort2.AutoSize = true;
             this.chkbxPort2.Location = new System.Drawing.Point(2, 65);
-            this.chkbxPort2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort2.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort2.Name = "chkbxPort2";
             this.chkbxPort2.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort2.TabIndex = 15;
@@ -695,7 +695,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort3.AutoSize = true;
             this.chkbxPort3.Location = new System.Drawing.Point(2, 92);
-            this.chkbxPort3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort3.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort3.Name = "chkbxPort3";
             this.chkbxPort3.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort3.TabIndex = 16;
@@ -706,7 +706,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort4.AutoSize = true;
             this.chkbxPort4.Location = new System.Drawing.Point(2, 118);
-            this.chkbxPort4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort4.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort4.Name = "chkbxPort4";
             this.chkbxPort4.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort4.TabIndex = 17;
@@ -717,7 +717,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort5.AutoSize = true;
             this.chkbxPort5.Location = new System.Drawing.Point(2, 142);
-            this.chkbxPort5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort5.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort5.Name = "chkbxPort5";
             this.chkbxPort5.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort5.TabIndex = 18;
@@ -728,7 +728,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort6.AutoSize = true;
             this.chkbxPort6.Location = new System.Drawing.Point(2, 166);
-            this.chkbxPort6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort6.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort6.Name = "chkbxPort6";
             this.chkbxPort6.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort6.TabIndex = 19;
@@ -739,7 +739,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort7.AutoSize = true;
             this.chkbxPort7.Location = new System.Drawing.Point(2, 191);
-            this.chkbxPort7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort7.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort7.Name = "chkbxPort7";
             this.chkbxPort7.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort7.TabIndex = 20;
@@ -750,7 +750,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort8.AutoSize = true;
             this.chkbxPort8.Location = new System.Drawing.Point(2, 215);
-            this.chkbxPort8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort8.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort8.Name = "chkbxPort8";
             this.chkbxPort8.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort8.TabIndex = 21;
@@ -761,7 +761,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort9.AutoSize = true;
             this.chkbxPort9.Location = new System.Drawing.Point(2, 240);
-            this.chkbxPort9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort9.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort9.Name = "chkbxPort9";
             this.chkbxPort9.Size = new System.Drawing.Size(32, 17);
             this.chkbxPort9.TabIndex = 22;
@@ -772,7 +772,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort10.AutoSize = true;
             this.chkbxPort10.Location = new System.Drawing.Point(2, 266);
-            this.chkbxPort10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort10.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort10.Name = "chkbxPort10";
             this.chkbxPort10.Size = new System.Drawing.Size(38, 17);
             this.chkbxPort10.TabIndex = 24;
@@ -783,7 +783,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort11.AutoSize = true;
             this.chkbxPort11.Location = new System.Drawing.Point(2, 291);
-            this.chkbxPort11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort11.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort11.Name = "chkbxPort11";
             this.chkbxPort11.Size = new System.Drawing.Size(38, 17);
             this.chkbxPort11.TabIndex = 23;
@@ -794,7 +794,7 @@ namespace Current_Cycling_Controls {
             // 
             this.chkbxPort12.AutoSize = true;
             this.chkbxPort12.Location = new System.Drawing.Point(2, 317);
-            this.chkbxPort12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkbxPort12.Margin = new System.Windows.Forms.Padding(2);
             this.chkbxPort12.Name = "chkbxPort12";
             this.chkbxPort12.Size = new System.Drawing.Size(38, 17);
             this.chkbxPort12.TabIndex = 25;
@@ -924,7 +924,7 @@ namespace Current_Cycling_Controls {
             // btnLoad1
             // 
             this.btnLoad1.Location = new System.Drawing.Point(211, 38);
-            this.btnLoad1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad1.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad1.Name = "btnLoad1";
             this.btnLoad1.Size = new System.Drawing.Size(54, 19);
             this.btnLoad1.TabIndex = 49;
@@ -935,7 +935,7 @@ namespace Current_Cycling_Controls {
             // btnLoad2
             // 
             this.btnLoad2.Location = new System.Drawing.Point(211, 65);
-            this.btnLoad2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad2.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad2.Name = "btnLoad2";
             this.btnLoad2.Size = new System.Drawing.Size(54, 19);
             this.btnLoad2.TabIndex = 50;
@@ -946,7 +946,7 @@ namespace Current_Cycling_Controls {
             // btnLoad3
             // 
             this.btnLoad3.Location = new System.Drawing.Point(211, 92);
-            this.btnLoad3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad3.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad3.Name = "btnLoad3";
             this.btnLoad3.Size = new System.Drawing.Size(54, 19);
             this.btnLoad3.TabIndex = 51;
@@ -957,7 +957,7 @@ namespace Current_Cycling_Controls {
             // btnLoad4
             // 
             this.btnLoad4.Location = new System.Drawing.Point(211, 118);
-            this.btnLoad4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad4.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad4.Name = "btnLoad4";
             this.btnLoad4.Size = new System.Drawing.Size(54, 19);
             this.btnLoad4.TabIndex = 52;
@@ -968,7 +968,7 @@ namespace Current_Cycling_Controls {
             // btnLoad5
             // 
             this.btnLoad5.Location = new System.Drawing.Point(211, 142);
-            this.btnLoad5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad5.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad5.Name = "btnLoad5";
             this.btnLoad5.Size = new System.Drawing.Size(54, 19);
             this.btnLoad5.TabIndex = 53;
@@ -979,7 +979,7 @@ namespace Current_Cycling_Controls {
             // btnLoad6
             // 
             this.btnLoad6.Location = new System.Drawing.Point(211, 166);
-            this.btnLoad6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad6.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad6.Name = "btnLoad6";
             this.btnLoad6.Size = new System.Drawing.Size(54, 19);
             this.btnLoad6.TabIndex = 54;
@@ -990,7 +990,7 @@ namespace Current_Cycling_Controls {
             // btnLoad7
             // 
             this.btnLoad7.Location = new System.Drawing.Point(211, 191);
-            this.btnLoad7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad7.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad7.Name = "btnLoad7";
             this.btnLoad7.Size = new System.Drawing.Size(54, 19);
             this.btnLoad7.TabIndex = 55;
@@ -1001,7 +1001,7 @@ namespace Current_Cycling_Controls {
             // btnLoad8
             // 
             this.btnLoad8.Location = new System.Drawing.Point(211, 215);
-            this.btnLoad8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad8.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad8.Name = "btnLoad8";
             this.btnLoad8.Size = new System.Drawing.Size(54, 19);
             this.btnLoad8.TabIndex = 56;
@@ -1012,7 +1012,7 @@ namespace Current_Cycling_Controls {
             // btnLoad9
             // 
             this.btnLoad9.Location = new System.Drawing.Point(211, 240);
-            this.btnLoad9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad9.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad9.Name = "btnLoad9";
             this.btnLoad9.Size = new System.Drawing.Size(54, 19);
             this.btnLoad9.TabIndex = 58;
@@ -1023,7 +1023,7 @@ namespace Current_Cycling_Controls {
             // btnLoad10
             // 
             this.btnLoad10.Location = new System.Drawing.Point(211, 266);
-            this.btnLoad10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad10.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad10.Name = "btnLoad10";
             this.btnLoad10.Size = new System.Drawing.Size(54, 19);
             this.btnLoad10.TabIndex = 57;
@@ -1034,7 +1034,7 @@ namespace Current_Cycling_Controls {
             // btnLoad11
             // 
             this.btnLoad11.Location = new System.Drawing.Point(211, 291);
-            this.btnLoad11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad11.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad11.Name = "btnLoad11";
             this.btnLoad11.Size = new System.Drawing.Size(54, 19);
             this.btnLoad11.TabIndex = 59;
@@ -1045,7 +1045,7 @@ namespace Current_Cycling_Controls {
             // btnLoad12
             // 
             this.btnLoad12.Location = new System.Drawing.Point(211, 317);
-            this.btnLoad12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad12.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad12.Name = "btnLoad12";
             this.btnLoad12.Size = new System.Drawing.Size(54, 19);
             this.btnLoad12.TabIndex = 60;
@@ -1056,7 +1056,7 @@ namespace Current_Cycling_Controls {
             // btnNew2
             // 
             this.btnNew2.Location = new System.Drawing.Point(283, 65);
-            this.btnNew2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew2.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew2.Name = "btnNew2";
             this.btnNew2.Size = new System.Drawing.Size(44, 19);
             this.btnNew2.TabIndex = 62;
@@ -1067,7 +1067,7 @@ namespace Current_Cycling_Controls {
             // btnNew3
             // 
             this.btnNew3.Location = new System.Drawing.Point(283, 92);
-            this.btnNew3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew3.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew3.Name = "btnNew3";
             this.btnNew3.Size = new System.Drawing.Size(44, 19);
             this.btnNew3.TabIndex = 63;
@@ -1078,7 +1078,7 @@ namespace Current_Cycling_Controls {
             // btnNew4
             // 
             this.btnNew4.Location = new System.Drawing.Point(283, 118);
-            this.btnNew4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew4.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew4.Name = "btnNew4";
             this.btnNew4.Size = new System.Drawing.Size(44, 19);
             this.btnNew4.TabIndex = 64;
@@ -1089,7 +1089,7 @@ namespace Current_Cycling_Controls {
             // btnNew5
             // 
             this.btnNew5.Location = new System.Drawing.Point(283, 142);
-            this.btnNew5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew5.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew5.Name = "btnNew5";
             this.btnNew5.Size = new System.Drawing.Size(44, 19);
             this.btnNew5.TabIndex = 65;
@@ -1100,7 +1100,7 @@ namespace Current_Cycling_Controls {
             // btnNew6
             // 
             this.btnNew6.Location = new System.Drawing.Point(283, 166);
-            this.btnNew6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew6.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew6.Name = "btnNew6";
             this.btnNew6.Size = new System.Drawing.Size(44, 19);
             this.btnNew6.TabIndex = 66;
@@ -1111,7 +1111,7 @@ namespace Current_Cycling_Controls {
             // btnNew7
             // 
             this.btnNew7.Location = new System.Drawing.Point(283, 191);
-            this.btnNew7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew7.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew7.Name = "btnNew7";
             this.btnNew7.Size = new System.Drawing.Size(44, 19);
             this.btnNew7.TabIndex = 68;
@@ -1122,7 +1122,7 @@ namespace Current_Cycling_Controls {
             // btnNew8
             // 
             this.btnNew8.Location = new System.Drawing.Point(283, 215);
-            this.btnNew8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew8.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew8.Name = "btnNew8";
             this.btnNew8.Size = new System.Drawing.Size(44, 19);
             this.btnNew8.TabIndex = 67;
@@ -1133,7 +1133,7 @@ namespace Current_Cycling_Controls {
             // btnNew9
             // 
             this.btnNew9.Location = new System.Drawing.Point(283, 240);
-            this.btnNew9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew9.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew9.Name = "btnNew9";
             this.btnNew9.Size = new System.Drawing.Size(44, 19);
             this.btnNew9.TabIndex = 69;
@@ -1144,7 +1144,7 @@ namespace Current_Cycling_Controls {
             // btnNew10
             // 
             this.btnNew10.Location = new System.Drawing.Point(283, 266);
-            this.btnNew10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew10.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew10.Name = "btnNew10";
             this.btnNew10.Size = new System.Drawing.Size(44, 19);
             this.btnNew10.TabIndex = 70;
@@ -1155,7 +1155,7 @@ namespace Current_Cycling_Controls {
             // btnNew11
             // 
             this.btnNew11.Location = new System.Drawing.Point(283, 291);
-            this.btnNew11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew11.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew11.Name = "btnNew11";
             this.btnNew11.Size = new System.Drawing.Size(44, 21);
             this.btnNew11.TabIndex = 71;
@@ -1166,7 +1166,7 @@ namespace Current_Cycling_Controls {
             // btnNew12
             // 
             this.btnNew12.Location = new System.Drawing.Point(283, 317);
-            this.btnNew12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNew12.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew12.Name = "btnNew12";
             this.btnNew12.Size = new System.Drawing.Size(44, 19);
             this.btnNew12.TabIndex = 72;
@@ -1177,7 +1177,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells1
             // 
             this.txtNumCells1.Location = new System.Drawing.Point(331, 38);
-            this.txtNumCells1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells1.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells1.Name = "txtNumCells1";
             this.txtNumCells1.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells1.TabIndex = 73;
@@ -1186,7 +1186,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells2
             // 
             this.txtNumCells2.Location = new System.Drawing.Point(331, 65);
-            this.txtNumCells2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells2.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells2.Name = "txtNumCells2";
             this.txtNumCells2.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells2.TabIndex = 74;
@@ -1195,7 +1195,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells3
             // 
             this.txtNumCells3.Location = new System.Drawing.Point(331, 92);
-            this.txtNumCells3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells3.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells3.Name = "txtNumCells3";
             this.txtNumCells3.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells3.TabIndex = 75;
@@ -1204,7 +1204,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells4
             // 
             this.txtNumCells4.Location = new System.Drawing.Point(331, 118);
-            this.txtNumCells4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells4.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells4.Name = "txtNumCells4";
             this.txtNumCells4.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells4.TabIndex = 76;
@@ -1213,7 +1213,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells5
             // 
             this.txtNumCells5.Location = new System.Drawing.Point(331, 142);
-            this.txtNumCells5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells5.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells5.Name = "txtNumCells5";
             this.txtNumCells5.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells5.TabIndex = 77;
@@ -1222,7 +1222,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells6
             // 
             this.txtNumCells6.Location = new System.Drawing.Point(331, 166);
-            this.txtNumCells6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells6.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells6.Name = "txtNumCells6";
             this.txtNumCells6.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells6.TabIndex = 78;
@@ -1231,7 +1231,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells7
             // 
             this.txtNumCells7.Location = new System.Drawing.Point(331, 191);
-            this.txtNumCells7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells7.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells7.Name = "txtNumCells7";
             this.txtNumCells7.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells7.TabIndex = 79;
@@ -1240,7 +1240,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells8
             // 
             this.txtNumCells8.Location = new System.Drawing.Point(331, 215);
-            this.txtNumCells8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells8.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells8.Name = "txtNumCells8";
             this.txtNumCells8.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells8.TabIndex = 80;
@@ -1249,7 +1249,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells9
             // 
             this.txtNumCells9.Location = new System.Drawing.Point(331, 240);
-            this.txtNumCells9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells9.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells9.Name = "txtNumCells9";
             this.txtNumCells9.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells9.TabIndex = 81;
@@ -1258,7 +1258,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells10
             // 
             this.txtNumCells10.Location = new System.Drawing.Point(331, 266);
-            this.txtNumCells10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells10.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells10.Name = "txtNumCells10";
             this.txtNumCells10.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells10.TabIndex = 82;
@@ -1267,7 +1267,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells11
             // 
             this.txtNumCells11.Location = new System.Drawing.Point(331, 291);
-            this.txtNumCells11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells11.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells11.Name = "txtNumCells11";
             this.txtNumCells11.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells11.TabIndex = 83;
@@ -1276,7 +1276,7 @@ namespace Current_Cycling_Controls {
             // txtNumCells12
             // 
             this.txtNumCells12.Location = new System.Drawing.Point(331, 317);
-            this.txtNumCells12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNumCells12.Margin = new System.Windows.Forms.Padding(2);
             this.txtNumCells12.Name = "txtNumCells12";
             this.txtNumCells12.Size = new System.Drawing.Size(33, 20);
             this.txtNumCells12.TabIndex = 84;
@@ -1285,7 +1285,7 @@ namespace Current_Cycling_Controls {
             // txtVoc2
             // 
             this.txtVoc2.Location = new System.Drawing.Point(368, 65);
-            this.txtVoc2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc2.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc2.Name = "txtVoc2";
             this.txtVoc2.Size = new System.Drawing.Size(33, 20);
             this.txtVoc2.TabIndex = 86;
@@ -1294,7 +1294,7 @@ namespace Current_Cycling_Controls {
             // txtVoc3
             // 
             this.txtVoc3.Location = new System.Drawing.Point(368, 92);
-            this.txtVoc3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc3.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc3.Name = "txtVoc3";
             this.txtVoc3.Size = new System.Drawing.Size(33, 20);
             this.txtVoc3.TabIndex = 87;
@@ -1303,7 +1303,7 @@ namespace Current_Cycling_Controls {
             // txtVoc4
             // 
             this.txtVoc4.Location = new System.Drawing.Point(368, 118);
-            this.txtVoc4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc4.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc4.Name = "txtVoc4";
             this.txtVoc4.Size = new System.Drawing.Size(33, 20);
             this.txtVoc4.TabIndex = 88;
@@ -1312,7 +1312,7 @@ namespace Current_Cycling_Controls {
             // txtVoc5
             // 
             this.txtVoc5.Location = new System.Drawing.Point(368, 142);
-            this.txtVoc5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc5.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc5.Name = "txtVoc5";
             this.txtVoc5.Size = new System.Drawing.Size(33, 20);
             this.txtVoc5.TabIndex = 89;
@@ -1321,7 +1321,7 @@ namespace Current_Cycling_Controls {
             // txtVoc6
             // 
             this.txtVoc6.Location = new System.Drawing.Point(368, 166);
-            this.txtVoc6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc6.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc6.Name = "txtVoc6";
             this.txtVoc6.Size = new System.Drawing.Size(33, 20);
             this.txtVoc6.TabIndex = 90;
@@ -1330,7 +1330,7 @@ namespace Current_Cycling_Controls {
             // txtVoc7
             // 
             this.txtVoc7.Location = new System.Drawing.Point(368, 191);
-            this.txtVoc7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc7.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc7.Name = "txtVoc7";
             this.txtVoc7.Size = new System.Drawing.Size(33, 20);
             this.txtVoc7.TabIndex = 91;
@@ -1339,7 +1339,7 @@ namespace Current_Cycling_Controls {
             // txtVoc8
             // 
             this.txtVoc8.Location = new System.Drawing.Point(368, 215);
-            this.txtVoc8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc8.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc8.Name = "txtVoc8";
             this.txtVoc8.Size = new System.Drawing.Size(33, 20);
             this.txtVoc8.TabIndex = 92;
@@ -1348,7 +1348,7 @@ namespace Current_Cycling_Controls {
             // txtVoc9
             // 
             this.txtVoc9.Location = new System.Drawing.Point(368, 240);
-            this.txtVoc9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc9.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc9.Name = "txtVoc9";
             this.txtVoc9.Size = new System.Drawing.Size(33, 20);
             this.txtVoc9.TabIndex = 93;
@@ -1357,7 +1357,7 @@ namespace Current_Cycling_Controls {
             // txtVoc10
             // 
             this.txtVoc10.Location = new System.Drawing.Point(368, 266);
-            this.txtVoc10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc10.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc10.Name = "txtVoc10";
             this.txtVoc10.Size = new System.Drawing.Size(33, 20);
             this.txtVoc10.TabIndex = 94;
@@ -1366,7 +1366,7 @@ namespace Current_Cycling_Controls {
             // txtVoc11
             // 
             this.txtVoc11.Location = new System.Drawing.Point(368, 291);
-            this.txtVoc11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc11.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc11.Name = "txtVoc11";
             this.txtVoc11.Size = new System.Drawing.Size(33, 20);
             this.txtVoc11.TabIndex = 95;
@@ -1375,7 +1375,7 @@ namespace Current_Cycling_Controls {
             // txtVoc12
             // 
             this.txtVoc12.Location = new System.Drawing.Point(368, 317);
-            this.txtVoc12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc12.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc12.Name = "txtVoc12";
             this.txtVoc12.Size = new System.Drawing.Size(33, 20);
             this.txtVoc12.TabIndex = 96;
@@ -1591,7 +1591,7 @@ namespace Current_Cycling_Controls {
             // txtVoc1
             // 
             this.txtVoc1.Location = new System.Drawing.Point(368, 38);
-            this.txtVoc1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtVoc1.Margin = new System.Windows.Forms.Padding(2);
             this.txtVoc1.Name = "txtVoc1";
             this.txtVoc1.Size = new System.Drawing.Size(33, 20);
             this.txtVoc1.TabIndex = 85;
@@ -1912,7 +1912,7 @@ namespace Current_Cycling_Controls {
             // btnStop
             // 
             this.btnStop.Location = new System.Drawing.Point(10, 34);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(178, 28);
             this.btnStop.TabIndex = 54;
@@ -1923,7 +1923,7 @@ namespace Current_Cycling_Controls {
             // btnStart
             // 
             this.btnStart.Location = new System.Drawing.Point(11, 1);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(177, 29);
             this.btnStart.TabIndex = 53;
@@ -1934,7 +1934,7 @@ namespace Current_Cycling_Controls {
             // txtDirectory
             // 
             this.txtDirectory.Location = new System.Drawing.Point(72, 90);
-            this.txtDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDirectory.Margin = new System.Windows.Forms.Padding(2);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.Size = new System.Drawing.Size(116, 20);
             this.txtDirectory.TabIndex = 51;
@@ -1943,7 +1943,7 @@ namespace Current_Cycling_Controls {
             // txtOperator
             // 
             this.txtOperator.Location = new System.Drawing.Point(72, 66);
-            this.txtOperator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOperator.Margin = new System.Windows.Forms.Padding(2);
             this.txtOperator.Name = "txtOperator";
             this.txtOperator.Size = new System.Drawing.Size(116, 20);
             this.txtOperator.TabIndex = 50;
@@ -2002,7 +2002,7 @@ namespace Current_Cycling_Controls {
             // txtOverTempSet
             // 
             this.txtOverTempSet.Location = new System.Drawing.Point(522, 63);
-            this.txtOverTempSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOverTempSet.Margin = new System.Windows.Forms.Padding(2);
             this.txtOverTempSet.Name = "txtOverTempSet";
             this.txtOverTempSet.Size = new System.Drawing.Size(27, 20);
             this.txtOverTempSet.TabIndex = 44;
@@ -2011,7 +2011,7 @@ namespace Current_Cycling_Controls {
             // txtCurrOffTempSet
             // 
             this.txtCurrOffTempSet.Location = new System.Drawing.Point(522, 35);
-            this.txtCurrOffTempSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCurrOffTempSet.Margin = new System.Windows.Forms.Padding(2);
             this.txtCurrOffTempSet.Name = "txtCurrOffTempSet";
             this.txtCurrOffTempSet.Size = new System.Drawing.Size(27, 20);
             this.txtCurrOffTempSet.TabIndex = 43;
@@ -2020,7 +2020,7 @@ namespace Current_Cycling_Controls {
             // txtCurrOnTempSet
             // 
             this.txtCurrOnTempSet.Location = new System.Drawing.Point(522, 5);
-            this.txtCurrOnTempSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCurrOnTempSet.Margin = new System.Windows.Forms.Padding(2);
             this.txtCurrOnTempSet.Name = "txtCurrOnTempSet";
             this.txtCurrOnTempSet.Size = new System.Drawing.Size(27, 20);
             this.txtCurrOnTempSet.TabIndex = 42;
@@ -2059,7 +2059,7 @@ namespace Current_Cycling_Controls {
             // txtBiasOff
             // 
             this.txtBiasOff.Location = new System.Drawing.Point(292, 34);
-            this.txtBiasOff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBiasOff.Margin = new System.Windows.Forms.Padding(2);
             this.txtBiasOff.Name = "txtBiasOff";
             this.txtBiasOff.Size = new System.Drawing.Size(27, 20);
             this.txtBiasOff.TabIndex = 38;
@@ -2068,7 +2068,7 @@ namespace Current_Cycling_Controls {
             // txtBiasOn
             // 
             this.txtBiasOn.Location = new System.Drawing.Point(292, 4);
-            this.txtBiasOn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBiasOn.Margin = new System.Windows.Forms.Padding(2);
             this.txtBiasOn.Name = "txtBiasOn";
             this.txtBiasOn.Size = new System.Drawing.Size(27, 20);
             this.txtBiasOn.TabIndex = 37;
@@ -2214,7 +2214,7 @@ namespace Current_Cycling_Controls {
             // txtSmokeOverSet
             // 
             this.txtSmokeOverSet.Location = new System.Drawing.Point(522, 93);
-            this.txtSmokeOverSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSmokeOverSet.Margin = new System.Windows.Forms.Padding(2);
             this.txtSmokeOverSet.Name = "txtSmokeOverSet";
             this.txtSmokeOverSet.Size = new System.Drawing.Size(27, 20);
             this.txtSmokeOverSet.TabIndex = 159;
@@ -2233,7 +2233,7 @@ namespace Current_Cycling_Controls {
             // txtPauseFans
             // 
             this.txtPauseFans.Location = new System.Drawing.Point(292, 63);
-            this.txtPauseFans.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPauseFans.Margin = new System.Windows.Forms.Padding(2);
             this.txtPauseFans.Name = "txtPauseFans";
             this.txtPauseFans.Size = new System.Drawing.Size(27, 20);
             this.txtPauseFans.TabIndex = 161;
@@ -2242,7 +2242,7 @@ namespace Current_Cycling_Controls {
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(191, 90);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 22);
             this.button1.TabIndex = 162;
@@ -2253,7 +2253,7 @@ namespace Current_Cycling_Controls {
             // btnCheckConnection
             // 
             this.btnCheckConnection.Location = new System.Drawing.Point(724, 7);
-            this.btnCheckConnection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCheckConnection.Margin = new System.Windows.Forms.Padding(2);
             this.btnCheckConnection.Name = "btnCheckConnection";
             this.btnCheckConnection.Size = new System.Drawing.Size(86, 23);
             this.btnCheckConnection.TabIndex = 163;
@@ -2264,7 +2264,7 @@ namespace Current_Cycling_Controls {
             // btnLoadSamples
             // 
             this.btnLoadSamples.Location = new System.Drawing.Point(724, 37);
-            this.btnLoadSamples.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadSamples.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadSamples.Name = "btnLoadSamples";
             this.btnLoadSamples.Size = new System.Drawing.Size(86, 23);
             this.btnLoadSamples.TabIndex = 164;
@@ -2289,7 +2289,7 @@ namespace Current_Cycling_Controls {
             // btnClearSamples
             // 
             this.btnClearSamples.Location = new System.Drawing.Point(724, 66);
-            this.btnClearSamples.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClearSamples.Margin = new System.Windows.Forms.Padding(2);
             this.btnClearSamples.Name = "btnClearSamples";
             this.btnClearSamples.Size = new System.Drawing.Size(86, 23);
             this.btnClearSamples.TabIndex = 166;
@@ -2311,7 +2311,7 @@ namespace Current_Cycling_Controls {
             legend1.Position.X = 70F;
             this.chartTemp.Legends.Add(legend1);
             this.chartTemp.Location = new System.Drawing.Point(5, 474);
-            this.chartTemp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartTemp.Margin = new System.Windows.Forms.Padding(2);
             this.chartTemp.Name = "chartTemp";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -2344,7 +2344,7 @@ namespace Current_Cycling_Controls {
             legend2.Position.X = 70F;
             this.chartSmoke.Legends.Add(legend2);
             this.chartSmoke.Location = new System.Drawing.Point(438, 474);
-            this.chartSmoke.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartSmoke.Margin = new System.Windows.Forms.Padding(2);
             this.chartSmoke.Name = "chartSmoke";
             series3.ChartArea = "ChartArea1";
             series3.Legend = "Legend1";
@@ -2366,7 +2366,7 @@ namespace Current_Cycling_Controls {
             // buttonClearAlarms
             // 
             this.buttonClearAlarms.Location = new System.Drawing.Point(724, 96);
-            this.buttonClearAlarms.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonClearAlarms.Margin = new System.Windows.Forms.Padding(2);
             this.buttonClearAlarms.Name = "buttonClearAlarms";
             this.buttonClearAlarms.Size = new System.Drawing.Size(86, 23);
             this.buttonClearAlarms.TabIndex = 169;
