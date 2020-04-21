@@ -733,7 +733,7 @@ namespace Current_Cycling_Controls
                     ser.BaudRate = U.BaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 300;
+                    ser.ReadTimeout = 3000;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
@@ -743,7 +743,7 @@ namespace Current_Cycling_Controls
                         break;
                     }
                 }
-                catch (Exception exc) {  }
+                catch (Exception exc) { Console.WriteLine($"{exc}"); }
             }
 
             // loop through each TDK, wait for response if connected
