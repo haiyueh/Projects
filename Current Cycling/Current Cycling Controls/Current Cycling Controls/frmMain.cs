@@ -707,7 +707,7 @@ namespace Current_Cycling_Controls
                     ser.BaudRate = U.BaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 150;
+                    ser.ReadTimeout = 300;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
