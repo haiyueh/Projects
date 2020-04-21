@@ -229,7 +229,7 @@ namespace Current_Cycling_Controls
 
             // wait until arduino is connected to start connecting TDKs
 #if RELEASE
-            //while (!_arduino.Connected) { }
+            while (!_arduino.Connected) { }
 #endif
             _connectionWorker.RunWorkerAsync();
             Console.WriteLine($"Checking TDK connections");
@@ -717,7 +717,7 @@ namespace Current_Cycling_Controls
                         break;
                     }
                 }
-                catch { }
+                catch (Exception exc) {  }
             }
 
             // loop through each TDK, wait for response if connected
