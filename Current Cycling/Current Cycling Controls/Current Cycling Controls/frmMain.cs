@@ -689,6 +689,32 @@ namespace Current_Cycling_Controls
                 MessageBox.Show("Please Stop Cycling before Closing Form! ");
                 e.Cancel = true;
             }
+            Properties.Settings.Default.DataFolder = txtDirectory.Text;
+            Properties.Settings.Default.Operator = txtOperator.Text;
+            Properties.Settings.Default.BiasON = txtBiasOn.Text;
+            Properties.Settings.Default.BiasOFF = txtBiasOff.Text;
+            Properties.Settings.Default.BiasONTempSet = txtCurrOnTempSet.Text;
+            Properties.Settings.Default.BiasOFFTempSet = txtCurrOffTempSet.Text;
+            Properties.Settings.Default.OverTempSet = txtOverTempSet.Text;
+            Properties.Settings.Default.OverSmokeSet = txtSmokeOverSet.Text;
+            Properties.Settings.Default.PauseFanTime = txtPauseFans.Text;
+            var iii = 0;
+            foreach (var chk in _checkBoxes) {
+                Properties.Settings.Default.CheckBoxes[iii] = chk.Checked;
+                iii++;
+            }
+            var ii = 0;
+            foreach (object chk in chkTemp.Items) {
+                Properties.Settings.Default.ActiveTemps[ii] = chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk));
+                ii++;
+            }
+            ii = 0;
+            foreach (object chk in chkSmoke.Items) {
+                Properties.Settings.Default.ActiveSmokes[ii] = chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk));
+                ii++;
+            }
+            Properties.Settings.Default.Save();
+
         }
 
         private void ButtonCheckConnection_Click(object sender, EventArgs e) {
@@ -892,6 +918,10 @@ namespace Current_Cycling_Controls
 
         private void ButtonClearAlarms_Click(object sender, EventArgs e) {
             SMOKEALARM = false;
+        }
+
+        private void OnClosing() {
+
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e) {
