@@ -10,7 +10,7 @@ namespace Current_Cycling_Controls {
         public static int BaudRate = 57600;
         public static string COMPort = "COM3";
         public static string VoltageCompliance = "60"; //Kat's code
-        public static string SampleTxtHeader = "Cycle Number,Epoch Time (seconds),Total Time (hrs),Time into Cycle (min),Current Status,Sample Name,Current (A),Voltage (V),# Cells,Cell VoC,TempSensor,SetCurrent,Estimated Rs,Temp 1,Temp 2,Temp 3,Temp 4,Temp 5,Temp 6,Temp 7,Temp 8,Temp 9,Temp 10,Temp 11,Temp 12,Temp 13,Temp 14,Temp 15,Temp 16,Smoke 1,Smoke 2,Smoke 3,Smoke 4,Smoke 5,Smoke 6,Smoke 7,Smoke 8";
+        public static string SampleTxtHeader = "Cycle Number,Epoch Time (seconds),Total Time (hrs),Time into Cycle (min),Current Status,Sample Name,Current (A),Voltage (V),# Cells,Cell VoC,TempSensor,SetCurrent,Estimated Rs,Temp 1,Temp 2,Temp 3,Temp 4,Temp 5,Temp 6,Temp 7,Temp 8,Temp 9,Temp 10,Temp 11,Temp 12,Temp 13,Temp 14,Temp 15,Temp 16,SmokeVoltage 1,SmokeVoltage 2,SmokeVoltage 3,SmokeVoltage 4,SmokeVoltage 5,SmokeVoltage 6,SmokeVoltage 7,SmokeVoltage 8,SmokeLevel 1,SmokeLevel 2,SmokeLevel 3,SmokeLevel 4,SmokeLevel 5,SmokeLevel 6,SmokeLevel 7,SmokeLevel 8";
 
         public enum CmdType {
             None,

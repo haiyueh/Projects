@@ -32,7 +32,8 @@ namespace Current_Cycling_Controls {
         public bool BIASON;
         public bool SAVE;
         public List<double> _temps;
-        public List<double> _smokes;
+        public List<double> _smokeRaw;
+        public List<double> _smokeLevel;
         public List<double> _voltages;
         public event CoreCommandEvent NewCoreCommand;
         public CurrentCycling() {
@@ -187,7 +188,13 @@ namespace Current_Cycling_Controls {
                 $"{_temps[6].ToString("F1")}",$"{_temps[7].ToString("F1")}",$"{_temps[8].ToString("F1")}",
                 $"{_temps[9].ToString("F1")}",$"{_temps[10].ToString("F1")}",$"{_temps[11].ToString("F1")}",
                 $"{_temps[12].ToString("F1")}",$"{_temps[13].ToString("F1")}",$"{_temps[14].ToString("F1")}",
-                $"{_temps[15].ToString("F1")}" };
+                $"{_temps[15].ToString("F1")}",
+                $"{_smokeRaw[0].ToString("F1")}", $"{_smokeRaw[1].ToString("F1")}", $"{_smokeRaw[2].ToString("F1")}",
+                $"{_smokeRaw[3].ToString("F1")}", $"{_smokeRaw[4].ToString("F1")}", $"{_smokeRaw[5].ToString("F1")}",
+                $"{_smokeRaw[6].ToString("F1")}", $"{_smokeRaw[7].ToString("F1")}",
+                $"{_smokeLevel[0].ToString("F1")}", $"{_smokeLevel[1].ToString("F1")}", $"{_smokeLevel[2].ToString("F1")}",
+                $"{_smokeLevel[3].ToString("F1")}", $"{_smokeLevel[4].ToString("F1")}", $"{_smokeLevel[5].ToString("F1")}",
+                $"{_smokeLevel[6].ToString("F1")}", $"{_smokeLevel[7].ToString("F1")}"};
             return string.Join(",", str);
         }
 

@@ -47,8 +47,11 @@ namespace Current_Cycling_Controls
         private List<TextBox> _voc;
         private List<TextBox> _numCells;
         private List<bool> _TDKconnection;
+        private List<double> _smokeLevel;
+        private List<double> _refSmokes;
         private int yy = 0;
         private string Cycling;
+        private bool SMOKEALARM;
 
         private DateTime _cycleTimer = DateTime.Now;
         private TransmitPacket _heartBeatPacket;
@@ -76,6 +79,8 @@ namespace Current_Cycling_Controls
             _cycling.NewCoreCommand += NewCoreCommand;
             _arduino.NewCoreCommand += NewCoreCommand;
 
+            _refSmokes = new List<double> { 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
+            _smokeLevel = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
             _TDKconnection = new List<bool> { false, false, false, false, false, false,
                 false, false, false, false, false, false, };
             _samples = new List<Label> { lblSample1, lblSample2, lblSample3, lblSample4,
@@ -323,9 +328,7 @@ namespace Current_Cycling_Controls
                 case U.CmdType.StartCycling:
                     Console.WriteLine($"Starting TDK Worker thread");
                     NewCoreCommand(this, new CoreCommand { Type = U.CmdType.UpdateHeartBeatPacket });
-                    
                     _TDKWorker.RunWorkerAsync(c.StartArgs);
-                    // communicate with TDKs with the StartInspectionProperties
                     break;
                 case U.CmdType.UpdateUI:
                     _commWorker.ReportProgress(5, c.StartArgs);
@@ -340,20 +343,30 @@ namespace Current_Cycling_Controls
                     // update GUI with temp/smoke/alarms
                     _commWorker.ReportProgress(2, c.ArduinoArgs);
 
-                    // if cycling is running then update alarms if needed
+                    // if cycling is running then update alarms/data
                     var packet = _arduino._recievedPacket;
                     if (_TDKWorker.IsBusy) {
-                        _cycling.SMOKEALARM = packet.SmokeAlarm;
+                        //_cycling.SMOKEALARM = packet.SmokeAlarm;
                         _cycling.TEMPALARM = packet.TempAlarm;
                         _cycling.STOP = packet.EMSSTOP;
                         _cycling._temps = new List<double>(packet.TempList);
-                        _cycling._smokes = new List<double>(packet.SmokeList);
+                        _cycling._smokeRaw = new List<double>(packet.SmokeList);
+                        
                     }
 
-                    if (packet.SmokeAlarm) {// || packet.TempAlarm || packet.EMSSTOP) {
+                    // update refs with smallest value then check over smoke
+                    UpdateSmokeRefs(packet.SmokeList);
+                    _cycling._smokeLevel = new List<double>(_smokeLevel);
+                    if (CheckSmokeOver(packet.SmokeList)) {
+                        _cycling.SMOKEALARM = true;
+                        SMOKEALARM = true;
+                    }
+                    if (SMOKEALARM) {// || packet.TempAlarm || packet.EMSSTOP) {
                         SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
                         audio.Play();
                     }
+
+
                     break;
                 case U.CmdType.UpdateHeartBeatPacket:
                     _commWorker.ReportProgress(3);
@@ -429,14 +442,15 @@ namespace Current_Cycling_Controls
                     chartSmoke.Series["Smoke Level"].Points.Clear();
                     foreach (object chk in chkSmoke.Items) {
                         if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
-                            var y = ardArgs.SmokeList[i];
+                            //var y = ardArgs.SmokeList[i];
+                            var y = _smokeLevel[i];
                             chartSmoke.Series["Smoke Level"].Points.AddXY(i+1, y);
                             i++;
                         }
                     }
 
                     labelTempAlarm.BackColor = ardArgs.TempAlarm ? Color.Red : Color.Empty;
-                    labelSmokeAlarm.BackColor = ardArgs.SmokeAlarm ? Color.Red : Color.Empty;
+                    labelSmokeAlarm.BackColor = SMOKEALARM ? Color.Red : Color.Empty;
                     labelEMSStop.BackColor = ardArgs.EMSSTOP ? Color.Red : Color.Empty;
 
                 }
@@ -643,6 +657,27 @@ namespace Current_Cycling_Controls
                     _TDKS.Where(t => t.Port == i+1).FirstOrDefault().CycleCount = int.Parse(_cycleLabels[i].Text);
                 }
             }
+        }
+
+        private void UpdateSmokeRefs(List<double> smokes) {
+            var i = 0;
+            foreach (var s in smokes) {
+                if (s < _refSmokes[i]) {
+                    _refSmokes[i] = s; // update reference if volt less than reference
+                }
+                _smokeLevel[i] = s - _refSmokes[i]; // update smoke level
+                i++;
+            }
+        }
+
+        private bool CheckSmokeOver(List<double> smokes) {
+            var set = double.Parse(txtSmokeOverSet.Text);
+            foreach (var s in _smokeLevel) {
+                if (s > set) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private string GetBinary(bool value) {
@@ -853,6 +888,10 @@ namespace Current_Cycling_Controls
         private void BtnClearSamples_Click(object sender, EventArgs e) {
             Properties.Settings.Default.Samples = new List<string> { null, null, null, null, null, null, null, null, null, null, null, null };
             Properties.Settings.Default.Save();
+        }
+
+        private void ButtonClearAlarms_Click(object sender, EventArgs e) {
+            SMOKEALARM = false;
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e) {

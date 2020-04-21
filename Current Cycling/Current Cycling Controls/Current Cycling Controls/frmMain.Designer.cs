@@ -234,6 +234,7 @@ namespace Current_Cycling_Controls {
             this.btnClearSamples = new System.Windows.Forms.Button();
             this.chartTemp = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartSmoke = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonClearAlarms = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).BeginInit();
@@ -2401,11 +2402,23 @@ namespace Current_Cycling_Controls {
             title2.Text = "Smoke Sensors";
             this.chartSmoke.Titles.Add(title2);
             // 
+            // buttonClearAlarms
+            // 
+            this.buttonClearAlarms.Location = new System.Drawing.Point(965, 118);
+            this.buttonClearAlarms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClearAlarms.Name = "buttonClearAlarms";
+            this.buttonClearAlarms.Size = new System.Drawing.Size(115, 28);
+            this.buttonClearAlarms.TabIndex = 169;
+            this.buttonClearAlarms.Text = "ClearAlarms";
+            this.buttonClearAlarms.UseVisualStyleBackColor = true;
+            this.buttonClearAlarms.Click += ButtonClearAlarms_Click;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 874);
+            this.Controls.Add(this.buttonClearAlarms);
             this.Controls.Add(this.chartSmoke);
             this.Controls.Add(this.chartTemp);
             this.Controls.Add(this.btnClearSamples);
@@ -2456,6 +2469,7 @@ namespace Current_Cycling_Controls {
             this.PerformLayout();
 
         }
+
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -2653,6 +2667,7 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Button btnClearSamples;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTemp;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSmoke;
+        private System.Windows.Forms.Button buttonClearAlarms;
     }
 }
 
