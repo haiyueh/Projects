@@ -183,18 +183,18 @@ namespace Current_Cycling_Controls {
                 (BIASON) ? "ON" : "OFF",
                 t.SampleName, t.Current, t.Voltage, t.NumCells, t.Voc,
                 t.TempSensor, t.SetCurrent, "-99.99",
-                $"{_temps[0].ToString("F1")}",$"{_temps[1].ToString("F1")}",$"{_temps[2].ToString("F1")}",
-                $"{_temps[3].ToString("F1")}",$"{_temps[4].ToString("F1")}",$"{_temps[5].ToString("F1")}",
-                $"{_temps[6].ToString("F1")}",$"{_temps[7].ToString("F1")}",$"{_temps[8].ToString("F1")}",
-                $"{_temps[9].ToString("F1")}",$"{_temps[10].ToString("F1")}",$"{_temps[11].ToString("F1")}",
-                $"{_temps[12].ToString("F1")}",$"{_temps[13].ToString("F1")}",$"{_temps[14].ToString("F1")}",
-                $"{_temps[15].ToString("F1")}",
-                $"{_smokeRaw[0].ToString("F1")}", $"{_smokeRaw[1].ToString("F1")}", $"{_smokeRaw[2].ToString("F1")}",
-                $"{_smokeRaw[3].ToString("F1")}", $"{_smokeRaw[4].ToString("F1")}", $"{_smokeRaw[5].ToString("F1")}",
-                $"{_smokeRaw[6].ToString("F1")}", $"{_smokeRaw[7].ToString("F1")}",
-                $"{_smokeLevel[0].ToString("F1")}", $"{_smokeLevel[1].ToString("F1")}", $"{_smokeLevel[2].ToString("F1")}",
-                $"{_smokeLevel[3].ToString("F1")}", $"{_smokeLevel[4].ToString("F1")}", $"{_smokeLevel[5].ToString("F1")}",
-                $"{_smokeLevel[6].ToString("F1")}", $"{_smokeLevel[7].ToString("F1")}"};
+                $"{_temps[0].ToString("F2")}",$"{_temps[1].ToString("F2")}",$"{_temps[2].ToString("F2")}",
+                $"{_temps[3].ToString("F2")}",$"{_temps[4].ToString("F2")}",$"{_temps[5].ToString("F2")}",
+                $"{_temps[6].ToString("F2")}",$"{_temps[7].ToString("F2")}",$"{_temps[8].ToString("F2")}",
+                $"{_temps[9].ToString("F2")}",$"{_temps[10].ToString("F2")}",$"{_temps[11].ToString("F2")}",
+                $"{_temps[12].ToString("F2")}",$"{_temps[13].ToString("F2")}",$"{_temps[14].ToString("F2")}",
+                $"{_temps[15].ToString("F2")}",
+                $"{_smokeRaw[0].ToString("F2")}", $"{_smokeRaw[1].ToString("F2")}", $"{_smokeRaw[2].ToString("F2")}",
+                $"{_smokeRaw[3].ToString("F2")}", $"{_smokeRaw[4].ToString("F2")}", $"{_smokeRaw[5].ToString("F2")}",
+                $"{_smokeRaw[6].ToString("F2")}", $"{_smokeRaw[7].ToString("F2")}",
+                $"{_smokeLevel[0].ToString("F2")}", $"{_smokeLevel[1].ToString("F2")}", $"{_smokeLevel[2].ToString("F2")}",
+                $"{_smokeLevel[3].ToString("F2")}", $"{_smokeLevel[4].ToString("F2")}", $"{_smokeLevel[5].ToString("F2")}",
+                $"{_smokeLevel[6].ToString("F2")}", $"{_smokeLevel[7].ToString("F2")}"};
             return string.Join(",", str);
         }
 
