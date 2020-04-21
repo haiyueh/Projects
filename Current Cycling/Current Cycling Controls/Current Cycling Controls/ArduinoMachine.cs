@@ -81,7 +81,7 @@ namespace Current_Cycling_Controls {
         private void ReadPackets() {
             _serArduino.DiscardInBuffer();
             var packet = _serArduino.ReadLine();
-            Console.WriteLine($"{packet}");
+            //Console.WriteLine($"{packet}");
             _recievedPacket = ParsePacket(packet);
         }
 

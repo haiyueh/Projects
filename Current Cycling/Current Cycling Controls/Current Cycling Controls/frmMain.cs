@@ -426,7 +426,7 @@ namespace Current_Cycling_Controls
                     foreach (object chk in chkTemp.Items) {
                         if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
                             var y = ardArgs.TempList[i];
-                            chartTemp.Series["Temp"].Points.AddXY(i+1, y);
+                            chartTemp.Series["Temp"].Points.AddXY(chkTemp.Items.IndexOf(chk) + 1, y);
                             i++;
                         }
                     }
@@ -444,7 +444,7 @@ namespace Current_Cycling_Controls
                         if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
                             //var y = ardArgs.SmokeList[i];
                             var y = _smokeLevel[i];
-                            chartSmoke.Series["Smoke Level"].Points.AddXY(i+1, y);
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(chkSmoke.Items.IndexOf(chk) + 1, y);
                             i++;
                         }
                     }
@@ -496,7 +496,7 @@ namespace Current_Cycling_Controls
                     chartTemp.Series["Temp"].Points.Clear();
                     foreach (object chk in chkTemp.Items) {
                         if (chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk))) {
-                            chartTemp.Series["Temp"].Points.AddXY(i, yy);
+                            chartTemp.Series["Temp"].Points.AddXY(chkTemp.Items.IndexOf(chk) + 1, yy);
                             i++;
                         }
                     }
@@ -512,7 +512,7 @@ namespace Current_Cycling_Controls
                     i = 1;
                     foreach (object chk in chkSmoke.Items) {
                         if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
-                            chartSmoke.Series["Smoke Level"].Points.AddXY(i, yy);
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(chkSmoke.Items.IndexOf(chk)+1, yy);
                             i++;
                         }
                     }
