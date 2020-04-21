@@ -171,7 +171,10 @@ bool isSmokeAlarmTripped(){
   for (int i = 0; i < SMOKE_MAX; i++){
     if ((floSmokeLevel[i] > floSmokeSensorTripLevel) && (bolSmokeSensorToUse[i] == true)){
       //Returns alarm tripped
-      return true;
+      //return true;
+
+      //Disables FW level smoke checking for now
+      return false;
     }
   }
 
