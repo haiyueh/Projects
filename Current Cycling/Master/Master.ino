@@ -90,6 +90,7 @@ int intBiasCurrentOnTemp = 85;
 int intBiasCurrentOffTemp = 25;
 int intBiasCurrentStatus = 0;
 int intPauseFans = 0;
+int Fan1PWM, Fan2PWM,Fan3PWM,Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
 
 //UART
 char chrPCData[UART_BUFFER];
@@ -213,7 +214,7 @@ void SetFanPWM (int Fan1PWM, int Fan2PWM, int Fan3PWM, int Fan4PWM, int Fan5PWM,
 //Description: Calculates the PWM duty cycle of the fans
 //======================================================================
 void CalculatePWM(void){
-  int Fan1PWM, Fan2PWM,Fan3PWM,Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
+  
   
   //Checks to see if the bias current is on or not
   if (intBiasCurrentStatus == 0){
@@ -341,7 +342,26 @@ void sendDataToPC(){
   Serial.print(",");
   Serial.print(isEMOPressed());
   Serial.print(",");
-  Serial.println(bolThermalControllerHeartBeatGood);
+  Serial.print(bolThermalControllerHeartBeatGood);
+  Serial.print(",");
+  Serial.print(Fan1PWM);
+  Serial.print(",");
+  Serial.print(Fan1PWM);
+  Serial.print(",");
+  Serial.print(Fan2PWM);
+  Serial.print(",");
+  Serial.print(Fan3PWM);
+  Serial.print(",");
+  Serial.print(Fan4PWM);
+  Serial.print(",");
+  Serial.print(Fan5PWM);
+  Serial.print(",");
+  Serial.print(Fan6PWM);
+  Serial.print(",");
+  Serial.print(Fan7PWM);
+  Serial.print(",");
+  Serial.println(Fan8PWM);
+  
   
   //Prints the debug
   /*Serial.print(",");
