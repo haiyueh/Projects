@@ -22,7 +22,8 @@ namespace Current_Cycling_Controls {
             CleanGUI,
             RecievedPacket,
             UpdateHeartBeatPacket,
-            CheckConnection
+            CheckConnection,
+            ArduinoConnectSuccess
         }
 
         public enum GUIReport {

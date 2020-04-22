@@ -87,6 +87,7 @@ namespace Current_Cycling_Controls {
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
                         if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
                         foreach (var tt in tdk) {
+                            if (STOP || SMOKEALARM || TEMPALARM) break;
                             SetAddress(tt);
 
                             _serTDK.Write("MV?\r\n");
@@ -101,6 +102,7 @@ namespace Current_Cycling_Controls {
                             if (SAVE) SaveResults(tt);
                             //tt.PastVoltages.Add(tt.Voltage);
                         }
+                        if (STOP || SMOKEALARM || TEMPALARM) break;
                         // if we have saved then restart timer
                         if (SAVE) {
                             SAVE = false;
@@ -119,6 +121,7 @@ namespace Current_Cycling_Controls {
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
                         if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
                         foreach (var tt in tdk) {
+                            if (STOP || SMOKEALARM || TEMPALARM) break;
                             _serTDK.Write("MV?\r\n");
                             Wait(50); // lag in measured value
                             tt.Voltage = _serTDK.ReadLine();
@@ -131,6 +134,7 @@ namespace Current_Cycling_Controls {
                             if (SAVE) SaveResults(tt);
                             //tt.PastVoltages.Add(tt.Voltage);
                         }
+                        if (STOP || SMOKEALARM || TEMPALARM) break;
 
                         // if we have saved then restart timer
                         if (SAVE) {

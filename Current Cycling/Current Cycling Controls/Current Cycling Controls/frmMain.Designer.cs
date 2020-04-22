@@ -235,6 +235,7 @@ namespace Current_Cycling_Controls {
             this.chartTemp = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartSmoke = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.buttonClearAlarms = new System.Windows.Forms.Button();
+            this.checkBoxPrintPacket = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).BeginInit();
@@ -435,7 +436,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr12
             // 
             this.txtSetCurr12.Location = new System.Drawing.Point(1046, 393);
-            this.txtSetCurr12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr12.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr12.Name = "txtSetCurr12";
             this.txtSetCurr12.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr12.TabIndex = 167;
@@ -444,7 +445,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr11
             // 
             this.txtSetCurr11.Location = new System.Drawing.Point(1046, 361);
-            this.txtSetCurr11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr11.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr11.Name = "txtSetCurr11";
             this.txtSetCurr11.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr11.TabIndex = 166;
@@ -453,7 +454,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr10
             // 
             this.txtSetCurr10.Location = new System.Drawing.Point(1046, 330);
-            this.txtSetCurr10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr10.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr10.Name = "txtSetCurr10";
             this.txtSetCurr10.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr10.TabIndex = 165;
@@ -462,7 +463,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr9
             // 
             this.txtSetCurr9.Location = new System.Drawing.Point(1046, 298);
-            this.txtSetCurr9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr9.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr9.Name = "txtSetCurr9";
             this.txtSetCurr9.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr9.TabIndex = 164;
@@ -471,7 +472,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr8
             // 
             this.txtSetCurr8.Location = new System.Drawing.Point(1046, 267);
-            this.txtSetCurr8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr8.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr8.Name = "txtSetCurr8";
             this.txtSetCurr8.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr8.TabIndex = 163;
@@ -480,7 +481,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr7
             // 
             this.txtSetCurr7.Location = new System.Drawing.Point(1046, 237);
-            this.txtSetCurr7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr7.Name = "txtSetCurr7";
             this.txtSetCurr7.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr7.TabIndex = 162;
@@ -489,7 +490,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr6
             // 
             this.txtSetCurr6.Location = new System.Drawing.Point(1046, 206);
-            this.txtSetCurr6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr6.Name = "txtSetCurr6";
             this.txtSetCurr6.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr6.TabIndex = 161;
@@ -498,7 +499,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr5
             // 
             this.txtSetCurr5.Location = new System.Drawing.Point(1046, 176);
-            this.txtSetCurr5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr5.Name = "txtSetCurr5";
             this.txtSetCurr5.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr5.TabIndex = 160;
@@ -507,7 +508,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr4
             // 
             this.txtSetCurr4.Location = new System.Drawing.Point(1046, 146);
-            this.txtSetCurr4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr4.Name = "txtSetCurr4";
             this.txtSetCurr4.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr4.TabIndex = 159;
@@ -516,7 +517,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr3
             // 
             this.txtSetCurr3.Location = new System.Drawing.Point(1046, 114);
-            this.txtSetCurr3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr3.Name = "txtSetCurr3";
             this.txtSetCurr3.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr3.TabIndex = 158;
@@ -525,7 +526,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr2
             // 
             this.txtSetCurr2.Location = new System.Drawing.Point(1046, 81);
-            this.txtSetCurr2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr2.Name = "txtSetCurr2";
             this.txtSetCurr2.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr2.TabIndex = 157;
@@ -534,7 +535,7 @@ namespace Current_Cycling_Controls {
             // txtSetCurr1
             // 
             this.txtSetCurr1.Location = new System.Drawing.Point(1046, 48);
-            this.txtSetCurr1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSetCurr1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr1.Name = "txtSetCurr1";
             this.txtSetCurr1.Size = new System.Drawing.Size(92, 22);
             this.txtSetCurr1.TabIndex = 156;
@@ -1852,7 +1853,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample1
             // 
             this.txtTempSensSample1.Location = new System.Drawing.Point(945, 48);
-            this.txtTempSensSample1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample1.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample1.Name = "txtTempSensSample1";
             this.txtTempSensSample1.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample1.TabIndex = 144;
@@ -1861,7 +1862,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample2
             // 
             this.txtTempSensSample2.Location = new System.Drawing.Point(945, 81);
-            this.txtTempSensSample2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample2.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample2.Name = "txtTempSensSample2";
             this.txtTempSensSample2.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample2.TabIndex = 145;
@@ -1870,7 +1871,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample3
             // 
             this.txtTempSensSample3.Location = new System.Drawing.Point(945, 114);
-            this.txtTempSensSample3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample3.Name = "txtTempSensSample3";
             this.txtTempSensSample3.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample3.TabIndex = 146;
@@ -1879,7 +1880,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample4
             // 
             this.txtTempSensSample4.Location = new System.Drawing.Point(945, 146);
-            this.txtTempSensSample4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample4.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample4.Name = "txtTempSensSample4";
             this.txtTempSensSample4.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample4.TabIndex = 147;
@@ -1888,7 +1889,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample5
             // 
             this.txtTempSensSample5.Location = new System.Drawing.Point(945, 176);
-            this.txtTempSensSample5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample5.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample5.Name = "txtTempSensSample5";
             this.txtTempSensSample5.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample5.TabIndex = 148;
@@ -1897,7 +1898,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample6
             // 
             this.txtTempSensSample6.Location = new System.Drawing.Point(945, 206);
-            this.txtTempSensSample6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample6.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample6.Name = "txtTempSensSample6";
             this.txtTempSensSample6.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample6.TabIndex = 149;
@@ -1906,7 +1907,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample7
             // 
             this.txtTempSensSample7.Location = new System.Drawing.Point(945, 237);
-            this.txtTempSensSample7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample7.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample7.Name = "txtTempSensSample7";
             this.txtTempSensSample7.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample7.TabIndex = 150;
@@ -1915,7 +1916,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample8
             // 
             this.txtTempSensSample8.Location = new System.Drawing.Point(945, 267);
-            this.txtTempSensSample8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample8.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample8.Name = "txtTempSensSample8";
             this.txtTempSensSample8.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample8.TabIndex = 151;
@@ -1924,7 +1925,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample9
             // 
             this.txtTempSensSample9.Location = new System.Drawing.Point(945, 298);
-            this.txtTempSensSample9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample9.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample9.Name = "txtTempSensSample9";
             this.txtTempSensSample9.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample9.TabIndex = 152;
@@ -1933,7 +1934,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample10
             // 
             this.txtTempSensSample10.Location = new System.Drawing.Point(945, 330);
-            this.txtTempSensSample10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample10.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample10.Name = "txtTempSensSample10";
             this.txtTempSensSample10.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample10.TabIndex = 153;
@@ -1942,7 +1943,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample11
             // 
             this.txtTempSensSample11.Location = new System.Drawing.Point(945, 361);
-            this.txtTempSensSample11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample11.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample11.Name = "txtTempSensSample11";
             this.txtTempSensSample11.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample11.TabIndex = 154;
@@ -1951,7 +1952,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample12
             // 
             this.txtTempSensSample12.Location = new System.Drawing.Point(945, 393);
-            this.txtTempSensSample12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTempSensSample12.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample12.Name = "txtTempSensSample12";
             this.txtTempSensSample12.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample12.TabIndex = 155;
@@ -2181,9 +2182,9 @@ namespace Current_Cycling_Controls {
             "7",
             "8"});
             this.chkSmoke.Location = new System.Drawing.Point(1171, 219);
-            this.chkSmoke.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkSmoke.Margin = new System.Windows.Forms.Padding(4);
             this.chkSmoke.Name = "chkSmoke";
-            this.chkSmoke.Size = new System.Drawing.Size(69, 140);
+            this.chkSmoke.Size = new System.Drawing.Size(69, 157);
             this.chkSmoke.TabIndex = 65;
             // 
             // chkTemp
@@ -2207,9 +2208,9 @@ namespace Current_Cycling_Controls {
             "15",
             "16"});
             this.chkTemp.Location = new System.Drawing.Point(1171, 444);
-            this.chkTemp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTemp.Margin = new System.Windows.Forms.Padding(4);
             this.chkTemp.Name = "chkTemp";
-            this.chkTemp.Size = new System.Drawing.Size(69, 293);
+            this.chkTemp.Size = new System.Drawing.Size(69, 310);
             this.chkTemp.TabIndex = 66;
             // 
             // label4
@@ -2415,11 +2416,26 @@ namespace Current_Cycling_Controls {
             this.buttonClearAlarms.UseVisualStyleBackColor = true;
             this.buttonClearAlarms.Click += new System.EventHandler(this.ButtonClearAlarms_Click_1);
             // 
+            // checkBoxPrintPacket
+            // 
+            this.checkBoxPrintPacket.AutoSize = true;
+            this.checkBoxPrintPacket.Checked = true;
+            this.checkBoxPrintPacket.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPrintPacket.Location = new System.Drawing.Point(1151, 760);
+            this.checkBoxPrintPacket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxPrintPacket.Name = "checkBoxPrintPacket";
+            this.checkBoxPrintPacket.Size = new System.Drawing.Size(113, 21);
+            this.checkBoxPrintPacket.TabIndex = 170;
+            this.checkBoxPrintPacket.Text = "Print Packets";
+            this.checkBoxPrintPacket.UseVisualStyleBackColor = true;
+            this.checkBoxPrintPacket.CheckedChanged += new System.EventHandler(this.CheckBoxPrintPacket_CheckedChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 874);
+            this.Controls.Add(this.checkBoxPrintPacket);
             this.Controls.Add(this.buttonClearAlarms);
             this.Controls.Add(this.chartSmoke);
             this.Controls.Add(this.chartTemp);
@@ -2460,7 +2476,7 @@ namespace Current_Cycling_Controls {
             this.Controls.Add(this.txtBiasOn);
             this.Controls.Add(this.lblBiasOff);
             this.Controls.Add(this.lblBiasOn);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMain";
             this.Text = "Current Cycling Controls";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -2670,6 +2686,7 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTemp;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSmoke;
         private System.Windows.Forms.Button buttonClearAlarms;
+        private System.Windows.Forms.CheckBox checkBoxPrintPacket;
     }
 }
 

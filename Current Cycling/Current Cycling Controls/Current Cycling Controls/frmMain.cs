@@ -79,6 +79,7 @@ namespace Current_Cycling_Controls
             _cycling.NewCoreCommand += NewCoreCommand;
             _arduino.NewCoreCommand += NewCoreCommand;
 
+            Connected = false;
             _refSmokes = new List<double> { 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
             _smokeLevel = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
             _TDKconnection = new List<bool> { false, false, false, false, false, false,
@@ -228,9 +229,11 @@ namespace Current_Cycling_Controls
             }
 
             // wait until arduino is connected to start connecting TDKs
-#if RELEASE
-            while (!_arduino.Connected) { }
-#endif
+//#if !DEBUG
+            //while (!Connected) { }
+            Thread.Sleep(6000);
+//#endif
+            _arduinoWorker.ReportProgress(1);
             _connectionWorker.RunWorkerAsync();
             Console.WriteLine($"Checking TDK connections");
             btnStart.Enabled = false;
@@ -266,7 +269,7 @@ namespace Current_Cycling_Controls
         }
 
         public void UpdateHeartBeat(object sender, ProgressChangedEventArgs e) {
-            _arduino.UpdateTransmit(_heartBeatPacket);
+            _arduino.UpdateTransmit(_heartBeatPacket, checkBoxPrintPacket.Checked);
         }
 
         public void CheckConnect(object sender, DoWorkEventArgs e) {
@@ -374,6 +377,9 @@ namespace Current_Cycling_Controls
                     break;
                 case U.CmdType.CheckConnection:
                     _connectionWorker.RunWorkerAsync();
+                    break;
+                case U.CmdType.ArduinoConnectSuccess:
+                    Connected = true;
                     break;
             }
         }
@@ -732,14 +738,16 @@ namespace Current_Cycling_Controls
         public List<string> CheckConnection() {
             var ser = new SerialPort();
             var connectLabels = new List<string>();
-            string[] ports = SerialPort.GetPortNames();
+            var ports = SerialPort.GetPortNames().ToList();
+            Console.WriteLine($"Port Names:");
+            ports.ForEach(Console.WriteLine);
             // ping each port and see if we get the TDK response
             foreach (var port in ports) { 
                 try {
                     ser.BaudRate = U.TDKBaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
-                    ser.ReadTimeout = 100;
+                    ser.ReadTimeout = 200;
                     ser.Open();
 
                     ser.Write("ADR " + "01" + "\r\n");
@@ -749,7 +757,10 @@ namespace Current_Cycling_Controls
                         break;
                     }
                 }
-                catch (Exception exc) { Console.WriteLine($"{exc}"); }
+                catch (Exception exc) {
+                    Console.WriteLine($"{exc}");
+                    ser.Close();
+                }
             }
 
             // loop through each TDK, wait for response if connected
@@ -929,6 +940,10 @@ namespace Current_Cycling_Controls
 
         private void ButtonClearAlarms_Click_1(object sender, EventArgs e) {
             SMOKEALARM = false;
+        }
+
+        private void CheckBoxPrintPacket_CheckedChanged(object sender, EventArgs e) {
+            _arduinoWorker.ReportProgress(1);
         }
     }
 }

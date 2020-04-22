@@ -18,8 +18,10 @@ namespace Current_Cycling_Controls {
         public event CoreCommandEvent NewCoreCommand;
         public TransmitPacket _transmitPacket;
         public bool Connected;
+        public bool _printPackets;
         public ArduinoMachine() {
             _transmitPacket = new TransmitPacket("200","200","85","25","0","0","0000000000000000","00000000", "0");
+            Connected = false;
         }
 
         public void StartArduinoMachine() {
@@ -62,16 +64,18 @@ namespace Current_Cycling_Controls {
                         _serArduino.DiscardOutBuffer();
                         _serArduino.DiscardInBuffer();
                         var str = _serArduino.ReadLine().Split(',').Select(sValue => sValue.Trim()).ToList();
+                        Console.WriteLine($"{str.Count}");
                         if (str.Count == U.ArduinoPacketSize) {
                             _serArduino.DiscardOutBuffer();
                             _serArduino.DiscardInBuffer();
                             Connected = true;
-                            Console.WriteLine($"Arduino connection successful");
+                            NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.ArduinoConnectSuccess });
+                            Console.WriteLine($"Arduino connection successful {port}");
                             break;
                         }
                     }
                     catch (Exception exc) {
-                        //Console.WriteLine($"{exc}");
+                        Console.WriteLine($"{exc}");
                         _serArduino.Close();
                     }
                 }
@@ -81,26 +85,27 @@ namespace Current_Cycling_Controls {
         private void ReadPackets() {
             _serArduino.DiscardInBuffer();
             var packet = _serArduino.ReadLine();
-            //Console.WriteLine($"{packet}");
+            if (_printPackets) Console.WriteLine($"{packet}");
             _recievedPacket = ParsePacket(packet);
         }
 
         private void SendPackets() {
-            _serArduino.WriteLine(_transmitPacket.ToStringPacket());
+            _serArduino.WriteLine(_transmitPacket.ToStringPacket(_printPackets));
         }
 
 
         private RecievePacket ParsePacket(string packet) {
             var values = packet.Split(',').Select(sValue => sValue.Trim()).ToList();
-            //if (values.Count != U.ArduinoPacketSize) {
-            //    throw new InvalidPacketSize(values.Count);
-            //}
+            if (values.Count != U.ArduinoPacketSize) {
+                throw new InvalidPacketSize(values.Count);
+            }
             return new RecievePacket(values.Take(16).ToList(), values.Skip(16).Take(8).ToList(),
                 values[24], values[25], values[26], values[27]);
         }
 
-        public void UpdateTransmit(TransmitPacket t) {
+        public void UpdateTransmit(TransmitPacket t, bool printPackets) {
             _transmitPacket = t;
+            _printPackets = printPackets;
         }
 
 
@@ -152,13 +157,13 @@ namespace Current_Cycling_Controls {
 
         }
 
-        public string ToStringPacket() {
+        public string ToStringPacket(bool print) {
             string[] str = { TempSetPoint, SmokeSetPoint, BiasCurrentONTemp, BiasCurrentOFFTemp,
                 BiasCurrentStatus, PauseFans, ActiveTemps, ActiveSmokes, CurrentCycling};
             string strr = string.Join(",", str);
             strr = strr.Insert(0, "<");
             strr += ">";
-            //Console.WriteLine($"{strr}");
+            if (print) Console.WriteLine($"{strr}");
             return strr;
         }
 
