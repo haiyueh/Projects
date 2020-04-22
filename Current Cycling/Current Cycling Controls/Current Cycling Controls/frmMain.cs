@@ -257,7 +257,7 @@ namespace Current_Cycling_Controls
             NewCoreCommand(this, new CoreCommand { Type = U.CmdType.UpdateHeartBeatPacket });
             NewCoreCommand(this, new CoreCommand { Type = U.CmdType.CleanGUI });
             foreach (var t in _TDKS) {
-                t.SetCurrent = null;
+                t.Cycling = false;
             }
         }
 
@@ -360,6 +360,7 @@ namespace Current_Cycling_Controls
                     if (CheckSmokeOver(packet.SmokeList)) {
                         _cycling.SMOKEALARM = true;
                         SMOKEALARM = true;
+                        Console.WriteLine($"SMOKE ALARM frmMAIN!");
                     }
                     if (SMOKEALARM) {// || packet.TempAlarm || packet.EMSSTOP) {
                         SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
@@ -390,13 +391,18 @@ namespace Current_Cycling_Controls
                 // update TDK readings during Cycling
                 if (e.ProgressPercentage == 5) {
                     var args = _cycling._args;
-                    _voltageLabels[args.Port-1].Text = args.Volt;
-                    _currentLabels[args.Port-1].Text = args.Current;
-                    _cycleLabels[args.Port-1].Text = args.Cycle; 
-
-                    var ts = (args.CycleTime - DateTime.Now);
-                    labelCount.Text = $@"{ts.Minutes:D2}:{ts.Seconds:D2}";
-                    lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
+                    if (args.Closing) {
+                        labelCount.Text = $@"00:00";
+                        lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
+                    }
+                    else {
+                        var ts = (args.CycleTime - DateTime.Now);
+                        labelCount.Text = $@"{ts.Minutes:D2}:{ts.Seconds:D2}";
+                        lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
+                    }
+                    _voltageLabels[args.Port - 1].Text = args.Volt;
+                    _currentLabels[args.Port - 1].Text = args.Current;
+                    _cycleLabels[args.Port - 1].Text = args.Cycle;
                     return;
                 }
                 // re-enable GUI buttons
@@ -576,7 +582,7 @@ namespace Current_Cycling_Controls
                 return;
             }
             CheckPorts();
-            var startargs = new StartCyclingArgs(_TDKS.Where(t => t.SetCurrent != null).ToList(), 
+            var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(), 
                 Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text), txtDirectory.Text);
 
             var start = new CoreCommand {
@@ -643,12 +649,12 @@ namespace Current_Cycling_Controls
         }
 
         /// <summary>
-        /// Loop through 12 TDK port check boxes. If checked, then initialize TDK object
+        /// Loop through 12 TDK port check boxes. If checked, then initialize TDK object from form data
         /// </summary>
         private void CheckPorts() {
             for (var i = 0; i < 12; i++) {
-                bool checkked = _checkBoxes[i].Checked;
-                if (checkked) {
+                if (_checkBoxes[i].Checked) {
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().Cycling = true;
                     _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SetCurrent = _setCurrents[i].Text;
                     _TDKS.Where(t => t.Port == i+1).FirstOrDefault().TempSensor = _tempSensors[i].Text;
                     _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SampleName = _samples[i].Text;
@@ -730,7 +736,7 @@ namespace Current_Cycling_Controls
             // ping each port and see if we get the TDK response
             foreach (var port in ports) { 
                 try {
-                    ser.BaudRate = U.BaudRate;
+                    ser.BaudRate = U.TDKBaudRate;
                     ser.PortName = port;
                     ser.NewLine = "\r";
                     ser.ReadTimeout = 100;
@@ -916,17 +922,13 @@ namespace Current_Cycling_Controls
             Properties.Settings.Default.Save();
         }
 
-        private void ButtonClearAlarms_Click(object sender, EventArgs e) {
-            SMOKEALARM = false;
-        }
-
-        private void OnClosing() {
-
-        }
-
         private void OnTimedEvent(object source, ElapsedEventArgs e) {
             yy++;
             _commWorker.ReportProgress(6);
+        }
+
+        private void ButtonClearAlarms_Click_1(object sender, EventArgs e) {
+            SMOKEALARM = false;
         }
     }
 }

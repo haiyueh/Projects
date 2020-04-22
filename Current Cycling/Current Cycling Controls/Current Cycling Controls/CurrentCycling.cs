@@ -99,7 +99,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
-                            tt.PastVoltages.Add(tt.Voltage);
+                            //tt.PastVoltages.Add(tt.Voltage);
                         }
                         // if we have saved then restart timer
                         if (SAVE) {
@@ -129,7 +129,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
-                            tt.PastVoltages.Add(tt.Voltage);
+                            //tt.PastVoltages.Add(tt.Voltage);
                         }
 
                         // if we have saved then restart timer
@@ -142,12 +142,12 @@ namespace Current_Cycling_Controls {
                     if (STOP || SMOKEALARM || TEMPALARM) break;
 
                     // save voltage graphs every 3 hours, 8 times a day
-                    if (_voltageTimer.ElapsedMilliseconds > 10800000) {
-                        foreach (var t in tdk) {
-                            GraphVoltages(t);
-                        }
-                        _voltageTimer.Restart();
-                    }
+                    //if (_voltageTimer.ElapsedMilliseconds > 10800000) {
+                    //    foreach (var t in tdk) {
+                    //        GraphVoltages(t);
+                    //    }
+                    //    _voltageTimer.Restart();
+                    //}
 
                     // completed a bias on/off cycle
                     foreach (var ttt in tdk) {
@@ -157,15 +157,22 @@ namespace Current_Cycling_Controls {
             }
             catch (Exception exc) {
                 Console.WriteLine($"{exc}");
-                TurnOffClose(tdk);
+                BIASON = false;
                 STOP = false;
                 SMOKEALARM = false;
                 TEMPALARM = false;
+                TurnOffClose(tdk);
+                Console.WriteLine($"TDK closing with exception");
+
             }
+            var cmd = STOP ? "EMSSTOP" : SMOKEALARM ? "SMOKEALARM" : "TEMPALARM";
+            Console.WriteLine($"Encountered {cmd} while Cycling!");
+            BIASON = false;
             STOP = false;
             SMOKEALARM = false;
             TEMPALARM = false;
             TurnOffClose(tdk);
+            Console.WriteLine($"TDK Closing Normally");
         }
 
         private void SaveResults(TDK t) {
@@ -203,7 +210,7 @@ namespace Current_Cycling_Controls {
             // ping each port and see if we get the TDK response
             foreach (var port in ports) { 
                 try {
-                    _serTDK.BaudRate = U.BaudRate;
+                    _serTDK.BaudRate = U.TDKBaudRate;
                     _serTDK.PortName = port; // com3
                     _serTDK.NewLine = "\r";
                     _serTDK.ReadTimeout = 1000;
@@ -295,7 +302,7 @@ namespace Current_Cycling_Controls {
                 _serTDK.Write("MC?\r\n");
                 Wait(50);
                 string current = _serTDK.ReadLine();
-                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer);
+                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer, closing:true);
                 NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
             }
             _serTDK.Close();
@@ -369,12 +376,14 @@ namespace Current_Cycling_Controls {
         public string Cycle { get; set; }
         public DateTime CycleTime { get; set; }
         public int Port { get; set; }
-        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt){
+        public bool Closing { get; set; }
+        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt, bool closing = false){
             Volt = volt;
             Current = current;
             Cycle = cycle.ToString();
             Port = port;
             CycleTime = dt;
+            Closing = closing;
         }
     }
 

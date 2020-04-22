@@ -62,7 +62,7 @@ namespace Current_Cycling_Controls {
                         _serArduino.DiscardOutBuffer();
                         _serArduino.DiscardInBuffer();
                         var str = _serArduino.ReadLine().Split(',').Select(sValue => sValue.Trim()).ToList();
-                        if (str.Count == 28) {
+                        if (str.Count == U.ArduinoPacketSize) {
                             _serArduino.DiscardOutBuffer();
                             _serArduino.DiscardInBuffer();
                             Connected = true;
@@ -81,7 +81,7 @@ namespace Current_Cycling_Controls {
         private void ReadPackets() {
             _serArduino.DiscardInBuffer();
             var packet = _serArduino.ReadLine();
-            Console.WriteLine($"{packet}");
+            //Console.WriteLine($"{packet}");
             _recievedPacket = ParsePacket(packet);
         }
 
@@ -92,7 +92,7 @@ namespace Current_Cycling_Controls {
 
         private RecievePacket ParsePacket(string packet) {
             var values = packet.Split(',').Select(sValue => sValue.Trim()).ToList();
-            //if (values.Count != 36) {
+            //if (values.Count != U.ArduinoPacketSize) {
             //    throw new InvalidPacketSize(values.Count);
             //}
             return new RecievePacket(values.Take(16).ToList(), values.Skip(16).Take(8).ToList(),
@@ -158,7 +158,7 @@ namespace Current_Cycling_Controls {
             string strr = string.Join(",", str);
             strr = strr.Insert(0, "<");
             strr += ">";
-            Console.WriteLine($"{strr}");
+            //Console.WriteLine($"{strr}");
             return strr;
         }
 
