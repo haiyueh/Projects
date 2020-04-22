@@ -346,8 +346,6 @@ void sendDataToPC(){
   Serial.print(",");
   Serial.print(Fan1PWM);
   Serial.print(",");
-  Serial.print(Fan1PWM);
-  Serial.print(",");
   Serial.print(Fan2PWM);
   Serial.print(",");
   Serial.print(Fan3PWM);
