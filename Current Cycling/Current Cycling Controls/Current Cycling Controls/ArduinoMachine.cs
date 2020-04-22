@@ -81,7 +81,7 @@ namespace Current_Cycling_Controls {
         private void ReadPackets() {
             _serArduino.DiscardInBuffer();
             var packet = _serArduino.ReadLine();
-            //Console.WriteLine($"{packet}");
+            Console.WriteLine($"{packet}");
             _recievedPacket = ParsePacket(packet);
         }
 
@@ -92,9 +92,9 @@ namespace Current_Cycling_Controls {
 
         private RecievePacket ParsePacket(string packet) {
             var values = packet.Split(',').Select(sValue => sValue.Trim()).ToList();
-            if (values.Count != 28) {
-                throw new InvalidPacketSize(values.Count);
-            }
+            //if (values.Count != 36) {
+            //    throw new InvalidPacketSize(values.Count);
+            //}
             return new RecievePacket(values.Take(16).ToList(), values.Skip(16).Take(8).ToList(),
                 values[24], values[25], values[26], values[27]);
         }
