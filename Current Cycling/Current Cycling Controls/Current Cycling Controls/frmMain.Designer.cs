@@ -236,6 +236,7 @@ namespace Current_Cycling_Controls {
             this.chartSmoke = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.buttonClearAlarms = new System.Windows.Forms.Button();
             this.checkBoxPrintPacket = new System.Windows.Forms.CheckBox();
+            this.buttonSaveLogs = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).BeginInit();
@@ -2430,11 +2431,23 @@ namespace Current_Cycling_Controls {
             this.checkBoxPrintPacket.UseVisualStyleBackColor = true;
             this.checkBoxPrintPacket.CheckedChanged += new System.EventHandler(this.CheckBoxPrintPacket_CheckedChanged);
             // 
+            // buttonSaveLogs
+            // 
+            this.buttonSaveLogs.Location = new System.Drawing.Point(1149, 785);
+            this.buttonSaveLogs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSaveLogs.Name = "buttonSaveLogs";
+            this.buttonSaveLogs.Size = new System.Drawing.Size(102, 28);
+            this.buttonSaveLogs.TabIndex = 171;
+            this.buttonSaveLogs.Text = "SaveLogs";
+            this.buttonSaveLogs.UseVisualStyleBackColor = true;
+            this.buttonSaveLogs.Click += new System.EventHandler(this.ButtonSaveLogs_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 874);
+            this.Controls.Add(this.buttonSaveLogs);
             this.Controls.Add(this.checkBoxPrintPacket);
             this.Controls.Add(this.buttonClearAlarms);
             this.Controls.Add(this.chartSmoke);
@@ -2687,6 +2700,7 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.DataVisualization.Charting.Chart chartSmoke;
         private System.Windows.Forms.Button buttonClearAlarms;
         private System.Windows.Forms.CheckBox checkBoxPrintPacket;
+        private System.Windows.Forms.Button buttonSaveLogs;
     }
 }
 

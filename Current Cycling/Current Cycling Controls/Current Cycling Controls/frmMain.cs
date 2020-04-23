@@ -172,6 +172,7 @@ namespace Current_Cycling_Controls
                 Properties.Settings.Default.Samples = new List<string> { null, null, null, null, null, null, null, null, null, null, null, null };
                 btnLoadSamples.Enabled = false;
             }
+            Properties.Settings.Default.Save();
 
             // set TDK rows to disabled until the connnection is good
             EnableTDKRows();
@@ -235,7 +236,7 @@ namespace Current_Cycling_Controls
 //#endif
             _arduinoWorker.ReportProgress(1);
             _connectionWorker.RunWorkerAsync();
-            Console.WriteLine($"Checking TDK connections");
+            U.Logger.WriteLine($"Checking TDK connections");
             btnStart.Enabled = false;
             btnCheckConnection.Enabled = false;
 
@@ -329,7 +330,7 @@ namespace Current_Cycling_Controls
                 case U.CmdType.None:
                     break;
                 case U.CmdType.StartCycling:
-                    Console.WriteLine($"Starting TDK Worker thread");
+                    U.Logger.WriteLine($"Starting TDK Worker thread");
                     NewCoreCommand(this, new CoreCommand { Type = U.CmdType.UpdateHeartBeatPacket });
                     _TDKWorker.RunWorkerAsync(c.StartArgs);
                     break;
@@ -363,7 +364,7 @@ namespace Current_Cycling_Controls
                     if (CheckSmokeOver(packet.SmokeList)) {
                         _cycling.SMOKEALARM = true;
                         SMOKEALARM = true;
-                        Console.WriteLine($"SMOKE ALARM frmMAIN!");
+                        U.Logger.WriteLine($"SMOKE ALARM frmMAIN!");
                     }
                     if (SMOKEALARM) {// || packet.TempAlarm || packet.EMSSTOP) {
                         SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
@@ -419,6 +420,9 @@ namespace Current_Cycling_Controls
                     chkSmoke.Enabled = true;
                     button1.Enabled = true;
                     btnCheckConnection.Enabled = true;
+                    btnLoadSamples.Enabled = true;
+                    btnClearSamples.Enabled = true;
+                    buttonClearAlarms.Enabled = true;
                     return;
                 }
                 // update temp/smoke/alarm readings
@@ -426,12 +430,12 @@ namespace Current_Cycling_Controls
                     var ardArgs = _arduino._recievedPacket;
 
                     var i = 0;
-                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 20;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + double.Parse(txtOverTempSet.Text) / 10;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     StripLine stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
-                    stripline.StripWidth = stripline.IntervalOffset / 25;
+                    stripline.StripWidth = stripline.IntervalOffset / 70;
                     stripline.BackColor = Color.Red;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartTemp.Series["Temp"].Points.Clear();
@@ -443,12 +447,12 @@ namespace Current_Cycling_Controls
                         }
                     }
                     i = 0;
-                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 2;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + double.Parse(txtSmokeOverSet.Text) / 10;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
-                    stripline.StripWidth = stripline.IntervalOffset / 25;
+                    stripline.StripWidth = stripline.IntervalOffset / 70;
                     stripline.BackColor = Color.Red;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartSmoke.Series["Smoke Level"].Points.Clear();
@@ -464,7 +468,6 @@ namespace Current_Cycling_Controls
                     labelTempAlarm.BackColor = ardArgs.TempAlarm ? Color.Red : Color.Empty;
                     labelSmokeAlarm.BackColor = SMOKEALARM ? Color.Red : Color.Empty;
                     labelEMSStop.BackColor = ardArgs.EMSSTOP ? Color.Red : Color.Empty;
-
                 }
                 // send event to arduino thread to update serial transmit packet
                 else if (e.ProgressPercentage == 3){
@@ -496,12 +499,12 @@ namespace Current_Cycling_Controls
                 }
                 // update smoke/temp charts TESTING
                 else if (e.ProgressPercentage == 6) {
-                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + 30;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + double.Parse(txtOverTempSet.Text)/10;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     StripLine stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
-                    stripline.StripWidth = stripline.IntervalOffset/25;
+                    stripline.StripWidth = stripline.IntervalOffset/70;
                     stripline.BackColor = Color.Red;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     var i = 1;
@@ -512,12 +515,12 @@ namespace Current_Cycling_Controls
                             i++;
                         }
                     }
-                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + 1;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + double.Parse(txtSmokeOverSet.Text)/10;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtSmokeOverSet.Text);
-                    stripline.StripWidth = stripline.IntervalOffset / 25;
+                    stripline.StripWidth = stripline.IntervalOffset / 70;
                     stripline.BackColor = Color.Red;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     chartSmoke.Series["Smoke Level"].Points.Clear();
@@ -573,17 +576,17 @@ namespace Current_Cycling_Controls
 
 
         public static void Info(object m, string module = "Server") {
-            Console.WriteLine($@"[{DateTime.Now:G}]:[{module}] {m}");
+            U.Logger.WriteLine($@"[{DateTime.Now:G}]:[{module}] {m}");
         }
 
         private void BtnStart_Click(object sender, EventArgs e) {
             if (!_TDKconnection.Any(b => b == true)) {
-                Console.WriteLine($"TDK has no connections!");
+                U.Logger.WriteLine($"TDK has no connections!");
                 MessageBox.Show($"TDK has no connections!");
                 return;
             }
             if (!_arduino.Connected) {
-                Console.WriteLine($"Arduino not connected!");
+                U.Logger.WriteLine($"Arduino not connected!");
                 MessageBox.Show($"Arduino not connected!");
                 return;
             }
@@ -624,6 +627,9 @@ namespace Current_Cycling_Controls
             btnStart.Enabled = false;
             btnCheckConnection.Enabled = false;
             button1.Enabled = false;
+            btnLoadSamples.Enabled = false;
+            btnClearSamples.Enabled = false;
+            buttonClearAlarms.Enabled = false;
 
             // save GUI inputs to default settings
             Properties.Settings.Default.DataFolder = txtDirectory.Text;
@@ -739,8 +745,8 @@ namespace Current_Cycling_Controls
             var ser = new SerialPort();
             var connectLabels = new List<string>();
             var ports = SerialPort.GetPortNames().ToList();
-            Console.WriteLine($"Port Names:");
-            ports.ForEach(Console.WriteLine);
+            U.Logger.WriteLine($"Port Names:");
+            ports.ForEach(U.Logger.WriteLine);
             // ping each port and see if we get the TDK response
             foreach (var port in ports) { 
                 try {
@@ -758,7 +764,7 @@ namespace Current_Cycling_Controls
                     }
                 }
                 catch (Exception exc) {
-                    Console.WriteLine($"{exc}");
+                    U.Logger.WriteLine($"{exc}");
                     ser.Close();
                 }
             }
@@ -899,20 +905,25 @@ namespace Current_Cycling_Controls
         }
 
         private void BtnLoadSamples_Click(object sender, EventArgs e) {
-            var i = -1;
+            var i = 0;
             foreach (var s in Properties.Settings.Default.Samples) {
-                i++;
                 try {
-                    if (s == null) continue;
+                    if (s == null) {
+                        i++;
+                        continue;
+                    }
+                    
                     var last = File.ReadLines(s).Last();
                     var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
                     _samples[i].Text = Path.GetFileNameWithoutExtension(s);
+                    // default populate if no data
                     if (File.ReadLines(s).Count() < 2) {
                         _cycleLabels[i].Text = "0";
                         _numCells[i].Text = "22";
                         _voc[i].Text = "0.655";
                         _tempSensors[i].Text = (i + 1).ToString();
                         _setCurrents[i].Text = "0";
+                        i++;
                         continue;
                     }
                     // populate from load file
@@ -923,8 +934,9 @@ namespace Current_Cycling_Controls
                     _setCurrents[i].Text = values[11];
                 }
                 catch (Exception exc) {
-                    MessageBox.Show(exc.ToString());
+                    U.Logger.WriteLine(exc.ToString());
                 }
+                i++;
             }
         }
 
@@ -944,6 +956,10 @@ namespace Current_Cycling_Controls
 
         private void CheckBoxPrintPacket_CheckedChanged(object sender, EventArgs e) {
             _arduinoWorker.ReportProgress(1);
+        }
+
+        private void ButtonSaveLogs_Click(object sender, EventArgs e) {
+            U.Logger.SaveLog();
         }
     }
 }

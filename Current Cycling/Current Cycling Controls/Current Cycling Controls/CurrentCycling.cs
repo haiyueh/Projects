@@ -53,7 +53,7 @@ namespace Current_Cycling_Controls {
                         t.Connected = true;
                     }
                     catch (TimeoutException exc) {
-                        Console.WriteLine($"TIMEOUT ON PORT #{t.Port}");
+                        U.Logger.WriteLine($"TIMEOUT ON PORT #{t.Port}");
                         throw new Exception(exc.Message);
                     }
                 }
@@ -160,23 +160,23 @@ namespace Current_Cycling_Controls {
                 }               
             }
             catch (Exception exc) {
-                Console.WriteLine($"{exc}");
+                U.Logger.WriteLine($"{exc}");
                 BIASON = false;
                 STOP = false;
                 SMOKEALARM = false;
                 TEMPALARM = false;
                 TurnOffClose(tdk);
-                Console.WriteLine($"TDK closing with exception");
+                U.Logger.WriteLine($"TDK closing with exception");
 
             }
             var cmd = STOP ? "EMSSTOP" : SMOKEALARM ? "SMOKEALARM" : "TEMPALARM";
-            Console.WriteLine($"Encountered {cmd} while Cycling!");
+            U.Logger.WriteLine($"Encountered {cmd} while Cycling!");
             BIASON = false;
             STOP = false;
             SMOKEALARM = false;
             TEMPALARM = false;
             TurnOffClose(tdk);
-            Console.WriteLine($"TDK Closing Normally");
+            U.Logger.WriteLine($"TDK Closing Normally");
         }
 
         private void SaveResults(TDK t) {
@@ -242,7 +242,7 @@ namespace Current_Cycling_Controls {
             do {
                 _serTDK.Write("PC " + tdk.SetCurrent + "\r\n");
                 if (_serTDK.ReadLine() == "OK") {
-                    Console.WriteLine($"Current: OKAY");
+                    U.Logger.WriteLine($"Current: OKAY");
                 }
                 _serTDK.Write("PC?\r\n");
             } while (_serTDK.ReadLine() == tdk.SetCurrent);
@@ -251,7 +251,7 @@ namespace Current_Cycling_Controls {
                 //Sets the voltage of the power supply
                 _serTDK.Write("PV " + U.VoltageCompliance + "\r\n");
                 if (_serTDK.ReadLine() == "OK") {
-                    Console.WriteLine($"Voltage: OKAY");
+                    U.Logger.WriteLine($"Voltage: OKAY");
                 }
                 _serTDK.Write("PC?\r\n");
             } while (_serTDK.ReadLine() == U.VoltageCompliance);
@@ -265,7 +265,7 @@ namespace Current_Cycling_Controls {
             do {
                 _serTDK.Write("OUT ON\r\n");
                 if (_serTDK.ReadLine() == "OK") {
-                    Console.WriteLine($"ON: OKAY");
+                    U.Logger.WriteLine($"ON: OKAY");
                 }
                 _serTDK.Write("MODE?\r\n");
             } while (_serTDK.ReadLine() == "ON");
@@ -276,7 +276,7 @@ namespace Current_Cycling_Controls {
                 _serTDK.Write("ADR " + t.Address + "\r\n");
                 _serTDK.Write("OUT OFF\r\n");
                 if (_serTDK.ReadLine() == "OK") {
-                    Console.WriteLine($"OFF: OKAY");
+                    U.Logger.WriteLine($"OFF: OKAY");
                 }
                 _serTDK.DiscardOutBuffer();
                 _serTDK.DiscardInBuffer();
@@ -288,7 +288,7 @@ namespace Current_Cycling_Controls {
                 _serTDK.Write("ADR " + t.Address + "\r\n");
                 _serTDK.Write("OUT OFF\r\n");
                 if (_serTDK.ReadLine() == "OK") {
-                    Console.WriteLine($"Port #{t.Port} OFF: OKAY");
+                    U.Logger.WriteLine($"Port #{t.Port} OFF: OKAY");
                 }
                 _serTDK.DiscardOutBuffer();
                 _serTDK.DiscardInBuffer();

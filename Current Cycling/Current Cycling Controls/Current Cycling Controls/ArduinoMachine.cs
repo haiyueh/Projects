@@ -34,13 +34,13 @@ namespace Current_Cycling_Controls {
                 }
                 catch (Exception ex) {
                     if (ex is TimeoutException) {
-                        Console.WriteLine(ex);
+                        U.Logger.WriteLine(ex.ToString());
                     }
                     else if (ex is InvalidPacketSize) {
-                        Console.WriteLine(ex);
+                        U.Logger.WriteLine(ex.ToString());
                     }
                     else {
-                        Console.WriteLine($"{ex}");
+                        U.Logger.WriteLine($"{ex}");
                     }
                 }
                 SendPackets();
@@ -51,7 +51,7 @@ namespace Current_Cycling_Controls {
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
             _serArduino.Close();
-            Console.WriteLine($"Connecting to Arduino");
+            U.Logger.WriteLine($"Connecting to Arduino");
             // loop through each port forever until we get the correct arduino packet
             while (!Connected) {
                 _serArduino.BaudRate = 115200;
@@ -64,18 +64,18 @@ namespace Current_Cycling_Controls {
                         _serArduino.DiscardOutBuffer();
                         _serArduino.DiscardInBuffer();
                         var str = _serArduino.ReadLine().Split(',').Select(sValue => sValue.Trim()).ToList();
-                        Console.WriteLine($"{str.Count}");
+                        U.Logger.WriteLine($"{str.Count}");
                         if (str.Count == U.ArduinoPacketSize) {
                             _serArduino.DiscardOutBuffer();
                             _serArduino.DiscardInBuffer();
                             Connected = true;
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.ArduinoConnectSuccess });
-                            Console.WriteLine($"Arduino connection successful {port}");
+                            U.Logger.WriteLine($"Arduino connection successful {port}");
                             break;
                         }
                     }
                     catch (Exception exc) {
-                        Console.WriteLine($"{exc}");
+                        //U.Logger.WriteLine($"{exc}");
                         _serArduino.Close();
                     }
                 }
@@ -85,7 +85,7 @@ namespace Current_Cycling_Controls {
         private void ReadPackets() {
             _serArduino.DiscardInBuffer();
             var packet = _serArduino.ReadLine();
-            if (_printPackets) Console.WriteLine($"{packet}");
+            if (_printPackets) U.Logger.WriteLine($"{packet}");
             _recievedPacket = ParsePacket(packet);
         }
 
@@ -129,7 +129,6 @@ namespace Current_Cycling_Controls {
             HeartBeatGood = Convert.ToBoolean(Int32.Parse(heartGood));
 
         }
-
     }
 
     public class TransmitPacket {
@@ -163,7 +162,7 @@ namespace Current_Cycling_Controls {
             string strr = string.Join(",", str);
             strr = strr.Insert(0, "<");
             strr += ">";
-            if (print) Console.WriteLine($"{strr}");
+            if (print) U.Logger.WriteLine($"{strr}");
             return strr;
         }
 
@@ -171,7 +170,7 @@ namespace Current_Cycling_Controls {
 
     class InvalidPacketSize : Exception {
         public InvalidPacketSize(int count) {
-            Console.WriteLine($"Invalid Packet Structure! Got only {count} entries");
+            U.Logger.WriteLine($"Invalid Packet Structure! Got only {count} entries");
         }
     }
 

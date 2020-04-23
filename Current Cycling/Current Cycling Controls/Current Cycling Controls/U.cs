@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,64 @@ namespace Current_Cycling_Controls {
             UpdateTDKVals,
             Testing
         }
+
+        public static class Logger {
+            public static StringBuilder LogString = new StringBuilder();
+            public static int maxBytes = 20000000; // 20mb
+            public static int maxChars = maxBytes / sizeof(char);
+
+            public static void WriteLine(string str) {
+                Console.WriteLine(str);
+                LogString.Append(str).Append(Environment.NewLine);
+            }
+
+            public static void Write(string str) {
+                Console.Write(str);
+                LogString.Append(str);
+            }
+
+            public static void SaveLog(bool append = false) {
+                int bytess = LogString.ToString().Length * sizeof(Char) + sizeof(int);
+
+                // if greater than 20mb split it up and save seperately
+                if (bytess > maxBytes) {
+                    var log = LogString.ToString();
+                    List<string> strList = new List<string>();
+                    for (int i = 0; i < log.Length; i += maxChars) {
+                        if ((i + maxChars) < log.Length)
+                            strList.Add(log.Substring(i, maxChars));
+                        else
+                            strList.Add(log.Substring(i));
+                    }
+
+                    int j = 0;
+                    foreach (var s in strList) {
+                        string path = $"./Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}_{j}.txt";
+                        if (LogString != null && LogString.Length > 0) {
+                            using (StreamWriter file = new StreamWriter(path)) {
+                                file.Write(s);
+                                file.Close();
+                                file.Dispose();
+                            }
+                        }
+                        j++;
+                    }
+                }
+                else {
+                    var path = $"./Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}.txt";
+                    if (LogString != null && LogString.Length > 0) {
+                        using (StreamWriter file = new StreamWriter(path)) {
+                            file.Write(LogString.ToString());
+                            file.Close();
+                            file.Dispose();
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
 
         public enum Status {
             Error = -1,
