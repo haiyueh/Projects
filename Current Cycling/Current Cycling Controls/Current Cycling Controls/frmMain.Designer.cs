@@ -681,7 +681,6 @@ namespace Current_Cycling_Controls {
             this.chkbxPort1.TabIndex = 14;
             this.chkbxPort1.Text = "1";
             this.chkbxPort1.UseVisualStyleBackColor = true;
-            this.chkbxPort1.CheckedChanged += new System.EventHandler(this.ChkbxPort1_CheckedChanged);
             // 
             // chkbxPort2
             // 

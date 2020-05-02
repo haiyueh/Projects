@@ -689,9 +689,19 @@ namespace Current_Cycling_Controls
         }
 
         private bool CheckSmokeOver(List<double> smokes) {
-            var set = double.Parse(txtSmokeOverSet.Text);
-            foreach (var s in _smokeLevel) {
-                if (s > set) {
+            // filter out smokes that are not checked
+            var filtered = new List<double> { }; 
+            var i = 0;
+            foreach (object chk in chkSmoke.Items) {
+                if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
+                    filtered.Add(smokes[i]);
+                }
+                i++;
+            }
+
+            // check if smoke over set point
+            foreach (var s in filtered) {
+                if (s > double.Parse(txtSmokeOverSet.Text)) {
                     return true;
                 }
             }
@@ -788,14 +798,6 @@ namespace Current_Cycling_Controls
             }
             ser.Close();
             return connectLabels;
-        }
-
-
-        private void ChkbxPort1_CheckedChanged(object sender, EventArgs e) {
-            //if (chkbxPort1.Checked) {
-            //    btnLoad1.Enabled = true;
-            //    btnNew1.Enabled = true;
-            //}
         }
 
         private void BtnStop_Click(object sender, EventArgs e) {
