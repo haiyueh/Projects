@@ -90,7 +90,6 @@ int intBiasCurrentOnTemp = 85;
 int intBiasCurrentOffTemp = 25;
 int intBiasCurrentStatus = 0;
 int intPauseFans = 0;
-int Fan1PWM, Fan2PWM,Fan3PWM,Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
 
 //UART
 char chrPCData[UART_BUFFER];
@@ -214,7 +213,7 @@ void SetFanPWM (int Fan1PWM, int Fan2PWM, int Fan3PWM, int Fan4PWM, int Fan5PWM,
 //Description: Calculates the PWM duty cycle of the fans
 //======================================================================
 void CalculatePWM(void){
-  
+  int Fan1PWM, Fan2PWM, Fan3PWM, Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
   
   //Checks to see if the bias current is on or not
   if (intBiasCurrentStatus == 0){
@@ -300,17 +299,23 @@ void ParseDataFromThermalController(char chrSerialData[UART_BUFFER]){
   }
   else{
     //Smoke alarm
-    bolSmokeAlarmOn = true;
+    //bolSmokeAlarmOn = true;
+
+    //Disables HW check for smoke alarm
+    bolSmokeAlarmOn = false;
   }
 
   //Parses the temperature alarm
   if (atoi(strtok(NULL, ",")) == 0){
-    //No smoke alarm
+    //No temp alarm
     bolOverTempAlarmOn = false;
   }
   else{
-    //Smoke alarm
-    bolOverTempAlarmOn = true;
+    //Temp alarm
+    //bolOverTempAlarmOn = true;
+
+    //Disables over temp alarm
+    bolOverTempAlarmOn = false;
   }
 
   //Clears the heart beat
@@ -344,21 +349,21 @@ void sendDataToPC(){
   Serial.print(",");
   Serial.print(bolThermalControllerHeartBeatGood);
   Serial.print(",");
-  Serial.print(Fan1PWM);
+  Serial.print(TargetFanPWMSpeeds[0]);
   Serial.print(",");
-  Serial.print(Fan2PWM);
+  Serial.print(TargetFanPWMSpeeds[1]);
   Serial.print(",");
-  Serial.print(Fan3PWM);
+  Serial.print(TargetFanPWMSpeeds[2]);
   Serial.print(",");
-  Serial.print(Fan4PWM);
+  Serial.print(TargetFanPWMSpeeds[3]);
   Serial.print(",");
-  Serial.print(Fan5PWM);
+  Serial.print(TargetFanPWMSpeeds[4]);
   Serial.print(",");
-  Serial.print(Fan6PWM);
+  Serial.print(TargetFanPWMSpeeds[5]);
   Serial.print(",");
-  Serial.print(Fan7PWM);
+  Serial.print(TargetFanPWMSpeeds[6]);
   Serial.print(",");
-  Serial.println(Fan8PWM);
+  Serial.println(TargetFanPWMSpeeds[7]);
   
   
   //Prints the debug
