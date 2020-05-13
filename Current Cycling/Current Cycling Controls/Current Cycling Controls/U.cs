@@ -13,6 +13,11 @@ namespace Current_Cycling_Controls {
         public static string VoltageCompliance = "60"; //Kat's code
         public static string SampleTxtHeader = "Cycle Number,Epoch Time (seconds),Total Time (hrs),Time into Cycle (min),Current Status,Sample Name,Current (A),Voltage (V),# Cells,Cell VoC,TempSensor,SetCurrent,Estimated Rs,Temp 1,Temp 2,Temp 3,Temp 4,Temp 5,Temp 6,Temp 7,Temp 8,Temp 9,Temp 10,Temp 11,Temp 12,Temp 13,Temp 14,Temp 15,Temp 16,SmokeVoltage 1,SmokeVoltage 2,SmokeVoltage 3,SmokeVoltage 4,SmokeVoltage 5,SmokeVoltage 6,SmokeVoltage 7,SmokeVoltage 8,SmokeLevel 1,SmokeLevel 2,SmokeLevel 3,SmokeLevel 4,SmokeLevel 5,SmokeLevel 6,SmokeLevel 7,SmokeLevel 8";
         public static int ArduinoPacketSize = 36;
+        public static int ResultsSaveTimeON = 2000;
+        public static int ResultsSaveTimeOFF = 20000;
+        public static string CCdb = "CurrentCycling";
+        public static string CCTable = "Cycling";
+        public static int MaxVoltageBurning = 53;
 
         public enum CmdType {
             None,
@@ -68,7 +73,7 @@ namespace Current_Cycling_Controls {
 
                     int j = 0;
                     foreach (var s in strList) {
-                        string path = $"./Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}_{j}.txt";
+                        string path = $"./logs/Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}_{j}.txt";
                         if (LogString != null && LogString.Length > 0) {
                             using (StreamWriter file = new StreamWriter(path)) {
                                 file.Write(s);
@@ -80,7 +85,7 @@ namespace Current_Cycling_Controls {
                     }
                 }
                 else {
-                    var path = $"./Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}.txt";
+                    var path = $"./logs/Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}.txt";
                     if (LogString != null && LogString.Length > 0) {
                         using (StreamWriter file = new StreamWriter(path)) {
                             file.Write(LogString.ToString());
@@ -90,7 +95,7 @@ namespace Current_Cycling_Controls {
                     }
                 }
 
-                
+                LogString.Clear();
             }
         }
 

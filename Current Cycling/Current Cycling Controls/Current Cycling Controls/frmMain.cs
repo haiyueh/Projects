@@ -52,6 +52,8 @@ namespace Current_Cycling_Controls
         private int yy = 0;
         private string Cycling;
         private bool SMOKEALARM;
+        public event DataEvent TestDataEvent;
+        private readonly Data _conn = new Data();
 
         private DateTime _cycleTimer = DateTime.Now;
         private TransmitPacket _heartBeatPacket;
@@ -59,7 +61,8 @@ namespace Current_Cycling_Controls
         {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
-
+            TestDataEvent += _conn.QueueData;
+            Directory.CreateDirectory("logs");
             _commWorker.DoWork += RunCommMachine;
             _commWorker.WorkerReportsProgress = true;
             _commWorker.ProgressChanged += UpdateUi;
@@ -537,6 +540,8 @@ namespace Current_Cycling_Controls
         }
 
         public void EnableTDKRows() {
+#if DEBUG
+#else
             var ii = 0;
             foreach (var chk in _checkBoxes) {
                 chk.Enabled = _TDKconnection[ii];
@@ -572,6 +577,7 @@ namespace Current_Cycling_Controls
                 chk.Enabled = _TDKconnection[ii];
                 ii++;
             }
+#endif
         }
 
 
@@ -694,7 +700,7 @@ namespace Current_Cycling_Controls
             var i = 0;
             foreach (object chk in chkSmoke.Items) {
                 if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
-                    filtered.Add(smokes[i]);
+                    filtered.Add(_smokeLevel[i]);
                 }
                 i++;
             }
@@ -702,6 +708,7 @@ namespace Current_Cycling_Controls
             // check if smoke over set point
             foreach (var s in filtered) {
                 if (s > double.Parse(txtSmokeOverSet.Text)) {
+                    Console.WriteLine($"OVERSMOKE Value: {s}");
                     return true;
                 }
             }
@@ -717,6 +724,7 @@ namespace Current_Cycling_Controls
                 MessageBox.Show("Please Stop Cycling before Closing Form! ");
                 e.Cancel = true;
             }
+            U.Logger.SaveLog();
             Properties.Settings.Default.DataFolder = txtDirectory.Text;
             Properties.Settings.Default.Operator = txtOperator.Text;
             Properties.Settings.Default.BiasON = txtBiasOn.Text;
@@ -962,6 +970,16 @@ namespace Current_Cycling_Controls
 
         private void ButtonSaveLogs_Click(object sender, EventArgs e) {
             U.Logger.SaveLog();
+#if DEBUG
+            TestDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData,
+                new CCDataPoint(5,
+                123, // epoch
+                123, // total time (hrs)
+                123, // time into current cycle
+                true, "test", 1, 1, 1,
+                1, 1, 1, -99.99,
+                new List<double>(), new List<double>(), new List<double>())));
+#endif
         }
     }
 }

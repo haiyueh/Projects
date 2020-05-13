@@ -36,8 +36,11 @@ namespace Current_Cycling_Controls {
         public List<double> _smokeLevel;
         public List<double> _voltages;
         public event CoreCommandEvent NewCoreCommand;
-        public CurrentCycling() {
+        public event DataEvent CycleDataEvent;
+        private readonly Data _conn = new Data();
 
+        public CurrentCycling() {
+            CycleDataEvent += _conn.QueueData;
         }
 
         public void StartCycling(StartCyclingArgs args) {
@@ -85,7 +88,7 @@ namespace Current_Cycling_Controls {
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOnTime);
                     while (_biasTimer.ElapsedMilliseconds < args.BiasOnTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
-                        if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
+                        if (_resultsTimer.ElapsedMilliseconds > U.ResultsSaveTimeON) SAVE = true;
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
                             SetAddress(tt);
@@ -100,6 +103,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
+                            if (double.Parse(tt.Voltage) > U.MaxVoltageBurning) STOP = true;
                             //tt.PastVoltages.Add(tt.Voltage);
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
@@ -119,7 +123,7 @@ namespace Current_Cycling_Controls {
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOffTime);
                     while (_biasTimer.ElapsedMilliseconds < args.BiasOffTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
-                        if (_resultsTimer.ElapsedMilliseconds > 1000) SAVE = true;
+                        if (_resultsTimer.ElapsedMilliseconds > U.ResultsSaveTimeOFF) SAVE = true;
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
                             _serTDK.Write("MV?\r\n");
@@ -132,6 +136,7 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResults(tt);
+                            //if (SAVE) SaveResultsMongo(tt);
                             //tt.PastVoltages.Add(tt.Voltage);
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
@@ -177,6 +182,21 @@ namespace Current_Cycling_Controls {
             TEMPALARM = false;
             TurnOffClose(tdk);
             U.Logger.WriteLine($"TDK Closing Normally");
+        }
+
+        private void SaveResultsMongo(TDK t) {
+            var point = CompileCCData(t);
+            CycleDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData, point));
+        }
+
+        private CCDataPoint CompileCCData(TDK t) {
+            return new CCDataPoint(t.CycleCount, 
+                (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds, // epoch
+                (_totalTimer.ElapsedMilliseconds / 3.6E+6), // total time (hrs)
+                (_intoCycleTimer.ElapsedMilliseconds / 60000.0), // time into current cycle
+                BIASON, t.SampleName, double.Parse(t.Current), double.Parse(t.Voltage), int.Parse(t.NumCells),
+                double.Parse(t.Voc), int.Parse(t.TempSensor), double.Parse(t.SetCurrent), -99.99,
+                _temps, _smokeRaw, _smokeLevel);
         }
 
         private void SaveResults(TDK t) {
