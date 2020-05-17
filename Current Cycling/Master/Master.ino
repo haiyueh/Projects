@@ -106,6 +106,24 @@ int intOperating = 0;
 
 
 //============================================================================
+//Function: float floLargestNumberInArray (float floArray[], int arraySize )
+//Notes: returns the largest number in an array
+//============================================================================
+int floLargestNumberInArray (float floArray[], int arraySize ){
+  //Declarations
+  float floValue=-1000;
+
+  //Finds the max value in the array
+  for(int i=0;i<arraySize;i++) {
+    if(floArray[i] > floValue) {
+      floValue = floArray[i];
+    }  
+  }
+
+  //Returns the maximum value
+  return floValue;
+}
+//============================================================================
 //Function: void execEmergencyAction (bool isEmergency)
 //Notes: executes actions based on whether there is an emergency detected
 //============================================================================
@@ -214,28 +232,34 @@ void SetFanPWM (int Fan1PWM, int Fan2PWM, int Fan3PWM, int Fan4PWM, int Fan5PWM,
 //======================================================================
 void CalculatePWM(void){
   int Fan1PWM, Fan2PWM, Fan3PWM, Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
+  float floMaxTemp = 0;
   
   //Checks to see if the bias current is on or not
   if (intBiasCurrentStatus == 0){
+    //Finds the maximum temperature
+    floMaxTemp = floLargestNumberInArray(floTemp,NUMBER_OF_TEMP_SENSORS);
+    
     //Regulates fans to no current temp
-    Fan1PWM = ((new_max(floTemp[0],floTemp[1])) - intBiasCurrentOffTemp + 5)*10;
-    Fan2PWM = ((new_max(floTemp[2],floTemp[3]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan3PWM = ((new_max(floTemp[4],floTemp[5]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan4PWM = ((new_max(floTemp[6],floTemp[7]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan5PWM = ((new_max(floTemp[8],floTemp[9]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan6PWM = ((new_max(floTemp[10],floTemp[11]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan7PWM = ((new_max(floTemp[12],floTemp[13]))  - intBiasCurrentOffTemp + 5)*10;
-    Fan8PWM = ((new_max(floTemp[14],floTemp[15]))  - intBiasCurrentOffTemp + 5)*10;
+    Fan1PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan2PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan3PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan4PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan5PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan6PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan7PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    Fan8PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
+    
   }
   else{
-    Fan1PWM = ((new_max(floTemp[0],floTemp[1]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan2PWM = ((new_max(floTemp[2],floTemp[3]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan3PWM = ((new_max(floTemp[4],floTemp[5]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan4PWM = ((new_max(floTemp[6],floTemp[7]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan5PWM = ((new_max(floTemp[8],floTemp[9]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan6PWM = ((new_max(floTemp[10],floTemp[11]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan7PWM = ((new_max(floTemp[12],floTemp[13]))  - intBiasCurrentOnTemp + 5)*10;
-    Fan8PWM = ((new_max(floTemp[14],floTemp[15]))  - intBiasCurrentOnTemp + 5)*10;
+    //Regulates fans to bais current temp
+    Fan1PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan2PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan3PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan4PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan5PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan6PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan7PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
+    Fan8PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
   }
   
   //Sets the PWM of all the fans if the fans are not in pause mode and we are operating
@@ -299,10 +323,10 @@ void ParseDataFromThermalController(char chrSerialData[UART_BUFFER]){
   }
   else{
     //Smoke alarm
-    //bolSmokeAlarmOn = true;
+    bolSmokeAlarmOn = true;
 
     //Disables HW check for smoke alarm
-    bolSmokeAlarmOn = false;
+   // bolSmokeAlarmOn = false;
   }
 
   //Parses the temperature alarm
@@ -312,10 +336,10 @@ void ParseDataFromThermalController(char chrSerialData[UART_BUFFER]){
   }
   else{
     //Temp alarm
-    //bolOverTempAlarmOn = true;
+    bolOverTempAlarmOn = true;
 
     //Disables over temp alarm
-    bolOverTempAlarmOn = false;
+    //bolOverTempAlarmOn = false;
   }
 
   //Clears the heart beat
