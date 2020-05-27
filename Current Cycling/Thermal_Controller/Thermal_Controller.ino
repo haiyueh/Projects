@@ -13,7 +13,6 @@
 #include <max6675.h>
 #include <EEPROM.h>
 
-
 //============================================================================
 //Definitions
 //============================================================================
@@ -79,6 +78,10 @@
 #define MINIMUM_UART_BUFFER_LENGTH 0
 #define NUMBER_OF_SMOKE_SENSORS 8
 #define NUMBER_OF_TEMP_SENSORS 16
+#define ORDER_OF_FILTER 10
+#define SMOKE_SENSOR_OFFSET 0.3
+#define SMOKE_SENSOR_MAX 5
+#define TEMP_SENSOR_OFFSET 10
 
 char startMarker = '<';
 char endMarker = '>';
@@ -90,13 +93,19 @@ char endMarker = '>';
 //============================================================================
 
 //Master data arrays
-float floTemp[16];
-float floSmokeLevel[8];
+float floTemp[NUMBER_OF_TEMP_SENSORS];
+float floSmokeLevel[NUMBER_OF_SMOKE_SENSORS];
 bool bolSmokeTripped[8];
 String strTempSensorToUse;
 String strSmokeSensorToUse;
 bool bolTempSensorToUse[NUMBER_OF_TEMP_SENSORS];
 bool bolSmokeSensorToUse[NUMBER_OF_SMOKE_SENSORS];
+
+float floTempFilterData[NUMBER_OF_TEMP_SENSORS][ORDER_OF_FILTER];
+float floSmokeFilterData[NUMBER_OF_SMOKE_SENSORS][ORDER_OF_FILTER];
+
+float floTempFiltered[NUMBER_OF_TEMP_SENSORS];
+float floSmokeFiltered[NUMBER_OF_SMOKE_SENSORS];
 
 
 //Trip levels
@@ -121,6 +130,61 @@ MAX6675 TC13(TC_SCK, TC_CS13, TC_MISO);
 MAX6675 TC14(TC_SCK, TC_CS14, TC_MISO);
 MAX6675 TC15(TC_SCK, TC_CS15, TC_MISO);
 
+
+//============================================================================
+//Function: void filterTemperature ()
+//Notes: filters the temperature
+//============================================================================
+void filterTemperature (){
+  //Declarations
+  float floSum = 0;
+  
+  for (int i = 0;  i < NUMBER_OF_TEMP_SENSORS; i++){
+    //Moves the average back a value
+    for (int j = (ORDER_OF_FILTER-1); j > 0  ; j--){
+      floTempFilterData [i][j] = floTempFilterData[i][j-1];
+    }
+
+    //Adds the newest temperature
+    floTempFilterData[i][0] = floTemp[i];
+
+    //Sums up the filter
+    for (int k = 0; k < ORDER_OF_FILTER; k++){
+      floTempFiltered[i]  =  floTempFiltered[i] + floTempFilterData[i][k];
+    }
+
+    //Averages the temperature
+    floTempFiltered[i] = floTempFiltered[i] / ORDER_OF_FILTER;
+  }
+}
+
+
+//============================================================================
+//Function: void filterSmoke ()
+//Notes: filters the temperature
+//============================================================================
+void filterSmoke (){
+  //Declarations
+  float floSum = 0;
+  
+  for (int i = 0;  i < NUMBER_OF_SMOKE_SENSORS; i++){
+    //Moves the average back a value
+    for (int j = (ORDER_OF_FILTER-1); j > 0  ; j--){
+      floSmokeFilterData [i][j] = floSmokeFilterData[i][j-1];
+    }
+
+    //Adds the newest temperature
+    floSmokeFilterData[i][0] = floSmokeLevel[i];
+
+    //Sums up the filter
+    for (int k = 0; k < ORDER_OF_FILTER; k++){
+      floSmokeFiltered[i]  =  floSmokeFiltered[i] + floSmokeFilterData[i][k];
+    }
+
+    //Averages the temperature
+    floSmokeFiltered[i] = floSmokeFiltered[i] / ORDER_OF_FILTER;
+  }
+}
 
 //============================================================================
 //Function: void readEEPROM()
@@ -167,14 +231,17 @@ bool isSmokeAlarmTripped(){
   floSmokeLevel[6] = ((float)analogRead(ADC_SMOKE_6)/(float)ADD_MAX_VALUE)*(float)ADC_MAX_VOLTAGE;
   floSmokeLevel[7] = ((float)analogRead(ADC_SMOKE_7)/(float)ADD_MAX_VALUE)*(float)ADC_MAX_VOLTAGE;
 
+  //Implements the smoke sensor filter
+  filterSmoke();
+
   //Loops through the entire loop to see if any of the smoke sensors are tripped
   for (int i = 0; i < SMOKE_MAX; i++){
-    if ((floSmokeLevel[i] > floSmokeSensorTripLevel) && (bolSmokeSensorToUse[i] == true)){
+    if ((floSmokeFiltered[i] > floSmokeSensorTripLevel) && (bolSmokeSensorToUse[i] == true)){
       //Returns alarm tripped
-      //return true;
+      return true;
 
       //Disables FW level smoke checking for now
-      return false;
+      //return false;
     }
   }
 
@@ -205,10 +272,13 @@ bool isOverTempAlarmTripped(){
   floTemp[14] = (float)TC14.readCelsius();
   floTemp[15] = (float)TC15.readCelsius();
 
+  //Implements the temperature moving average filter
+  filterTemperature();
+
   
   //Loops through the entire loop to see if any of the thermocouples are over temperatured
   for (int i = 0; i < TC_MAX; i++){
-    if ((floTemp[i] > floOverTempDegC) && (bolTempSensorToUse[i] == true)){
+    if ((floTempFiltered[i] > floOverTempDegC) && (bolTempSensorToUse[i] == true)){
       //Returns alarm tripped
       return true;
     }
@@ -227,17 +297,31 @@ void PrintSensorDataDebug(){
   //Sends the beginning of string character
   Serial.print(startMarker);
 
-  //Sends data back to the master - temperatures
+  //Sends data back to the computer debug - temperatures
   for (int i = 0; i < TC_MAX; i++){
    Serial.print(floTemp[i]);
    Serial.print(",");
   }
+
+  //Sends data back to the computer debug - temperatures, filtered
+  for (int i = 0; i < TC_MAX; i++){
+   Serial.print(floTempFiltered[i]);
+   Serial.print(",");
+  }
   
-  //Sends data back to the master - smoke levels
+  //Sends data back to the computer debug - smoke levels
   for (int i = 0; i < SMOKE_MAX; i++){
    Serial.print(floSmokeLevel[i]);
    Serial.print(",");
   }
+
+   //Sends data back to the computer debug - smoke filtered
+  for (int i = 0; i < SMOKE_MAX; i++){
+   Serial.print(floSmokeFiltered[i]);
+   Serial.print(",");
+  }
+
+  
   
   //Sends the end of string character
   Serial.println(endMarker);
@@ -318,6 +402,19 @@ void loop() {
     floSmokeSensorTripLevelNew = atof(strtok(NULL, ","));
     strTempSensorToUse = strtok(NULL, ",");
     strSmokeSensorToUse = strtok(NULL, ",");
+
+    //Adds an additional offset for smoke and temperature sensor
+    if ((floSmokeSensorTripLevelNew + SMOKE_SENSOR_OFFSET)< SMOKE_SENSOR_MAX){
+      //Adds the offset to the smoke sensor level
+      floSmokeSensorTripLevelNew = floSmokeSensorTripLevelNew + SMOKE_SENSOR_OFFSET;
+    }
+    else{
+      //Saturates the smoke sensor level
+      floSmokeSensorTripLevelNew = SMOKE_SENSOR_MAX;
+    }
+
+    //Adds an offset to the temperature trip point
+    floOverTempDegCNew = floOverTempDegCNew + TEMP_SENSOR_OFFSET;
 
     //Echos the data on USB
     Serial.print(floOverTempDegCNew);

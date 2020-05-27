@@ -1,0 +1,47 @@
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.exe.config
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.exe
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Newtonsoft.Json.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Newtonsoft.Json.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csprojAssemblyReference.cache
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery_Example.frmMain.resources
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery_Example.Properties.Resources.resources
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csproj.GenerateResource.cache
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csproj.CopyComplete
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.exe
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.dll
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.xml
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.pdb
+C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.xml
