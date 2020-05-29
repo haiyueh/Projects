@@ -15,9 +15,13 @@ namespace Current_Cycling_Controls {
         public static int ArduinoPacketSize = 36;
         public static int ResultsSaveTimeON = 2000;
         public static int ResultsSaveTimeOFF = 20000;
+        public static int MaxVoltageBurning = 53;
+
         public static string CCdb = "CurrentCycling";
         public static string CCTable = "Cycling";
-        public static int MaxVoltageBurning = 53;
+        public static string CCRecipeTable = "CCRecipe";
+
+        
 
         public enum CmdType {
             None,

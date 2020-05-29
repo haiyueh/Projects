@@ -53,7 +53,8 @@ namespace Current_Cycling_Controls
         private string Cycling;
         private bool SMOKEALARM;
         public event DataEvent TestDataEvent;
-        private readonly Data _conn = new Data();
+        private readonly Data MongoConn = new Data();
+        private CCRecipe _ccRecipe;
 
         private DateTime _cycleTimer = DateTime.Now;
         private TransmitPacket _heartBeatPacket;
@@ -61,7 +62,7 @@ namespace Current_Cycling_Controls
         {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
-            TestDataEvent += _conn.QueueData;
+            TestDataEvent += MongoConn.QueueData;
             Directory.CreateDirectory("logs");
             _commWorker.DoWork += RunCommMachine;
             _commWorker.WorkerReportsProgress = true;
@@ -120,8 +121,8 @@ namespace Current_Cycling_Controls
             lblPSStatus10,lblPSStatus11,lblPSStatus12 };
             _loadButtons = new List<Button> { btnLoad1, btnLoad2, btnLoad3, btnLoad4,
             btnLoad5,btnLoad6,btnLoad7,btnLoad8,btnLoad9,btnLoad10,btnLoad11,btnLoad12};
-            _newButtons = new List<Button> { btnNew1, btnNew2, btnNew3 , btnNew4 ,
-            btnNew5,btnNew6,btnNew7,btnNew8,btnNew9,btnNew10,btnNew11,btnNew12};
+            //_newButtons = new List<Button> { btnNew1, btnNew2, btnNew3 , btnNew4 ,
+            //btnNew5,btnNew6,btnNew7,btnNew8,btnNew9,btnNew10,btnNew11,btnNew12};
             _voc = new List<TextBox> { txtVoc1, txtVoc2 , txtVoc3 , txtVoc4 , txtVoc5 ,
             txtVoc6,txtVoc7,txtVoc8,txtVoc9,txtVoc10,txtVoc11,txtVoc12};
             _numCells = new List<TextBox> { txtNumCells1, txtNumCells2 , txtNumCells3 ,
@@ -870,6 +871,36 @@ namespace Current_Cycling_Controls
 
         }
 
+
+
+        private void ButtonRecipe_Click(object sender, EventArgs e) {
+            var form = new RecipeEditor<CCRecipe>(MongoConn, new CCRecipe());
+            form.Closed += GetRecipes;
+            form.ShowDialog();
+
+            _ccRecipe = MongoConn.GetCurrentRecipe<CCRecipe>(U.CCRecipeTable) ?? new CCRecipe();
+            // use Btn sender to parse through control lists
+            string txt = ((Button)sender).Name;
+            int index = 0;
+            if (txt.Length == 8) {
+                index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
+            }
+            else {
+                index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
+            }
+
+            //_cycleLabels[index].Text = _.
+            _samples[index].Text = _ccRecipe.SampleName;
+            _numCells[index].Text = _ccRecipe.NumCells.ToString();
+            _voc[index].Text = _ccRecipe.CellVoc.ToString();
+            _tempSensors[index].Text = _ccRecipe.TempSensor.ToString();
+            _setCurrents[index].Text = _ccRecipe.SetCurrent.ToString();
+        }
+
+        private void GetRecipes(object sender, EventArgs e) {
+            if (!MongoConn.GetCurrentRecipeWithError(U.CCRecipeTable, out _ccRecipe)) throw new Exception("Could not get recipe");
+        }
+
         private void BtnLoad_Click(object sender, EventArgs e) {
             // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
             var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
@@ -980,6 +1011,10 @@ namespace Current_Cycling_Controls
                 1, 1, 1, -99.99,
                 new List<double>(), new List<double>(), new List<double>())));
 #endif
+        }
+
+        private void LblTempSensNum_Click(object sender, EventArgs e) {
+
         }
     }
 }

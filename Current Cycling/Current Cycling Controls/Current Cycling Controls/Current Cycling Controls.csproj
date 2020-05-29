@@ -107,6 +107,14 @@
     <Compile Include="ArduinoMachine.cs" />
     <Compile Include="ArduinoUpdates.cs" />
     <Compile Include="CCDataPoint.cs" />
+    <Compile Include="CCRecipe.cs" />
+    <Compile Include="RecipeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecipeEditor.Designer.cs">
+      <DependentUpon>RecipeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recipe.cs" />
     <Compile Include="DataQueueObject.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="CurrentCycling.cs" />

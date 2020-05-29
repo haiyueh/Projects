@@ -29,16 +29,16 @@ namespace Current_Cycling_Controls {
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSetCurr12 = new System.Windows.Forms.TextBox();
             this.txtSetCurr11 = new System.Windows.Forms.TextBox();
@@ -53,7 +53,6 @@ namespace Current_Cycling_Controls {
             this.txtSetCurr2 = new System.Windows.Forms.TextBox();
             this.txtSetCurr1 = new System.Windows.Forms.TextBox();
             this.lblCycle12 = new System.Windows.Forms.Label();
-            this.btnNew1 = new System.Windows.Forms.Button();
             this.lblSetCurrent = new System.Windows.Forms.Label();
             this.lblTempSensNum = new System.Windows.Forms.Label();
             this.lblVoltage = new System.Windows.Forms.Label();
@@ -62,7 +61,6 @@ namespace Current_Cycling_Controls {
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.lblSampleNames = new System.Windows.Forms.Label();
             this.lblActivePort = new System.Windows.Forms.Label();
@@ -102,17 +100,6 @@ namespace Current_Cycling_Controls {
             this.btnLoad10 = new System.Windows.Forms.Button();
             this.btnLoad11 = new System.Windows.Forms.Button();
             this.btnLoad12 = new System.Windows.Forms.Button();
-            this.btnNew2 = new System.Windows.Forms.Button();
-            this.btnNew3 = new System.Windows.Forms.Button();
-            this.btnNew4 = new System.Windows.Forms.Button();
-            this.btnNew5 = new System.Windows.Forms.Button();
-            this.btnNew6 = new System.Windows.Forms.Button();
-            this.btnNew7 = new System.Windows.Forms.Button();
-            this.btnNew8 = new System.Windows.Forms.Button();
-            this.btnNew9 = new System.Windows.Forms.Button();
-            this.btnNew10 = new System.Windows.Forms.Button();
-            this.btnNew11 = new System.Windows.Forms.Button();
-            this.btnNew12 = new System.Windows.Forms.Button();
             this.txtNumCells1 = new System.Windows.Forms.TextBox();
             this.txtNumCells2 = new System.Windows.Forms.TextBox();
             this.txtNumCells3 = new System.Windows.Forms.TextBox();
@@ -244,42 +231,39 @@ namespace Current_Cycling_Controls {
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 12;
+            this.tableLayoutPanel1.ColumnCount = 11;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr12, 11, 12);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr11, 11, 11);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr10, 11, 10);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr9, 11, 9);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr8, 11, 8);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr7, 11, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr6, 11, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr5, 11, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr4, 11, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr3, 11, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr2, 11, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr1, 11, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle12, 7, 12);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew1, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblSetCurrent, 11, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTempSensNum, 10, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage, 9, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycleNum, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label20, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label19, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label18, 3, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr12, 10, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr11, 10, 11);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr10, 10, 10);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr9, 10, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr8, 10, 8);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr7, 10, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr6, 10, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr5, 10, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr4, 10, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr3, 10, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr2, 10, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtSetCurr1, 10, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle12, 6, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblSetCurrent, 10, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycleNum, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label21, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label20, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label19, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label17, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblSampleNames, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblActivePort, 0, 0);
@@ -319,100 +303,90 @@ namespace Current_Cycling_Controls {
             this.tableLayoutPanel1.Controls.Add(this.btnLoad10, 2, 10);
             this.tableLayoutPanel1.Controls.Add(this.btnLoad11, 2, 11);
             this.tableLayoutPanel1.Controls.Add(this.btnLoad12, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew2, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew3, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew4, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew5, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew6, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew7, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew8, 3, 8);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew9, 3, 9);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew10, 3, 10);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew11, 3, 11);
-            this.tableLayoutPanel1.Controls.Add(this.btnNew12, 3, 12);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells1, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells2, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells3, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells4, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells5, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells6, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells7, 4, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells8, 4, 8);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells9, 4, 9);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells10, 4, 10);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells11, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.txtNumCells12, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc2, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc3, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc4, 5, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc5, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc6, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc7, 5, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc8, 5, 8);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc9, 5, 9);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc10, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc11, 5, 11);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc12, 5, 12);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus1, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus2, 6, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus3, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus4, 6, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus5, 6, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus6, 6, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus7, 6, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus8, 6, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus9, 6, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus10, 6, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus11, 6, 11);
-            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus12, 6, 12);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle1, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle2, 7, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle3, 7, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle4, 7, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle5, 7, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle6, 7, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle7, 7, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle8, 7, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle9, 7, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle10, 7, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblCycle11, 7, 11);
-            this.tableLayoutPanel1.Controls.Add(this.txtVoc1, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent1, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent2, 8, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent3, 8, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent4, 8, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent5, 8, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent6, 8, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent7, 8, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent8, 8, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent9, 8, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent10, 8, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent11, 8, 11);
-            this.tableLayoutPanel1.Controls.Add(this.lblCurrent12, 8, 12);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage1, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage2, 9, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage3, 9, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage4, 9, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage5, 9, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage6, 9, 6);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage7, 9, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage8, 9, 8);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage9, 9, 9);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage10, 9, 10);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage11, 9, 11);
-            this.tableLayoutPanel1.Controls.Add(this.lblVoltage12, 9, 12);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample1, 10, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample2, 10, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample3, 10, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample4, 10, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample5, 10, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample6, 10, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample7, 10, 7);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample8, 10, 8);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample9, 10, 9);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample10, 10, 10);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample11, 10, 11);
-            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample12, 10, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells1, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells2, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells3, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells4, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells5, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells6, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells7, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells8, 3, 8);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells9, 3, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells10, 3, 10);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells11, 3, 11);
+            this.tableLayoutPanel1.Controls.Add(this.txtNumCells12, 3, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc2, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc3, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc4, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc5, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc6, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc7, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc8, 4, 8);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc9, 4, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc10, 4, 10);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc11, 4, 11);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc12, 4, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus1, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus2, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus3, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus4, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus5, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus6, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus7, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus8, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus9, 5, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus10, 5, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus11, 5, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblPSStatus12, 5, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle1, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle2, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle3, 6, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle4, 6, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle5, 6, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle6, 6, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle7, 6, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle8, 6, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle9, 6, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle10, 6, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblCycle11, 6, 11);
+            this.tableLayoutPanel1.Controls.Add(this.txtVoc1, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent1, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent2, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent3, 7, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent4, 7, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent5, 7, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent6, 7, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent7, 7, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent8, 7, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent9, 7, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent10, 7, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent11, 7, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblCurrent12, 7, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage1, 8, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage2, 8, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage3, 8, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage4, 8, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage5, 8, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage6, 8, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage7, 8, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage8, 8, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage9, 8, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage10, 8, 10);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage11, 8, 11);
+            this.tableLayoutPanel1.Controls.Add(this.lblVoltage12, 8, 12);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample1, 9, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample2, 9, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample3, 9, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample4, 9, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample5, 9, 5);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample6, 9, 6);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample7, 9, 7);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample8, 9, 8);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample9, 9, 9);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample10, 9, 10);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample11, 9, 11);
+            this.tableLayoutPanel1.Controls.Add(this.txtTempSensSample12, 9, 12);
+            this.tableLayoutPanel1.Controls.Add(this.lblTempSensNum, 9, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 159);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -430,13 +404,12 @@ namespace Current_Cycling_Controls {
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1157, 420);
             this.tableLayoutPanel1.TabIndex = 57;
             // 
             // txtSetCurr12
             // 
-            this.txtSetCurr12.Location = new System.Drawing.Point(1046, 393);
+            this.txtSetCurr12.Location = new System.Drawing.Point(1051, 393);
             this.txtSetCurr12.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr12.Name = "txtSetCurr12";
             this.txtSetCurr12.Size = new System.Drawing.Size(92, 22);
@@ -445,7 +418,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr11
             // 
-            this.txtSetCurr11.Location = new System.Drawing.Point(1046, 361);
+            this.txtSetCurr11.Location = new System.Drawing.Point(1051, 361);
             this.txtSetCurr11.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr11.Name = "txtSetCurr11";
             this.txtSetCurr11.Size = new System.Drawing.Size(92, 22);
@@ -454,7 +427,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr10
             // 
-            this.txtSetCurr10.Location = new System.Drawing.Point(1046, 330);
+            this.txtSetCurr10.Location = new System.Drawing.Point(1051, 330);
             this.txtSetCurr10.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr10.Name = "txtSetCurr10";
             this.txtSetCurr10.Size = new System.Drawing.Size(92, 22);
@@ -463,7 +436,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr9
             // 
-            this.txtSetCurr9.Location = new System.Drawing.Point(1046, 298);
+            this.txtSetCurr9.Location = new System.Drawing.Point(1051, 298);
             this.txtSetCurr9.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr9.Name = "txtSetCurr9";
             this.txtSetCurr9.Size = new System.Drawing.Size(92, 22);
@@ -472,7 +445,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr8
             // 
-            this.txtSetCurr8.Location = new System.Drawing.Point(1046, 267);
+            this.txtSetCurr8.Location = new System.Drawing.Point(1051, 267);
             this.txtSetCurr8.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr8.Name = "txtSetCurr8";
             this.txtSetCurr8.Size = new System.Drawing.Size(92, 22);
@@ -481,7 +454,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr7
             // 
-            this.txtSetCurr7.Location = new System.Drawing.Point(1046, 237);
+            this.txtSetCurr7.Location = new System.Drawing.Point(1051, 237);
             this.txtSetCurr7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr7.Name = "txtSetCurr7";
             this.txtSetCurr7.Size = new System.Drawing.Size(92, 22);
@@ -490,7 +463,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr6
             // 
-            this.txtSetCurr6.Location = new System.Drawing.Point(1046, 206);
+            this.txtSetCurr6.Location = new System.Drawing.Point(1051, 206);
             this.txtSetCurr6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr6.Name = "txtSetCurr6";
             this.txtSetCurr6.Size = new System.Drawing.Size(92, 22);
@@ -499,7 +472,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr5
             // 
-            this.txtSetCurr5.Location = new System.Drawing.Point(1046, 176);
+            this.txtSetCurr5.Location = new System.Drawing.Point(1051, 176);
             this.txtSetCurr5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr5.Name = "txtSetCurr5";
             this.txtSetCurr5.Size = new System.Drawing.Size(92, 22);
@@ -508,7 +481,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr4
             // 
-            this.txtSetCurr4.Location = new System.Drawing.Point(1046, 146);
+            this.txtSetCurr4.Location = new System.Drawing.Point(1051, 146);
             this.txtSetCurr4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr4.Name = "txtSetCurr4";
             this.txtSetCurr4.Size = new System.Drawing.Size(92, 22);
@@ -517,7 +490,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr3
             // 
-            this.txtSetCurr3.Location = new System.Drawing.Point(1046, 114);
+            this.txtSetCurr3.Location = new System.Drawing.Point(1051, 114);
             this.txtSetCurr3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr3.Name = "txtSetCurr3";
             this.txtSetCurr3.Size = new System.Drawing.Size(92, 22);
@@ -526,7 +499,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr2
             // 
-            this.txtSetCurr2.Location = new System.Drawing.Point(1046, 81);
+            this.txtSetCurr2.Location = new System.Drawing.Point(1051, 81);
             this.txtSetCurr2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr2.Name = "txtSetCurr2";
             this.txtSetCurr2.Size = new System.Drawing.Size(92, 22);
@@ -535,7 +508,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr1
             // 
-            this.txtSetCurr1.Location = new System.Drawing.Point(1046, 48);
+            this.txtSetCurr1.Location = new System.Drawing.Point(1051, 48);
             this.txtSetCurr1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr1.Name = "txtSetCurr1";
             this.txtSetCurr1.Size = new System.Drawing.Size(92, 22);
@@ -545,28 +518,17 @@ namespace Current_Cycling_Controls {
             // lblCycle12
             // 
             this.lblCycle12.AutoSize = true;
-            this.lblCycle12.Location = new System.Drawing.Point(699, 389);
+            this.lblCycle12.Location = new System.Drawing.Point(712, 389);
             this.lblCycle12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle12.Name = "lblCycle12";
             this.lblCycle12.Size = new System.Drawing.Size(16, 17);
             this.lblCycle12.TabIndex = 110;
             this.lblCycle12.Text = "0";
             // 
-            // btnNew1
-            // 
-            this.btnNew1.Location = new System.Drawing.Point(378, 46);
-            this.btnNew1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew1.Name = "btnNew1";
-            this.btnNew1.Size = new System.Drawing.Size(58, 23);
-            this.btnNew1.TabIndex = 61;
-            this.btnNew1.Text = "New";
-            this.btnNew1.UseVisualStyleBackColor = true;
-            this.btnNew1.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
             // lblSetCurrent
             // 
             this.lblSetCurrent.AutoSize = true;
-            this.lblSetCurrent.Location = new System.Drawing.Point(1045, 0);
+            this.lblSetCurrent.Location = new System.Drawing.Point(1050, 0);
             this.lblSetCurrent.Name = "lblSetCurrent";
             this.lblSetCurrent.Size = new System.Drawing.Size(103, 17);
             this.lblSetCurrent.TabIndex = 36;
@@ -575,16 +537,17 @@ namespace Current_Cycling_Controls {
             // lblTempSensNum
             // 
             this.lblTempSensNum.AutoSize = true;
-            this.lblTempSensNum.Location = new System.Drawing.Point(944, 0);
+            this.lblTempSensNum.Location = new System.Drawing.Point(935, 0);
             this.lblTempSensNum.Name = "lblTempSensNum";
-            this.lblTempSensNum.Size = new System.Drawing.Size(94, 34);
+            this.lblTempSensNum.Size = new System.Drawing.Size(105, 17);
             this.lblTempSensNum.TabIndex = 35;
-            this.lblTempSensNum.Text = "Temperature Sensor #";
+            this.lblTempSensNum.Text = "Temp Sensor #";
+            this.lblTempSensNum.Click += new System.EventHandler(this.LblTempSensNum_Click);
             // 
             // lblVoltage
             // 
             this.lblVoltage.AutoSize = true;
-            this.lblVoltage.Location = new System.Drawing.Point(853, 0);
+            this.lblVoltage.Location = new System.Drawing.Point(849, 0);
             this.lblVoltage.Name = "lblVoltage";
             this.lblVoltage.Size = new System.Drawing.Size(79, 17);
             this.lblVoltage.TabIndex = 34;
@@ -593,7 +556,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent
             // 
             this.lblCurrent.AutoSize = true;
-            this.lblCurrent.Location = new System.Drawing.Point(757, 0);
+            this.lblCurrent.Location = new System.Drawing.Point(763, 0);
             this.lblCurrent.Name = "lblCurrent";
             this.lblCurrent.Size = new System.Drawing.Size(78, 17);
             this.lblCurrent.TabIndex = 33;
@@ -602,7 +565,7 @@ namespace Current_Cycling_Controls {
             // lblCycleNum
             // 
             this.lblCycleNum.AutoSize = true;
-            this.lblCycleNum.Location = new System.Drawing.Point(698, 0);
+            this.lblCycleNum.Location = new System.Drawing.Point(711, 0);
             this.lblCycleNum.Name = "lblCycleNum";
             this.lblCycleNum.Size = new System.Drawing.Size(42, 17);
             this.lblCycleNum.TabIndex = 32;
@@ -611,7 +574,7 @@ namespace Current_Cycling_Controls {
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(555, 0);
+            this.label21.Location = new System.Drawing.Point(547, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(70, 17);
             this.label21.TabIndex = 31;
@@ -620,7 +583,7 @@ namespace Current_Cycling_Controls {
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(491, 0);
+            this.label20.Location = new System.Drawing.Point(479, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(32, 17);
             this.label20.TabIndex = 30;
@@ -629,29 +592,20 @@ namespace Current_Cycling_Controls {
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(442, 0);
+            this.label19.Location = new System.Drawing.Point(397, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(39, 34);
+            this.label19.Size = new System.Drawing.Size(46, 17);
             this.label19.TabIndex = 29;
             this.label19.Text = "#Cells";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(378, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(35, 17);
-            this.label18.TabIndex = 28;
-            this.label18.Text = "New";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(282, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(87, 17);
+            this.label17.Size = new System.Drawing.Size(104, 17);
             this.label17.TabIndex = 27;
-            this.label17.Text = "PostMidread";
+            this.label17.Text = "Choose Recipe";
             // 
             // lblSampleNames
             // 
@@ -920,7 +874,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad1.TabIndex = 49;
             this.btnLoad1.Text = "Load";
             this.btnLoad1.UseVisualStyleBackColor = true;
-            this.btnLoad1.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad1.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad2
             // 
@@ -1043,130 +997,9 @@ namespace Current_Cycling_Controls {
             this.btnLoad12.UseVisualStyleBackColor = true;
             this.btnLoad12.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
-            // btnNew2
-            // 
-            this.btnNew2.Location = new System.Drawing.Point(378, 79);
-            this.btnNew2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew2.Name = "btnNew2";
-            this.btnNew2.Size = new System.Drawing.Size(58, 23);
-            this.btnNew2.TabIndex = 62;
-            this.btnNew2.Text = "New";
-            this.btnNew2.UseVisualStyleBackColor = true;
-            this.btnNew2.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew3
-            // 
-            this.btnNew3.Location = new System.Drawing.Point(378, 112);
-            this.btnNew3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew3.Name = "btnNew3";
-            this.btnNew3.Size = new System.Drawing.Size(58, 23);
-            this.btnNew3.TabIndex = 63;
-            this.btnNew3.Text = "New";
-            this.btnNew3.UseVisualStyleBackColor = true;
-            this.btnNew3.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew4
-            // 
-            this.btnNew4.Location = new System.Drawing.Point(378, 144);
-            this.btnNew4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew4.Name = "btnNew4";
-            this.btnNew4.Size = new System.Drawing.Size(58, 23);
-            this.btnNew4.TabIndex = 64;
-            this.btnNew4.Text = "New";
-            this.btnNew4.UseVisualStyleBackColor = true;
-            this.btnNew4.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew5
-            // 
-            this.btnNew5.Location = new System.Drawing.Point(378, 174);
-            this.btnNew5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew5.Name = "btnNew5";
-            this.btnNew5.Size = new System.Drawing.Size(58, 23);
-            this.btnNew5.TabIndex = 65;
-            this.btnNew5.Text = "New";
-            this.btnNew5.UseVisualStyleBackColor = true;
-            this.btnNew5.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew6
-            // 
-            this.btnNew6.Location = new System.Drawing.Point(378, 204);
-            this.btnNew6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew6.Name = "btnNew6";
-            this.btnNew6.Size = new System.Drawing.Size(58, 23);
-            this.btnNew6.TabIndex = 66;
-            this.btnNew6.Text = "New";
-            this.btnNew6.UseVisualStyleBackColor = true;
-            this.btnNew6.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew7
-            // 
-            this.btnNew7.Location = new System.Drawing.Point(378, 235);
-            this.btnNew7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew7.Name = "btnNew7";
-            this.btnNew7.Size = new System.Drawing.Size(58, 23);
-            this.btnNew7.TabIndex = 68;
-            this.btnNew7.Text = "New";
-            this.btnNew7.UseVisualStyleBackColor = true;
-            this.btnNew7.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew8
-            // 
-            this.btnNew8.Location = new System.Drawing.Point(378, 265);
-            this.btnNew8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew8.Name = "btnNew8";
-            this.btnNew8.Size = new System.Drawing.Size(58, 23);
-            this.btnNew8.TabIndex = 67;
-            this.btnNew8.Text = "New";
-            this.btnNew8.UseVisualStyleBackColor = true;
-            this.btnNew8.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew9
-            // 
-            this.btnNew9.Location = new System.Drawing.Point(378, 296);
-            this.btnNew9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew9.Name = "btnNew9";
-            this.btnNew9.Size = new System.Drawing.Size(58, 23);
-            this.btnNew9.TabIndex = 69;
-            this.btnNew9.Text = "New";
-            this.btnNew9.UseVisualStyleBackColor = true;
-            this.btnNew9.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew10
-            // 
-            this.btnNew10.Location = new System.Drawing.Point(378, 328);
-            this.btnNew10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew10.Name = "btnNew10";
-            this.btnNew10.Size = new System.Drawing.Size(58, 23);
-            this.btnNew10.TabIndex = 70;
-            this.btnNew10.Text = "New";
-            this.btnNew10.UseVisualStyleBackColor = true;
-            this.btnNew10.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew11
-            // 
-            this.btnNew11.Location = new System.Drawing.Point(378, 359);
-            this.btnNew11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew11.Name = "btnNew11";
-            this.btnNew11.Size = new System.Drawing.Size(58, 26);
-            this.btnNew11.TabIndex = 71;
-            this.btnNew11.Text = "New";
-            this.btnNew11.UseVisualStyleBackColor = true;
-            this.btnNew11.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
-            // btnNew12
-            // 
-            this.btnNew12.Location = new System.Drawing.Point(378, 391);
-            this.btnNew12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNew12.Name = "btnNew12";
-            this.btnNew12.Size = new System.Drawing.Size(58, 23);
-            this.btnNew12.TabIndex = 72;
-            this.btnNew12.Text = "New";
-            this.btnNew12.UseVisualStyleBackColor = true;
-            this.btnNew12.Click += new System.EventHandler(this.BtnNew_Click);
-            // 
             // txtNumCells1
             // 
-            this.txtNumCells1.Location = new System.Drawing.Point(442, 46);
+            this.txtNumCells1.Location = new System.Drawing.Point(397, 46);
             this.txtNumCells1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells1.Name = "txtNumCells1";
             this.txtNumCells1.Size = new System.Drawing.Size(43, 22);
@@ -1175,7 +1008,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells2
             // 
-            this.txtNumCells2.Location = new System.Drawing.Point(442, 79);
+            this.txtNumCells2.Location = new System.Drawing.Point(397, 79);
             this.txtNumCells2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells2.Name = "txtNumCells2";
             this.txtNumCells2.Size = new System.Drawing.Size(43, 22);
@@ -1184,7 +1017,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells3
             // 
-            this.txtNumCells3.Location = new System.Drawing.Point(442, 112);
+            this.txtNumCells3.Location = new System.Drawing.Point(397, 112);
             this.txtNumCells3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells3.Name = "txtNumCells3";
             this.txtNumCells3.Size = new System.Drawing.Size(43, 22);
@@ -1193,7 +1026,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells4
             // 
-            this.txtNumCells4.Location = new System.Drawing.Point(442, 144);
+            this.txtNumCells4.Location = new System.Drawing.Point(397, 144);
             this.txtNumCells4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells4.Name = "txtNumCells4";
             this.txtNumCells4.Size = new System.Drawing.Size(43, 22);
@@ -1202,7 +1035,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells5
             // 
-            this.txtNumCells5.Location = new System.Drawing.Point(442, 174);
+            this.txtNumCells5.Location = new System.Drawing.Point(397, 174);
             this.txtNumCells5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells5.Name = "txtNumCells5";
             this.txtNumCells5.Size = new System.Drawing.Size(43, 22);
@@ -1211,7 +1044,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells6
             // 
-            this.txtNumCells6.Location = new System.Drawing.Point(442, 204);
+            this.txtNumCells6.Location = new System.Drawing.Point(397, 204);
             this.txtNumCells6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells6.Name = "txtNumCells6";
             this.txtNumCells6.Size = new System.Drawing.Size(43, 22);
@@ -1220,7 +1053,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells7
             // 
-            this.txtNumCells7.Location = new System.Drawing.Point(442, 235);
+            this.txtNumCells7.Location = new System.Drawing.Point(397, 235);
             this.txtNumCells7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells7.Name = "txtNumCells7";
             this.txtNumCells7.Size = new System.Drawing.Size(43, 22);
@@ -1229,7 +1062,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells8
             // 
-            this.txtNumCells8.Location = new System.Drawing.Point(442, 265);
+            this.txtNumCells8.Location = new System.Drawing.Point(397, 265);
             this.txtNumCells8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells8.Name = "txtNumCells8";
             this.txtNumCells8.Size = new System.Drawing.Size(43, 22);
@@ -1238,7 +1071,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells9
             // 
-            this.txtNumCells9.Location = new System.Drawing.Point(442, 296);
+            this.txtNumCells9.Location = new System.Drawing.Point(397, 296);
             this.txtNumCells9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells9.Name = "txtNumCells9";
             this.txtNumCells9.Size = new System.Drawing.Size(43, 22);
@@ -1247,7 +1080,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells10
             // 
-            this.txtNumCells10.Location = new System.Drawing.Point(442, 328);
+            this.txtNumCells10.Location = new System.Drawing.Point(397, 328);
             this.txtNumCells10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells10.Name = "txtNumCells10";
             this.txtNumCells10.Size = new System.Drawing.Size(43, 22);
@@ -1256,7 +1089,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells11
             // 
-            this.txtNumCells11.Location = new System.Drawing.Point(442, 359);
+            this.txtNumCells11.Location = new System.Drawing.Point(397, 359);
             this.txtNumCells11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells11.Name = "txtNumCells11";
             this.txtNumCells11.Size = new System.Drawing.Size(43, 22);
@@ -1265,7 +1098,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells12
             // 
-            this.txtNumCells12.Location = new System.Drawing.Point(442, 391);
+            this.txtNumCells12.Location = new System.Drawing.Point(397, 391);
             this.txtNumCells12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells12.Name = "txtNumCells12";
             this.txtNumCells12.Size = new System.Drawing.Size(43, 22);
@@ -1274,7 +1107,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc2
             // 
-            this.txtVoc2.Location = new System.Drawing.Point(491, 79);
+            this.txtVoc2.Location = new System.Drawing.Point(479, 79);
             this.txtVoc2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc2.Name = "txtVoc2";
             this.txtVoc2.Size = new System.Drawing.Size(43, 22);
@@ -1283,7 +1116,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc3
             // 
-            this.txtVoc3.Location = new System.Drawing.Point(491, 112);
+            this.txtVoc3.Location = new System.Drawing.Point(479, 112);
             this.txtVoc3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc3.Name = "txtVoc3";
             this.txtVoc3.Size = new System.Drawing.Size(43, 22);
@@ -1292,7 +1125,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc4
             // 
-            this.txtVoc4.Location = new System.Drawing.Point(491, 144);
+            this.txtVoc4.Location = new System.Drawing.Point(479, 144);
             this.txtVoc4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc4.Name = "txtVoc4";
             this.txtVoc4.Size = new System.Drawing.Size(43, 22);
@@ -1301,7 +1134,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc5
             // 
-            this.txtVoc5.Location = new System.Drawing.Point(491, 174);
+            this.txtVoc5.Location = new System.Drawing.Point(479, 174);
             this.txtVoc5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc5.Name = "txtVoc5";
             this.txtVoc5.Size = new System.Drawing.Size(43, 22);
@@ -1310,7 +1143,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc6
             // 
-            this.txtVoc6.Location = new System.Drawing.Point(491, 204);
+            this.txtVoc6.Location = new System.Drawing.Point(479, 204);
             this.txtVoc6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc6.Name = "txtVoc6";
             this.txtVoc6.Size = new System.Drawing.Size(43, 22);
@@ -1319,7 +1152,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc7
             // 
-            this.txtVoc7.Location = new System.Drawing.Point(491, 235);
+            this.txtVoc7.Location = new System.Drawing.Point(479, 235);
             this.txtVoc7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc7.Name = "txtVoc7";
             this.txtVoc7.Size = new System.Drawing.Size(43, 22);
@@ -1328,7 +1161,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc8
             // 
-            this.txtVoc8.Location = new System.Drawing.Point(491, 265);
+            this.txtVoc8.Location = new System.Drawing.Point(479, 265);
             this.txtVoc8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc8.Name = "txtVoc8";
             this.txtVoc8.Size = new System.Drawing.Size(43, 22);
@@ -1337,7 +1170,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc9
             // 
-            this.txtVoc9.Location = new System.Drawing.Point(491, 296);
+            this.txtVoc9.Location = new System.Drawing.Point(479, 296);
             this.txtVoc9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc9.Name = "txtVoc9";
             this.txtVoc9.Size = new System.Drawing.Size(43, 22);
@@ -1346,7 +1179,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc10
             // 
-            this.txtVoc10.Location = new System.Drawing.Point(491, 328);
+            this.txtVoc10.Location = new System.Drawing.Point(479, 328);
             this.txtVoc10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc10.Name = "txtVoc10";
             this.txtVoc10.Size = new System.Drawing.Size(43, 22);
@@ -1355,7 +1188,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc11
             // 
-            this.txtVoc11.Location = new System.Drawing.Point(491, 359);
+            this.txtVoc11.Location = new System.Drawing.Point(479, 359);
             this.txtVoc11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc11.Name = "txtVoc11";
             this.txtVoc11.Size = new System.Drawing.Size(43, 22);
@@ -1364,7 +1197,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc12
             // 
-            this.txtVoc12.Location = new System.Drawing.Point(491, 391);
+            this.txtVoc12.Location = new System.Drawing.Point(479, 391);
             this.txtVoc12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc12.Name = "txtVoc12";
             this.txtVoc12.Size = new System.Drawing.Size(43, 22);
@@ -1374,7 +1207,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus1
             // 
             this.lblPSStatus1.AutoSize = true;
-            this.lblPSStatus1.Location = new System.Drawing.Point(556, 44);
+            this.lblPSStatus1.Location = new System.Drawing.Point(548, 44);
             this.lblPSStatus1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus1.Name = "lblPSStatus1";
             this.lblPSStatus1.Size = new System.Drawing.Size(114, 17);
@@ -1384,7 +1217,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus2
             // 
             this.lblPSStatus2.AutoSize = true;
-            this.lblPSStatus2.Location = new System.Drawing.Point(556, 77);
+            this.lblPSStatus2.Location = new System.Drawing.Point(548, 77);
             this.lblPSStatus2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus2.Name = "lblPSStatus2";
             this.lblPSStatus2.Size = new System.Drawing.Size(114, 17);
@@ -1394,7 +1227,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus3
             // 
             this.lblPSStatus3.AutoSize = true;
-            this.lblPSStatus3.Location = new System.Drawing.Point(556, 110);
+            this.lblPSStatus3.Location = new System.Drawing.Point(548, 110);
             this.lblPSStatus3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus3.Name = "lblPSStatus3";
             this.lblPSStatus3.Size = new System.Drawing.Size(114, 17);
@@ -1404,7 +1237,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus4
             // 
             this.lblPSStatus4.AutoSize = true;
-            this.lblPSStatus4.Location = new System.Drawing.Point(556, 142);
+            this.lblPSStatus4.Location = new System.Drawing.Point(548, 142);
             this.lblPSStatus4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus4.Name = "lblPSStatus4";
             this.lblPSStatus4.Size = new System.Drawing.Size(114, 17);
@@ -1414,7 +1247,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus5
             // 
             this.lblPSStatus5.AutoSize = true;
-            this.lblPSStatus5.Location = new System.Drawing.Point(556, 172);
+            this.lblPSStatus5.Location = new System.Drawing.Point(548, 172);
             this.lblPSStatus5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus5.Name = "lblPSStatus5";
             this.lblPSStatus5.Size = new System.Drawing.Size(114, 17);
@@ -1424,7 +1257,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus6
             // 
             this.lblPSStatus6.AutoSize = true;
-            this.lblPSStatus6.Location = new System.Drawing.Point(556, 202);
+            this.lblPSStatus6.Location = new System.Drawing.Point(548, 202);
             this.lblPSStatus6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus6.Name = "lblPSStatus6";
             this.lblPSStatus6.Size = new System.Drawing.Size(114, 17);
@@ -1434,7 +1267,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus7
             // 
             this.lblPSStatus7.AutoSize = true;
-            this.lblPSStatus7.Location = new System.Drawing.Point(556, 233);
+            this.lblPSStatus7.Location = new System.Drawing.Point(548, 233);
             this.lblPSStatus7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus7.Name = "lblPSStatus7";
             this.lblPSStatus7.Size = new System.Drawing.Size(114, 17);
@@ -1444,7 +1277,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus8
             // 
             this.lblPSStatus8.AutoSize = true;
-            this.lblPSStatus8.Location = new System.Drawing.Point(556, 263);
+            this.lblPSStatus8.Location = new System.Drawing.Point(548, 263);
             this.lblPSStatus8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus8.Name = "lblPSStatus8";
             this.lblPSStatus8.Size = new System.Drawing.Size(114, 17);
@@ -1454,7 +1287,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus9
             // 
             this.lblPSStatus9.AutoSize = true;
-            this.lblPSStatus9.Location = new System.Drawing.Point(556, 294);
+            this.lblPSStatus9.Location = new System.Drawing.Point(548, 294);
             this.lblPSStatus9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus9.Name = "lblPSStatus9";
             this.lblPSStatus9.Size = new System.Drawing.Size(114, 17);
@@ -1464,7 +1297,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus10
             // 
             this.lblPSStatus10.AutoSize = true;
-            this.lblPSStatus10.Location = new System.Drawing.Point(556, 326);
+            this.lblPSStatus10.Location = new System.Drawing.Point(548, 326);
             this.lblPSStatus10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus10.Name = "lblPSStatus10";
             this.lblPSStatus10.Size = new System.Drawing.Size(122, 17);
@@ -1474,7 +1307,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus11
             // 
             this.lblPSStatus11.AutoSize = true;
-            this.lblPSStatus11.Location = new System.Drawing.Point(556, 357);
+            this.lblPSStatus11.Location = new System.Drawing.Point(548, 357);
             this.lblPSStatus11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus11.Name = "lblPSStatus11";
             this.lblPSStatus11.Size = new System.Drawing.Size(122, 17);
@@ -1484,7 +1317,7 @@ namespace Current_Cycling_Controls {
             // lblPSStatus12
             // 
             this.lblPSStatus12.AutoSize = true;
-            this.lblPSStatus12.Location = new System.Drawing.Point(556, 389);
+            this.lblPSStatus12.Location = new System.Drawing.Point(548, 389);
             this.lblPSStatus12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPSStatus12.Name = "lblPSStatus12";
             this.lblPSStatus12.Size = new System.Drawing.Size(122, 17);
@@ -1494,7 +1327,7 @@ namespace Current_Cycling_Controls {
             // lblCycle1
             // 
             this.lblCycle1.AutoSize = true;
-            this.lblCycle1.Location = new System.Drawing.Point(699, 44);
+            this.lblCycle1.Location = new System.Drawing.Point(712, 44);
             this.lblCycle1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle1.Name = "lblCycle1";
             this.lblCycle1.Size = new System.Drawing.Size(16, 17);
@@ -1504,7 +1337,7 @@ namespace Current_Cycling_Controls {
             // lblCycle2
             // 
             this.lblCycle2.AutoSize = true;
-            this.lblCycle2.Location = new System.Drawing.Point(699, 77);
+            this.lblCycle2.Location = new System.Drawing.Point(712, 77);
             this.lblCycle2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle2.Name = "lblCycle2";
             this.lblCycle2.Size = new System.Drawing.Size(16, 17);
@@ -1514,7 +1347,7 @@ namespace Current_Cycling_Controls {
             // lblCycle3
             // 
             this.lblCycle3.AutoSize = true;
-            this.lblCycle3.Location = new System.Drawing.Point(699, 110);
+            this.lblCycle3.Location = new System.Drawing.Point(712, 110);
             this.lblCycle3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle3.Name = "lblCycle3";
             this.lblCycle3.Size = new System.Drawing.Size(16, 17);
@@ -1524,7 +1357,7 @@ namespace Current_Cycling_Controls {
             // lblCycle4
             // 
             this.lblCycle4.AutoSize = true;
-            this.lblCycle4.Location = new System.Drawing.Point(699, 142);
+            this.lblCycle4.Location = new System.Drawing.Point(712, 142);
             this.lblCycle4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle4.Name = "lblCycle4";
             this.lblCycle4.Size = new System.Drawing.Size(16, 17);
@@ -1534,7 +1367,7 @@ namespace Current_Cycling_Controls {
             // lblCycle5
             // 
             this.lblCycle5.AutoSize = true;
-            this.lblCycle5.Location = new System.Drawing.Point(699, 172);
+            this.lblCycle5.Location = new System.Drawing.Point(712, 172);
             this.lblCycle5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle5.Name = "lblCycle5";
             this.lblCycle5.Size = new System.Drawing.Size(16, 17);
@@ -1544,7 +1377,7 @@ namespace Current_Cycling_Controls {
             // lblCycle6
             // 
             this.lblCycle6.AutoSize = true;
-            this.lblCycle6.Location = new System.Drawing.Point(699, 202);
+            this.lblCycle6.Location = new System.Drawing.Point(712, 202);
             this.lblCycle6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle6.Name = "lblCycle6";
             this.lblCycle6.Size = new System.Drawing.Size(16, 17);
@@ -1554,7 +1387,7 @@ namespace Current_Cycling_Controls {
             // lblCycle7
             // 
             this.lblCycle7.AutoSize = true;
-            this.lblCycle7.Location = new System.Drawing.Point(699, 233);
+            this.lblCycle7.Location = new System.Drawing.Point(712, 233);
             this.lblCycle7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle7.Name = "lblCycle7";
             this.lblCycle7.Size = new System.Drawing.Size(16, 17);
@@ -1564,7 +1397,7 @@ namespace Current_Cycling_Controls {
             // lblCycle8
             // 
             this.lblCycle8.AutoSize = true;
-            this.lblCycle8.Location = new System.Drawing.Point(699, 263);
+            this.lblCycle8.Location = new System.Drawing.Point(712, 263);
             this.lblCycle8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle8.Name = "lblCycle8";
             this.lblCycle8.Size = new System.Drawing.Size(16, 17);
@@ -1574,7 +1407,7 @@ namespace Current_Cycling_Controls {
             // lblCycle9
             // 
             this.lblCycle9.AutoSize = true;
-            this.lblCycle9.Location = new System.Drawing.Point(699, 294);
+            this.lblCycle9.Location = new System.Drawing.Point(712, 294);
             this.lblCycle9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle9.Name = "lblCycle9";
             this.lblCycle9.Size = new System.Drawing.Size(16, 17);
@@ -1584,7 +1417,7 @@ namespace Current_Cycling_Controls {
             // lblCycle10
             // 
             this.lblCycle10.AutoSize = true;
-            this.lblCycle10.Location = new System.Drawing.Point(699, 326);
+            this.lblCycle10.Location = new System.Drawing.Point(712, 326);
             this.lblCycle10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle10.Name = "lblCycle10";
             this.lblCycle10.Size = new System.Drawing.Size(16, 17);
@@ -1594,7 +1427,7 @@ namespace Current_Cycling_Controls {
             // lblCycle11
             // 
             this.lblCycle11.AutoSize = true;
-            this.lblCycle11.Location = new System.Drawing.Point(699, 357);
+            this.lblCycle11.Location = new System.Drawing.Point(712, 357);
             this.lblCycle11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle11.Name = "lblCycle11";
             this.lblCycle11.Size = new System.Drawing.Size(16, 17);
@@ -1603,7 +1436,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc1
             // 
-            this.txtVoc1.Location = new System.Drawing.Point(491, 46);
+            this.txtVoc1.Location = new System.Drawing.Point(479, 46);
             this.txtVoc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc1.Name = "txtVoc1";
             this.txtVoc1.Size = new System.Drawing.Size(43, 22);
@@ -1613,7 +1446,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent1
             // 
             this.lblCurrent1.AutoSize = true;
-            this.lblCurrent1.Location = new System.Drawing.Point(758, 44);
+            this.lblCurrent1.Location = new System.Drawing.Point(764, 44);
             this.lblCurrent1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent1.Name = "lblCurrent1";
             this.lblCurrent1.Size = new System.Drawing.Size(28, 17);
@@ -1623,7 +1456,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent2
             // 
             this.lblCurrent2.AutoSize = true;
-            this.lblCurrent2.Location = new System.Drawing.Point(758, 77);
+            this.lblCurrent2.Location = new System.Drawing.Point(764, 77);
             this.lblCurrent2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent2.Name = "lblCurrent2";
             this.lblCurrent2.Size = new System.Drawing.Size(28, 17);
@@ -1633,7 +1466,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent3
             // 
             this.lblCurrent3.AutoSize = true;
-            this.lblCurrent3.Location = new System.Drawing.Point(758, 110);
+            this.lblCurrent3.Location = new System.Drawing.Point(764, 110);
             this.lblCurrent3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent3.Name = "lblCurrent3";
             this.lblCurrent3.Size = new System.Drawing.Size(28, 17);
@@ -1643,7 +1476,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent4
             // 
             this.lblCurrent4.AutoSize = true;
-            this.lblCurrent4.Location = new System.Drawing.Point(758, 142);
+            this.lblCurrent4.Location = new System.Drawing.Point(764, 142);
             this.lblCurrent4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent4.Name = "lblCurrent4";
             this.lblCurrent4.Size = new System.Drawing.Size(28, 17);
@@ -1653,7 +1486,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent5
             // 
             this.lblCurrent5.AutoSize = true;
-            this.lblCurrent5.Location = new System.Drawing.Point(758, 172);
+            this.lblCurrent5.Location = new System.Drawing.Point(764, 172);
             this.lblCurrent5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent5.Name = "lblCurrent5";
             this.lblCurrent5.Size = new System.Drawing.Size(28, 17);
@@ -1663,7 +1496,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent6
             // 
             this.lblCurrent6.AutoSize = true;
-            this.lblCurrent6.Location = new System.Drawing.Point(758, 202);
+            this.lblCurrent6.Location = new System.Drawing.Point(764, 202);
             this.lblCurrent6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent6.Name = "lblCurrent6";
             this.lblCurrent6.Size = new System.Drawing.Size(28, 17);
@@ -1673,7 +1506,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent7
             // 
             this.lblCurrent7.AutoSize = true;
-            this.lblCurrent7.Location = new System.Drawing.Point(758, 233);
+            this.lblCurrent7.Location = new System.Drawing.Point(764, 233);
             this.lblCurrent7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent7.Name = "lblCurrent7";
             this.lblCurrent7.Size = new System.Drawing.Size(28, 17);
@@ -1683,7 +1516,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent8
             // 
             this.lblCurrent8.AutoSize = true;
-            this.lblCurrent8.Location = new System.Drawing.Point(758, 263);
+            this.lblCurrent8.Location = new System.Drawing.Point(764, 263);
             this.lblCurrent8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent8.Name = "lblCurrent8";
             this.lblCurrent8.Size = new System.Drawing.Size(28, 17);
@@ -1693,7 +1526,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent9
             // 
             this.lblCurrent9.AutoSize = true;
-            this.lblCurrent9.Location = new System.Drawing.Point(758, 294);
+            this.lblCurrent9.Location = new System.Drawing.Point(764, 294);
             this.lblCurrent9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent9.Name = "lblCurrent9";
             this.lblCurrent9.Size = new System.Drawing.Size(28, 17);
@@ -1703,7 +1536,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent10
             // 
             this.lblCurrent10.AutoSize = true;
-            this.lblCurrent10.Location = new System.Drawing.Point(758, 326);
+            this.lblCurrent10.Location = new System.Drawing.Point(764, 326);
             this.lblCurrent10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent10.Name = "lblCurrent10";
             this.lblCurrent10.Size = new System.Drawing.Size(28, 17);
@@ -1713,7 +1546,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent11
             // 
             this.lblCurrent11.AutoSize = true;
-            this.lblCurrent11.Location = new System.Drawing.Point(758, 357);
+            this.lblCurrent11.Location = new System.Drawing.Point(764, 357);
             this.lblCurrent11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent11.Name = "lblCurrent11";
             this.lblCurrent11.Size = new System.Drawing.Size(28, 17);
@@ -1723,7 +1556,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent12
             // 
             this.lblCurrent12.AutoSize = true;
-            this.lblCurrent12.Location = new System.Drawing.Point(758, 389);
+            this.lblCurrent12.Location = new System.Drawing.Point(764, 389);
             this.lblCurrent12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent12.Name = "lblCurrent12";
             this.lblCurrent12.Size = new System.Drawing.Size(28, 17);
@@ -1733,7 +1566,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage1
             // 
             this.lblVoltage1.AutoSize = true;
-            this.lblVoltage1.Location = new System.Drawing.Point(854, 44);
+            this.lblVoltage1.Location = new System.Drawing.Point(850, 44);
             this.lblVoltage1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage1.Name = "lblVoltage1";
             this.lblVoltage1.Size = new System.Drawing.Size(28, 17);
@@ -1743,7 +1576,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage2
             // 
             this.lblVoltage2.AutoSize = true;
-            this.lblVoltage2.Location = new System.Drawing.Point(854, 77);
+            this.lblVoltage2.Location = new System.Drawing.Point(850, 77);
             this.lblVoltage2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage2.Name = "lblVoltage2";
             this.lblVoltage2.Size = new System.Drawing.Size(28, 17);
@@ -1753,7 +1586,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage3
             // 
             this.lblVoltage3.AutoSize = true;
-            this.lblVoltage3.Location = new System.Drawing.Point(854, 110);
+            this.lblVoltage3.Location = new System.Drawing.Point(850, 110);
             this.lblVoltage3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage3.Name = "lblVoltage3";
             this.lblVoltage3.Size = new System.Drawing.Size(28, 17);
@@ -1763,7 +1596,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage4
             // 
             this.lblVoltage4.AutoSize = true;
-            this.lblVoltage4.Location = new System.Drawing.Point(854, 142);
+            this.lblVoltage4.Location = new System.Drawing.Point(850, 142);
             this.lblVoltage4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage4.Name = "lblVoltage4";
             this.lblVoltage4.Size = new System.Drawing.Size(28, 17);
@@ -1773,7 +1606,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage5
             // 
             this.lblVoltage5.AutoSize = true;
-            this.lblVoltage5.Location = new System.Drawing.Point(854, 172);
+            this.lblVoltage5.Location = new System.Drawing.Point(850, 172);
             this.lblVoltage5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage5.Name = "lblVoltage5";
             this.lblVoltage5.Size = new System.Drawing.Size(28, 17);
@@ -1783,7 +1616,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage6
             // 
             this.lblVoltage6.AutoSize = true;
-            this.lblVoltage6.Location = new System.Drawing.Point(854, 202);
+            this.lblVoltage6.Location = new System.Drawing.Point(850, 202);
             this.lblVoltage6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage6.Name = "lblVoltage6";
             this.lblVoltage6.Size = new System.Drawing.Size(28, 17);
@@ -1793,7 +1626,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage7
             // 
             this.lblVoltage7.AutoSize = true;
-            this.lblVoltage7.Location = new System.Drawing.Point(854, 233);
+            this.lblVoltage7.Location = new System.Drawing.Point(850, 233);
             this.lblVoltage7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage7.Name = "lblVoltage7";
             this.lblVoltage7.Size = new System.Drawing.Size(28, 17);
@@ -1803,7 +1636,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage8
             // 
             this.lblVoltage8.AutoSize = true;
-            this.lblVoltage8.Location = new System.Drawing.Point(854, 263);
+            this.lblVoltage8.Location = new System.Drawing.Point(850, 263);
             this.lblVoltage8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage8.Name = "lblVoltage8";
             this.lblVoltage8.Size = new System.Drawing.Size(28, 17);
@@ -1813,7 +1646,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage9
             // 
             this.lblVoltage9.AutoSize = true;
-            this.lblVoltage9.Location = new System.Drawing.Point(854, 294);
+            this.lblVoltage9.Location = new System.Drawing.Point(850, 294);
             this.lblVoltage9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage9.Name = "lblVoltage9";
             this.lblVoltage9.Size = new System.Drawing.Size(28, 17);
@@ -1823,7 +1656,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage10
             // 
             this.lblVoltage10.AutoSize = true;
-            this.lblVoltage10.Location = new System.Drawing.Point(854, 326);
+            this.lblVoltage10.Location = new System.Drawing.Point(850, 326);
             this.lblVoltage10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage10.Name = "lblVoltage10";
             this.lblVoltage10.Size = new System.Drawing.Size(28, 17);
@@ -1833,7 +1666,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage11
             // 
             this.lblVoltage11.AutoSize = true;
-            this.lblVoltage11.Location = new System.Drawing.Point(854, 357);
+            this.lblVoltage11.Location = new System.Drawing.Point(850, 357);
             this.lblVoltage11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage11.Name = "lblVoltage11";
             this.lblVoltage11.Size = new System.Drawing.Size(28, 17);
@@ -1843,7 +1676,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage12
             // 
             this.lblVoltage12.AutoSize = true;
-            this.lblVoltage12.Location = new System.Drawing.Point(854, 389);
+            this.lblVoltage12.Location = new System.Drawing.Point(850, 389);
             this.lblVoltage12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage12.Name = "lblVoltage12";
             this.lblVoltage12.Size = new System.Drawing.Size(28, 17);
@@ -1852,7 +1685,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample1
             // 
-            this.txtTempSensSample1.Location = new System.Drawing.Point(945, 48);
+            this.txtTempSensSample1.Location = new System.Drawing.Point(936, 48);
             this.txtTempSensSample1.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample1.Name = "txtTempSensSample1";
             this.txtTempSensSample1.Size = new System.Drawing.Size(92, 22);
@@ -1861,7 +1694,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample2
             // 
-            this.txtTempSensSample2.Location = new System.Drawing.Point(945, 81);
+            this.txtTempSensSample2.Location = new System.Drawing.Point(936, 81);
             this.txtTempSensSample2.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample2.Name = "txtTempSensSample2";
             this.txtTempSensSample2.Size = new System.Drawing.Size(92, 22);
@@ -1870,7 +1703,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample3
             // 
-            this.txtTempSensSample3.Location = new System.Drawing.Point(945, 114);
+            this.txtTempSensSample3.Location = new System.Drawing.Point(936, 114);
             this.txtTempSensSample3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample3.Name = "txtTempSensSample3";
             this.txtTempSensSample3.Size = new System.Drawing.Size(92, 22);
@@ -1879,7 +1712,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample4
             // 
-            this.txtTempSensSample4.Location = new System.Drawing.Point(945, 146);
+            this.txtTempSensSample4.Location = new System.Drawing.Point(936, 146);
             this.txtTempSensSample4.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample4.Name = "txtTempSensSample4";
             this.txtTempSensSample4.Size = new System.Drawing.Size(92, 22);
@@ -1888,7 +1721,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample5
             // 
-            this.txtTempSensSample5.Location = new System.Drawing.Point(945, 176);
+            this.txtTempSensSample5.Location = new System.Drawing.Point(936, 176);
             this.txtTempSensSample5.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample5.Name = "txtTempSensSample5";
             this.txtTempSensSample5.Size = new System.Drawing.Size(92, 22);
@@ -1897,7 +1730,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample6
             // 
-            this.txtTempSensSample6.Location = new System.Drawing.Point(945, 206);
+            this.txtTempSensSample6.Location = new System.Drawing.Point(936, 206);
             this.txtTempSensSample6.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample6.Name = "txtTempSensSample6";
             this.txtTempSensSample6.Size = new System.Drawing.Size(92, 22);
@@ -1906,7 +1739,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample7
             // 
-            this.txtTempSensSample7.Location = new System.Drawing.Point(945, 237);
+            this.txtTempSensSample7.Location = new System.Drawing.Point(936, 237);
             this.txtTempSensSample7.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample7.Name = "txtTempSensSample7";
             this.txtTempSensSample7.Size = new System.Drawing.Size(92, 22);
@@ -1915,7 +1748,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample8
             // 
-            this.txtTempSensSample8.Location = new System.Drawing.Point(945, 267);
+            this.txtTempSensSample8.Location = new System.Drawing.Point(936, 267);
             this.txtTempSensSample8.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample8.Name = "txtTempSensSample8";
             this.txtTempSensSample8.Size = new System.Drawing.Size(92, 22);
@@ -1924,7 +1757,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample9
             // 
-            this.txtTempSensSample9.Location = new System.Drawing.Point(945, 298);
+            this.txtTempSensSample9.Location = new System.Drawing.Point(936, 298);
             this.txtTempSensSample9.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample9.Name = "txtTempSensSample9";
             this.txtTempSensSample9.Size = new System.Drawing.Size(92, 22);
@@ -1933,7 +1766,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample10
             // 
-            this.txtTempSensSample10.Location = new System.Drawing.Point(945, 330);
+            this.txtTempSensSample10.Location = new System.Drawing.Point(936, 330);
             this.txtTempSensSample10.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample10.Name = "txtTempSensSample10";
             this.txtTempSensSample10.Size = new System.Drawing.Size(92, 22);
@@ -1942,7 +1775,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample11
             // 
-            this.txtTempSensSample11.Location = new System.Drawing.Point(945, 361);
+            this.txtTempSensSample11.Location = new System.Drawing.Point(936, 361);
             this.txtTempSensSample11.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample11.Name = "txtTempSensSample11";
             this.txtTempSensSample11.Size = new System.Drawing.Size(92, 22);
@@ -1951,7 +1784,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample12
             // 
-            this.txtTempSensSample12.Location = new System.Drawing.Point(945, 393);
+            this.txtTempSensSample12.Location = new System.Drawing.Point(936, 393);
             this.txtTempSensSample12.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample12.Name = "txtTempSensSample12";
             this.txtTempSensSample12.Size = new System.Drawing.Size(92, 22);
@@ -2341,69 +2174,69 @@ namespace Current_Cycling_Controls {
             // 
             // chartTemp
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartTemp.ChartAreas.Add(chartArea1);
-            legend1.AutoFitMinFontSize = 9;
-            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            legend1.Position.Auto = false;
-            legend1.Position.Height = 16.6065F;
-            legend1.Position.Width = 30F;
-            legend1.Position.X = 70F;
-            this.chartTemp.Legends.Add(legend1);
+            chartArea7.Name = "ChartArea1";
+            this.chartTemp.ChartAreas.Add(chartArea7);
+            legend7.AutoFitMinFontSize = 9;
+            legend7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend7.IsTextAutoFit = false;
+            legend7.Name = "Legend1";
+            legend7.Position.Auto = false;
+            legend7.Position.Height = 16.6065F;
+            legend7.Position.Width = 30F;
+            legend7.Position.X = 70F;
+            this.chartTemp.Legends.Add(legend7);
             this.chartTemp.Location = new System.Drawing.Point(7, 583);
             this.chartTemp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartTemp.Name = "chartTemp";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Temp";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Color = System.Drawing.Color.Red;
-            series2.Legend = "Legend1";
-            series2.Name = "MaxTemp";
-            this.chartTemp.Series.Add(series1);
-            this.chartTemp.Series.Add(series2);
+            series13.ChartArea = "ChartArea1";
+            series13.Legend = "Legend1";
+            series13.Name = "Temp";
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Color = System.Drawing.Color.Red;
+            series14.Legend = "Legend1";
+            series14.Name = "MaxTemp";
+            this.chartTemp.Series.Add(series13);
+            this.chartTemp.Series.Add(series14);
             this.chartTemp.Size = new System.Drawing.Size(571, 278);
             this.chartTemp.TabIndex = 167;
             this.chartTemp.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Temperature Sensors";
-            this.chartTemp.Titles.Add(title1);
+            title7.Name = "Title1";
+            title7.Text = "Temperature Sensors";
+            this.chartTemp.Titles.Add(title7);
             // 
             // chartSmoke
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartSmoke.ChartAreas.Add(chartArea2);
-            legend2.AutoFitMinFontSize = 9;
-            legend2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend2.IsTextAutoFit = false;
-            legend2.Name = "Legend1";
-            legend2.Position.Auto = false;
-            legend2.Position.Height = 16.6065F;
-            legend2.Position.Width = 30F;
-            legend2.Position.X = 70F;
-            this.chartSmoke.Legends.Add(legend2);
+            chartArea8.Name = "ChartArea1";
+            this.chartSmoke.ChartAreas.Add(chartArea8);
+            legend8.AutoFitMinFontSize = 9;
+            legend8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend8.IsTextAutoFit = false;
+            legend8.Name = "Legend1";
+            legend8.Position.Auto = false;
+            legend8.Position.Height = 16.6065F;
+            legend8.Position.Width = 30F;
+            legend8.Position.X = 70F;
+            this.chartSmoke.Legends.Add(legend8);
             this.chartSmoke.Location = new System.Drawing.Point(584, 583);
             this.chartSmoke.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartSmoke.Name = "chartSmoke";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Smoke Level";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Color = System.Drawing.Color.Red;
-            series4.Legend = "Legend1";
-            series4.Name = "MaxSmoke";
-            this.chartSmoke.Series.Add(series3);
-            this.chartSmoke.Series.Add(series4);
+            series15.ChartArea = "ChartArea1";
+            series15.Legend = "Legend1";
+            series15.Name = "Smoke Level";
+            series16.ChartArea = "ChartArea1";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Color = System.Drawing.Color.Red;
+            series16.Legend = "Legend1";
+            series16.Name = "MaxSmoke";
+            this.chartSmoke.Series.Add(series15);
+            this.chartSmoke.Series.Add(series16);
             this.chartSmoke.Size = new System.Drawing.Size(561, 278);
             this.chartSmoke.TabIndex = 168;
             this.chartSmoke.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Smoke Sensors";
-            this.chartSmoke.Titles.Add(title2);
+            title8.Name = "Title1";
+            title8.Text = "Smoke Sensors";
+            this.chartSmoke.Titles.Add(title8);
             // 
             // buttonClearAlarms
             // 
@@ -2516,7 +2349,6 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.TextBox txtSetCurr2;
         private System.Windows.Forms.TextBox txtSetCurr1;
         private System.Windows.Forms.Label lblCycle12;
-        private System.Windows.Forms.Button btnNew1;
         private System.Windows.Forms.Label lblSetCurrent;
         private System.Windows.Forms.Label lblTempSensNum;
         private System.Windows.Forms.Label lblVoltage;
@@ -2525,7 +2357,6 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lblSampleNames;
         private System.Windows.Forms.Label lblActivePort;
@@ -2565,17 +2396,6 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Button btnLoad10;
         private System.Windows.Forms.Button btnLoad11;
         private System.Windows.Forms.Button btnLoad12;
-        private System.Windows.Forms.Button btnNew2;
-        private System.Windows.Forms.Button btnNew3;
-        private System.Windows.Forms.Button btnNew4;
-        private System.Windows.Forms.Button btnNew5;
-        private System.Windows.Forms.Button btnNew6;
-        private System.Windows.Forms.Button btnNew7;
-        private System.Windows.Forms.Button btnNew8;
-        private System.Windows.Forms.Button btnNew9;
-        private System.Windows.Forms.Button btnNew10;
-        private System.Windows.Forms.Button btnNew11;
-        private System.Windows.Forms.Button btnNew12;
         private System.Windows.Forms.TextBox txtNumCells1;
         private System.Windows.Forms.TextBox txtNumCells2;
         private System.Windows.Forms.TextBox txtNumCells3;
