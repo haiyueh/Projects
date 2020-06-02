@@ -15,11 +15,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Diagnostics;
 using System.Timers;
 
-namespace Current_Cycling_Controls
-{
+namespace Current_Cycling_Controls {
     public delegate void HeartBeatUpdate(object sender, TransmitPacket t);
-    public partial class frmMain : Form
-    {
+    public partial class frmMain : Form {
         public bool Connected { get; set; }
         public HeartBeatUpdate heartBeatUpdates;
         private readonly AutoResetEvent _commReset = new AutoResetEvent(false);
@@ -53,16 +51,15 @@ namespace Current_Cycling_Controls
         private string Cycling;
         private bool SMOKEALARM;
         public event DataEvent TestDataEvent;
-        private readonly Data MongoConn = new Data();
+        private readonly Data BQConn = new Data();
         private CCRecipe _ccRecipe;
 
         private DateTime _cycleTimer = DateTime.Now;
         private TransmitPacket _heartBeatPacket;
-        public frmMain()
-        {
+        public frmMain() {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
-            TestDataEvent += MongoConn.QueueData;
+            TestDataEvent += BQConn.QueueData;
             Directory.CreateDirectory("logs");
             _commWorker.DoWork += RunCommMachine;
             _commWorker.WorkerReportsProgress = true;
@@ -154,9 +151,9 @@ namespace Current_Cycling_Controls
                 var temps = chkTemp.Items;
                 var ii = 0;
                 foreach (var temp in Properties.Settings.Default.ActiveTemps) {
-                    chkTemp.SetItemChecked(temps.IndexOf(temps[ii]), temp); 
+                    chkTemp.SetItemChecked(temps.IndexOf(temps[ii]), temp);
                     ii++;
-                }         
+                }
             }
             else {
                 Properties.Settings.Default.ActiveTemps = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
@@ -183,7 +180,7 @@ namespace Current_Cycling_Controls
 
             // initialize TDK objects
             _TDKS = new List<TDK> { };
-            for (int j = 1; j <13; j++) {
+            for (int j = 1; j < 13; j++) {
                 _TDKS.Add(new TDK("0" + j, j));
             }
 
@@ -234,10 +231,10 @@ namespace Current_Cycling_Controls
             }
 
             // wait until arduino is connected to start connecting TDKs
-//#if !DEBUG
+            //#if !DEBUG
             //while (!Connected) { }
             Thread.Sleep(6000);
-//#endif
+            //#endif
             _arduinoWorker.ReportProgress(1);
             _connectionWorker.RunWorkerAsync();
             U.Logger.WriteLine($"Checking TDK connections");
@@ -253,7 +250,7 @@ namespace Current_Cycling_Controls
         }
 
 
-        private void RunCurrentCycling (object s, DoWorkEventArgs e) {
+        private void RunCurrentCycling(object s, DoWorkEventArgs e) {
             var tdk = (StartCyclingArgs)e.Argument;
             Cycling = "1";
             _cycling.StartCycling(tdk);
@@ -359,7 +356,7 @@ namespace Current_Cycling_Controls
                         _cycling.STOP = packet.EMSSTOP;
                         _cycling._temps = new List<double>(packet.TempList);
                         _cycling._smokeRaw = new List<double>(packet.SmokeList);
-                        
+
                     }
 
                     // update refs with smallest value then check over smoke
@@ -474,7 +471,7 @@ namespace Current_Cycling_Controls
                     labelEMSStop.BackColor = ardArgs.EMSSTOP ? Color.Red : Color.Empty;
                 }
                 // send event to arduino thread to update serial transmit packet
-                else if (e.ProgressPercentage == 3){
+                else if (e.ProgressPercentage == 3) {
                     string tempBin = "";
                     foreach (object chk in chkTemp.Items) {
                         tempBin += GetBinary(chkTemp.GetItemChecked(chkTemp.Items.IndexOf(chk)));
@@ -484,7 +481,7 @@ namespace Current_Cycling_Controls
                         smokeBin += GetBinary(chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk)));
                     }
                     string biasON = _cycling.BIASON ? "1" : "0";
-                    if (_TDKWorker.IsBusy) Cycling = "1"; 
+                    if (_TDKWorker.IsBusy) Cycling = "1";
                     _heartBeatPacket = new TransmitPacket(txtOverTempSet.Text, txtSmokeOverSet.Text,
                         txtCurrOnTempSet.Text, txtCurrOffTempSet.Text, biasON, "0", tempBin, smokeBin, Cycling);
                     _arduinoWorker.ReportProgress(1);
@@ -503,12 +500,12 @@ namespace Current_Cycling_Controls
                 }
                 // update smoke/temp charts TESTING
                 else if (e.ProgressPercentage == 6) {
-                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + double.Parse(txtOverTempSet.Text)/10;
+                    chartTemp.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtOverTempSet.Text) + double.Parse(txtOverTempSet.Text) / 10;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     StripLine stripline = new StripLine();
                     stripline.Interval = 0;
                     stripline.IntervalOffset = double.Parse(txtOverTempSet.Text);
-                    stripline.StripWidth = stripline.IntervalOffset/70;
+                    stripline.StripWidth = stripline.IntervalOffset / 70;
                     stripline.BackColor = Color.Red;
                     chartTemp.ChartAreas["ChartArea1"].AxisY.StripLines.Add(stripline);
                     var i = 1;
@@ -519,7 +516,7 @@ namespace Current_Cycling_Controls
                             i++;
                         }
                     }
-                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + double.Parse(txtSmokeOverSet.Text)/10;
+                    chartSmoke.ChartAreas["ChartArea1"].AxisY.Maximum = double.Parse(txtSmokeOverSet.Text) + double.Parse(txtSmokeOverSet.Text) / 10;
                     chartSmoke.ChartAreas["ChartArea1"].AxisY.StripLines.Clear();
                     stripline = new StripLine();
                     stripline.Interval = 0;
@@ -531,7 +528,7 @@ namespace Current_Cycling_Controls
                     i = 1;
                     foreach (object chk in chkSmoke.Items) {
                         if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
-                            chartSmoke.Series["Smoke Level"].Points.AddXY(chkSmoke.Items.IndexOf(chk)+1, yy);
+                            chartSmoke.Series["Smoke Level"].Points.AddXY(chkSmoke.Items.IndexOf(chk) + 1, yy);
                             i++;
                         }
                     }
@@ -598,7 +595,7 @@ namespace Current_Cycling_Controls
                 return;
             }
             CheckPorts();
-            var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(), 
+            var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(),
                 Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text), txtDirectory.Text);
 
             var start = new CoreCommand {
@@ -674,12 +671,12 @@ namespace Current_Cycling_Controls
             for (var i = 0; i < 12; i++) {
                 if (_checkBoxes[i].Checked) {
                     _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().Cycling = true;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SetCurrent = _setCurrents[i].Text;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().TempSensor = _tempSensors[i].Text;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().SampleName = _samples[i].Text;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().Voc = _voc[i].Text;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().NumCells = _numCells[i].Text;
-                    _TDKS.Where(t => t.Port == i+1).FirstOrDefault().CycleCount = int.Parse(_cycleLabels[i].Text);
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().SetCurrent = _setCurrents[i].Text;
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().TempSensor = _tempSensors[i].Text;
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().SampleName = _samples[i].Text;
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().Voc = _voc[i].Text;
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().NumCells = _numCells[i].Text;
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().CycleCount = int.Parse(_cycleLabels[i].Text);
                 }
             }
         }
@@ -697,7 +694,7 @@ namespace Current_Cycling_Controls
 
         private bool CheckSmokeOver(List<double> smokes) {
             // filter out smokes that are not checked
-            var filtered = new List<double> { }; 
+            var filtered = new List<double> { };
             var i = 0;
             foreach (object chk in chkSmoke.Items) {
                 if (chkSmoke.GetItemChecked(chkSmoke.Items.IndexOf(chk))) {
@@ -767,7 +764,7 @@ namespace Current_Cycling_Controls
             U.Logger.WriteLine($"Port Names:");
             ports.ForEach(U.Logger.WriteLine);
             // ping each port and see if we get the TDK response
-            foreach (var port in ports) { 
+            foreach (var port in ports) {
                 try {
                     ser.BaudRate = U.TDKBaudRate;
                     ser.PortName = port;
@@ -810,7 +807,7 @@ namespace Current_Cycling_Controls
         }
 
         private void BtnStop_Click(object sender, EventArgs e) {
-            NewCoreCommand(this, new CoreCommand{ Type = U.CmdType.StopCycling });
+            NewCoreCommand(this, new CoreCommand { Type = U.CmdType.StopCycling });
         }
 
         private void ButtonDataFolder_Click(object sender, EventArgs e) {
@@ -824,8 +821,11 @@ namespace Current_Cycling_Controls
         // TODO: Real Devs would create a control class 
         private void BtnNew_Click(object sender, EventArgs e) {
             // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder,
-                DefaultExt = ".txt", AddExtension = true };
+            var saveFile = new SaveFileDialog() {
+                InitialDirectory = Properties.Settings.Default.DataFolder,
+                DefaultExt = ".txt",
+                AddExtension = true
+            };
             if (saveFile.ShowDialog() == DialogResult.Cancel) return;
 
             //// user overwrites
@@ -874,11 +874,11 @@ namespace Current_Cycling_Controls
 
 
         private void ButtonRecipe_Click(object sender, EventArgs e) {
-            var form = new RecipeEditor<CCRecipe>(MongoConn, new CCRecipe());
+            var form = new RecipeEditor<CCRecipe>(BQConn, new CCRecipe());
             form.Closed += GetRecipes;
             form.ShowDialog();
 
-            _ccRecipe = MongoConn.GetCurrentRecipe<CCRecipe>(U.CCRecipeTable) ?? new CCRecipe();
+            _ccRecipe = BQConn.GetCurrentRecipe<CCRecipe>(U.CCRecipeTable) ?? new CCRecipe();
             // use Btn sender to parse through control lists
             string txt = ((Button)sender).Name;
             int index = 0;
@@ -890,7 +890,6 @@ namespace Current_Cycling_Controls
             }
 
             //_cycleLabels[index].Text = _.
-            _samples[index].Text = _ccRecipe.SampleName;
             _numCells[index].Text = _ccRecipe.NumCells.ToString();
             _voc[index].Text = _ccRecipe.CellVoc.ToString();
             _tempSensors[index].Text = _ccRecipe.TempSensor.ToString();
@@ -898,7 +897,7 @@ namespace Current_Cycling_Controls
         }
 
         private void GetRecipes(object sender, EventArgs e) {
-            if (!MongoConn.GetCurrentRecipeWithError(U.CCRecipeTable, out _ccRecipe)) throw new Exception("Could not get recipe");
+            if (!BQConn.GetCurrentRecipeWithError(U.CCRecipeTable, out _ccRecipe)) throw new Exception("Could not get recipe");
         }
 
         private void BtnLoad_Click(object sender, EventArgs e) {
@@ -932,7 +931,7 @@ namespace Current_Cycling_Controls
                 _cycleLabels[index].Text = "0";
                 _numCells[index].Text = "22";
                 _voc[index].Text = "0.655";
-                _tempSensors[index].Text = (index+1).ToString();
+                _tempSensors[index].Text = (index + 1).ToString();
                 _setCurrents[index].Text = "0";
                 return;
             }
@@ -953,7 +952,7 @@ namespace Current_Cycling_Controls
                         i++;
                         continue;
                     }
-                    
+
                     var last = File.ReadLines(s).Last();
                     var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
                     _samples[i].Text = Path.GetFileNameWithoutExtension(s);
@@ -1002,14 +1001,17 @@ namespace Current_Cycling_Controls
         private void ButtonSaveLogs_Click(object sender, EventArgs e) {
             U.Logger.SaveLog();
 #if DEBUG
-            TestDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData,
+            for (var i = 0; i < 100; i++) {
+                TestDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData,
                 new CCDataPoint(5,
                 123, // epoch
                 123, // total time (hrs)
                 123, // time into current cycle
                 true, "test", 1, 1, 1,
                 1, 1, 1, -99.99,
-                new List<double>(), new List<double>(), new List<double>())));
+                new List<double> { 5, 5 }, new List<double> { 6, 6 }, new List<double> { 7, 7 })));
+            }
+
 #endif
         }
 

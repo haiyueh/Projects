@@ -45,12 +45,6 @@ namespace Current_Cycling_Controls {
             _dataWorker.RunWorkerAsync(0);
         }
 
-        /// <summary>
-        /// Update the recipe editor with new recipes Saved or initial recipes loaded. 
-        /// Used to refresh comboBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void UpdateData(object sender, ProgressChangedEventArgs e) {
 
             comboBoxSelect.Items.Clear();
@@ -79,9 +73,6 @@ namespace Current_Cycling_Controls {
             InitializeTable();
         }
 
-        /// <summary>
-        /// Populates the Recipe Viewer with the CurrentRecipe properties
-        /// </summary>
         private void InitializeTable() {
             _recipeData = new DataTable();
             _recipeData.Columns.Add("Parameter");
@@ -100,7 +91,8 @@ namespace Current_Cycling_Controls {
 
             var row = 0;
 
-            foreach (var t in _top) {
+            // populate data from top properties and align
+            foreach (var t in new string[] { "Name", "Created", "Updated" }) {
                 var p = (from pr in _recipeProperties where pr.Name.Equals(t) select pr).First();
 
                 dvc = new DataGridViewCellStyle {
@@ -117,6 +109,7 @@ namespace Current_Cycling_Controls {
                 row++;
             }
 
+            // 
             foreach (var property in _recipeProperties) {
                 if (_excluded.Any(x => x.Equals(property.Name))) continue;
                 dvc = new DataGridViewCellStyle {
@@ -125,6 +118,7 @@ namespace Current_Cycling_Controls {
                 var val = property.GetValue(CurrentRecipe, null);
                 _recipeData.Rows.Add(property.Name, val);
 
+                // if bool change to checkbox
                 if (val is bool) {
                     dvc.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     dataViewer[1, row] = new DataGridViewCheckBoxCell { Value = val, Style = dvc };
@@ -174,16 +168,12 @@ namespace Current_Cycling_Controls {
             return newvalue != null;
         }
 
-        /// <summary>
-        /// Selected new ComboBox index. Switch CurrentRecipe to the one selected.
-        /// If Get new recipe then populate editor with default recipe. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void comboBoxSelect_SelectedIndexChanged(object sender, EventArgs e) {
             if (_loading || comboBoxSelect.SelectedIndex <= 0) return;
             if (comboBoxSelect.SelectedIndex == comboBoxSelect.Items.Count - 1) {
-                GetNewRecipe();
+                //GetNewRecipe();
+                // TODO: Instead of update new values to data base we want to update the TDK 
+                // parameters that will be sent to the CC worker on start. Then the new data will be added
 
             }
             else {
@@ -217,10 +207,6 @@ namespace Current_Cycling_Controls {
             _dataWorker.RunWorkerAsync(1);
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e) {
-            _dataWorker.RunWorkerAsync(2);
-        }
-
         private void RunDataWorker(object sender, DoWorkEventArgs e) {
             switch (e.Argument) {
                 case 0:
@@ -230,11 +216,8 @@ namespace Current_Cycling_Controls {
                     _conn.SaveData(CurrentRecipe);
                     _conn.SelectData(CurrentRecipe);
                     break;
-                case 2:
-                    if (CurrentRecipe == null) return;
-                    _conn.DeleteData(CurrentRecipe);
-                    break;
             }
+
 
             if (ThisType == typeof(CCRecipe)) {
                 var list = _conn.GetRecipeList<CCRecipe>(CurrentRecipe.Table);
