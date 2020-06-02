@@ -45,3 +45,51 @@ C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Deb
 C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.xml
 C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.pdb
 C:\Git\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.exe.config
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.exe
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\BigQuery Example.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Newtonsoft.Json.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Api.Gax.Rest.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Auth.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Bigquery.v2.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Core.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Apis.Storage.v1.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.BigQuery.V2.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.pdb
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Google.Cloud.Storage.V1.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\Newtonsoft.Json.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csprojAssemblyReference.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery_Example.frmMain.resources
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery_Example.Properties.Resources.resources
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csproj.GenerateResource.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csproj.CoreCompileInputs.cache
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.csproj.CopyComplete
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.exe
+C:\Users\phoge\source\repos\Projects\Current Cycling\Sample code\BigQuery C#\BigQuery Example\obj\Debug\BigQuery Example.pdb

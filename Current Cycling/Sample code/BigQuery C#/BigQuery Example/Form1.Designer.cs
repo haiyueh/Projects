@@ -31,13 +31,15 @@
             this.btnAddData = new System.Windows.Forms.Button();
             this.txtData = new System.Windows.Forms.TextBox();
             this.lblData = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddData
             // 
-            this.btnAddData.Location = new System.Drawing.Point(12, 59);
+            this.btnAddData.Location = new System.Drawing.Point(16, 73);
+            this.btnAddData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddData.Name = "btnAddData";
-            this.btnAddData.Size = new System.Drawing.Size(75, 23);
+            this.btnAddData.Size = new System.Drawing.Size(100, 28);
             this.btnAddData.TabIndex = 0;
             this.btnAddData.Text = "Add Data";
             this.btnAddData.UseVisualStyleBackColor = true;
@@ -45,28 +47,43 @@
             // 
             // txtData
             // 
-            this.txtData.Location = new System.Drawing.Point(12, 33);
+            this.txtData.Location = new System.Drawing.Point(16, 41);
+            this.txtData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(265, 20);
+            this.txtData.Size = new System.Drawing.Size(352, 22);
             this.txtData.TabIndex = 1;
             // 
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(13, 14);
+            this.lblData.Location = new System.Drawing.Point(17, 17);
+            this.lblData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(71, 13);
+            this.lblData.Size = new System.Drawing.Size(92, 17);
             this.lblData.TabIndex = 2;
             this.lblData.Text = "Data To Add:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(135, 73);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(113, 28);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Query Recipe";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += BtnQueryClick;
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 91);
+            this.ClientSize = new System.Drawing.Size(380, 112);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblData);
             this.Controls.Add(this.txtData);
             this.Controls.Add(this.btnAddData);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMain";
             this.Text = "BigQuery C# Example";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -80,6 +97,7 @@
         private System.Windows.Forms.Button btnAddData;
         private System.Windows.Forms.TextBox txtData;
         private System.Windows.Forms.Label lblData;
+        private System.Windows.Forms.Button button1;
     }
 }
 
