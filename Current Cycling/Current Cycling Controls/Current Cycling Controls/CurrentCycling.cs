@@ -66,7 +66,6 @@ namespace Current_Cycling_Controls {
                     t.PastVoltages = new List<string>();
                 }
                 _TDK = tdk;
-                _resultsDir = args.ResultsDirectory;
                 _totalTimer = new Stopwatch();
                 _totalTimer.Start();
                 _voltageTimer = new Stopwatch();

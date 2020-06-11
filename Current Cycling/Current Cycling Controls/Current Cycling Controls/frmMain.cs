@@ -127,7 +127,6 @@ namespace Current_Cycling_Controls {
             ,txtNumCells10,txtNumCells11,txtNumCells12};
 
             // reload default settings to GUI
-            txtDirectory.Text = Properties.Settings.Default.DataFolder;
             txtOperator.Text = Properties.Settings.Default.Operator;
             txtBiasOn.Text = Properties.Settings.Default.BiasON;
             txtBiasOff.Text = Properties.Settings.Default.BiasOFF;
@@ -419,7 +418,6 @@ namespace Current_Cycling_Controls {
                     btnStart.Enabled = true;
                     chkTemp.Enabled = true;
                     chkSmoke.Enabled = true;
-                    button1.Enabled = true;
                     btnCheckConnection.Enabled = true;
                     btnLoadSamples.Enabled = true;
                     btnClearSamples.Enabled = true;
@@ -579,6 +577,13 @@ namespace Current_Cycling_Controls {
         }
 
         private void BtnStart_Click(object sender, EventArgs e) {
+            var samples = new List<string>();
+            foreach (var s in _samples) samples.Add(s.Text);
+            if (samples.GroupBy(n => n).Any(c => c.Count() > 1)) {
+                U.Logger.WriteLine($"Duplicate Sample Names Choosen!");
+                MessageBox.Show($"Duplicate Sample Names Choosen!");
+                return;
+            }
             if (!_TDKconnection.Any(b => b == true)) {
                 U.Logger.WriteLine($"TDK has no connections!");
                 MessageBox.Show($"TDK has no connections!");
@@ -589,9 +594,10 @@ namespace Current_Cycling_Controls {
                 MessageBox.Show($"Arduino not connected!");
                 return;
             }
+
             CheckPorts();
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(),
-                Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text), txtDirectory.Text);
+                Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text));
 
             var start = new CoreCommand {
                 Type = U.CmdType.StartCycling,
@@ -622,13 +628,11 @@ namespace Current_Cycling_Controls {
             chkSmoke.Enabled = false;
             btnStart.Enabled = false;
             btnCheckConnection.Enabled = false;
-            button1.Enabled = false;
             btnLoadSamples.Enabled = false;
             btnClearSamples.Enabled = false;
             buttonClearAlarms.Enabled = false;
 
             // save GUI inputs to default settings
-            Properties.Settings.Default.DataFolder = txtDirectory.Text;
             Properties.Settings.Default.Operator = txtOperator.Text;
             Properties.Settings.Default.BiasON = txtBiasOn.Text;
             Properties.Settings.Default.BiasOFF = txtBiasOff.Text;
@@ -715,7 +719,6 @@ namespace Current_Cycling_Controls {
                 e.Cancel = true;
             }
             U.Logger.SaveLog();
-            Properties.Settings.Default.DataFolder = txtDirectory.Text;
             Properties.Settings.Default.Operator = txtOperator.Text;
             Properties.Settings.Default.BiasON = txtBiasOn.Text;
             Properties.Settings.Default.BiasOFF = txtBiasOff.Text;
@@ -802,68 +805,6 @@ namespace Current_Cycling_Controls {
             NewCoreCommand(this, new CoreCommand { Type = U.CmdType.StopCycling });
         }
 
-        private void ButtonDataFolder_Click(object sender, EventArgs e) {
-            var folderPath = new FolderBrowserDialog();
-            if (folderPath.ShowDialog() == DialogResult.Cancel) return;
-            Properties.Settings.Default.DataFolder = folderPath.SelectedPath;
-            txtDirectory.Text = folderPath.SelectedPath;
-            Properties.Settings.Default.Save();
-        }
-
-        // TODO: Real Devs would create a control class 
-        private void BtnNew_Click(object sender, EventArgs e) {
-            // create new file upload dialog and user choose folder then put in sample name.txt
-            var saveFile = new SaveFileDialog() {
-                InitialDirectory = Properties.Settings.Default.DataFolder,
-                DefaultExt = ".txt",
-                AddExtension = true
-            };
-            if (saveFile.ShowDialog() == DialogResult.Cancel) return;
-
-            //// user overwrites
-            //if (File.Exists(saveFile.FileName)) {
-            //    saveFile.FileName = Path.GetDirectoryName(saveFile.FileName) + "\\" + Path.GetFileNameWithoutExtension(saveFile.FileName);
-            //    saveFile.FileName = saveFile.FileName + $"_old[{DateTime.Now.ToString("yyyy-M-dd--HH")}].txt";
-            //}
-            //else {
-            //    if (Path.GetFileName(saveFile.FileName).Contains(".")) {
-            //        MessageBox.Show("Don't add file extension to filename!");
-            //        return;
-            //    }
-            //}
-            if (File.Exists(saveFile.FileName)) {
-                MessageBox.Show("Cannot overwrite data files!");
-                return;
-            }
-            if (Path.GetFileNameWithoutExtension(saveFile.FileName).Contains(".")) {
-                MessageBox.Show("Don't add file extension to filename!");
-                return;
-            }
-
-            using (var writer = new StreamWriter(saveFile.FileName, true)) {
-                writer.WriteLine(U.SampleTxtHeader);
-            }
-
-            // use btn props to parse through control lists
-            string txt = ((Button)sender).Name;
-            int index;
-            if (txt.Length == 7) index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
-            else index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
-            _samples[index].Text = Path.GetFileNameWithoutExtension(saveFile.FileName);
-            Properties.Settings.Default.DataFolder = Directory.GetParent(saveFile.FileName).FullName;
-            Properties.Settings.Default.Samples[index] = Path.GetFileNameWithoutExtension(saveFile.FileName);
-            btnLoadSamples.Enabled = true;
-            Properties.Settings.Default.Save();
-            txtDirectory.Text = Directory.GetParent(saveFile.FileName).FullName;
-            _cycleLabels[index].Text = "0";
-            _numCells[index].Text = "22";
-            _voc[index].Text = "0.655";
-            _tempSensors[index].Text = (index + 1).ToString();
-            _setCurrents[index].Text = "0";
-
-        }
-
-
 
         private void ButtonRecipe_Click(object sender, EventArgs e) {
             // use Btn sender to parse through control lists
@@ -895,50 +836,7 @@ namespace Current_Cycling_Controls {
         }
 
 
-        private void BtnLoad_Click(object sender, EventArgs e) {
-            // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
-            var loadFile = new OpenFileDialog() { InitialDirectory = Properties.Settings.Default.DataFolder };
-            if (loadFile.ShowDialog() == DialogResult.Cancel) return;
-            Properties.Settings.Default.DataFolder = Directory.GetParent(loadFile.FileName).FullName;
-            Properties.Settings.Default.Save();
-            txtDirectory.Text = Directory.GetParent(loadFile.FileName).FullName;
-            var last = File.ReadLines(loadFile.FileName).Last();
-            var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-
-            // use Btn sender to parse through control lists
-            string txt = ((Button)sender).Name;
-            int index = 0;
-            if (txt.Length == 8) {
-                index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
-            }
-            else {
-                index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
-            }
-
-            // save sample name to TDK row
-            Properties.Settings.Default.Samples[index] = loadFile.FileName;
-            btnLoadSamples.Enabled = true;
-            Properties.Settings.Default.Save();
-
-            _samples[index].Text = Path.GetFileNameWithoutExtension(loadFile.FileName);
-            // default populate if no data
-            if (File.ReadLines(loadFile.FileName).Count() < 2) {
-                _cycleLabels[index].Text = "0";
-                _numCells[index].Text = "22";
-                _voc[index].Text = "0.655";
-                _tempSensors[index].Text = (index + 1).ToString();
-                _setCurrents[index].Text = "0";
-                return;
-            }
-            // populate from load file
-            _cycleLabels[index].Text = values[0];
-            _numCells[index].Text = values[8];
-            _voc[index].Text = values[9];
-            _tempSensors[index].Text = values[10];
-            _setCurrents[index].Text = values[11];
-
-        }
-
+        
         private void BtnLoadSamples_Click(object sender, EventArgs e) {
             var i = 0;
             foreach (var s in Properties.Settings.Default.Samples) {

@@ -181,9 +181,7 @@ namespace Current_Cycling_Controls {
             this.lblTempSensNum = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.txtDirectory = new System.Windows.Forms.TextBox();
             this.txtOperator = new System.Windows.Forms.TextBox();
-            this.lblDirectory = new System.Windows.Forms.Label();
             this.lblOperator = new System.Windows.Forms.Label();
             this.lblOverTempDegC = new System.Windows.Forms.Label();
             this.lblCurrOffDegC = new System.Windows.Forms.Label();
@@ -210,7 +208,6 @@ namespace Current_Cycling_Controls {
             this.txtSmokeOverSet = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPauseFans = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnCheckConnection = new System.Windows.Forms.Button();
             this.btnLoadSamples = new System.Windows.Forms.Button();
             this.lblBiasStatus = new System.Windows.Forms.Label();
@@ -1856,15 +1853,6 @@ namespace Current_Cycling_Controls {
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
-            // txtDirectory
-            // 
-            this.txtDirectory.Location = new System.Drawing.Point(96, 111);
-            this.txtDirectory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtDirectory.Name = "txtDirectory";
-            this.txtDirectory.Size = new System.Drawing.Size(153, 22);
-            this.txtDirectory.TabIndex = 51;
-            this.txtDirectory.Text = "C:\\Users\\hahan\\Documents";
-            // 
             // txtOperator
             // 
             this.txtOperator.Location = new System.Drawing.Point(96, 81);
@@ -1873,15 +1861,6 @@ namespace Current_Cycling_Controls {
             this.txtOperator.Size = new System.Drawing.Size(153, 22);
             this.txtOperator.TabIndex = 50;
             this.txtOperator.Text = "Operator";
-            // 
-            // lblDirectory
-            // 
-            this.lblDirectory.AutoSize = true;
-            this.lblDirectory.Location = new System.Drawing.Point(9, 111);
-            this.lblDirectory.Name = "lblDirectory";
-            this.lblDirectory.Size = new System.Drawing.Size(69, 17);
-            this.lblDirectory.TabIndex = 49;
-            this.lblDirectory.Text = "Directory:";
             // 
             // lblOperator
             // 
@@ -2158,17 +2137,6 @@ namespace Current_Cycling_Controls {
             this.txtPauseFans.TabIndex = 161;
             this.txtPauseFans.Text = "5";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(255, 111);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 27);
-            this.button1.TabIndex = 162;
-            this.button1.Text = "Data Directory";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonDataFolder_Click);
-            // 
             // btnCheckConnection
             // 
             this.btnCheckConnection.Location = new System.Drawing.Point(965, 9);
@@ -2331,7 +2299,6 @@ namespace Current_Cycling_Controls {
             this.Controls.Add(this.lblBiasStatus);
             this.Controls.Add(this.btnLoadSamples);
             this.Controls.Add(this.btnCheckConnection);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtPauseFans);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSmokeOverSet);
@@ -2347,9 +2314,7 @@ namespace Current_Cycling_Controls {
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.txtDirectory);
             this.Controls.Add(this.txtOperator);
-            this.Controls.Add(this.lblDirectory);
             this.Controls.Add(this.lblOperator);
             this.Controls.Add(this.lblOverTempDegC);
             this.Controls.Add(this.lblCurrOffDegC);
@@ -2524,9 +2489,7 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.TextBox txtTempSensSample12;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.TextBox txtDirectory;
         private System.Windows.Forms.TextBox txtOperator;
-        private System.Windows.Forms.Label lblDirectory;
         private System.Windows.Forms.Label lblOperator;
         private System.Windows.Forms.Label lblOverTempDegC;
         private System.Windows.Forms.Label lblCurrOffDegC;
@@ -2553,7 +2516,6 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.TextBox txtSmokeOverSet;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPauseFans;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnCheckConnection;
         private System.Windows.Forms.Button btnLoadSamples;
         private System.Windows.Forms.Label lblBiasStatus;
