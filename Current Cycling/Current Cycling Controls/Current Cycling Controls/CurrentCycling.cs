@@ -102,9 +102,8 @@ namespace Current_Cycling_Controls {
                             tt.Current = _serTDK.ReadLine();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
-                            if (SAVE) SaveResults(tt);
+                            if (SAVE) SaveResultsBQ(tt);
                             if (double.Parse(tt.Voltage) > U.MaxVoltageBurning) STOP = true;
-                            //tt.PastVoltages.Add(tt.Voltage);
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
                         // if we have saved then restart timer
@@ -135,9 +134,7 @@ namespace Current_Cycling_Controls {
                             tt.Current = _serTDK.ReadLine();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
-                            if (SAVE) SaveResults(tt);
-                            //if (SAVE) SaveResultsMongo(tt);
-                            //tt.PastVoltages.Add(tt.Voltage);
+                            if (SAVE) SaveResultsBQ(tt);
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
 
@@ -146,23 +143,15 @@ namespace Current_Cycling_Controls {
                             SAVE = false;
                             _resultsTimer.Restart();
                         }
-                        
+
                     }
                     if (STOP || SMOKEALARM || TEMPALARM) break;
-
-                    // save voltage graphs every 3 hours, 8 times a day
-                    //if (_voltageTimer.ElapsedMilliseconds > 10800000) {
-                    //    foreach (var t in tdk) {
-                    //        GraphVoltages(t);
-                    //    }
-                    //    _voltageTimer.Restart();
-                    //}
 
                     // completed a bias on/off cycle
                     foreach (var ttt in tdk) {
                         ttt.CycleCount++;
                     }
-                }               
+                }
             }
             catch (Exception exc) {
                 U.Logger.WriteLine($"{exc}");
@@ -184,13 +173,13 @@ namespace Current_Cycling_Controls {
             U.Logger.WriteLine($"TDK Closing Normally");
         }
 
-        private void SaveResultsMongo(TDK t) {
+        private void SaveResultsBQ(TDK t) {
             var point = CompileCCData(t);
             CycleDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData, point));
         }
 
         private CCDataPoint CompileCCData(TDK t) {
-            return new CCDataPoint(t.CycleCount, 
+            return new CCDataPoint(t.CycleCount,
                 (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds, // epoch
                 (_totalTimer.ElapsedMilliseconds / 3.6E+6), // total time (hrs)
                 (_intoCycleTimer.ElapsedMilliseconds / 60000.0), // time into current cycle
@@ -232,7 +221,7 @@ namespace Current_Cycling_Controls {
         private void OpenPorts() {
             string[] ports = SerialPort.GetPortNames();
             // ping each port and see if we get the TDK response
-            foreach (var port in ports) { 
+            foreach (var port in ports) {
                 try {
                     _serTDK.BaudRate = U.TDKBaudRate;
                     _serTDK.PortName = port; // com3
@@ -275,7 +264,7 @@ namespace Current_Cycling_Controls {
                 }
                 _serTDK.Write("PC?\r\n");
             } while (_serTDK.ReadLine() == U.VoltageCompliance);
-            
+
         }
 
         private void TurnON(TDK tdk) {
@@ -312,8 +301,8 @@ namespace Current_Cycling_Controls {
                 }
                 _serTDK.DiscardOutBuffer();
                 _serTDK.DiscardInBuffer();
-                
-                
+
+
             }
             StartTimer();
             // wait and get updated measured value from TDKs for the GUI
@@ -326,7 +315,7 @@ namespace Current_Cycling_Controls {
                 _serTDK.Write("MC?\r\n");
                 Wait(50);
                 string current = _serTDK.ReadLine();
-                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer, closing:true);
+                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer, closing: true);
                 NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
             }
             _serTDK.Close();
@@ -401,7 +390,7 @@ namespace Current_Cycling_Controls {
         public DateTime CycleTime { get; set; }
         public int Port { get; set; }
         public bool Closing { get; set; }
-        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt, bool closing = false){
+        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt, bool closing = false) {
             Volt = volt;
             Current = current;
             Cycle = cycle.ToString();

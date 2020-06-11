@@ -11,22 +11,27 @@ using System.Windows.Forms;
 namespace Current_Cycling_Controls {
     public partial class RecipeEditor<TType> : Form {
 
-        private List<Recipe<TType>> _recipeList;
-        public Recipe<TType> CurrentRecipe { get; set; }
+        /// <summary>
+        /// Used for populating comboBox
+        /// </summary>
+        private List<string> _recipeList;
+        public CCRecipe CurrentRecipe { get; set; }
         private readonly Data _conn;
         private DataTable _recipeData;
         private readonly BackgroundWorker _dataWorker = new BackgroundWorker();
         private bool _loading, _update;
         private List<PropertyInfo> _recipeProperties;
+        private string _selectedSample;
 
         private Type ThisType => typeof(TType);
 
-        private readonly string[] _excluded = { "Id", "Table", "Active", "Selected", "Updated", "Created", "Name" };
-        private readonly string[] _top = { "Name", "Created", "Updated" };
-        private readonly string[] _readonly = { "Updated", "Created" };
+        private readonly string[] _excluded = { "Id", "Table", "Active", "Selected", "Updated", "Created", "Name", "CycleNumber" };
+        private readonly string[] _readonly = { "Updated", "Created", "SampleName" };
 
-        public RecipeEditor(Data conn, Recipe<TType> recipe) {
+        public RecipeEditor(Data conn, CCRecipe recipe, string sample) {
             InitializeComponent();
+            _recipeList = new List<string>();
+            _selectedSample = sample;
             _conn = conn;
             CurrentRecipe = recipe;
             _dataWorker.DoWork += RunDataWorker;
@@ -45,35 +50,39 @@ namespace Current_Cycling_Controls {
             _dataWorker.RunWorkerAsync(0);
         }
 
+        /// <summary>
+        /// Updates comboBox with newest Samples and starts the InitializeTable function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateData(object sender, ProgressChangedEventArgs e) {
 
             comboBoxSelect.Items.Clear();
+            _loading = true;
+            comboBoxSelect.Items.Add("Select a Recipe to Update or Load");
+            comboBoxSelect.Items.Add("Create new recipe");
+            comboBoxSelect.SelectedIndex = 0;
             if (_recipeList == null || _recipeList.Count == 0) {
-                InitializeTable();
+                InitializeTable(false);
                 return;
             }
-            _loading = true;
-            comboBoxSelect.Items.Add("Select a Recipe to Modify");
-            comboBoxSelect.SelectedIndex = 0;
-            var index = 0;
+            var index = 1;
             foreach (var r in _recipeList) {
                 comboBoxSelect.Items.Add(r);
                 index++;
-                if (r.Selected) {
-                    CurrentRecipe = r;
+                if (r == _selectedSample) {
+                    CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
                     comboBoxSelect.SelectedIndex = index;
                 }
 
             }
 
 
-            comboBoxSelect.Items.Add("Create new recipe");
             _loading = false;
-
-            InitializeTable();
+            InitializeTable(false);
         }
 
-        private void InitializeTable() {
+        private void InitializeTable(bool readOnly) {
             _recipeData = new DataTable();
             _recipeData.Columns.Add("Parameter");
             _recipeData.Columns.Add("Value");
@@ -91,25 +100,7 @@ namespace Current_Cycling_Controls {
 
             var row = 0;
 
-            // populate data from top properties and align
-            foreach (var t in new string[] { "Name", "Created", "Updated" }) {
-                var p = (from pr in _recipeProperties where pr.Name.Equals(t) select pr).First();
-
-                dvc = new DataGridViewCellStyle {
-                    Alignment = DataGridViewContentAlignment.MiddleRight
-                };
-
-                var val = p.GetValue(CurrentRecipe, null);
-                _recipeData.Rows.Add(p.Name, val);
-                if (_readonly.Any(x => x.Equals(p.Name))) {
-                    dataViewer[1, row].ReadOnly = true;
-                    dvc.ForeColor = Color.DimGray;
-                }
-                dataViewer[1, row].Style = dvc;
-                row++;
-            }
-
-            // 
+            // TODO: If "Create new recipe" then dont set SampleName to readonly
             foreach (var property in _recipeProperties) {
                 if (_excluded.Any(x => x.Equals(property.Name))) continue;
                 dvc = new DataGridViewCellStyle {
@@ -124,7 +115,8 @@ namespace Current_Cycling_Controls {
                     dataViewer[1, row] = new DataGridViewCheckBoxCell { Value = val, Style = dvc };
                 }
 
-                if (!property.CanWrite || _readonly.Any(x => x.Equals(property.Name))) {
+                if (!property.CanWrite || _readonly.Any(x => x.Equals(property.Name))
+                    && readOnly) {
                     dataViewer[1, row].ReadOnly = true;
                     dvc.ForeColor = Color.DimGray;
                 }
@@ -170,41 +162,41 @@ namespace Current_Cycling_Controls {
 
         private void comboBoxSelect_SelectedIndexChanged(object sender, EventArgs e) {
             if (_loading || comboBoxSelect.SelectedIndex <= 0) return;
-            if (comboBoxSelect.SelectedIndex == comboBoxSelect.Items.Count - 1) {
-                //GetNewRecipe();
-                // TODO: Instead of update new values to data base we want to update the TDK 
-                // parameters that will be sent to the CC worker on start. Then the new data will be added
 
+            // creates new default recipe and lets user write to it
+            if (comboBoxSelect.SelectedIndex == 1) {
+                CurrentRecipe = new CCRecipe();
+                InitializeTable(false);
             }
+            // select recipe already there
             else {
-                CurrentRecipe = (Recipe<TType>)comboBoxSelect.SelectedItem;
-                _conn.SelectData(CurrentRecipe);
+                _selectedSample = comboBoxSelect.SelectedItem.ToString();
+                CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
+                InitializeTable(true);
             }
 
-            InitializeTable();
+
         }
 
-        private void UpdateParameters() {
+        /// <summary>
+        /// Saves the dataTable to the CurrentRecipe
+        /// </summary>
+        private void UpdateRecipe() {
             foreach (DataRow r in _recipeData.Rows) {
                 foreach (var p in _recipeProperties.Where(p => p.Name.Equals(r[0]) && p.CanWrite && p.PropertyType != typeof(DateTime))) {
                     if (!GetValueFromString(p.PropertyType, r[1].ToString(), out var newVal)) continue;
-
+                    if (newVal is string) {
+                        if ((string)newVal == "") return;
+                    }
                     p.SetValue(CurrentRecipe, newVal);
-
                 }
             }
         }
 
-        private void GetNewRecipe() {
-            if (ThisType == typeof(CCRecipe)) {
-                object recipe = new CCRecipe();
-                CurrentRecipe = (Recipe<TType>)recipe;
-            }
-        }
-
         private void buttonSave_Click(object sender, EventArgs e) {
-            UpdateParameters();
-            _dataWorker.RunWorkerAsync(1);
+            UpdateRecipe();
+            Close();
+            //_dataWorker.RunWorkerAsync(1);
         }
 
         private void RunDataWorker(object sender, DoWorkEventArgs e) {
@@ -213,23 +205,16 @@ namespace Current_Cycling_Controls {
                     break;
                 case 1:
                     if (CurrentRecipe == null) return;
-                    _conn.SaveData(CurrentRecipe);
-                    _conn.SelectData(CurrentRecipe);
+                    _selectedSample = CurrentRecipe.SampleName;
+                    CurrentRecipe.Selected = true;
                     break;
             }
-
-
-            if (ThisType == typeof(CCRecipe)) {
-                var list = _conn.GetRecipeList<CCRecipe>(CurrentRecipe.Table);
-                _recipeList = new List<Recipe<TType>>();
-                foreach (var l in list) {
-                    _recipeList.Add(l as Recipe<TType>);
-                }
-            }
-
-            //else _recipeList =  _conn.GetRecipeList<type>(CurrentRecipe.Table);
+            _recipeList = _conn.GetRecipeList<CCRecipe>();
             _dataWorker.ReportProgress(int.Parse(e.Argument.ToString()));
         }
+
+
+
 
     }
 }

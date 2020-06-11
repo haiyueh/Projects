@@ -546,35 +546,30 @@ namespace Current_Cycling_Controls {
                 ii++;
             }
             ii = 0;
-            foreach (var chk in _tempSensors) {
-                chk.Enabled = _TDKconnection[ii];
-                ii++;
-            }
-            ii = 0;
-            foreach (var chk in _setCurrents) {
-                chk.Enabled = _TDKconnection[ii];
-                ii++;
-            }
+            //foreach (var chk in _tempSensors) {
+            //    chk.Enabled = _TDKconnection[ii];
+            //    ii++;
+            //}
+            //ii = 0;
+            //foreach (var chk in _setCurrents) {
+            //    chk.Enabled = _TDKconnection[ii];
+            //    ii++;
+            //}
             ii = 0;
             foreach (var chk in _loadButtons) {
                 chk.Enabled = _TDKconnection[ii];
                 ii++;
             }
-            ii = 0;
-            foreach (var chk in _newButtons) {
-                chk.Enabled = _TDKconnection[ii];
-                ii++;
-            }
-            ii = 0;
-            foreach (var chk in _voc) {
-                chk.Enabled = _TDKconnection[ii];
-                ii++;
-            }
-            ii = 0;
-            foreach (var chk in _numCells) {
-                chk.Enabled = _TDKconnection[ii];
-                ii++;
-            }
+            //ii = 0;
+            //foreach (var chk in _voc) {
+            //    chk.Enabled = _TDKconnection[ii];
+            //    ii++;
+            //}
+            //ii = 0;
+            //foreach (var chk in _numCells) {
+            //    chk.Enabled = _TDKconnection[ii];
+            //    ii++;
+            //}
 #endif
         }
 
@@ -616,9 +611,6 @@ namespace Current_Cycling_Controls {
             }
             foreach (var load in _loadButtons) {
                 load.Enabled = false;
-            }
-            foreach (var neww in _newButtons) {
-                neww.Enabled = false;
             }
             foreach (var neww in _voc) {
                 neww.Enabled = false;
@@ -874,14 +866,9 @@ namespace Current_Cycling_Controls {
 
 
         private void ButtonRecipe_Click(object sender, EventArgs e) {
-            var form = new RecipeEditor<CCRecipe>(BQConn, new CCRecipe());
-            form.Closed += GetRecipes;
-            form.ShowDialog();
-
-            _ccRecipe = BQConn.GetCurrentRecipe<CCRecipe>(U.CCRecipeTable) ?? new CCRecipe();
             // use Btn sender to parse through control lists
             string txt = ((Button)sender).Name;
-            int index = 0;
+            int index;
             if (txt.Length == 8) {
                 index = int.Parse(txt.Substring(txt.Length - 1)) - 1;
             }
@@ -889,16 +876,24 @@ namespace Current_Cycling_Controls {
                 index = int.Parse(txt.Substring(txt.Length - 2)) - 1;
             }
 
-            //_cycleLabels[index].Text = _.
-            _numCells[index].Text = _ccRecipe.NumCells.ToString();
-            _voc[index].Text = _ccRecipe.CellVoc.ToString();
-            _tempSensors[index].Text = _ccRecipe.TempSensor.ToString();
-            _setCurrents[index].Text = _ccRecipe.SetCurrent.ToString();
+            var form = new RecipeEditor<CCRecipe>(BQConn, new CCRecipe(), _samples[index].Text);
+            form.ShowDialog();
+            _ccRecipe = form.CurrentRecipe;
+
+            if (_ccRecipe.SampleName != null) {
+                Properties.Settings.Default.Samples[index] = _ccRecipe.SampleName;
+                Properties.Settings.Default.Save();
+                _samples[index].Text = _ccRecipe.SampleName;
+                _cycleLabels[index].Text = _ccRecipe.CycleNumber.ToString();
+                _numCells[index].Text = _ccRecipe.NumCells.ToString();
+                _voc[index].Text = _ccRecipe.CellVoc.ToString();
+                _tempSensors[index].Text = _ccRecipe.TempSensor.ToString();
+                _setCurrents[index].Text = _ccRecipe.SetCurrent.ToString();
+            }
+
+
         }
 
-        private void GetRecipes(object sender, EventArgs e) {
-            if (!BQConn.GetCurrentRecipeWithError(U.CCRecipeTable, out _ccRecipe)) throw new Exception("Could not get recipe");
-        }
 
         private void BtnLoad_Click(object sender, EventArgs e) {
             // loads the file and reads the last readline and updates the GUI with values (cycle, voc, set current etc)
@@ -952,26 +947,14 @@ namespace Current_Cycling_Controls {
                         i++;
                         continue;
                     }
-
-                    var last = File.ReadLines(s).Last();
-                    var values = last.Split(',').Select(sValue => sValue.Trim()).ToList();
-                    _samples[i].Text = Path.GetFileNameWithoutExtension(s);
-                    // default populate if no data
-                    if (File.ReadLines(s).Count() < 2) {
-                        _cycleLabels[i].Text = "0";
-                        _numCells[i].Text = "22";
-                        _voc[i].Text = "0.655";
-                        _tempSensors[i].Text = (i + 1).ToString();
-                        _setCurrents[i].Text = "0";
-                        i++;
-                        continue;
-                    }
-                    // populate from load file
-                    _cycleLabels[i].Text = values[0];
-                    _numCells[i].Text = values[8];
-                    _voc[i].Text = values[9];
-                    _tempSensors[i].Text = values[10];
-                    _setCurrents[i].Text = values[11];
+                    Console.WriteLine($"Loading Recipes...");
+                    var recipe = BQConn.GetCurrentRecipe(s);
+                    _samples[i].Text = recipe.SampleName;
+                    _cycleLabels[i].Text = recipe.CycleNumber.ToString();
+                    _numCells[i].Text = recipe.NumCells.ToString();
+                    _voc[i].Text = recipe.CellVoc.ToString();
+                    _tempSensors[i].Text = recipe.TempSensor.ToString();
+                    _setCurrents[i].Text = recipe.SetCurrent.ToString();
                 }
                 catch (Exception exc) {
                     U.Logger.WriteLine(exc.ToString());
@@ -1001,22 +984,19 @@ namespace Current_Cycling_Controls {
         private void ButtonSaveLogs_Click(object sender, EventArgs e) {
             U.Logger.SaveLog();
 #if DEBUG
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 20; i++) {
                 TestDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData,
                 new CCDataPoint(5,
-                123, // epoch
-                123, // total time (hrs)
-                123, // time into current cycle
-                true, "test", 1, 1, 1,
+                66666666.253, // epoch
+                1231212313.35, // total time (hrs)
+                121313123.3434343, // time into current cycle
+                false, "test", 1, 1, 1,
                 1, 1, 1, -99.99,
-                new List<double> { 5, 5 }, new List<double> { 6, 6 }, new List<double> { 7, 7 })));
+                new List<double> { 5, 5,5,5,5,5,5,5,5,5,5,5,5,5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 })));
             }
 
 #endif
         }
 
-        private void LblTempSensNum_Click(object sender, EventArgs e) {
-
-        }
     }
 }

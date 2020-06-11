@@ -15,11 +15,12 @@ namespace Current_Cycling_Controls {
         public double CellVoc { get; set; }
         public int TempSensor { get; set; }
         public double SetCurrent { get; set; }
-        public int LastActivePort { get; set; }
+        public int CycleNumber { get; set; }
 
         public CCRecipe() {
             Table = U.CCRecipeTable;
             Name = $"CC Parameters [{DateTime.Now:G}]";
+
         }
 
     }

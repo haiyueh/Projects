@@ -1,8 +1,7 @@
 ﻿using System;
 
 namespace Current_Cycling_Controls {
-    partial class frmMain
-    {
+    partial class frmMain {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -12,10 +11,8 @@ namespace Current_Cycling_Controls {
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -27,18 +24,17 @@ namespace Current_Cycling_Controls {
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+        private void InitializeComponent() {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtSetCurr12 = new System.Windows.Forms.TextBox();
             this.txtSetCurr11 = new System.Windows.Forms.TextBox();
@@ -54,7 +50,6 @@ namespace Current_Cycling_Controls {
             this.txtSetCurr1 = new System.Windows.Forms.TextBox();
             this.lblCycle12 = new System.Windows.Forms.Label();
             this.lblSetCurrent = new System.Windows.Forms.Label();
-            this.lblTempSensNum = new System.Windows.Forms.Label();
             this.lblVoltage = new System.Windows.Forms.Label();
             this.lblCurrent = new System.Windows.Forms.Label();
             this.lblCycleNum = new System.Windows.Forms.Label();
@@ -183,6 +178,7 @@ namespace Current_Cycling_Controls {
             this.txtTempSensSample10 = new System.Windows.Forms.TextBox();
             this.txtTempSensSample11 = new System.Windows.Forms.TextBox();
             this.txtTempSensSample12 = new System.Windows.Forms.TextBox();
+            this.lblTempSensNum = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
@@ -242,7 +238,7 @@ namespace Current_Cycling_Controls {
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.txtSetCurr12, 10, 12);
             this.tableLayoutPanel1.Controls.Add(this.txtSetCurr11, 10, 11);
@@ -409,6 +405,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr12
             // 
+            this.txtSetCurr12.Enabled = false;
             this.txtSetCurr12.Location = new System.Drawing.Point(1051, 393);
             this.txtSetCurr12.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr12.Name = "txtSetCurr12";
@@ -418,6 +415,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr11
             // 
+            this.txtSetCurr11.Enabled = false;
             this.txtSetCurr11.Location = new System.Drawing.Point(1051, 361);
             this.txtSetCurr11.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr11.Name = "txtSetCurr11";
@@ -427,6 +425,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr10
             // 
+            this.txtSetCurr10.Enabled = false;
             this.txtSetCurr10.Location = new System.Drawing.Point(1051, 330);
             this.txtSetCurr10.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr10.Name = "txtSetCurr10";
@@ -436,6 +435,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr9
             // 
+            this.txtSetCurr9.Enabled = false;
             this.txtSetCurr9.Location = new System.Drawing.Point(1051, 298);
             this.txtSetCurr9.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr9.Name = "txtSetCurr9";
@@ -445,6 +445,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr8
             // 
+            this.txtSetCurr8.Enabled = false;
             this.txtSetCurr8.Location = new System.Drawing.Point(1051, 267);
             this.txtSetCurr8.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr8.Name = "txtSetCurr8";
@@ -454,6 +455,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr7
             // 
+            this.txtSetCurr7.Enabled = false;
             this.txtSetCurr7.Location = new System.Drawing.Point(1051, 237);
             this.txtSetCurr7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr7.Name = "txtSetCurr7";
@@ -463,6 +465,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr6
             // 
+            this.txtSetCurr6.Enabled = false;
             this.txtSetCurr6.Location = new System.Drawing.Point(1051, 206);
             this.txtSetCurr6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr6.Name = "txtSetCurr6";
@@ -472,6 +475,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr5
             // 
+            this.txtSetCurr5.Enabled = false;
             this.txtSetCurr5.Location = new System.Drawing.Point(1051, 176);
             this.txtSetCurr5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr5.Name = "txtSetCurr5";
@@ -481,6 +485,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr4
             // 
+            this.txtSetCurr4.Enabled = false;
             this.txtSetCurr4.Location = new System.Drawing.Point(1051, 146);
             this.txtSetCurr4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr4.Name = "txtSetCurr4";
@@ -490,6 +495,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr3
             // 
+            this.txtSetCurr3.Enabled = false;
             this.txtSetCurr3.Location = new System.Drawing.Point(1051, 114);
             this.txtSetCurr3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr3.Name = "txtSetCurr3";
@@ -499,6 +505,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr2
             // 
+            this.txtSetCurr2.Enabled = false;
             this.txtSetCurr2.Location = new System.Drawing.Point(1051, 81);
             this.txtSetCurr2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr2.Name = "txtSetCurr2";
@@ -508,6 +515,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtSetCurr1
             // 
+            this.txtSetCurr1.Enabled = false;
             this.txtSetCurr1.Location = new System.Drawing.Point(1051, 48);
             this.txtSetCurr1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr1.Name = "txtSetCurr1";
@@ -533,16 +541,6 @@ namespace Current_Cycling_Controls {
             this.lblSetCurrent.Size = new System.Drawing.Size(103, 17);
             this.lblSetCurrent.TabIndex = 36;
             this.lblSetCurrent.Text = "Set Current (A)";
-            // 
-            // lblTempSensNum
-            // 
-            this.lblTempSensNum.AutoSize = true;
-            this.lblTempSensNum.Location = new System.Drawing.Point(935, 0);
-            this.lblTempSensNum.Name = "lblTempSensNum";
-            this.lblTempSensNum.Size = new System.Drawing.Size(105, 17);
-            this.lblTempSensNum.TabIndex = 35;
-            this.lblTempSensNum.Text = "Temp Sensor #";
-            this.lblTempSensNum.Click += new System.EventHandler(this.LblTempSensNum_Click);
             // 
             // lblVoltage
             // 
@@ -885,7 +883,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad2.TabIndex = 50;
             this.btnLoad2.Text = "Load";
             this.btnLoad2.UseVisualStyleBackColor = true;
-            this.btnLoad2.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad2.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad3
             // 
@@ -896,7 +894,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad3.TabIndex = 51;
             this.btnLoad3.Text = "Load";
             this.btnLoad3.UseVisualStyleBackColor = true;
-            this.btnLoad3.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad3.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad4
             // 
@@ -907,7 +905,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad4.TabIndex = 52;
             this.btnLoad4.Text = "Load";
             this.btnLoad4.UseVisualStyleBackColor = true;
-            this.btnLoad4.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad4.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad5
             // 
@@ -918,7 +916,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad5.TabIndex = 53;
             this.btnLoad5.Text = "Load";
             this.btnLoad5.UseVisualStyleBackColor = true;
-            this.btnLoad5.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad5.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad6
             // 
@@ -929,7 +927,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad6.TabIndex = 54;
             this.btnLoad6.Text = "Load";
             this.btnLoad6.UseVisualStyleBackColor = true;
-            this.btnLoad6.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad6.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad7
             // 
@@ -940,7 +938,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad7.TabIndex = 55;
             this.btnLoad7.Text = "Load";
             this.btnLoad7.UseVisualStyleBackColor = true;
-            this.btnLoad7.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad7.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad8
             // 
@@ -951,7 +949,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad8.TabIndex = 56;
             this.btnLoad8.Text = "Load";
             this.btnLoad8.UseVisualStyleBackColor = true;
-            this.btnLoad8.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad8.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad9
             // 
@@ -962,7 +960,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad9.TabIndex = 58;
             this.btnLoad9.Text = "Load";
             this.btnLoad9.UseVisualStyleBackColor = true;
-            this.btnLoad9.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad9.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad10
             // 
@@ -973,7 +971,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad10.TabIndex = 57;
             this.btnLoad10.Text = "Load";
             this.btnLoad10.UseVisualStyleBackColor = true;
-            this.btnLoad10.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad10.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad11
             // 
@@ -984,7 +982,7 @@ namespace Current_Cycling_Controls {
             this.btnLoad11.TabIndex = 59;
             this.btnLoad11.Text = "Load";
             this.btnLoad11.UseVisualStyleBackColor = true;
-            this.btnLoad11.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad11.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // btnLoad12
             // 
@@ -995,10 +993,11 @@ namespace Current_Cycling_Controls {
             this.btnLoad12.TabIndex = 60;
             this.btnLoad12.Text = "Load";
             this.btnLoad12.UseVisualStyleBackColor = true;
-            this.btnLoad12.Click += new System.EventHandler(this.BtnLoad_Click);
+            this.btnLoad12.Click += new System.EventHandler(this.ButtonRecipe_Click);
             // 
             // txtNumCells1
             // 
+            this.txtNumCells1.Enabled = false;
             this.txtNumCells1.Location = new System.Drawing.Point(397, 46);
             this.txtNumCells1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells1.Name = "txtNumCells1";
@@ -1008,6 +1007,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells2
             // 
+            this.txtNumCells2.Enabled = false;
             this.txtNumCells2.Location = new System.Drawing.Point(397, 79);
             this.txtNumCells2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells2.Name = "txtNumCells2";
@@ -1017,6 +1017,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells3
             // 
+            this.txtNumCells3.Enabled = false;
             this.txtNumCells3.Location = new System.Drawing.Point(397, 112);
             this.txtNumCells3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells3.Name = "txtNumCells3";
@@ -1026,6 +1027,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells4
             // 
+            this.txtNumCells4.Enabled = false;
             this.txtNumCells4.Location = new System.Drawing.Point(397, 144);
             this.txtNumCells4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells4.Name = "txtNumCells4";
@@ -1035,6 +1037,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells5
             // 
+            this.txtNumCells5.Enabled = false;
             this.txtNumCells5.Location = new System.Drawing.Point(397, 174);
             this.txtNumCells5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells5.Name = "txtNumCells5";
@@ -1044,6 +1047,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells6
             // 
+            this.txtNumCells6.Enabled = false;
             this.txtNumCells6.Location = new System.Drawing.Point(397, 204);
             this.txtNumCells6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells6.Name = "txtNumCells6";
@@ -1053,6 +1057,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells7
             // 
+            this.txtNumCells7.Enabled = false;
             this.txtNumCells7.Location = new System.Drawing.Point(397, 235);
             this.txtNumCells7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells7.Name = "txtNumCells7";
@@ -1062,6 +1067,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells8
             // 
+            this.txtNumCells8.Enabled = false;
             this.txtNumCells8.Location = new System.Drawing.Point(397, 265);
             this.txtNumCells8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells8.Name = "txtNumCells8";
@@ -1071,6 +1077,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells9
             // 
+            this.txtNumCells9.Enabled = false;
             this.txtNumCells9.Location = new System.Drawing.Point(397, 296);
             this.txtNumCells9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells9.Name = "txtNumCells9";
@@ -1080,6 +1087,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells10
             // 
+            this.txtNumCells10.Enabled = false;
             this.txtNumCells10.Location = new System.Drawing.Point(397, 328);
             this.txtNumCells10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells10.Name = "txtNumCells10";
@@ -1089,6 +1097,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells11
             // 
+            this.txtNumCells11.Enabled = false;
             this.txtNumCells11.Location = new System.Drawing.Point(397, 359);
             this.txtNumCells11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells11.Name = "txtNumCells11";
@@ -1098,6 +1107,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtNumCells12
             // 
+            this.txtNumCells12.Enabled = false;
             this.txtNumCells12.Location = new System.Drawing.Point(397, 391);
             this.txtNumCells12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNumCells12.Name = "txtNumCells12";
@@ -1107,6 +1117,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc2
             // 
+            this.txtVoc2.Enabled = false;
             this.txtVoc2.Location = new System.Drawing.Point(479, 79);
             this.txtVoc2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc2.Name = "txtVoc2";
@@ -1116,6 +1127,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc3
             // 
+            this.txtVoc3.Enabled = false;
             this.txtVoc3.Location = new System.Drawing.Point(479, 112);
             this.txtVoc3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc3.Name = "txtVoc3";
@@ -1125,6 +1137,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc4
             // 
+            this.txtVoc4.Enabled = false;
             this.txtVoc4.Location = new System.Drawing.Point(479, 144);
             this.txtVoc4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc4.Name = "txtVoc4";
@@ -1134,6 +1147,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc5
             // 
+            this.txtVoc5.Enabled = false;
             this.txtVoc5.Location = new System.Drawing.Point(479, 174);
             this.txtVoc5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc5.Name = "txtVoc5";
@@ -1143,6 +1157,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc6
             // 
+            this.txtVoc6.Enabled = false;
             this.txtVoc6.Location = new System.Drawing.Point(479, 204);
             this.txtVoc6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc6.Name = "txtVoc6";
@@ -1152,6 +1167,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc7
             // 
+            this.txtVoc7.Enabled = false;
             this.txtVoc7.Location = new System.Drawing.Point(479, 235);
             this.txtVoc7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc7.Name = "txtVoc7";
@@ -1161,6 +1177,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc8
             // 
+            this.txtVoc8.Enabled = false;
             this.txtVoc8.Location = new System.Drawing.Point(479, 265);
             this.txtVoc8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc8.Name = "txtVoc8";
@@ -1170,6 +1187,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc9
             // 
+            this.txtVoc9.Enabled = false;
             this.txtVoc9.Location = new System.Drawing.Point(479, 296);
             this.txtVoc9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc9.Name = "txtVoc9";
@@ -1179,6 +1197,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc10
             // 
+            this.txtVoc10.Enabled = false;
             this.txtVoc10.Location = new System.Drawing.Point(479, 328);
             this.txtVoc10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc10.Name = "txtVoc10";
@@ -1188,6 +1207,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc11
             // 
+            this.txtVoc11.Enabled = false;
             this.txtVoc11.Location = new System.Drawing.Point(479, 359);
             this.txtVoc11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc11.Name = "txtVoc11";
@@ -1197,6 +1217,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc12
             // 
+            this.txtVoc12.Enabled = false;
             this.txtVoc12.Location = new System.Drawing.Point(479, 391);
             this.txtVoc12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc12.Name = "txtVoc12";
@@ -1436,6 +1457,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtVoc1
             // 
+            this.txtVoc1.Enabled = false;
             this.txtVoc1.Location = new System.Drawing.Point(479, 46);
             this.txtVoc1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtVoc1.Name = "txtVoc1";
@@ -1685,6 +1707,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample1
             // 
+            this.txtTempSensSample1.Enabled = false;
             this.txtTempSensSample1.Location = new System.Drawing.Point(936, 48);
             this.txtTempSensSample1.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample1.Name = "txtTempSensSample1";
@@ -1694,6 +1717,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample2
             // 
+            this.txtTempSensSample2.Enabled = false;
             this.txtTempSensSample2.Location = new System.Drawing.Point(936, 81);
             this.txtTempSensSample2.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample2.Name = "txtTempSensSample2";
@@ -1703,6 +1727,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample3
             // 
+            this.txtTempSensSample3.Enabled = false;
             this.txtTempSensSample3.Location = new System.Drawing.Point(936, 114);
             this.txtTempSensSample3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample3.Name = "txtTempSensSample3";
@@ -1712,6 +1737,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample4
             // 
+            this.txtTempSensSample4.Enabled = false;
             this.txtTempSensSample4.Location = new System.Drawing.Point(936, 146);
             this.txtTempSensSample4.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample4.Name = "txtTempSensSample4";
@@ -1721,6 +1747,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample5
             // 
+            this.txtTempSensSample5.Enabled = false;
             this.txtTempSensSample5.Location = new System.Drawing.Point(936, 176);
             this.txtTempSensSample5.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample5.Name = "txtTempSensSample5";
@@ -1730,6 +1757,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample6
             // 
+            this.txtTempSensSample6.Enabled = false;
             this.txtTempSensSample6.Location = new System.Drawing.Point(936, 206);
             this.txtTempSensSample6.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample6.Name = "txtTempSensSample6";
@@ -1739,6 +1767,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample7
             // 
+            this.txtTempSensSample7.Enabled = false;
             this.txtTempSensSample7.Location = new System.Drawing.Point(936, 237);
             this.txtTempSensSample7.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample7.Name = "txtTempSensSample7";
@@ -1748,6 +1777,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample8
             // 
+            this.txtTempSensSample8.Enabled = false;
             this.txtTempSensSample8.Location = new System.Drawing.Point(936, 267);
             this.txtTempSensSample8.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample8.Name = "txtTempSensSample8";
@@ -1757,6 +1787,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample9
             // 
+            this.txtTempSensSample9.Enabled = false;
             this.txtTempSensSample9.Location = new System.Drawing.Point(936, 298);
             this.txtTempSensSample9.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample9.Name = "txtTempSensSample9";
@@ -1766,6 +1797,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample10
             // 
+            this.txtTempSensSample10.Enabled = false;
             this.txtTempSensSample10.Location = new System.Drawing.Point(936, 330);
             this.txtTempSensSample10.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample10.Name = "txtTempSensSample10";
@@ -1775,6 +1807,7 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample11
             // 
+            this.txtTempSensSample11.Enabled = false;
             this.txtTempSensSample11.Location = new System.Drawing.Point(936, 361);
             this.txtTempSensSample11.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample11.Name = "txtTempSensSample11";
@@ -1784,12 +1817,22 @@ namespace Current_Cycling_Controls {
             // 
             // txtTempSensSample12
             // 
+            this.txtTempSensSample12.Enabled = false;
             this.txtTempSensSample12.Location = new System.Drawing.Point(936, 393);
             this.txtTempSensSample12.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample12.Name = "txtTempSensSample12";
             this.txtTempSensSample12.Size = new System.Drawing.Size(92, 22);
             this.txtTempSensSample12.TabIndex = 155;
             this.txtTempSensSample12.Text = "12";
+            // 
+            // lblTempSensNum
+            // 
+            this.lblTempSensNum.AutoSize = true;
+            this.lblTempSensNum.Location = new System.Drawing.Point(935, 0);
+            this.lblTempSensNum.Name = "lblTempSensNum";
+            this.lblTempSensNum.Size = new System.Drawing.Size(105, 17);
+            this.lblTempSensNum.TabIndex = 35;
+            this.lblTempSensNum.Text = "Temp Sensor #";
             // 
             // btnStop
             // 
@@ -2174,69 +2217,69 @@ namespace Current_Cycling_Controls {
             // 
             // chartTemp
             // 
-            chartArea7.Name = "ChartArea1";
-            this.chartTemp.ChartAreas.Add(chartArea7);
-            legend7.AutoFitMinFontSize = 9;
-            legend7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend7.IsTextAutoFit = false;
-            legend7.Name = "Legend1";
-            legend7.Position.Auto = false;
-            legend7.Position.Height = 16.6065F;
-            legend7.Position.Width = 30F;
-            legend7.Position.X = 70F;
-            this.chartTemp.Legends.Add(legend7);
+            chartArea1.Name = "ChartArea1";
+            this.chartTemp.ChartAreas.Add(chartArea1);
+            legend1.AutoFitMinFontSize = 9;
+            legend1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Legend1";
+            legend1.Position.Auto = false;
+            legend1.Position.Height = 16.6065F;
+            legend1.Position.Width = 30F;
+            legend1.Position.X = 70F;
+            this.chartTemp.Legends.Add(legend1);
             this.chartTemp.Location = new System.Drawing.Point(7, 583);
             this.chartTemp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartTemp.Name = "chartTemp";
-            series13.ChartArea = "ChartArea1";
-            series13.Legend = "Legend1";
-            series13.Name = "Temp";
-            series14.ChartArea = "ChartArea1";
-            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series14.Color = System.Drawing.Color.Red;
-            series14.Legend = "Legend1";
-            series14.Name = "MaxTemp";
-            this.chartTemp.Series.Add(series13);
-            this.chartTemp.Series.Add(series14);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Temp";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.Name = "MaxTemp";
+            this.chartTemp.Series.Add(series1);
+            this.chartTemp.Series.Add(series2);
             this.chartTemp.Size = new System.Drawing.Size(571, 278);
             this.chartTemp.TabIndex = 167;
             this.chartTemp.Text = "chart1";
-            title7.Name = "Title1";
-            title7.Text = "Temperature Sensors";
-            this.chartTemp.Titles.Add(title7);
+            title1.Name = "Title1";
+            title1.Text = "Temperature Sensors";
+            this.chartTemp.Titles.Add(title1);
             // 
             // chartSmoke
             // 
-            chartArea8.Name = "ChartArea1";
-            this.chartSmoke.ChartAreas.Add(chartArea8);
-            legend8.AutoFitMinFontSize = 9;
-            legend8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            legend8.IsTextAutoFit = false;
-            legend8.Name = "Legend1";
-            legend8.Position.Auto = false;
-            legend8.Position.Height = 16.6065F;
-            legend8.Position.Width = 30F;
-            legend8.Position.X = 70F;
-            this.chartSmoke.Legends.Add(legend8);
+            chartArea2.Name = "ChartArea1";
+            this.chartSmoke.ChartAreas.Add(chartArea2);
+            legend2.AutoFitMinFontSize = 9;
+            legend2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Legend1";
+            legend2.Position.Auto = false;
+            legend2.Position.Height = 16.6065F;
+            legend2.Position.Width = 30F;
+            legend2.Position.X = 70F;
+            this.chartSmoke.Legends.Add(legend2);
             this.chartSmoke.Location = new System.Drawing.Point(584, 583);
             this.chartSmoke.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartSmoke.Name = "chartSmoke";
-            series15.ChartArea = "ChartArea1";
-            series15.Legend = "Legend1";
-            series15.Name = "Smoke Level";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.Color = System.Drawing.Color.Red;
-            series16.Legend = "Legend1";
-            series16.Name = "MaxSmoke";
-            this.chartSmoke.Series.Add(series15);
-            this.chartSmoke.Series.Add(series16);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Smoke Level";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Red;
+            series4.Legend = "Legend1";
+            series4.Name = "MaxSmoke";
+            this.chartSmoke.Series.Add(series3);
+            this.chartSmoke.Series.Add(series4);
             this.chartSmoke.Size = new System.Drawing.Size(561, 278);
             this.chartSmoke.TabIndex = 168;
             this.chartSmoke.Text = "chart1";
-            title8.Name = "Title1";
-            title8.Text = "Smoke Sensors";
-            this.chartSmoke.Titles.Add(title8);
+            title2.Name = "Title1";
+            title2.Text = "Smoke Sensors";
+            this.chartSmoke.Titles.Add(title2);
             // 
             // buttonClearAlarms
             // 

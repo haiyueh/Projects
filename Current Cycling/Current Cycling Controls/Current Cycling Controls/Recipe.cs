@@ -14,8 +14,6 @@ namespace Current_Cycling_Controls {
         public string Name { get; set; }
         public bool Active { get; set; }
         public bool Selected { get; set; }
-        //public TRecipeType Type { get; set; }
-        private readonly string _database = U.CCdb;
         public string Table { get; set; }
         protected Recipe() {
             Id = new ObjectId();
