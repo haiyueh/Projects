@@ -80,6 +80,7 @@ String strOverTempAlarm;
 bool bolThermalControllerHeartBeatGood = false;
 String strTempSensorToUse;
 String strSmokeSensorToUse;
+bool bolTempSensorToUse[NUMBER_OF_TEMP_SENSORS];
 
 //Trip levels
 float floSmokeSensorTripLevel = 3.0; 
@@ -106,16 +107,17 @@ int intOperating = 0;
 
 
 //============================================================================
-//Function: float floLargestNumberInArray (float floArray[], int arraySize )
-//Notes: returns the largest number in an array
+//Function: float floCalculateMaxEnabledTemp (float floArray[], int arraySize )
+//Notes: returns the largest number in the temperature array
 //============================================================================
-int floLargestNumberInArray (float floArray[], int arraySize ){
+int floCalculateMaxEnabledTemp (float floArray[], int arraySize ){
   //Declarations
   float floValue=-1000;
 
   //Finds the max value in the array
   for(int i=0;i<arraySize;i++) {
-    if(floArray[i] > floValue) {
+    //Checks for max value and if the temp sensor is in use
+    if((floArray[i] > floValue) && (bolTempSensorToUse[i] == true)) {
       floValue = floArray[i];
     }  
   }
@@ -233,11 +235,13 @@ void SetFanPWM (int Fan1PWM, int Fan2PWM, int Fan3PWM, int Fan4PWM, int Fan5PWM,
 void CalculatePWM(void){
   int Fan1PWM, Fan2PWM, Fan3PWM, Fan4PWM, Fan5PWM, Fan6PWM, Fan7PWM, Fan8PWM;
   float floMaxTemp = 0;
-  
+
+  //Finds the maximum temperature
+  floMaxTemp = floCalculateMaxEnabledTemp(floTemp,NUMBER_OF_TEMP_SENSORS);
+    
   //Checks to see if the bias current is on or not
   if (intBiasCurrentStatus == 0){
-    //Finds the maximum temperature
-    floMaxTemp = floLargestNumberInArray(floTemp,NUMBER_OF_TEMP_SENSORS);
+    
     
     //Regulates fans to no current temp
     Fan1PWM = (floMaxTemp - intBiasCurrentOffTemp + 5)*10;
@@ -251,6 +255,7 @@ void CalculatePWM(void){
     
   }
   else{
+  
     //Regulates fans to bais current temp
     Fan1PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
     Fan2PWM = (floMaxTemp - intBiasCurrentOnTemp + 5)*10;
@@ -477,6 +482,17 @@ void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
   strTempSensorToUse = strtok(NULL, ",");
   strSmokeSensorToUse = strtok(NULL, ",");
   intOperating = atoi(strtok(NULL, ",")); 
+
+  //Parses the temp sensor to use
+  for (int i = 0; i < NUMBER_OF_TEMP_SENSORS; i++){
+    if (strTempSensorToUse[i] == '1'){
+      bolTempSensorToUse[i] = true;
+      
+    }
+    else{
+      bolTempSensorToUse[i] = false;
+    }
+  }
 
   //Clears the PC heart beat
   intPCHeartbeatCounter = 0;
