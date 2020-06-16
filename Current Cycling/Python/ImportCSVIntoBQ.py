@@ -2,15 +2,29 @@ import pandas_gbq
 import pandas
 from os import listdir
 from os.path import isfile, join
+from google.oauth2 import service_account
 
-# TODO: Set project_id to your Google Cloud Platform project ID.
+
 project_id = "booming-pride-278623"
 table_id = "CCDataset.CCTable"
+credentials = service_account.Credentials.from_service_account_info(
+{
+  "type": "service_account",
+  "project_id": "booming-pride-278623",
+  "private_key_id": "85349bff3fab73238ad054fa4971007a43fb4c8e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDTTF6mRmM6HbeK\ntzstnkzn4Bo6GBBJyuCGVLBQmRZh2QUATyuImkL15gIWDSyGeq/xpx5IgQyAvk0A\nEILs4qymvLG4SkSjvyBZ4CMBsTT9BPepH1+DN6QQDRxWAspi2Ous4Bs4l0n3Zpaz\n8pgrAuuxF3yHcaqdGsn5ZHbbuud421uOIoOvMwymOkoT38dA1oWubFonmsQH/G7l\nT+YLarWXcnMvsRdH6PEXv3N8+VIVZ0eYwLXu0dTtgpumd8HQqI14V0Ltilutt5QU\nMGqp4q8b8paeAWXF8kCdOaGiP6FiECPuYMqxLcp+DDfWqivID1Qnx0lyoaQQKYU4\n7pmbiKW1AgMBAAECggEADxFfoIjdc5wB5jT51d93iYOMKz9jDfgXOc0ZQ64fD/w7\nZJHAv32Mr99mn67x0Wc3W8q4mKAHRbkMYahLxdvGRx+mpsc5DNpI0s/ufyTla/Oq\nO5e+pmtV2kUtE58gUps4dzwGBOuY/TkGHy/6FPsg1qCfo0MCUTDDXXMCHNo/vnj4\n5ddi4HZqInfWEhBkqBG0UDf2eUGBEycPXxcFWUMAeQrr38BPxK3FPquq2Ss27v57\ny94jtv9RKz6KhwBMGPk+xHSXyxOm8Z9EpNickspgH4xDY5c05DQ7WjffbA3xC5CL\nl6hZ9OxL3AD/e5qHgl+yEdiCA4JaRcWpvc3P0/vFMQKBgQDw7/vKY61VqY/lAcGe\nbZu/Ex5prfXP7L++h/O4MRvKUD35YHAajLpoY/ea135+4OHe/liX6Hg1KoQGDvF0\n14DzOJg2LaTcgb5UFv4zMAZA0Ga2rsdBaDGFw0mGN3kBAFEYGsaLCS/NlrLq7LSC\nJXZT7c839KSypyTnpvBzZytC3QKBgQDgggj+0LJMQrMTKEbtxxOk5Ur/jeK5S3X0\n9u7gBtKeCkyABG6dh4Zmf08k7qiH4B1KBLRxxXALzktd4aW8uxLbNBYhqkM4Dmjs\n8OJ+R9M7qHRL9mzPy6fwsyS9c4UwovQIxnyNpL8WqOkzPs704Gb3GpPck6HcZX0K\ntxLnB9NkuQKBgQDuIAF28jTqKP+ykp3N+v6nRjoUsH311kNcB/n03XRd7BiUU5/4\nXYYOjl61hq3asGAMiMz+th+4TCDX7ATwOd2UhSbKxSnfVcvKSD9MT/aeMFqTywHb\nvyLS1UPhhwns12dOr4fy+k1on7yNOwzcZDIimTLoVr5AY7mxyehz5k93cQKBgQDB\nkTwiP1vLBqMRPGPTNRaJ0KxWJEY7zoUYPSN+AkPrwSNuKOQabDQEAXYCeMbTx/ZY\n0C+n/Dv74dT3T8svKvg6CPGf+wXTuhDbYWFW0aSdRkNnD0OH8aaNkFd4BLbsVUMk\nocXX9hhPeDkAVwHm/eeo28BqqNsghFxINcpVaVjo+QKBgB7JPRwXLJxIk2WW5Uks\naO9rG8WVXHjhVetHrthng7je0cwwn1VPXFR28HkHeqaMsUK53Bj1VMWI+0Mp5DHP\nLeh5YbVbQPFtzr06zcTopoQWfozsgEt9arjItW2sMlKLMDSThltoNgVui7U2M5t5\nNeVQPJO378L2gGLy6FTjfhj/\n-----END PRIVATE KEY-----\n",
+  "client_email": "c-sharp@booming-pride-278623.iam.gserviceaccount.com",
+  "client_id": "106487000463359952131",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/c-sharp%40booming-pride-278623.iam.gserviceaccount.com"
+}
+)
 
 
 #File path
 dataPath = "C:\Git\Projects\Current Cycling\Python\Data"
-
 
 
 #Enumerates all files in folder
@@ -29,7 +43,7 @@ for i, val in enumerate(onlyfiles):
 
     #Renames the columns on the pandas dataframe to match BigQuery's schema
     data.rename(columns={'Cycle Number':'CycleNumber'}, inplace=True)
-    data.rename(columns={'Epoch Time (seconds)':'EpochTime_Seconds'}, inplace=True)
+    data.rename(columns={'Epoch Time (seconds)':'LogTime_Timestamp'}, inplace=True)
     data.rename(columns={'Total Time (hrs)':'TotalTest_Hours'}, inplace=True)
     data.rename(columns={'Time into Cycle (min)':'MinutesIntoCycle'}, inplace=True)
     data.rename(columns={'Current Status':'CurrentBiasIsOn'}, inplace=True)
@@ -74,62 +88,16 @@ for i, val in enumerate(onlyfiles):
     data.rename(columns={'TempSensor':'TempSensorNumber'}, inplace=True)
     data.rename(columns={'SetCurrent':'SetCurrent_Amps'}, inplace=True)
 
+    #Casts SetCurrent_Amps to float
+    data['SetCurrent_Amps'] = data['SetCurrent_Amps'].astype(float)
+
+    #Casts Logtime from Epoch to Datetime
+    data['LogTime_Timestamp'] = pandas.to_datetime(data['LogTime_Timestamp'],unit='s')
+
     #Adds the data to the database
-    pandas_gbq.to_gbq(data, table_id, project_id=project_id,if_exists='append')
+    pandas_gbq.to_gbq(data, table_id, project_id=project_id,if_exists='append',credentials=credentials)
 
     #Prints the progress
     print ("Percent Done: " + str(round((i+1)/len(onlyfiles)*100,1)) + "%")
 
-
-
-df2 = pandas.DataFrame(
-    {
-        "LogTimeStamp": pandas.date_range("now", periods=1),
-        "SampleName": "C1909-026_1696",
-        "CycleNumber": 8242,
-        "EpochTimeStamp": 0.000968055555555556,
-        "TotalTest_Hours": 47.3811172222222,
-        "MinutesIntoCycle": 6.98205,
-        "CurrentBias": True,
-        "Current_Amps": 10.0,
-        "Voltage_Volts": 38.873,
-        "EstimatedRs_mOhms": -99.99,
-        "Temp1_C": 80.0,
-        "Temp2_C": 27.25,
-        "Temp3_C": 82.0,
-        "Temp4_C": 23.5,
-        "Temp5_C": 27.0,
-        "Temp6_C": 25.0,
-        "Temp7_C": 27.75,
-        "Temp8_C": 26.75,
-        "Temp9_C": 31.0,
-        "Temp10_C": 22.75,
-        "Temp11_C": 22.5,
-        "Temp12_C": 83.5,
-        "Temp13_C": 92.25,
-        "Temp14_C": 105.0,
-        "Temp15_C": 100.25,
-        "Temp16_C": 123.5,
-        "SmokeLevel1_Volts": 0.03,
-        "SmokeLevel2_Volts": 0.01,
-        "SmokeLevel3_Volts": 0.0,
-        "SmokeLevel4_Volts": 0.01,
-        "SmokeLevel5_Volts": 0.0,
-        "SmokeLevel6_Volts": 0.0,
-        "SmokeLevel7_Volts": 0.01,
-        "SmokeLevel8_Volts": 0.02,
-        "SmokeVoltage1_Volts": 0.17,
-        "SmokeVoltage2_Volts": 0.17,
-        "SmokeVoltage3_Volts": 0.06,
-        "SmokeVoltage4_Volts": 0.03,
-        "SmokeVoltage5_Volts": 0.03,
-        "SmokeVoltage6_Volts": 0.06,
-        "SmokeVoltage7_Volts": 0.08,
-        "SmokeVoltage8_Volts": 0.08,
-        "NumCells": 22,
-        "CellVoc_Volts": 0.655,
-        "TempSensorNumber": 16,
-        "SetCurrent_Amps": 10.0
-    }
-)
 
