@@ -20,6 +20,7 @@ namespace Current_Cycling_Controls {
         public CCRecipe() {
             Table = U.CCRecipeTable;
             Name = $"CC Parameters [{DateTime.Now:G}]";
+            SampleName = "Sample not chosen";
 
         }
 

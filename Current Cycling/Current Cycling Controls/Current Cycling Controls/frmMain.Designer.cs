@@ -217,6 +217,8 @@ namespace Current_Cycling_Controls {
             this.buttonClearAlarms = new System.Windows.Forms.Button();
             this.checkBoxPrintPacket = new System.Windows.Forms.CheckBox();
             this.buttonSaveLogs = new System.Windows.Forms.Button();
+            this.textBoxOverVoltage = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTemp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartSmoke)).BeginInit();
@@ -2285,11 +2287,31 @@ namespace Current_Cycling_Controls {
             this.buttonSaveLogs.UseVisualStyleBackColor = true;
             this.buttonSaveLogs.Click += new System.EventHandler(this.ButtonSaveLogs_Click);
             // 
+            // textBoxOverVoltage
+            // 
+            this.textBoxOverVoltage.Location = new System.Drawing.Point(389, 113);
+            this.textBoxOverVoltage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxOverVoltage.Name = "textBoxOverVoltage";
+            this.textBoxOverVoltage.Size = new System.Drawing.Size(35, 22);
+            this.textBoxOverVoltage.TabIndex = 172;
+            this.textBoxOverVoltage.Text = "5";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(259, 116);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(124, 17);
+            this.label3.TabIndex = 173;
+            this.label3.Text = "Max Over Voltage:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 874);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxOverVoltage);
             this.Controls.Add(this.buttonSaveLogs);
             this.Controls.Add(this.checkBoxPrintPacket);
             this.Controls.Add(this.buttonClearAlarms);
@@ -2525,6 +2547,8 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Button buttonClearAlarms;
         private System.Windows.Forms.CheckBox checkBoxPrintPacket;
         private System.Windows.Forms.Button buttonSaveLogs;
+        private System.Windows.Forms.TextBox textBoxOverVoltage;
+        private System.Windows.Forms.Label label3;
     }
 }
 

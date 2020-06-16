@@ -29,6 +29,9 @@ namespace Current_Cycling_Controls {
         public bool STOP;
         public bool SMOKEALARM;
         public bool TEMPALARM;
+        public bool GUISTOP;
+        public bool EMSSTOP;
+        public bool OVERMAXVOLTAGE;
         public bool BIASON;
         public bool SAVE;
         public List<double> _temps;
@@ -102,7 +105,10 @@ namespace Current_Cycling_Controls {
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) SaveResultsBQ(tt);
-                            if (double.Parse(tt.Voltage) > U.MaxVoltageBurning) STOP = true;
+                            if (double.Parse(tt.Voltage) > args.MaxOverVoltage) {
+                                STOP = true;
+                                OVERMAXVOLTAGE = true;
+                            } 
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
                         // if we have saved then restart timer
@@ -162,12 +168,15 @@ namespace Current_Cycling_Controls {
                 U.Logger.WriteLine($"TDK closing with exception");
 
             }
-            var cmd = STOP ? "EMSSTOP" : SMOKEALARM ? "SMOKEALARM" : "TEMPALARM";
+            var cmd = EMSSTOP ? "EMSSTOP" : SMOKEALARM ? "SMOKEALARM" : GUISTOP ? "GUI Stop" : OVERMAXVOLTAGE ? "Over Max Voltage" : "TEMPALARM";
             U.Logger.WriteLine($"Encountered {cmd} while Cycling!");
             BIASON = false;
             STOP = false;
             SMOKEALARM = false;
             TEMPALARM = false;
+            EMSSTOP = false;
+            GUISTOP = false;
+            OVERMAXVOLTAGE = false;
             TurnOffClose(tdk);
             U.Logger.WriteLine($"TDK Closing Normally");
         }

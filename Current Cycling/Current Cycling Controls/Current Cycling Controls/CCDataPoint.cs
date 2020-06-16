@@ -33,7 +33,6 @@ namespace Current_Cycling_Controls {
         public CCDataPoint(int cycle, double ep, double totaltime, double timeinto, bool bias, string sample,
             double curr, double voltage, int numcells, double cellVoc, int tempsensor, double setcurrent,
             double rs, List<double> temps, List<double> smokevolts, List<double> smokelevel) {
-            //Id = ObjectId.GenerateNewId();
             LogTime = DateTime.UtcNow;
             CycleNumber = cycle;
             Epoch = ep;

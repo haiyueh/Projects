@@ -11,11 +11,13 @@ namespace Current_Cycling_Controls {
         public double BiasOnTime { get; set; }
         public double BiasOffTime { get; set; }
         public string ResultsDirectory { get; set; }
+        public double MaxOverVoltage { get; set; }
 
-        public StartCyclingArgs(List<TDK> tdk, double biason, double biasoff) {
+        public StartCyclingArgs(List<TDK> tdk, double biason, double biasoff, double max) {
             TDK = tdk;
             BiasOnTime = biason * 60000 ; // convert to msec
             BiasOffTime = biasoff * 60000;
+            MaxOverVoltage = max;
         }
     }
 }

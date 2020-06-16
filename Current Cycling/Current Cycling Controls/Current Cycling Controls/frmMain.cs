@@ -339,6 +339,7 @@ namespace Current_Cycling_Controls {
                     break;
                 case U.CmdType.StopCycling:
                     _cycling.STOP = true;
+                    _cycling.GUISTOP = true;
                     break;
                 case U.CmdType.CleanGUI:
                     _commWorker.ReportProgress(1);
@@ -353,6 +354,7 @@ namespace Current_Cycling_Controls {
                         //_cycling.SMOKEALARM = packet.SmokeAlarm;
                         _cycling.TEMPALARM = packet.TempAlarm;
                         _cycling.STOP = packet.EMSSTOP;
+                        _cycling.EMSSTOP = packet.EMSSTOP;
                         _cycling._temps = new List<double>(packet.TempList);
                         _cycling._smokeRaw = new List<double>(packet.SmokeList);
 
@@ -597,7 +599,8 @@ namespace Current_Cycling_Controls {
 
             CheckPorts();
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(),
-                Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text));
+                Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text),
+                Double.Parse(textBoxOverVoltage.Text));
 
             var start = new CoreCommand {
                 Type = U.CmdType.StartCycling,
@@ -882,15 +885,15 @@ namespace Current_Cycling_Controls {
         private void ButtonSaveLogs_Click(object sender, EventArgs e) {
             U.Logger.SaveLog();
 #if DEBUG
-            for (var i = 0; i < 20; i++) {
+            for (var i = 0; i < 5; i++) {
                 TestDataEvent?.Invoke(this, new DataQueueObject(DataQueueObject.DataType.CycleData,
                 new CCDataPoint(5,
                 66666666.253, // epoch
                 1231212313.35, // total time (hrs)
                 121313123.3434343, // time into current cycle
-                false, "test", 1, 1, 1,
-                1, 1, 1, -99.99,
-                new List<double> { 5, 5,5,5,5,5,5,5,5,5,5,5,5,5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 })));
+                false, "Testing", 1, 1, 1,
+                1, 1, 10.2, -99.99,
+                new List<double> { 5, 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5 }, new List<double> { 5, 5, 5, 5, 5, 5, 5, 5 })));
             }
 
 #endif

@@ -92,7 +92,7 @@ namespace Current_Cycling_Controls {
             dataViewer.Columns[0].ReadOnly = true;
             dataViewer.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataViewer.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataViewer.Columns[0].FillWeight = 200;
+            dataViewer.Columns[0].FillWeight = 50;
 
             _recipeProperties = (from p in CurrentRecipe.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance) select p).ToList();
 
