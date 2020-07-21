@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using Google.Cloud.BigQuery.V2;
 using Google.Apis.Bigquery.v2.Data;
 using System.IO;
@@ -28,6 +26,7 @@ namespace Current_Cycling_Controls {
         public bool DataError = false;
 
         public Data() {
+            if (!BuildTable()) Console.WriteLine($"Couldn't Connect to Google BQ. Please check connection!");
             _dataWorker.DoWork += DataWorker_DoWork;
             _dataWorker.RunWorkerAsync();
         }

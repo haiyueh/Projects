@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Current_Cycling_Controls {
-    [BsonIgnoreExtraElements]
 
     public class CCRecipe : Recipe<CCRecipe> {
         public string SampleName { get; set; }
