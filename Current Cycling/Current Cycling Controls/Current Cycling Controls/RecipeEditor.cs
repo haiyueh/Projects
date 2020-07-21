@@ -23,8 +23,6 @@ namespace Current_Cycling_Controls {
         private List<PropertyInfo> _recipeProperties;
         private string _selectedSample;
 
-        private Type ThisType => typeof(TType);
-
         private readonly string[] _excluded = { "Id", "Table", "Active", "Selected", "Updated", "Created", "Name", "CycleNumber" };
         private readonly string[] _readonly = { "Updated", "Created", "SampleName" };
 

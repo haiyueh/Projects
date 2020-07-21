@@ -61,6 +61,7 @@ namespace Current_Cycling_Controls {
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
             TestDataEvent += BQConn.QueueData;
             Directory.CreateDirectory("logs");
+            Directory.CreateDirectory("backupData");
             _commWorker.DoWork += RunCommMachine;
             _commWorker.WorkerReportsProgress = true;
             _commWorker.ProgressChanged += UpdateUi;

@@ -25,13 +25,8 @@ namespace Current_Cycling_Controls {
         public List<TDK> _TDK;
         public bool _updateRun;
         public GUIArgs _args;
-        public string _resultsDir;
-        public bool STOP;
-        public bool SMOKEALARM;
-        public bool TEMPALARM;
-        public bool GUISTOP;
-        public bool EMSSTOP;
-        public bool OVERMAXVOLTAGE;
+        public string _resultsDir = $".\\backupData\\";
+        public bool STOP, SMOKEALARM, TEMPALARM, GUISTOP, EMSSTOP, OVERMAXVOLTAGE;
         public bool BIASON;
         public bool SAVE;
         public List<double> _temps;
@@ -41,6 +36,7 @@ namespace Current_Cycling_Controls {
         public event CoreCommandEvent NewCoreCommand;
         public event DataEvent CycleDataEvent;
         private readonly Data _conn = new Data();
+        public bool DataError = false;
 
         public CurrentCycling() {
             CycleDataEvent += _conn.QueueData;
@@ -73,7 +69,7 @@ namespace Current_Cycling_Controls {
                 _totalTimer.Start();
                 _voltageTimer = new Stopwatch();
                 _voltageTimer.Start();
-
+                DataError = false; // assume connection is good at start
                 // Loop forever until we get a stop command from main thread
                 while (true) {
                     _intoCycleTimer = new Stopwatch();
@@ -104,7 +100,10 @@ namespace Current_Cycling_Controls {
                             tt.Current = _serTDK.ReadLine();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
-                            if (SAVE) SaveResultsBQ(tt);
+                            if (SAVE) {
+                                SaveResultsBQ(tt);
+                            }
+                            
                             if (double.Parse(tt.Voltage) > args.MaxOverVoltage) {
                                 STOP = true;
                                 OVERMAXVOLTAGE = true;
@@ -139,7 +138,9 @@ namespace Current_Cycling_Controls {
                             tt.Current = _serTDK.ReadLine();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
-                            if (SAVE) SaveResultsBQ(tt);
+                            if (SAVE) {
+                                SaveResultsBQ(tt);
+                            }
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
 
@@ -198,7 +199,7 @@ namespace Current_Cycling_Controls {
 
         private void SaveResults(TDK t) {
             var str = CompileDataStr(t);
-            var path = _resultsDir + $"\\{t.SampleName}.txt";
+            var path = _resultsDir + $"{t.SampleName}_{DateTime.Now:M-dd--HH-mm--ss}.txt";
             using (var writer = new StreamWriter(path, true)) {
                 writer.WriteLine(str);
             }
