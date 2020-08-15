@@ -28,12 +28,12 @@
 #define FAN8_CTRL 10
 
 //LEDs
-#define LED_POWER 30
-#define LED_OVERTEMP 32
-#define LED_CURRENT_ON 34
-#define LED_CYCLE_ON 36
-#define LED_COOLING 38
-#define LED_SMOKE_ALARM 40
+#define LED_POWER 30        //Red LED
+#define LED_OVERTEMP 32     //Orange LED
+#define LED_CURRENT_ON 34   //Yellow LED 
+#define LED_CYCLE_ON 36     //Green LED
+#define LED_COOLING 38      //Blue LED
+#define LED_SMOKE_ALARM 40  //Purple LED
 
 
 //EMO
