@@ -1,8 +1,8 @@
 #include <SoftwareI2C.h>
 #include <Adafruit_ADS1X15_Software_I2C.h>
 
-
-Adafruit_ADS1115 ads(0x4a,20,21);  /* Use this for the 16-bit version */
+//CLK,DA
+Adafruit_ADS1115 ads(0x4a,49,48);  /* Use this for the 16-bit version */
 
 void setup(void) 
 {
@@ -30,7 +30,6 @@ void setup(void)
 void loop(void) 
 {
   int16_t adc0, adc1, adc2, adc3;
-
   adc0 = ads.readADC_SingleEnded(0);
   adc1 = ads.readADC_SingleEnded(1);
   adc2 = ads.readADC_SingleEnded(2);
@@ -40,6 +39,6 @@ void loop(void)
   Serial.print("AIN2: "); Serial.println(adc2);
   Serial.print("AIN3: "); Serial.println(adc3);
   Serial.println(" ");
-  
   delay(1000);
+  
 }
