@@ -4,6 +4,7 @@
 
 #include <SoftwareI2C.h>
 #include <Adafruit_ADS1X15_Software_I2C.h>
+#include "TimerOne.h"
 
 //====================================================
 //Definitions
@@ -11,6 +12,8 @@
 #define NUMBER_OF_BOARDS 8
 #define ADC_ADDRESS_CHANNELS_1_TO_4 0x4B
 #define ADC_ADDRESS_CHANNELS_5_TO_8 0x4A
+#define UART_BUFFER 256
+#define TIMED_LOOP_DURATION_US 1000000
 
 //====================================================
 //Declarations
@@ -37,23 +40,77 @@ int intADCPGA[64] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 //ADC programmable gain amplifier constants
 uint16_t intPGADefinition[6] = {GAIN_TWOTHIRDS, GAIN_ONE, GAIN_TWO, GAIN_FOUR, GAIN_EIGHT, GAIN_SIXTEEN};
 
+//UART
+char chrPCData[UART_BUFFER];
+boolean newData = false;
+char startMarker = '<';
+char endMarker = '>';
+int intFlag = -255;
 
-//====================================================
-//Function: setup
-//Input: none
-//Output: none
-//====================================================
-void setup(void) {
-  //DEBUG
-  Serial.begin(115200);
+//============================================================================
+//Function: void ParseDataFromPC(char chrSerialData[UART_BUFFER])
+//Notes:  parses data from the PC
+//============================================================================
+void ParseDataFromPC(char chrSerialData[UART_BUFFER]){
+  //Uses string tokenizer to parse the data from the PC (sample: <75.0,3.5,70,50,1,0,0>)
+  intADCPGA[0] = atof(strtok(chrSerialData,","));  
+
+  //Reads in all the gains for the PGA
+  for (int i = 1; i < 64; i++){
+    intADCPGA[i] = atof(strtok(NULL, ",")); 
+  }
+
+  //Reads the flag
+  intFlag = atof(strtok(NULL, ","));
+
 }
 
-//====================================================
-//Function: loop
-//Input: none
-//Output: none
-//====================================================
-void loop(void){
+
+//============================================================================
+//Function: void ReadDatafromPC()
+//Notes:  reads data from the PC
+//============================================================================
+void ReadDatafromPC() {
+
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char rc;
+
+    //Reads the data from the serial port if there is data
+    while (Serial.available() > 0 && newData == false) {
+        //Gets a byte back from the serial port
+        rc = Serial.read();
+
+        //Checks to see if we are at a new line or in progress of constructing a line
+        if (recvInProgress == true) {
+            //Checks for end marker
+            if (rc != endMarker) {
+                chrPCData[ndx] = rc;
+                ndx++;
+                if (ndx >= UART_BUFFER) {
+                    ndx = UART_BUFFER - 1;
+                }
+            }
+            else {
+                chrPCData[ndx] = '\0'; 
+                recvInProgress = false;
+                ndx = 0;
+
+                //Parses the data
+                ParseDataFromPC(chrPCData);
+            }
+        }
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
+    }
+}
+
+//======================================================================
+//Function: TimedLoop
+//Description: This function runs at the specified timer interval
+//======================================================================
+void TimedLoop(){
   //Declarations
   int intBoardIndex = 0;
   
@@ -96,12 +153,40 @@ void loop(void){
     intADCValues[intBoardIndex*8+7] = ads2.readADC_SingleEnded(3);
   }
 
-  //DEBUG
+  //Prints out the data to the computer
+  Serial.print("<");
   for (int i = 0; i < 64; i++){
     Serial.print(intADCValues[i]);
     Serial.print(",");
   }
-  Serial.println();
-  //delay(100);
+  Serial.print(intFlag);
+  Serial.println(">");
+}
+
+
+//====================================================
+//Function: setup
+//Input: none
+//Output: none
+//====================================================
+void setup(void) {
+  //Serial init
+  Serial.begin(115200);
+
+  //Timer that calls function TimedLoop every TIMED_LOOP_DURATION_US uS 
+  Timer1.initialize(TIMED_LOOP_DURATION_US);
+  Timer1.attachInterrupt(TimedLoop);
+
+}
+
+//====================================================
+//Function: loop
+//Input: none
+//Output: none
+//====================================================
+void loop(void){
+
+  //Recieve data from PC  
+  ReadDatafromPC();
   
 }
