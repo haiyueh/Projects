@@ -638,11 +638,14 @@ void TestHeartBeat(){
 //Description: This function runs at the specified timer interval
 //======================================================================
 void TimedLoop(){
-    //Writes the data from the thermal controller
-    SendDataToThermalController();
+    //Tests the heart beat
+    TestHeartBeat();
 
     //Checks to see if E-Stop is pressed
     execEmergencyAction(isEMOPressed);
+    
+    //Writes the data from the thermal controller
+    SendDataToThermalController();
 
     //Checks to see if user is requesting a start or a stop
     StartStopCycle();
@@ -656,8 +659,6 @@ void TimedLoop(){
     //Sends the data to the PC
     sendDataToPC();
 
-    //Tests the heart beat
-    TestHeartBeat();
 }
 
 
