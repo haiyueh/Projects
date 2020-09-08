@@ -628,7 +628,7 @@ void TestHeartBeat(){
   if (intPCHeartbeatCounter > HEARTBEAT_LENGTH){
     //Heartbeat fails - disables power supplies and fans
     //Serial.println("Heartbeat fail");
-    execEmergencyAction(true);;
+    execEmergencyAction(true);
   }
 }
 
