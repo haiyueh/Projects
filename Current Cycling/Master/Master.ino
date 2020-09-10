@@ -133,6 +133,7 @@ void execEmergencyAction (bool bolIsEmergency){
   //Checks to see if there is an emergency
   if (bolIsEmergency == true){
     //Executes emergency action
+    intOperating = 0;
     setPowerSupplyInterlock(false);
     setFanPowerInterlock(false);
     SetFanPWM (0,0,0,0,0,0,0,0);
@@ -151,11 +152,11 @@ bool isEMOPressed(){
   //Reads the EMO switch
   if (digitalRead(EMO_SW) == HIGH){
     //This means stop; EMO switch has been pressed
-    return true; 
+    return false; 
   }
   else{
     //This means run, nothing has been pressed
-    return false;
+    return true;
     
   }
 }
@@ -166,7 +167,14 @@ bool isEMOPressed(){
 //============================================================================
 void setPowerSupplyInterlock(bool bolEnablePowerSupply){
   //Turns the power supply interlock depending on the input
-  digitalWrite(POWER_SUPPLY_INTERLOCK, bolEnablePowerSupply);
+  if (bolEnablePowerSupply == false){
+    digitalWrite(POWER_SUPPLY_INTERLOCK, LOW);
+    }
+  else{
+    digitalWrite(POWER_SUPPLY_INTERLOCK, HIGH);
+  }
+  //DEBUG
+  digitalWrite(LED_CURRENT_ON,digitalRead(POWER_SUPPLY_INTERLOCK));
 }
 
 //============================================================================
@@ -175,7 +183,12 @@ void setPowerSupplyInterlock(bool bolEnablePowerSupply){
 //============================================================================
 void setFanPowerInterlock(bool bolFanPowerEnable){
   //Enables/disables the fan
-  digitalWrite(FAN_POWER_INTERLOCK, bolFanPowerEnable);
+  if (bolFanPowerEnable == false){
+    digitalWrite(FAN_POWER_INTERLOCK, LOW);
+  }
+  else{
+    digitalWrite(FAN_POWER_INTERLOCK, HIGH);
+  }
 }
 
 //============================================================================
@@ -618,7 +631,7 @@ void TestHeartBeat(){
   intThermalControllerHeartbeatCounter++;
 
   //Checks to see if we have an expired heart beat for the thermal controller
-  if (intThermalControllerHeartbeatCounter > HEARTBEAT_LENGTH){
+  if (intThermalControllerHeartbeatCounter > (HEARTBEAT_LENGTH+99999)){
     //Heartbeat fails - disables power supplies and fans
     bolThermalControllerHeartBeatGood = false;
     execEmergencyAction(true);
@@ -642,7 +655,7 @@ void TimedLoop(){
     TestHeartBeat();
 
     //Checks to see if E-Stop is pressed
-    execEmergencyAction(isEMOPressed);
+    execEmergencyAction(isEMOPressed());
     
     //Writes the data from the thermal controller
     SendDataToThermalController();
