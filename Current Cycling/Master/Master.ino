@@ -631,7 +631,7 @@ void TestHeartBeat(){
   intThermalControllerHeartbeatCounter++;
 
   //Checks to see if we have an expired heart beat for the thermal controller
-  if (intThermalControllerHeartbeatCounter > (HEARTBEAT_LENGTH+99999)){
+  if (intThermalControllerHeartbeatCounter > (HEARTBEAT_LENGTH)){
     //Heartbeat fails - disables power supplies and fans
     bolThermalControllerHeartBeatGood = false;
     execEmergencyAction(true);
