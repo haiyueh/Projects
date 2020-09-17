@@ -50,6 +50,7 @@ namespace Current_Cycling_Controls {
             public static StringBuilder LogString = new StringBuilder();
             public static int maxBytes = 20000000; // 20mb
             public static int maxChars = maxBytes / sizeof(char);
+            public static string Dir = "C:/CCLogs/";
 
             public static void WriteLine(string str) {
                 Console.WriteLine(str);
@@ -62,6 +63,10 @@ namespace Current_Cycling_Controls {
             }
 
             public static void SaveLog(bool append = false) {
+                if (!Directory.Exists(Dir)) {
+                    Directory.CreateDirectory(Dir);
+                }
+
                 int bytess = LogString.ToString().Length * sizeof(Char) + sizeof(int);
 
                 // if greater than 20mb split it up and save seperately
@@ -77,7 +82,7 @@ namespace Current_Cycling_Controls {
 
                     int j = 0;
                     foreach (var s in strList) {
-                        string path = $"./logs/Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}_{j}.txt";
+                        string path = $"{Dir}Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}_{j}.txt";
                         if (LogString != null && LogString.Length > 0) {
                             using (StreamWriter file = new StreamWriter(path)) {
                                 file.Write(s);
@@ -89,7 +94,7 @@ namespace Current_Cycling_Controls {
                     }
                 }
                 else {
-                    var path = $"./logs/Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}.txt";
+                    var path = $"{Dir}Log {DateTime.Now.ToString("yy_MM_dd_H_mm")}.txt";
                     if (LogString != null && LogString.Length > 0) {
                         using (StreamWriter file = new StreamWriter(path)) {
                             file.Write(LogString.ToString());

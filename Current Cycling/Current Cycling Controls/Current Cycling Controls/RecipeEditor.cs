@@ -98,7 +98,6 @@ namespace Current_Cycling_Controls {
 
             var row = 0;
 
-            // TODO: If "Create new recipe" then dont set SampleName to readonly
             foreach (var property in _recipeProperties) {
                 if (_excluded.Any(x => x.Equals(property.Name))) continue;
                 dvc = new DataGridViewCellStyle {

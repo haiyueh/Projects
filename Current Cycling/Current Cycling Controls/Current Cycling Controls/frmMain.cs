@@ -58,6 +58,7 @@ namespace Current_Cycling_Controls {
         private TransmitPacket _heartBeatPacket;
         public frmMain() {
             InitializeComponent();
+            Connected = false;
             this.FormClosing += new FormClosingEventHandler(Form_Closing);
             TestDataEvent += BQConn.QueueData;
             Directory.CreateDirectory("logs");
@@ -81,7 +82,7 @@ namespace Current_Cycling_Controls {
             _cycling.NewCoreCommand += NewCoreCommand;
             _arduino.NewCoreCommand += NewCoreCommand;
 
-            Connected = false;
+            
             _refSmokes = new List<double> { 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000 };
             _smokeLevel = new List<double> { 0, 0, 0, 0, 0, 0, 0, 0 };
             _TDKconnection = new List<bool> { false, false, false, false, false, false,
@@ -326,7 +327,6 @@ namespace Current_Cycling_Controls {
                 Info("Got null command");
                 return;
             }
-            //Info(c);
             switch (c.Type) {
                 case U.CmdType.None:
                     break;

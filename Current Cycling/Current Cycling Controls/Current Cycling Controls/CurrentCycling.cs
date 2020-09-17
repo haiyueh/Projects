@@ -46,6 +46,9 @@ namespace Current_Cycling_Controls {
             _serTDK = new SerialPort();
             var tdk = args.TDK;
             if (tdk.Count < 1) return;
+            U.Logger.WriteLine("Waiting for HW interlock");
+            NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateHeartBeatPacket });
+            Thread.Sleep(2000); // wait for HW interlock to disengage
             OpenPorts();
             try {
                 foreach (var t in tdk) {

@@ -232,12 +232,12 @@ namespace Current_Cycling_Controls {
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 115F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.txtSetCurr12, 10, 12);
             this.tableLayoutPanel1.Controls.Add(this.txtSetCurr11, 10, 11);
@@ -405,127 +405,127 @@ namespace Current_Cycling_Controls {
             // txtSetCurr12
             // 
             this.txtSetCurr12.Enabled = false;
-            this.txtSetCurr12.Location = new System.Drawing.Point(1051, 393);
+            this.txtSetCurr12.Location = new System.Drawing.Point(1075, 393);
             this.txtSetCurr12.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr12.Name = "txtSetCurr12";
-            this.txtSetCurr12.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr12.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr12.TabIndex = 167;
             this.txtSetCurr12.Text = "0";
             // 
             // txtSetCurr11
             // 
             this.txtSetCurr11.Enabled = false;
-            this.txtSetCurr11.Location = new System.Drawing.Point(1051, 361);
+            this.txtSetCurr11.Location = new System.Drawing.Point(1075, 361);
             this.txtSetCurr11.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr11.Name = "txtSetCurr11";
-            this.txtSetCurr11.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr11.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr11.TabIndex = 166;
             this.txtSetCurr11.Text = "0";
             // 
             // txtSetCurr10
             // 
             this.txtSetCurr10.Enabled = false;
-            this.txtSetCurr10.Location = new System.Drawing.Point(1051, 330);
+            this.txtSetCurr10.Location = new System.Drawing.Point(1075, 330);
             this.txtSetCurr10.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr10.Name = "txtSetCurr10";
-            this.txtSetCurr10.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr10.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr10.TabIndex = 165;
             this.txtSetCurr10.Text = "0";
             // 
             // txtSetCurr9
             // 
             this.txtSetCurr9.Enabled = false;
-            this.txtSetCurr9.Location = new System.Drawing.Point(1051, 298);
+            this.txtSetCurr9.Location = new System.Drawing.Point(1075, 298);
             this.txtSetCurr9.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr9.Name = "txtSetCurr9";
-            this.txtSetCurr9.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr9.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr9.TabIndex = 164;
             this.txtSetCurr9.Text = "0";
             // 
             // txtSetCurr8
             // 
             this.txtSetCurr8.Enabled = false;
-            this.txtSetCurr8.Location = new System.Drawing.Point(1051, 267);
+            this.txtSetCurr8.Location = new System.Drawing.Point(1075, 267);
             this.txtSetCurr8.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr8.Name = "txtSetCurr8";
-            this.txtSetCurr8.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr8.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr8.TabIndex = 163;
             this.txtSetCurr8.Text = "0";
             // 
             // txtSetCurr7
             // 
             this.txtSetCurr7.Enabled = false;
-            this.txtSetCurr7.Location = new System.Drawing.Point(1051, 237);
+            this.txtSetCurr7.Location = new System.Drawing.Point(1075, 237);
             this.txtSetCurr7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr7.Name = "txtSetCurr7";
-            this.txtSetCurr7.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr7.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr7.TabIndex = 162;
             this.txtSetCurr7.Text = "0";
             // 
             // txtSetCurr6
             // 
             this.txtSetCurr6.Enabled = false;
-            this.txtSetCurr6.Location = new System.Drawing.Point(1051, 206);
+            this.txtSetCurr6.Location = new System.Drawing.Point(1075, 206);
             this.txtSetCurr6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr6.Name = "txtSetCurr6";
-            this.txtSetCurr6.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr6.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr6.TabIndex = 161;
             this.txtSetCurr6.Text = "0";
             // 
             // txtSetCurr5
             // 
             this.txtSetCurr5.Enabled = false;
-            this.txtSetCurr5.Location = new System.Drawing.Point(1051, 176);
+            this.txtSetCurr5.Location = new System.Drawing.Point(1075, 176);
             this.txtSetCurr5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr5.Name = "txtSetCurr5";
-            this.txtSetCurr5.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr5.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr5.TabIndex = 160;
             this.txtSetCurr5.Text = "0";
             // 
             // txtSetCurr4
             // 
             this.txtSetCurr4.Enabled = false;
-            this.txtSetCurr4.Location = new System.Drawing.Point(1051, 146);
+            this.txtSetCurr4.Location = new System.Drawing.Point(1075, 146);
             this.txtSetCurr4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr4.Name = "txtSetCurr4";
-            this.txtSetCurr4.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr4.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr4.TabIndex = 159;
             this.txtSetCurr4.Text = "0";
             // 
             // txtSetCurr3
             // 
             this.txtSetCurr3.Enabled = false;
-            this.txtSetCurr3.Location = new System.Drawing.Point(1051, 114);
+            this.txtSetCurr3.Location = new System.Drawing.Point(1075, 114);
             this.txtSetCurr3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr3.Name = "txtSetCurr3";
-            this.txtSetCurr3.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr3.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr3.TabIndex = 158;
             this.txtSetCurr3.Text = "0";
             // 
             // txtSetCurr2
             // 
             this.txtSetCurr2.Enabled = false;
-            this.txtSetCurr2.Location = new System.Drawing.Point(1051, 81);
+            this.txtSetCurr2.Location = new System.Drawing.Point(1075, 81);
             this.txtSetCurr2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr2.Name = "txtSetCurr2";
-            this.txtSetCurr2.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr2.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr2.TabIndex = 157;
             this.txtSetCurr2.Text = "0";
             // 
             // txtSetCurr1
             // 
             this.txtSetCurr1.Enabled = false;
-            this.txtSetCurr1.Location = new System.Drawing.Point(1051, 48);
+            this.txtSetCurr1.Location = new System.Drawing.Point(1075, 48);
             this.txtSetCurr1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSetCurr1.Name = "txtSetCurr1";
-            this.txtSetCurr1.Size = new System.Drawing.Size(92, 22);
+            this.txtSetCurr1.Size = new System.Drawing.Size(78, 22);
             this.txtSetCurr1.TabIndex = 156;
             this.txtSetCurr1.Text = "0";
             // 
             // lblCycle12
             // 
             this.lblCycle12.AutoSize = true;
-            this.lblCycle12.Location = new System.Drawing.Point(712, 389);
+            this.lblCycle12.Location = new System.Drawing.Point(695, 389);
             this.lblCycle12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle12.Name = "lblCycle12";
             this.lblCycle12.Size = new System.Drawing.Size(16, 17);
@@ -535,16 +535,16 @@ namespace Current_Cycling_Controls {
             // lblSetCurrent
             // 
             this.lblSetCurrent.AutoSize = true;
-            this.lblSetCurrent.Location = new System.Drawing.Point(1050, 0);
+            this.lblSetCurrent.Location = new System.Drawing.Point(1074, 0);
             this.lblSetCurrent.Name = "lblSetCurrent";
-            this.lblSetCurrent.Size = new System.Drawing.Size(103, 17);
+            this.lblSetCurrent.Size = new System.Drawing.Size(80, 34);
             this.lblSetCurrent.TabIndex = 36;
             this.lblSetCurrent.Text = "Set Current (A)";
             // 
             // lblVoltage
             // 
             this.lblVoltage.AutoSize = true;
-            this.lblVoltage.Location = new System.Drawing.Point(849, 0);
+            this.lblVoltage.Location = new System.Drawing.Point(874, 0);
             this.lblVoltage.Name = "lblVoltage";
             this.lblVoltage.Size = new System.Drawing.Size(79, 17);
             this.lblVoltage.TabIndex = 34;
@@ -553,7 +553,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent
             // 
             this.lblCurrent.AutoSize = true;
-            this.lblCurrent.Location = new System.Drawing.Point(763, 0);
+            this.lblCurrent.Location = new System.Drawing.Point(782, 0);
             this.lblCurrent.Name = "lblCurrent";
             this.lblCurrent.Size = new System.Drawing.Size(78, 17);
             this.lblCurrent.TabIndex = 33;
@@ -562,7 +562,7 @@ namespace Current_Cycling_Controls {
             // lblCycleNum
             // 
             this.lblCycleNum.AutoSize = true;
-            this.lblCycleNum.Location = new System.Drawing.Point(711, 0);
+            this.lblCycleNum.Location = new System.Drawing.Point(694, 0);
             this.lblCycleNum.Name = "lblCycleNum";
             this.lblCycleNum.Size = new System.Drawing.Size(42, 17);
             this.lblCycleNum.TabIndex = 32;
@@ -1347,7 +1347,7 @@ namespace Current_Cycling_Controls {
             // lblCycle1
             // 
             this.lblCycle1.AutoSize = true;
-            this.lblCycle1.Location = new System.Drawing.Point(712, 44);
+            this.lblCycle1.Location = new System.Drawing.Point(695, 44);
             this.lblCycle1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle1.Name = "lblCycle1";
             this.lblCycle1.Size = new System.Drawing.Size(16, 17);
@@ -1357,7 +1357,7 @@ namespace Current_Cycling_Controls {
             // lblCycle2
             // 
             this.lblCycle2.AutoSize = true;
-            this.lblCycle2.Location = new System.Drawing.Point(712, 77);
+            this.lblCycle2.Location = new System.Drawing.Point(695, 77);
             this.lblCycle2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle2.Name = "lblCycle2";
             this.lblCycle2.Size = new System.Drawing.Size(16, 17);
@@ -1367,7 +1367,7 @@ namespace Current_Cycling_Controls {
             // lblCycle3
             // 
             this.lblCycle3.AutoSize = true;
-            this.lblCycle3.Location = new System.Drawing.Point(712, 110);
+            this.lblCycle3.Location = new System.Drawing.Point(695, 110);
             this.lblCycle3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle3.Name = "lblCycle3";
             this.lblCycle3.Size = new System.Drawing.Size(16, 17);
@@ -1377,7 +1377,7 @@ namespace Current_Cycling_Controls {
             // lblCycle4
             // 
             this.lblCycle4.AutoSize = true;
-            this.lblCycle4.Location = new System.Drawing.Point(712, 142);
+            this.lblCycle4.Location = new System.Drawing.Point(695, 142);
             this.lblCycle4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle4.Name = "lblCycle4";
             this.lblCycle4.Size = new System.Drawing.Size(16, 17);
@@ -1387,7 +1387,7 @@ namespace Current_Cycling_Controls {
             // lblCycle5
             // 
             this.lblCycle5.AutoSize = true;
-            this.lblCycle5.Location = new System.Drawing.Point(712, 172);
+            this.lblCycle5.Location = new System.Drawing.Point(695, 172);
             this.lblCycle5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle5.Name = "lblCycle5";
             this.lblCycle5.Size = new System.Drawing.Size(16, 17);
@@ -1397,7 +1397,7 @@ namespace Current_Cycling_Controls {
             // lblCycle6
             // 
             this.lblCycle6.AutoSize = true;
-            this.lblCycle6.Location = new System.Drawing.Point(712, 202);
+            this.lblCycle6.Location = new System.Drawing.Point(695, 202);
             this.lblCycle6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle6.Name = "lblCycle6";
             this.lblCycle6.Size = new System.Drawing.Size(16, 17);
@@ -1407,7 +1407,7 @@ namespace Current_Cycling_Controls {
             // lblCycle7
             // 
             this.lblCycle7.AutoSize = true;
-            this.lblCycle7.Location = new System.Drawing.Point(712, 233);
+            this.lblCycle7.Location = new System.Drawing.Point(695, 233);
             this.lblCycle7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle7.Name = "lblCycle7";
             this.lblCycle7.Size = new System.Drawing.Size(16, 17);
@@ -1417,7 +1417,7 @@ namespace Current_Cycling_Controls {
             // lblCycle8
             // 
             this.lblCycle8.AutoSize = true;
-            this.lblCycle8.Location = new System.Drawing.Point(712, 263);
+            this.lblCycle8.Location = new System.Drawing.Point(695, 263);
             this.lblCycle8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle8.Name = "lblCycle8";
             this.lblCycle8.Size = new System.Drawing.Size(16, 17);
@@ -1427,7 +1427,7 @@ namespace Current_Cycling_Controls {
             // lblCycle9
             // 
             this.lblCycle9.AutoSize = true;
-            this.lblCycle9.Location = new System.Drawing.Point(712, 294);
+            this.lblCycle9.Location = new System.Drawing.Point(695, 294);
             this.lblCycle9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle9.Name = "lblCycle9";
             this.lblCycle9.Size = new System.Drawing.Size(16, 17);
@@ -1437,7 +1437,7 @@ namespace Current_Cycling_Controls {
             // lblCycle10
             // 
             this.lblCycle10.AutoSize = true;
-            this.lblCycle10.Location = new System.Drawing.Point(712, 326);
+            this.lblCycle10.Location = new System.Drawing.Point(695, 326);
             this.lblCycle10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle10.Name = "lblCycle10";
             this.lblCycle10.Size = new System.Drawing.Size(16, 17);
@@ -1447,7 +1447,7 @@ namespace Current_Cycling_Controls {
             // lblCycle11
             // 
             this.lblCycle11.AutoSize = true;
-            this.lblCycle11.Location = new System.Drawing.Point(712, 357);
+            this.lblCycle11.Location = new System.Drawing.Point(695, 357);
             this.lblCycle11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCycle11.Name = "lblCycle11";
             this.lblCycle11.Size = new System.Drawing.Size(16, 17);
@@ -1467,7 +1467,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent1
             // 
             this.lblCurrent1.AutoSize = true;
-            this.lblCurrent1.Location = new System.Drawing.Point(764, 44);
+            this.lblCurrent1.Location = new System.Drawing.Point(783, 44);
             this.lblCurrent1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent1.Name = "lblCurrent1";
             this.lblCurrent1.Size = new System.Drawing.Size(28, 17);
@@ -1477,7 +1477,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent2
             // 
             this.lblCurrent2.AutoSize = true;
-            this.lblCurrent2.Location = new System.Drawing.Point(764, 77);
+            this.lblCurrent2.Location = new System.Drawing.Point(783, 77);
             this.lblCurrent2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent2.Name = "lblCurrent2";
             this.lblCurrent2.Size = new System.Drawing.Size(28, 17);
@@ -1487,7 +1487,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent3
             // 
             this.lblCurrent3.AutoSize = true;
-            this.lblCurrent3.Location = new System.Drawing.Point(764, 110);
+            this.lblCurrent3.Location = new System.Drawing.Point(783, 110);
             this.lblCurrent3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent3.Name = "lblCurrent3";
             this.lblCurrent3.Size = new System.Drawing.Size(28, 17);
@@ -1497,7 +1497,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent4
             // 
             this.lblCurrent4.AutoSize = true;
-            this.lblCurrent4.Location = new System.Drawing.Point(764, 142);
+            this.lblCurrent4.Location = new System.Drawing.Point(783, 142);
             this.lblCurrent4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent4.Name = "lblCurrent4";
             this.lblCurrent4.Size = new System.Drawing.Size(28, 17);
@@ -1507,7 +1507,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent5
             // 
             this.lblCurrent5.AutoSize = true;
-            this.lblCurrent5.Location = new System.Drawing.Point(764, 172);
+            this.lblCurrent5.Location = new System.Drawing.Point(783, 172);
             this.lblCurrent5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent5.Name = "lblCurrent5";
             this.lblCurrent5.Size = new System.Drawing.Size(28, 17);
@@ -1517,7 +1517,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent6
             // 
             this.lblCurrent6.AutoSize = true;
-            this.lblCurrent6.Location = new System.Drawing.Point(764, 202);
+            this.lblCurrent6.Location = new System.Drawing.Point(783, 202);
             this.lblCurrent6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent6.Name = "lblCurrent6";
             this.lblCurrent6.Size = new System.Drawing.Size(28, 17);
@@ -1527,7 +1527,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent7
             // 
             this.lblCurrent7.AutoSize = true;
-            this.lblCurrent7.Location = new System.Drawing.Point(764, 233);
+            this.lblCurrent7.Location = new System.Drawing.Point(783, 233);
             this.lblCurrent7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent7.Name = "lblCurrent7";
             this.lblCurrent7.Size = new System.Drawing.Size(28, 17);
@@ -1537,7 +1537,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent8
             // 
             this.lblCurrent8.AutoSize = true;
-            this.lblCurrent8.Location = new System.Drawing.Point(764, 263);
+            this.lblCurrent8.Location = new System.Drawing.Point(783, 263);
             this.lblCurrent8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent8.Name = "lblCurrent8";
             this.lblCurrent8.Size = new System.Drawing.Size(28, 17);
@@ -1547,7 +1547,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent9
             // 
             this.lblCurrent9.AutoSize = true;
-            this.lblCurrent9.Location = new System.Drawing.Point(764, 294);
+            this.lblCurrent9.Location = new System.Drawing.Point(783, 294);
             this.lblCurrent9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent9.Name = "lblCurrent9";
             this.lblCurrent9.Size = new System.Drawing.Size(28, 17);
@@ -1557,7 +1557,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent10
             // 
             this.lblCurrent10.AutoSize = true;
-            this.lblCurrent10.Location = new System.Drawing.Point(764, 326);
+            this.lblCurrent10.Location = new System.Drawing.Point(783, 326);
             this.lblCurrent10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent10.Name = "lblCurrent10";
             this.lblCurrent10.Size = new System.Drawing.Size(28, 17);
@@ -1567,7 +1567,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent11
             // 
             this.lblCurrent11.AutoSize = true;
-            this.lblCurrent11.Location = new System.Drawing.Point(764, 357);
+            this.lblCurrent11.Location = new System.Drawing.Point(783, 357);
             this.lblCurrent11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent11.Name = "lblCurrent11";
             this.lblCurrent11.Size = new System.Drawing.Size(28, 17);
@@ -1577,7 +1577,7 @@ namespace Current_Cycling_Controls {
             // lblCurrent12
             // 
             this.lblCurrent12.AutoSize = true;
-            this.lblCurrent12.Location = new System.Drawing.Point(764, 389);
+            this.lblCurrent12.Location = new System.Drawing.Point(783, 389);
             this.lblCurrent12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCurrent12.Name = "lblCurrent12";
             this.lblCurrent12.Size = new System.Drawing.Size(28, 17);
@@ -1587,7 +1587,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage1
             // 
             this.lblVoltage1.AutoSize = true;
-            this.lblVoltage1.Location = new System.Drawing.Point(850, 44);
+            this.lblVoltage1.Location = new System.Drawing.Point(875, 44);
             this.lblVoltage1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage1.Name = "lblVoltage1";
             this.lblVoltage1.Size = new System.Drawing.Size(28, 17);
@@ -1597,7 +1597,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage2
             // 
             this.lblVoltage2.AutoSize = true;
-            this.lblVoltage2.Location = new System.Drawing.Point(850, 77);
+            this.lblVoltage2.Location = new System.Drawing.Point(875, 77);
             this.lblVoltage2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage2.Name = "lblVoltage2";
             this.lblVoltage2.Size = new System.Drawing.Size(28, 17);
@@ -1607,7 +1607,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage3
             // 
             this.lblVoltage3.AutoSize = true;
-            this.lblVoltage3.Location = new System.Drawing.Point(850, 110);
+            this.lblVoltage3.Location = new System.Drawing.Point(875, 110);
             this.lblVoltage3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage3.Name = "lblVoltage3";
             this.lblVoltage3.Size = new System.Drawing.Size(28, 17);
@@ -1617,7 +1617,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage4
             // 
             this.lblVoltage4.AutoSize = true;
-            this.lblVoltage4.Location = new System.Drawing.Point(850, 142);
+            this.lblVoltage4.Location = new System.Drawing.Point(875, 142);
             this.lblVoltage4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage4.Name = "lblVoltage4";
             this.lblVoltage4.Size = new System.Drawing.Size(28, 17);
@@ -1627,7 +1627,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage5
             // 
             this.lblVoltage5.AutoSize = true;
-            this.lblVoltage5.Location = new System.Drawing.Point(850, 172);
+            this.lblVoltage5.Location = new System.Drawing.Point(875, 172);
             this.lblVoltage5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage5.Name = "lblVoltage5";
             this.lblVoltage5.Size = new System.Drawing.Size(28, 17);
@@ -1637,7 +1637,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage6
             // 
             this.lblVoltage6.AutoSize = true;
-            this.lblVoltage6.Location = new System.Drawing.Point(850, 202);
+            this.lblVoltage6.Location = new System.Drawing.Point(875, 202);
             this.lblVoltage6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage6.Name = "lblVoltage6";
             this.lblVoltage6.Size = new System.Drawing.Size(28, 17);
@@ -1647,7 +1647,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage7
             // 
             this.lblVoltage7.AutoSize = true;
-            this.lblVoltage7.Location = new System.Drawing.Point(850, 233);
+            this.lblVoltage7.Location = new System.Drawing.Point(875, 233);
             this.lblVoltage7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage7.Name = "lblVoltage7";
             this.lblVoltage7.Size = new System.Drawing.Size(28, 17);
@@ -1657,7 +1657,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage8
             // 
             this.lblVoltage8.AutoSize = true;
-            this.lblVoltage8.Location = new System.Drawing.Point(850, 263);
+            this.lblVoltage8.Location = new System.Drawing.Point(875, 263);
             this.lblVoltage8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage8.Name = "lblVoltage8";
             this.lblVoltage8.Size = new System.Drawing.Size(28, 17);
@@ -1667,7 +1667,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage9
             // 
             this.lblVoltage9.AutoSize = true;
-            this.lblVoltage9.Location = new System.Drawing.Point(850, 294);
+            this.lblVoltage9.Location = new System.Drawing.Point(875, 294);
             this.lblVoltage9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage9.Name = "lblVoltage9";
             this.lblVoltage9.Size = new System.Drawing.Size(28, 17);
@@ -1677,7 +1677,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage10
             // 
             this.lblVoltage10.AutoSize = true;
-            this.lblVoltage10.Location = new System.Drawing.Point(850, 326);
+            this.lblVoltage10.Location = new System.Drawing.Point(875, 326);
             this.lblVoltage10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage10.Name = "lblVoltage10";
             this.lblVoltage10.Size = new System.Drawing.Size(28, 17);
@@ -1687,7 +1687,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage11
             // 
             this.lblVoltage11.AutoSize = true;
-            this.lblVoltage11.Location = new System.Drawing.Point(850, 357);
+            this.lblVoltage11.Location = new System.Drawing.Point(875, 357);
             this.lblVoltage11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage11.Name = "lblVoltage11";
             this.lblVoltage11.Size = new System.Drawing.Size(28, 17);
@@ -1697,7 +1697,7 @@ namespace Current_Cycling_Controls {
             // lblVoltage12
             // 
             this.lblVoltage12.AutoSize = true;
-            this.lblVoltage12.Location = new System.Drawing.Point(850, 389);
+            this.lblVoltage12.Location = new System.Drawing.Point(875, 389);
             this.lblVoltage12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVoltage12.Name = "lblVoltage12";
             this.lblVoltage12.Size = new System.Drawing.Size(28, 17);
@@ -1707,7 +1707,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample1
             // 
             this.txtTempSensSample1.Enabled = false;
-            this.txtTempSensSample1.Location = new System.Drawing.Point(936, 48);
+            this.txtTempSensSample1.Location = new System.Drawing.Point(964, 48);
             this.txtTempSensSample1.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample1.Name = "txtTempSensSample1";
             this.txtTempSensSample1.Size = new System.Drawing.Size(92, 22);
@@ -1717,7 +1717,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample2
             // 
             this.txtTempSensSample2.Enabled = false;
-            this.txtTempSensSample2.Location = new System.Drawing.Point(936, 81);
+            this.txtTempSensSample2.Location = new System.Drawing.Point(964, 81);
             this.txtTempSensSample2.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample2.Name = "txtTempSensSample2";
             this.txtTempSensSample2.Size = new System.Drawing.Size(92, 22);
@@ -1727,7 +1727,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample3
             // 
             this.txtTempSensSample3.Enabled = false;
-            this.txtTempSensSample3.Location = new System.Drawing.Point(936, 114);
+            this.txtTempSensSample3.Location = new System.Drawing.Point(964, 114);
             this.txtTempSensSample3.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample3.Name = "txtTempSensSample3";
             this.txtTempSensSample3.Size = new System.Drawing.Size(92, 22);
@@ -1737,7 +1737,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample4
             // 
             this.txtTempSensSample4.Enabled = false;
-            this.txtTempSensSample4.Location = new System.Drawing.Point(936, 146);
+            this.txtTempSensSample4.Location = new System.Drawing.Point(964, 146);
             this.txtTempSensSample4.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample4.Name = "txtTempSensSample4";
             this.txtTempSensSample4.Size = new System.Drawing.Size(92, 22);
@@ -1747,7 +1747,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample5
             // 
             this.txtTempSensSample5.Enabled = false;
-            this.txtTempSensSample5.Location = new System.Drawing.Point(936, 176);
+            this.txtTempSensSample5.Location = new System.Drawing.Point(964, 176);
             this.txtTempSensSample5.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample5.Name = "txtTempSensSample5";
             this.txtTempSensSample5.Size = new System.Drawing.Size(92, 22);
@@ -1757,7 +1757,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample6
             // 
             this.txtTempSensSample6.Enabled = false;
-            this.txtTempSensSample6.Location = new System.Drawing.Point(936, 206);
+            this.txtTempSensSample6.Location = new System.Drawing.Point(964, 206);
             this.txtTempSensSample6.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample6.Name = "txtTempSensSample6";
             this.txtTempSensSample6.Size = new System.Drawing.Size(92, 22);
@@ -1767,7 +1767,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample7
             // 
             this.txtTempSensSample7.Enabled = false;
-            this.txtTempSensSample7.Location = new System.Drawing.Point(936, 237);
+            this.txtTempSensSample7.Location = new System.Drawing.Point(964, 237);
             this.txtTempSensSample7.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample7.Name = "txtTempSensSample7";
             this.txtTempSensSample7.Size = new System.Drawing.Size(92, 22);
@@ -1777,7 +1777,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample8
             // 
             this.txtTempSensSample8.Enabled = false;
-            this.txtTempSensSample8.Location = new System.Drawing.Point(936, 267);
+            this.txtTempSensSample8.Location = new System.Drawing.Point(964, 267);
             this.txtTempSensSample8.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample8.Name = "txtTempSensSample8";
             this.txtTempSensSample8.Size = new System.Drawing.Size(92, 22);
@@ -1787,7 +1787,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample9
             // 
             this.txtTempSensSample9.Enabled = false;
-            this.txtTempSensSample9.Location = new System.Drawing.Point(936, 298);
+            this.txtTempSensSample9.Location = new System.Drawing.Point(964, 298);
             this.txtTempSensSample9.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample9.Name = "txtTempSensSample9";
             this.txtTempSensSample9.Size = new System.Drawing.Size(92, 22);
@@ -1797,7 +1797,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample10
             // 
             this.txtTempSensSample10.Enabled = false;
-            this.txtTempSensSample10.Location = new System.Drawing.Point(936, 330);
+            this.txtTempSensSample10.Location = new System.Drawing.Point(964, 330);
             this.txtTempSensSample10.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample10.Name = "txtTempSensSample10";
             this.txtTempSensSample10.Size = new System.Drawing.Size(92, 22);
@@ -1807,7 +1807,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample11
             // 
             this.txtTempSensSample11.Enabled = false;
-            this.txtTempSensSample11.Location = new System.Drawing.Point(936, 361);
+            this.txtTempSensSample11.Location = new System.Drawing.Point(964, 361);
             this.txtTempSensSample11.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample11.Name = "txtTempSensSample11";
             this.txtTempSensSample11.Size = new System.Drawing.Size(92, 22);
@@ -1817,7 +1817,7 @@ namespace Current_Cycling_Controls {
             // txtTempSensSample12
             // 
             this.txtTempSensSample12.Enabled = false;
-            this.txtTempSensSample12.Location = new System.Drawing.Point(936, 393);
+            this.txtTempSensSample12.Location = new System.Drawing.Point(964, 393);
             this.txtTempSensSample12.Margin = new System.Windows.Forms.Padding(4);
             this.txtTempSensSample12.Name = "txtTempSensSample12";
             this.txtTempSensSample12.Size = new System.Drawing.Size(92, 22);
@@ -1827,7 +1827,7 @@ namespace Current_Cycling_Controls {
             // lblTempSensNum
             // 
             this.lblTempSensNum.AutoSize = true;
-            this.lblTempSensNum.Location = new System.Drawing.Point(935, 0);
+            this.lblTempSensNum.Location = new System.Drawing.Point(963, 0);
             this.lblTempSensNum.Name = "lblTempSensNum";
             this.lblTempSensNum.Size = new System.Drawing.Size(105, 17);
             this.lblTempSensNum.TabIndex = 35;
