@@ -28,12 +28,12 @@
 #define FAN8_CTRL 10
 
 //LEDs
-#define LED_POWER 30
-#define LED_OVERTEMP 32
-#define LED_CURRENT_ON 34
-#define LED_CYCLE_ON 36
-#define LED_COOLING 38
-#define LED_SMOKE_ALARM 40
+#define LED_POWER 30        //Red LED
+#define LED_OVERTEMP 32     //Orange LED
+#define LED_CURRENT_ON 34   //Yellow LED 
+#define LED_CYCLE_ON 36     //Green LED
+#define LED_COOLING 38      //Blue LED
+#define LED_SMOKE_ALARM 40  //Purple LED
 
 
 //EMO
@@ -133,6 +133,7 @@ void execEmergencyAction (bool bolIsEmergency){
   //Checks to see if there is an emergency
   if (bolIsEmergency == true){
     //Executes emergency action
+    intOperating = 0;
     setPowerSupplyInterlock(false);
     setFanPowerInterlock(false);
     SetFanPWM (0,0,0,0,0,0,0,0);
@@ -151,11 +152,11 @@ bool isEMOPressed(){
   //Reads the EMO switch
   if (digitalRead(EMO_SW) == HIGH){
     //This means stop; EMO switch has been pressed
-    return true; 
+    return false; 
   }
   else{
     //This means run, nothing has been pressed
-    return false;
+    return true;
     
   }
 }
@@ -166,7 +167,14 @@ bool isEMOPressed(){
 //============================================================================
 void setPowerSupplyInterlock(bool bolEnablePowerSupply){
   //Turns the power supply interlock depending on the input
-  digitalWrite(POWER_SUPPLY_INTERLOCK, bolEnablePowerSupply);
+  if (bolEnablePowerSupply == false){
+    digitalWrite(POWER_SUPPLY_INTERLOCK, LOW);
+    }
+  else{
+    digitalWrite(POWER_SUPPLY_INTERLOCK, HIGH);
+  }
+  //DEBUG
+  digitalWrite(LED_CURRENT_ON,digitalRead(POWER_SUPPLY_INTERLOCK));
 }
 
 //============================================================================
@@ -175,7 +183,12 @@ void setPowerSupplyInterlock(bool bolEnablePowerSupply){
 //============================================================================
 void setFanPowerInterlock(bool bolFanPowerEnable){
   //Enables/disables the fan
-  digitalWrite(FAN_POWER_INTERLOCK, bolFanPowerEnable);
+  if (bolFanPowerEnable == false){
+    digitalWrite(FAN_POWER_INTERLOCK, LOW);
+  }
+  else{
+    digitalWrite(FAN_POWER_INTERLOCK, HIGH);
+  }
 }
 
 //============================================================================
@@ -618,7 +631,7 @@ void TestHeartBeat(){
   intThermalControllerHeartbeatCounter++;
 
   //Checks to see if we have an expired heart beat for the thermal controller
-  if (intThermalControllerHeartbeatCounter > HEARTBEAT_LENGTH){
+  if (intThermalControllerHeartbeatCounter > (HEARTBEAT_LENGTH)){
     //Heartbeat fails - disables power supplies and fans
     bolThermalControllerHeartBeatGood = false;
     execEmergencyAction(true);
@@ -628,7 +641,7 @@ void TestHeartBeat(){
   if (intPCHeartbeatCounter > HEARTBEAT_LENGTH){
     //Heartbeat fails - disables power supplies and fans
     //Serial.println("Heartbeat fail");
-    execEmergencyAction(true);;
+    execEmergencyAction(true);
   }
 }
 
@@ -638,11 +651,14 @@ void TestHeartBeat(){
 //Description: This function runs at the specified timer interval
 //======================================================================
 void TimedLoop(){
-    //Writes the data from the thermal controller
-    SendDataToThermalController();
+    //Tests the heart beat
+    TestHeartBeat();
 
     //Checks to see if E-Stop is pressed
-    execEmergencyAction(isEMOPressed);
+    execEmergencyAction(isEMOPressed());
+    
+    //Writes the data from the thermal controller
+    SendDataToThermalController();
 
     //Checks to see if user is requesting a start or a stop
     StartStopCycle();
@@ -656,8 +672,6 @@ void TimedLoop(){
     //Sends the data to the PC
     sendDataToPC();
 
-    //Tests the heart beat
-    TestHeartBeat();
 }
 
 
