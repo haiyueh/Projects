@@ -167,9 +167,11 @@ void setup() {
     pinMode(intRelayIO[i],OUTPUT);
   }
 
-  //Sets the address pins as input
+  //Sets the address pins as input with pullup
   pinMode(ADR0_INPUT,INPUT);
   pinMode(ADR1_INPUT,INPUT);
+  digitalWrite(ADR0_INPUT,HIGH);
+  digitalWrite(ADR1_INPUT,HIGH);
   
   //Timer that calls function TimedLoop every TIMED_LOOP_DURATION_US uS 
   Timer1.initialize(TIMED_LOOP_DURATION_US);
