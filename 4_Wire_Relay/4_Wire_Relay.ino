@@ -8,9 +8,11 @@
 //====================================================
 #define TIMED_LOOP_DURATION_US 10000
 #define NUM_OF_RELAYS 16
-#define ADDR1_INPUT 19
+#define ADR1_INPUT 19
 #define ADR0_INPUT 18
 #define TIMER1_CLOCK_DIVIDER 100
+#define UART_BUFFER 256
+
 
 //====================================================
 //Declarations
@@ -20,7 +22,7 @@
 int intRelayToClose = 0;
 
 //Current relay state
-int intCurrentRelayState = 0
+int intCurrentRelayState = 0;
 
 //Relay pin array
 int intRelayIO[NUM_OF_RELAYS] = {17,16,15,14,13,2,3,4,5,6,7,8,9,10,11,12};
@@ -31,6 +33,12 @@ int intClockDivider = 0;
 //Address
 int intAddress = 0;
 
+//UART
+char chrPCData[UART_BUFFER];
+boolean newData = false;
+char startMarker = '<';
+char endMarker = '>';
+
 
 //======================================================================
 //Function: TimedLoop
@@ -38,26 +46,26 @@ int intAddress = 0;
 //======================================================================
 void TimedLoop(){
   //Reads the address
-  if ((digitalRead(ADR1_INPUT) == LOW) && (digitalRead(ADR1_INPUT) == LOW)){
+  if ((digitalRead(ADR1_INPUT) == LOW) && (digitalRead(ADR0_INPUT) == LOW)){
     //Address 0
     intAddress = 0;
   }
-  else if ((digitalRead(ADR1_INPUT) == LOW) && (digitalRead(ADR1_INPUT) == HIGH)){
+  else if ((digitalRead(ADR1_INPUT) == LOW) && (digitalRead(ADR0_INPUT) == HIGH)){
     //Address 1
     intAddress = 1;
   }
-  else if ((digitalRead(ADR1_INPUT) == HIGH) && (digitalRead(ADR1_INPUT) == LOW)){
+  else if ((digitalRead(ADR1_INPUT) == HIGH) && (digitalRead(ADR0_INPUT) == LOW)){
     //Address 2
     intAddress = 2;
   }
-  else if ((digitalRead(ADR1_INPUT) == HIGH) && (digitalRead(ADR1_INPUT) == HIGH)){
+  else if ((digitalRead(ADR1_INPUT) == HIGH) && (digitalRead(ADR0_INPUT) == HIGH)){
     //Address 3
     intAddress = 3;
   }
   
   
   //Checks if user commanded a different relay state
-  if (intRelayToClose != intCurrentRelayState){
+  if ((intRelayToClose != intCurrentRelayState) && (intRelayToClose >= 0) && (intRelayToClose <= NUM_OF_RELAYS)){
     //Opens all the relays
     for (int i = 0; i <NUM_OF_RELAYS; i++){
       //Turns off all the relays
@@ -68,14 +76,17 @@ void TimedLoop(){
     if (intRelayToClose > 0){
       //Closes the appropriate realy
       digitalWrite(intRelayIO[intRelayToClose - 1],HIGH);
-
-      //Sets the current relay state to the new relay that's closed
-      intCurrentRelayState = intRelayToClose;
     }
+
+    //Sets the current relay state to the new relay that's closed
+    intCurrentRelayState = intRelayToClose;
   }
 
   //Checks to see if we have reached our clock divider value so that we send data to the PC
   if (intClockDivider >= TIMER1_CLOCK_DIVIDER){
+    //Resets the clock divider
+    intClockDivider = 0;
+    
     //Sends the data to the PC
     Serial.print("<");
     Serial.print("4WIRERELAY,");
