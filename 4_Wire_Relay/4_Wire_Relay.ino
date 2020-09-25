@@ -25,7 +25,7 @@ int intRelayToClose = 0;
 int intCurrentRelayState = 0;
 
 //Relay pin array
-int intRelayIO[NUM_OF_RELAYS] = {17,16,15,14,13,2,3,4,5,6,7,8,9,10,11,12};
+int intRelayIO[NUM_OF_RELAYS] = {5,6,7,8,9,10,11,12,17,16,15,14,13,2,3,4};
 
 //Timer clock divider
 int intClockDivider = 0;
