@@ -21,7 +21,7 @@ namespace Current_Cycling_Controls {
         public static string CCTable = "Cycling";
         public static string CCRecipeTable = "CCRecipe";
 
-        
+        public static string BackupDir = "C:/backupData/";
 
         public enum CmdType {
             None,
