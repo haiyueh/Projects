@@ -122,15 +122,23 @@ void TimedLoop(){
 
 
     //Sets the gain and then reads the ADC values
+    ads1.setGain(GAIN_TWOTHIRDS);
+    ads1.readADC_SingleEnded(0);
     ads1.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+0]]);
     intADCValues[intBoardIndex*8+0] = ads1.readADC_SingleEnded(0);
     
+    ads1.setGain(GAIN_TWOTHIRDS);
+    ads1.readADC_SingleEnded(1);
     ads1.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+1]]);
     intADCValues[intBoardIndex*8+1] = ads1.readADC_SingleEnded(1);
-    
+
+    ads1.setGain(GAIN_TWOTHIRDS);
+    ads1.readADC_SingleEnded(2);
     ads1.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+2]]);
     intADCValues[intBoardIndex*8+2] = ads1.readADC_SingleEnded(2);
-    
+
+    ads1.setGain(GAIN_TWOTHIRDS);
+    ads1.readADC_SingleEnded(3);
     ads1.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+3]]);
     intADCValues[intBoardIndex*8+3] = ads1.readADC_SingleEnded(3);
 
@@ -140,15 +148,23 @@ void TimedLoop(){
     Adafruit_ADS1115 ads2(ADC_ADDRESS_CHANNELS_5_TO_8,intADCPin[intBoardIndex][0],intADCPin[intBoardIndex][1]); 
     ads2.begin();
 
+    ads2.setGain(GAIN_TWOTHIRDS);
+    ads2.readADC_SingleEnded(0);
     ads2.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+4]]);
     intADCValues[intBoardIndex*8+4] = ads2.readADC_SingleEnded(0);
-    
+
+    ads2.setGain(GAIN_TWOTHIRDS);
+    ads2.readADC_SingleEnded(1);
     ads2.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+5]]);
     intADCValues[intBoardIndex*8+5] = ads2.readADC_SingleEnded(1);
-    
+
+    ads2.setGain(GAIN_TWOTHIRDS);
+    ads2.readADC_SingleEnded(2);
     ads2.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+6]]);
     intADCValues[intBoardIndex*8+6] = ads2.readADC_SingleEnded(2);
-    
+
+    ads2.setGain(GAIN_TWOTHIRDS);
+    ads2.readADC_SingleEnded(3);
     ads2.setGain(intPGADefinition[intADCPGA[intBoardIndex*8+7]]);
     intADCValues[intBoardIndex*8+7] = ads2.readADC_SingleEnded(3);
   }
@@ -189,4 +205,4 @@ void loop(void){
   //Recieve data from PC  
   ReadDatafromPC();
   
-}
+} 
