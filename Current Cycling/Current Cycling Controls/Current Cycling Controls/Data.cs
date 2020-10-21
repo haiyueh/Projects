@@ -248,7 +248,7 @@ namespace Current_Cycling_Controls {
 
         private void SaveResults(CCDataPoint p) {
             var str = CompileDataStr(p);
-            var path = $".\\backupData\\" + $"{p.SampleName}.txt";
+            var path = $"C:/backupData/" + $"{p.SampleName}.txt";
             if (!File.Exists(path)) {
                 using (var writer = new StreamWriter(path, true)) {
                     writer.WriteLine(U.SampleTxtHeader);
