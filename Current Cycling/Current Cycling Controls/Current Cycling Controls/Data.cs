@@ -24,6 +24,7 @@ namespace Current_Cycling_Controls {
         private readonly object _lock = new object();
         private readonly string ComputerName = Environment.MachineName.ToUpper();
         public bool DataError = false;
+        public bool _saved;
 
         public Data() {
             if (!BuildTable()) Console.WriteLine($"Couldn't Connect to Google BQ. Please check connection!");
@@ -96,6 +97,11 @@ namespace Current_Cycling_Controls {
             return lst;
         }
 
+        /// <summary>
+        /// Gets recipe parameters from data query and returns them to the Recipe form
+        /// </summary>
+        /// <param name="currentSample"></param>
+        /// <returns></returns>
         public CCRecipe GetCurrentRecipe(string currentSample) {
             var recipe = new CCRecipe();
             try {
@@ -182,6 +188,7 @@ namespace Current_Cycling_Controls {
         }
 
         private void SaveCCData(CCDataPoint d) {
+            _saved = false;
             try {
                 //IDictionary<String, Object> dictionary = d.GetType()
                 //  .GetProperties()
@@ -242,13 +249,40 @@ namespace Current_Cycling_Controls {
             }
             catch { 
                 Console.WriteLine("Google BQ connection ERROR. Backing up via CSV");
-                SaveResults(d);
             }
+            SaveCSVResults(d);
         }
 
-        private void SaveResults(CCDataPoint p) {
+        private void SaveCSVResults(CCDataPoint p) {
             var str = CompileDataStr(p);
-            var path = U.BackupDir + $"{p.SampleName}.txt";
+            int cycle = -1;
+
+            // if new sample create directory for it and start cycle at its first cycle
+            if (!Directory.Exists(U.CCDataDir + p.SampleName + "\\")) {
+                Directory.CreateDirectory(U.CCDataDir + p.SampleName + "\\");
+                cycle = p.CycleNumber;
+            }
+            var path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+            
+            // if not first sample data grab last cycle number from filename
+            if (cycle == -1) {
+                var fileArray = Directory.GetFiles(U.CCDataDir + p.SampleName + "\\").Select(Path.GetFileNameWithoutExtension).ToList();
+                var lasts = new List<int>();
+                foreach (var f in fileArray) {
+                    lasts.Add(int.Parse(f.Split('_').Last()));
+                }
+                cycle = lasts.Max();
+                path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+
+                // if file size > 15mb then save new file as current cycle number
+                FileInfo fi = new FileInfo(path);
+                if (fi.Length > 15000000) {
+                    cycle = p.CycleNumber;
+                    path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+                }
+
+            }
+            // create new csv with header if path not exists
             if (!File.Exists(path)) {
                 using (var writer = new StreamWriter(path, true)) {
                     writer.WriteLine(U.SampleTxtHeader);
@@ -257,6 +291,7 @@ namespace Current_Cycling_Controls {
             using (var writer = new StreamWriter(path, true)) {
                 writer.WriteLine(str);
             }
+            
         }
 
         private string CompileDataStr(CCDataPoint p) {

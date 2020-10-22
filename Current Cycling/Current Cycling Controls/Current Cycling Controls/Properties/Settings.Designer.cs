@@ -122,6 +122,18 @@ namespace Current_Cycling_Controls.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public string OverVoltage {
+            get {
+                return ((string)(this["OverVoltage"]));
+            }
+            set {
+                this["OverVoltage"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public string PauseFanTime {
             get {

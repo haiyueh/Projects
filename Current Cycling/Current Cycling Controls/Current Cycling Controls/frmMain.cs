@@ -136,6 +136,7 @@ namespace Current_Cycling_Controls {
             txtCurrOffTempSet.Text = Properties.Settings.Default.BiasOFFTempSet;
             txtOverTempSet.Text = Properties.Settings.Default.OverTempSet;
             txtSmokeOverSet.Text = Properties.Settings.Default.OverSmokeSet;
+            textBoxOverVoltage.Text = Properties.Settings.Default.OverVoltage;
             txtPauseFans.Text = Properties.Settings.Default.PauseFanTime;
             if (Properties.Settings.Default.CheckBoxes != null) {
                 var iii = 0;
@@ -644,6 +645,7 @@ namespace Current_Cycling_Controls {
             Properties.Settings.Default.BiasOFFTempSet = txtCurrOffTempSet.Text;
             Properties.Settings.Default.OverTempSet = txtOverTempSet.Text;
             Properties.Settings.Default.OverSmokeSet = txtSmokeOverSet.Text;
+            Properties.Settings.Default.OverVoltage = textBoxOverVoltage.Text;
             Properties.Settings.Default.PauseFanTime = txtPauseFans.Text;
             var iii = 0;
             foreach (var chk in _checkBoxes) {
@@ -729,6 +731,7 @@ namespace Current_Cycling_Controls {
             Properties.Settings.Default.BiasONTempSet = txtCurrOnTempSet.Text;
             Properties.Settings.Default.BiasOFFTempSet = txtCurrOffTempSet.Text;
             Properties.Settings.Default.OverTempSet = txtOverTempSet.Text;
+            Properties.Settings.Default.OverVoltage = textBoxOverVoltage.Text;
             Properties.Settings.Default.OverSmokeSet = txtSmokeOverSet.Text;
             Properties.Settings.Default.PauseFanTime = txtPauseFans.Text;
             var iii = 0;
@@ -787,7 +790,7 @@ namespace Current_Cycling_Controls {
             // loop through each TDK, wait for response if connected
             for (var i = 1; i < 13; i++) {
                 try {
-                    ser.Write("ADR " + $"0{i.ToString()}" + "\r\n");
+                    ser.Write("ADR " + $"0{i}" + "\r\n");
                     // TDK address is connected
                     if (ser.ReadLine() == "OK") {
                         connectLabels.Add("Connected");
