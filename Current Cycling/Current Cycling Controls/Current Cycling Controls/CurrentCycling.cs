@@ -93,14 +93,10 @@ namespace Current_Cycling_Controls {
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
                             SetAddress(tt);
+                            _serTDK.DiscardInBuffer();
 
-                            _serTDK.Write("MV?\r\n");
-                            Wait(50); // lag in measured value
-                            tt.Voltage = _serTDK.ReadLine();
-
-                            _serTDK.Write("MC?\r\n");
-                            Wait(50);
-                            tt.Current = _serTDK.ReadLine();
+                            tt.Voltage = MeasureVoltage();
+                            tt.Current = MeasureCurrent();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) {
@@ -132,13 +128,8 @@ namespace Current_Cycling_Controls {
                         if (_resultsTimer.ElapsedMilliseconds > U.ResultsSaveTimeOFF) SAVE = true;
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
-                            _serTDK.Write("MV?\r\n");
-                            Wait(50); // lag in measured value
-                            tt.Voltage = _serTDK.ReadLine();
-
-                            _serTDK.Write("MC?\r\n");
-                            Wait(50);
-                            tt.Current = _serTDK.ReadLine();
+                            tt.Voltage = MeasureVoltage();
+                            tt.Current = MeasureCurrent();
                             _args = new GUIArgs(tt.Voltage, tt.Current, tt.CycleCount, tt.Port, _cycleTimer);
                             NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
                             if (SAVE) {
@@ -252,10 +243,39 @@ namespace Current_Cycling_Controls {
             }
         }
 
+        private string MeasureVoltage() {
+            string val = "";
+            bool stop = false;
+            while (!stop) {
+                _serTDK.Write("MV?\r\n");
+                Wait(50); // lag in measured value
+                val = _serTDK.ReadLine();
+                // get rid of OK packets and check if value is parsable
+                if (double.TryParse(val, out var num)) stop = true;
+            }
+            return val;
+            
+        }
+
+        private string MeasureCurrent() {
+            string val = "";
+            bool stop = false;
+            _serTDK.DiscardInBuffer();
+            while (!stop) {
+                _serTDK.Write("MC?\r\n");
+                Wait(50); // lag in measured value
+                val = _serTDK.ReadLine();
+                if (double.TryParse(val, out var num)) stop = true;
+            }
+            return val;
+
+        }
+
         private void SetAddress(TDK tdk) {
             // Sets the address of the power supply
             _serTDK.Write("ADR " + tdk.Address + "\r\n");
             if (_serTDK.ReadLine() == "OK") { }
+            _serTDK.DiscardInBuffer();
         }
 
         private void SetCurrentVoltage(TDK tdk) {
@@ -276,7 +296,7 @@ namespace Current_Cycling_Controls {
                 }
                 _serTDK.Write("PC?\r\n");
             } while (_serTDK.ReadLine() == U.VoltageCompliance);
-
+            _serTDK.DiscardInBuffer();
         }
 
         private void TurnON(TDK tdk) {
@@ -290,6 +310,7 @@ namespace Current_Cycling_Controls {
                 }
                 _serTDK.Write("MODE?\r\n");
             } while (_serTDK.ReadLine() == "ON");
+            _serTDK.DiscardInBuffer();
         }
 
         private void TurnOff(List<TDK> tdk) {

@@ -581,13 +581,13 @@ namespace Current_Cycling_Controls {
         }
 
         private void BtnStart_Click(object sender, EventArgs e) {
-            var samples = new List<string>();
-            foreach (var s in _samples) samples.Add(s.Text);
-            if (samples.GroupBy(n => n).Any(c => c.Count() > 1)) {
-                U.Logger.WriteLine($"Duplicate Sample Names Choosen!");
-                MessageBox.Show($"Duplicate Sample Names Choosen!");
-                return;
-            }
+            //var samples = new List<string>();
+            //foreach (var s in _samples) samples.Add(s.Text);
+            //if (samples.GroupBy(n => n).Any(c => c.Count() > 1)) {
+            //    U.Logger.WriteLine($"Duplicate Sample Names Choosen!");
+            //    MessageBox.Show($"Duplicate Sample Names Choosen!");
+            //    return;
+            //}
             if (!_TDKconnection.Any(b => b == true)) {
                 U.Logger.WriteLine($"TDK has no connections!");
                 MessageBox.Show($"TDK has no connections!");
@@ -600,6 +600,13 @@ namespace Current_Cycling_Controls {
             }
 
             CheckPorts();
+            var tdks = _TDKS.Where(t => t.Cycling == true).ToList();
+            if (tdks.Select(x=>x.SampleName).Distinct().Count() != tdks.Count() && tdks.Count() > 1) {
+                U.Logger.WriteLine($"Duplicate Sample Names Choosen!");
+                MessageBox.Show($"Duplicate Sample Names Choosen!");
+                return;
+            }
+
             var startargs = new StartCyclingArgs(_TDKS.Where(t => t.Cycling == true).ToList(),
                 Double.Parse(txtBiasOn.Text), Double.Parse(txtBiasOff.Text),
                 Double.Parse(textBoxOverVoltage.Text));
