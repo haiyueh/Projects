@@ -341,13 +341,8 @@ namespace Current_Cycling_Controls {
             // wait and get updated measured value from TDKs for the GUI
             Wait(500);
             foreach (var tt in tdk) {
-                _serTDK.Write("MV?\r\n");
-                Wait(50); // lag in measured value
-                string volt = _serTDK.ReadLine();
-
-                _serTDK.Write("MC?\r\n");
-                Wait(50);
-                string current = _serTDK.ReadLine();
+                string volt = MeasureVoltage();
+                string current = MeasureCurrent();
                 _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer, closing: true);
                 NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
             }
