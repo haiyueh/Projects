@@ -253,9 +253,10 @@ namespace Current_Cycling_Controls {
 
 
         private void RunCurrentCycling(object s, DoWorkEventArgs e) {
-            var tdk = (StartCyclingArgs)e.Argument;
+            var args = (StartCyclingArgs)e.Argument;
+            args = BQConn.CompareCycleNumbers(args);
             Cycling = "1";
-            _cycling.StartCycling(tdk);
+            _cycling.StartCycling(args);
         }
 
         private void CyclingComplete(object s, RunWorkerCompletedEventArgs e) {
@@ -411,6 +412,9 @@ namespace Current_Cycling_Controls {
                         labelCount.Text = $@"{ts.Minutes:D2}:{ts.Seconds:D2}";
                         lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
                     }
+                    labelOverVoltage.BackColor = args.OverVoltage ? Color.Red : Color.Empty;
+                    labelTempAlarm.BackColor = args.OverTemp ? Color.Red : Color.Empty;
+                    labelSmokeAlarm.BackColor = args.OverSmoke ? Color.Red : Color.Empty;
                     _voltageLabels[args.Port - 1].Text = args.Volt;
                     _currentLabels[args.Port - 1].Text = args.Current;
                     _cycleLabels[args.Port - 1].Text = args.Cycle;
@@ -466,11 +470,7 @@ namespace Current_Cycling_Controls {
                             chartSmoke.Series["Smoke Level"].Points.AddXY(chkSmoke.Items.IndexOf(chk) + 1, y);
                             i++;
                         }
-                    }
-
-                    labelTempAlarm.BackColor = ardArgs.TempAlarm ? Color.Red : Color.Empty;
-                    labelSmokeAlarm.BackColor = SMOKEALARM ? Color.Red : Color.Empty;
-                    labelEMSStop.BackColor = ardArgs.EMSSTOP ? Color.Red : Color.Empty;
+                    }                    
                 }
                 // send event to arduino thread to update serial transmit packet
                 else if (e.ProgressPercentage == 3) {
@@ -581,13 +581,6 @@ namespace Current_Cycling_Controls {
         }
 
         private void BtnStart_Click(object sender, EventArgs e) {
-            //var samples = new List<string>();
-            //foreach (var s in _samples) samples.Add(s.Text);
-            //if (samples.GroupBy(n => n).Any(c => c.Count() > 1)) {
-            //    U.Logger.WriteLine($"Duplicate Sample Names Choosen!");
-            //    MessageBox.Show($"Duplicate Sample Names Choosen!");
-            //    return;
-            //}
             if (!_TDKconnection.Any(b => b == true)) {
                 U.Logger.WriteLine($"TDK has no connections!");
                 MessageBox.Show($"TDK has no connections!");

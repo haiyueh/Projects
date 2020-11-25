@@ -159,6 +159,9 @@ namespace Current_Cycling_Controls {
                 STOP = false;
                 SMOKEALARM = false;
                 TEMPALARM = false;
+                GUISTOP = false;
+                EMSSTOP = false;
+                OVERMAXVOLTAGE = false;
                 TurnOffClose(tdk);
                 U.Logger.WriteLine($"TDK closing with exception");
 
@@ -167,12 +170,12 @@ namespace Current_Cycling_Controls {
             U.Logger.WriteLine($"Encountered {cmd} while Cycling!");
             BIASON = false;
             STOP = false;
-            SMOKEALARM = false;
-            TEMPALARM = false;
             EMSSTOP = false;
             GUISTOP = false;
+            TurnOffClose(tdk , OVERMAXVOLTAGE, SMOKEALARM, TEMPALARM);
             OVERMAXVOLTAGE = false;
-            TurnOffClose(tdk);
+            SMOKEALARM = false;
+            TEMPALARM = false;
             U.Logger.WriteLine($"TDK Closing Normally");
         }
 
@@ -325,7 +328,8 @@ namespace Current_Cycling_Controls {
             }
         }
 
-        private void TurnOffClose(List<TDK> tdk) {
+        private void TurnOffClose(List<TDK> tdk, bool overvolt = false,
+            bool oversmoke = false, bool overtemp = false) {
             foreach (var t in tdk) {
                 _serTDK.Write("ADR " + t.Address + "\r\n");
                 _serTDK.Write("OUT OFF\r\n");
@@ -343,7 +347,8 @@ namespace Current_Cycling_Controls {
             foreach (var tt in tdk) {
                 string volt = MeasureVoltage();
                 string current = MeasureCurrent();
-                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer, closing: true);
+                _args = new GUIArgs(volt, current, tt.CycleCount, tt.Port, _cycleTimer,
+                    closing: true, overvolt: overvolt, oversmoke: oversmoke, overtemp: overtemp);
                 NewCoreCommand?.Invoke(this, new CoreCommand() { Type = U.CmdType.UpdateUI });
             }
             _serTDK.Close();
@@ -418,13 +423,20 @@ namespace Current_Cycling_Controls {
         public DateTime CycleTime { get; set; }
         public int Port { get; set; }
         public bool Closing { get; set; }
-        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt, bool closing = false) {
+        public bool OverVoltage { get; set; }
+        public bool OverSmoke { get; set; }
+        public bool OverTemp { get; set; }
+        public GUIArgs(string volt, string current, int cycle, int port, DateTime dt, 
+            bool closing = false, bool overvolt = false, bool oversmoke = false, bool overtemp = false) {
             Volt = volt;
             Current = current;
             Cycle = cycle.ToString();
             Port = port;
             CycleTime = dt;
             Closing = closing;
+            OverVoltage = overvolt;
+            OverSmoke = oversmoke;
+            OverTemp = overtemp;
         }
     }
 

@@ -198,7 +198,7 @@ namespace Current_Cycling_Controls {
             this.lblBiasOn = new System.Windows.Forms.Label();
             this.labelTempAlarm = new System.Windows.Forms.Label();
             this.labelSmokeAlarm = new System.Windows.Forms.Label();
-            this.labelEMSStop = new System.Windows.Forms.Label();
+            this.labelOverVoltage = new System.Windows.Forms.Label();
             this.chkSmoke = new System.Windows.Forms.CheckedListBox();
             this.chkTemp = new System.Windows.Forms.CheckedListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -2014,17 +2014,17 @@ namespace Current_Cycling_Controls {
             this.labelSmokeAlarm.Text = "Smoke Alarm";
             this.labelSmokeAlarm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelEMSStop
+            // labelOverVoltage
             // 
-            this.labelEMSStop.AutoSize = true;
-            this.labelEMSStop.Location = new System.Drawing.Point(1087, 98);
-            this.labelEMSStop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelEMSStop.MinimumSize = new System.Drawing.Size(131, 39);
-            this.labelEMSStop.Name = "labelEMSStop";
-            this.labelEMSStop.Size = new System.Drawing.Size(131, 39);
-            this.labelEMSStop.TabIndex = 62;
-            this.labelEMSStop.Text = "Emergency Stop";
-            this.labelEMSStop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelOverVoltage.AutoSize = true;
+            this.labelOverVoltage.Location = new System.Drawing.Point(1087, 98);
+            this.labelOverVoltage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelOverVoltage.MinimumSize = new System.Drawing.Size(131, 39);
+            this.labelOverVoltage.Name = "labelOverVoltage";
+            this.labelOverVoltage.Size = new System.Drawing.Size(131, 39);
+            this.labelOverVoltage.TabIndex = 62;
+            this.labelOverVoltage.Text = "Over Voltage";
+            this.labelOverVoltage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chkSmoke
             // 
@@ -2330,7 +2330,7 @@ namespace Current_Cycling_Controls {
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chkTemp);
             this.Controls.Add(this.chkSmoke);
-            this.Controls.Add(this.labelEMSStop);
+            this.Controls.Add(this.labelOverVoltage);
             this.Controls.Add(this.labelSmokeAlarm);
             this.Controls.Add(this.labelTempAlarm);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -2528,7 +2528,7 @@ namespace Current_Cycling_Controls {
         private System.Windows.Forms.Label lblBiasOn;
         private System.Windows.Forms.Label labelTempAlarm;
         private System.Windows.Forms.Label labelSmokeAlarm;
-        private System.Windows.Forms.Label labelEMSStop;
+        private System.Windows.Forms.Label labelOverVoltage;
         private System.Windows.Forms.CheckedListBox chkSmoke;
         private System.Windows.Forms.CheckedListBox chkTemp;
         private System.Windows.Forms.Label label4;

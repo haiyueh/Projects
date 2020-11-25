@@ -190,11 +190,6 @@ namespace Current_Cycling_Controls {
         private void SaveCCData(CCDataPoint d) {
             _saved = false;
             try {
-                //IDictionary<String, Object> dictionary = d.GetType()
-                //  .GetProperties()
-                //  .Where(p => p.CanRead)
-                //  .ToDictionary(p => p.Name, p => p.GetValue(d, null));
-                //foreach (var dd in dictionary) Console.WriteLine($"{dd}");
                 if (BuildTable()) {
                     _table.InsertRow(new BigQueryInsertRow
                     {
@@ -256,29 +251,30 @@ namespace Current_Cycling_Controls {
         private void SaveCSVResults(CCDataPoint p) {
             var str = CompileDataStr(p);
             int cycle = -1;
+            var samplePath = U.CCDataDir + p.SampleName + "\\";
 
             // if new sample create directory for it and start cycle at its first cycle
-            if (!Directory.Exists(U.CCDataDir + p.SampleName + "\\")) {
-                Directory.CreateDirectory(U.CCDataDir + p.SampleName + "\\");
+            if (!Directory.Exists(samplePath)) {
+                Directory.CreateDirectory(samplePath);
                 cycle = p.CycleNumber;
             }
-            var path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+            var path = samplePath + $"{p.SampleName}_Cycle_{cycle}.csv";
             
             // if not first sample data grab last cycle number from filename
             if (cycle == -1) {
-                var fileArray = Directory.GetFiles(U.CCDataDir + p.SampleName + "\\").Select(Path.GetFileNameWithoutExtension).ToList();
+                var fileArray = Directory.GetFiles(samplePath).Select(Path.GetFileNameWithoutExtension).ToList();
                 var lasts = new List<int>();
                 foreach (var f in fileArray) {
                     lasts.Add(int.Parse(f.Split('_').Last()));
                 }
                 cycle = lasts.Max();
-                path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+                path = samplePath + $"{p.SampleName}_Cycle_{cycle}.csv";
 
                 // if file size > 15mb then save new file as current cycle number
                 FileInfo fi = new FileInfo(path);
                 if (fi.Length > 15000000) {
                     cycle = p.CycleNumber;
-                    path = U.CCDataDir + p.SampleName + "\\" + $"{p.SampleName}_Cycle_{cycle}.csv";
+                    path = samplePath + $"{p.SampleName}_Cycle_{cycle}.csv";
                 }
 
             }
@@ -292,6 +288,26 @@ namespace Current_Cycling_Controls {
                 writer.WriteLine(str);
             }
             
+        }
+
+        /// <summary>
+        /// Compare cycle number from BQ to the backup data. Backupdata should have most recent
+        /// </summary>
+        public StartCyclingArgs CompareCycleNumbers(StartCyclingArgs a) {
+            for (int i = 0; i < a.TDK.Count; i++) {
+                var sampleDir = U.CCDataDir + a.TDK[i].SampleName + "\\";
+                var directory = new DirectoryInfo(sampleDir);
+                var file = directory.GetFiles()
+                     .OrderByDescending(f => f.LastWriteTime)
+                     .First().FullName;
+                var lastCycle = int.Parse(File.ReadLines(file).Last().Split(',').ToList()[0]);
+
+                if (lastCycle != a.TDK[i].CycleCount) {
+                    U.Logger.WriteLine($"BQ cycle count {a.TDK[i].CycleCount} does not match local saved cycle count {lastCycle}. Choosing highest cycle!");
+                    if (lastCycle > a.TDK[i].CycleCount) a.TDK[i].CycleCount = lastCycle;
+                }
+            }
+            return a;
         }
 
         private string CompileDataStr(CCDataPoint p) {
