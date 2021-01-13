@@ -81,7 +81,7 @@ namespace Current_Cycling_Controls {
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Load/Update Recipe";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // RecipeEditor
             // 

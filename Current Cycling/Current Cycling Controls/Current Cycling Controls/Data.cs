@@ -14,7 +14,7 @@ namespace Current_Cycling_Controls {
 
     public delegate void DataEvent(object sender, DataQueueObject e);
     public class Data {
-        private static readonly BigQueryClient _client = BigQueryClient.Create("booming-pride-278623");
+        private BigQueryClient _client;
         private BigQueryDataset _dataset;
         private BigQueryTable _table;
 
@@ -27,7 +27,7 @@ namespace Current_Cycling_Controls {
         public bool _saved;
 
         public Data() {
-            if (!BuildTable()) Console.WriteLine($"Couldn't Connect to Google BQ. Please check connection!");
+            //if (!BuildTable()) U.Logger.WriteLine($"Couldn't Connect to Google BQ. Please check connection!");
             _dataWorker.DoWork += DataWorker_DoWork;
             _dataWorker.RunWorkerAsync();
         }
@@ -91,10 +91,25 @@ namespace Current_Cycling_Controls {
             catch (TimeoutException) {
             }
             catch (Exception exc) {
-                Console.WriteLine(exc);
+                U.Logger.WriteLine(exc.ToString());
             }
             if (lst.Contains("Testing")) lst.Remove("Testing");
-            return lst;
+            var recipes = new List<string>();
+            for (int i = 0; i < lst.Count; i++) {
+                if (!lst[i].Contains("_not_chosen")) recipes.Add(lst[i]);
+            }
+            return recipes;
+        }
+
+        public List<string> GetRecipeListCSV() {
+            var path = U.CCDataDir;
+            var samples = Directory.GetDirectories(path).Select(Path.GetFileName).ToList();
+            if (samples.Contains("Testing")) samples.Remove("Testing");
+            var recipes = new List<string>();
+            for (int i = 0; i < samples.Count; i++) {
+                if (!samples[i].Contains("_not_chosen")) recipes.Add(samples[i]);
+            }
+            return recipes;
         }
 
         /// <summary>
@@ -119,7 +134,45 @@ namespace Current_Cycling_Controls {
                 };
             }
             catch (Exception exc) {
-                Console.WriteLine(exc);
+                U.Logger.WriteLine(exc.ToString());
+            }
+            return recipe;
+
+        }
+
+        public CCRecipe GetCurrentRecipeCSV(string currentSample) {
+            var recipe = new CCRecipe();
+            var line = new List<string>();
+            try {
+                var samplePath = U.CCDataDir + currentSample + "\\";
+                // if no files in directory then set values to default
+                if (Directory.GetFiles(samplePath).Length == 0) {
+                    recipe = new CCRecipe() {
+                        SampleName = currentSample,
+                        NumCells = 0,
+                        CellVoc = 0,
+                        TempSensor = 0,
+                        SetCurrent = 0,
+                        CycleNumber = 0,
+                    };
+                }
+                else {
+                    (int cycle, string filePath) = GetLastCycleFromSample(currentSample);
+                    line = File.ReadLines(filePath).Last().Split(',').ToList();
+                    recipe = new CCRecipe() {
+                        SampleName = line[5],
+                        NumCells = int.Parse(line[8]),
+                        CellVoc = double.Parse(line[9]),
+                        TempSensor = int.Parse(line[10]),
+                        SetCurrent = double.Parse(line[11]),
+                        CycleNumber = int.Parse(line[0]),
+                    };
+                }
+
+
+            }
+            catch (Exception exc) {
+                U.Logger.WriteLine(exc.ToString());
             }
             return recipe;
 
@@ -131,6 +184,7 @@ namespace Current_Cycling_Controls {
             tableName = "CCChinaTable";
 #endif
             try {
+                _client = BigQueryClient.Create("booming-pride-278623");
                 _dataset = _client.GetOrCreateDataset("CCDataset");
                 _table = _dataset.GetOrCreateTable(tableName, new TableSchemaBuilder
                     {
@@ -188,11 +242,12 @@ namespace Current_Cycling_Controls {
         }
 
         private void SaveCCData(CCDataPoint d) {
-            _saved = false;
-            try {
-                if (BuildTable()) {
-                    _table.InsertRow(new BigQueryInsertRow
-                    {
+
+            if (ComputerName != "CH-J7TMTZ1") {
+                try {
+                    if (BuildTable()) {
+                        _table.InsertRow(new BigQueryInsertRow
+                        {
                         { "CycleNumber", d.CycleNumber },
                         { "LogTime_Timestamp", d.LogTime },
                         { "TotalTest_Hours", d.TotalTime },
@@ -239,13 +294,20 @@ namespace Current_Cycling_Controls {
                         { "SmokeVoltage7_Volts", d.SmokeVoltage[6] },
                         { "SmokeVoltage8_Volts", d.SmokeVoltage[7] },
                     });
+                    }
+                    else { U.Logger.WriteLine("Google BQ connection ERROR. Backing up via CSV"); }
                 }
-                else { throw new Exception(); }
+                catch (Exception exc) {
+                    U.Logger.WriteLine(exc.ToString());
+                }
             }
-            catch { 
-                Console.WriteLine("Google BQ connection ERROR. Backing up via CSV");
+            try {
+                SaveCSVResults(d);
             }
-            SaveCSVResults(d);
+            catch (Exception exc) {
+                U.Logger.WriteLine(exc.ToString());
+            }
+            
         }
 
         private void SaveCSVResults(CCDataPoint p) {
@@ -253,13 +315,12 @@ namespace Current_Cycling_Controls {
             int cycle = -1;
             var samplePath = U.CCDataDir + p.SampleName + "\\";
 
-            // if new sample create directory for it and start cycle at its first cycle
-            if (!Directory.Exists(samplePath)) {
-                Directory.CreateDirectory(samplePath);
+            // if no files in directory then start cycle number at start
+            if (Directory.GetFiles(samplePath).Length == 0) {
                 cycle = p.CycleNumber;
             }
             var path = samplePath + $"{p.SampleName}_Cycle_{cycle}.csv";
-            
+
             // if not first sample data grab last cycle number from filename
             if (cycle == -1) {
                 var fileArray = Directory.GetFiles(samplePath).Select(Path.GetFileNameWithoutExtension).ToList();
@@ -278,6 +339,7 @@ namespace Current_Cycling_Controls {
                 }
 
             }
+
             // create new csv with header if path not exists
             if (!File.Exists(path)) {
                 using (var writer = new StreamWriter(path, true)) {
@@ -287,7 +349,7 @@ namespace Current_Cycling_Controls {
             using (var writer = new StreamWriter(path, true)) {
                 writer.WriteLine(str);
             }
-            
+
         }
 
         /// <summary>
@@ -330,6 +392,24 @@ namespace Current_Cycling_Controls {
                 $"{p.SmokeLevel[3].ToString("F2")}", $"{p.SmokeLevel[4].ToString("F2")}", $"{p.SmokeLevel[5].ToString("F2")}",
                 $"{p.SmokeLevel[6].ToString("F2")}", $"{p.SmokeLevel[7].ToString("F2")}"};
             return string.Join(",", str);
+        }
+
+        /// <summary>
+        /// Returns latest cycle number and path to latest data file
+        /// </summary>
+        /// <param name="sampleName"></param>
+        /// <returns></returns>
+        private (int, string) GetLastCycleFromSample(string sampleName) {
+            var samplePath = U.CCDataDir + sampleName + "\\";
+            var fileArray = Directory.GetFiles(samplePath).Select(Path.GetFileNameWithoutExtension).ToList();
+            var lasts = new List<int>();
+            foreach (var f in fileArray) {
+                lasts.Add(int.Parse(f.Split('_').Last()));
+            }
+            var cycle = lasts.Max();
+            var path = samplePath + $"{sampleName}_Cycle_{cycle}.csv";
+
+            return (cycle, path);
         }
 
     }

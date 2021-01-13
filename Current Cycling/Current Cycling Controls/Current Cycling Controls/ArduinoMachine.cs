@@ -162,7 +162,7 @@ namespace Current_Cycling_Controls {
             string strr = string.Join(",", str);
             strr = strr.Insert(0, "<");
             strr += ">";
-            if (print) U.Logger.WriteLine($"{strr}");
+            if (print) Console.WriteLine($"{strr}");
             return strr;
         }
 

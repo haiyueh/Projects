@@ -67,6 +67,11 @@ namespace Current_Cycling_Controls {
                     t.CycleCount++;
                     t.PastVoltages = new List<string>();
                 }
+
+                // save at a slower interval for China
+                var saveTimeON = Environment.MachineName.ToUpper() == "CH-J7TMTZ1" ? 5000 : U.ResultsSaveTimeON;
+                var saveTimeOFF = Environment.MachineName.ToUpper() == "CH-J7TMTZ1" ? 60000 : U.ResultsSaveTimeOFF;
+
                 _TDK = tdk;
                 _totalTimer = new Stopwatch();
                 _totalTimer.Start();
@@ -89,7 +94,7 @@ namespace Current_Cycling_Controls {
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOnTime);
                     while (_biasTimer.ElapsedMilliseconds < args.BiasOnTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
-                        if (_resultsTimer.ElapsedMilliseconds > U.ResultsSaveTimeON) SAVE = true;
+                        if (_resultsTimer.ElapsedMilliseconds > saveTimeON) SAVE = true;
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
                             SetAddress(tt);
@@ -106,6 +111,7 @@ namespace Current_Cycling_Controls {
                             if (double.Parse(tt.Voltage) > args.MaxOverVoltage) {
                                 STOP = true;
                                 OVERMAXVOLTAGE = true;
+                                U.Logger.WriteLine($"{tt.SampleName} Overvoltaged!!");
                             } 
                         }
                         if (STOP || SMOKEALARM || TEMPALARM) break;
@@ -125,7 +131,7 @@ namespace Current_Cycling_Controls {
                     _cycleTimer = DateTime.Now.AddMilliseconds(args.BiasOffTime);
                     while (_biasTimer.ElapsedMilliseconds < args.BiasOffTime
                         && !STOP && !TEMPALARM && !SMOKEALARM) {
-                        if (_resultsTimer.ElapsedMilliseconds > U.ResultsSaveTimeOFF) SAVE = true;
+                        if (_resultsTimer.ElapsedMilliseconds > saveTimeOFF) SAVE = true;
                         foreach (var tt in tdk) {
                             if (STOP || SMOKEALARM || TEMPALARM) break;
                             tt.Voltage = MeasureVoltage();

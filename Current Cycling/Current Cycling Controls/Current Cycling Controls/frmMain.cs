@@ -50,6 +50,7 @@ namespace Current_Cycling_Controls {
         private int yy = 0;
         private string Cycling;
         private bool SMOKEALARM;
+        private bool TEMPALARM;
         public event DataEvent TestDataEvent;
         private readonly Data BQConn = new Data();
         private CCRecipe _ccRecipe;
@@ -254,7 +255,8 @@ namespace Current_Cycling_Controls {
 
         private void RunCurrentCycling(object s, DoWorkEventArgs e) {
             var args = (StartCyclingArgs)e.Argument;
-            args = BQConn.CompareCycleNumbers(args);
+            if (args.TDK.Count == 0) return;
+            //args = BQConn.CompareCycleNumbers(args);
             Cycling = "1";
             _cycling.StartCycling(args);
         }
@@ -354,8 +356,6 @@ namespace Current_Cycling_Controls {
                     // if cycling is running then update alarms/data
                     var packet = _arduino._recievedPacket;
                     if (_TDKWorker.IsBusy) {
-                        //_cycling.SMOKEALARM = packet.SmokeAlarm;
-                        _cycling.TEMPALARM = packet.TempAlarm;
                         _cycling.STOP = packet.EMSSTOP;
                         _cycling.EMSSTOP = packet.EMSSTOP;
                         _cycling._temps = new List<double>(packet.TempList);
@@ -371,9 +371,22 @@ namespace Current_Cycling_Controls {
                         SMOKEALARM = true;
                         U.Logger.WriteLine($"SMOKE ALARM frmMAIN!");
                     }
-                    if (SMOKEALARM) {// || packet.TempAlarm || packet.EMSSTOP) {
-                        SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
+
+                    // check overTemp
+                    if (CheckTempOver(packet.TempList)) {
+                        _cycling.TEMPALARM = true;
+                        TEMPALARM = true;
+                        U.Logger.WriteLine($"TEMP ALARM frmMAIN!");
+                    }
+
+                    labelTempAlarm.BackColor = TEMPALARM ? Color.Red : Color.Empty;
+                    labelSmokeAlarm.BackColor = SMOKEALARM ? Color.Red : Color.Empty;
+                    SoundPlayer audio = new SoundPlayer(Properties.Resources.AircraftAlarm);
+                    if (SMOKEALARM || TEMPALARM) { //|| packet.EMSSTOP) {
                         audio.Play();
+                    }
+                    else {
+                        audio.Stop();
                     }
 
 
@@ -413,8 +426,8 @@ namespace Current_Cycling_Controls {
                         lblBiasStatus.Text = _cycling.BIASON ? "BIAS ON" : "BIAS OFF";
                     }
                     labelOverVoltage.BackColor = args.OverVoltage ? Color.Red : Color.Empty;
-                    labelTempAlarm.BackColor = args.OverTemp ? Color.Red : Color.Empty;
-                    labelSmokeAlarm.BackColor = args.OverSmoke ? Color.Red : Color.Empty;
+                    //labelTempAlarm.BackColor = args.OverTemp ? Color.Red : Color.Empty;
+                    //labelSmokeAlarm.BackColor = args.OverSmoke ? Color.Red : Color.Empty;
                     _voltageLabels[args.Port - 1].Text = args.Volt;
                     _currentLabels[args.Port - 1].Text = args.Current;
                     _cycleLabels[args.Port - 1].Text = args.Cycle;
@@ -680,6 +693,9 @@ namespace Current_Cycling_Controls {
                     _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().NumCells = _numCells[i].Text;
                     _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().CycleCount = int.Parse(_cycleLabels[i].Text);
                 }
+                else {
+                    _TDKS.Where(t => t.Port == i + 1).FirstOrDefault().Cycling = false;
+                }
             }
         }
 
@@ -708,7 +724,16 @@ namespace Current_Cycling_Controls {
             // check if smoke over set point
             foreach (var s in filtered) {
                 if (s > double.Parse(txtSmokeOverSet.Text)) {
-                    Console.WriteLine($"OVERSMOKE Value: {s}");
+                    U.Logger.WriteLine($"OVERSMOKE Value: {s}");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckTempOver(List<double> temps) {
+            foreach (var t in temps) {
+                if (t > double.Parse(txtOverTempSet.Text)) {
                     return true;
                 }
             }
@@ -828,6 +853,7 @@ namespace Current_Cycling_Controls {
             form.ShowDialog();
             _ccRecipe = form.CurrentRecipe;
 
+            // set CurrentRecipe values to port GUI values
             if (_ccRecipe.SampleName != null) {
                 Properties.Settings.Default.Samples[index] = _ccRecipe.SampleName;
                 Properties.Settings.Default.Save();
@@ -837,8 +863,15 @@ namespace Current_Cycling_Controls {
                 _voc[index].Text = _ccRecipe.CellVoc.ToString();
                 _tempSensors[index].Text = _ccRecipe.TempSensor.ToString();
                 _setCurrents[index].Text = _ccRecipe.SetCurrent.ToString();
+
+                var samplePath = U.CCDataDir + _ccRecipe.SampleName + "\\";
+                // if new sample create directory for it to reference later for local recipes
+                if (!Directory.Exists(samplePath)) {
+                    Directory.CreateDirectory(samplePath);
+                }
             }
 
+            
 
         }
 
@@ -852,8 +885,9 @@ namespace Current_Cycling_Controls {
                         i++;
                         continue;
                     }
-                    Console.WriteLine($"Loading Recipes...");
-                    var recipe = BQConn.GetCurrentRecipe(s);
+                    U.Logger.WriteLine($"Loading Recipes...");
+                    //var recipe = BQConn.GetCurrentRecipe(s);
+                    var recipe = BQConn.GetCurrentRecipeCSV(s);
                     _samples[i].Text = recipe.SampleName;
                     _cycleLabels[i].Text = recipe.CycleNumber.ToString();
                     _numCells[i].Text = recipe.NumCells.ToString();
@@ -880,6 +914,9 @@ namespace Current_Cycling_Controls {
 
         private void ButtonClearAlarms_Click_1(object sender, EventArgs e) {
             SMOKEALARM = false;
+            TEMPALARM = false;
+            _cycling.SMOKEALARM = false;
+            _cycling.TEMPALARM = false;
         }
 
         private void CheckBoxPrintPacket_CheckedChanged(object sender, EventArgs e) {

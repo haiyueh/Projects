@@ -69,7 +69,8 @@ namespace Current_Cycling_Controls {
                 comboBoxSelect.Items.Add(r);
                 index++;
                 if (r == _selectedSample) {
-                    CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
+                    //CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
+                    CurrentRecipe = _conn.GetCurrentRecipeCSV(_selectedSample);
                     comboBoxSelect.SelectedIndex = index;
                 }
 
@@ -168,7 +169,8 @@ namespace Current_Cycling_Controls {
             // select recipe already there
             else {
                 _selectedSample = comboBoxSelect.SelectedItem.ToString();
-                CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
+                //CurrentRecipe = _conn.GetCurrentRecipe(_selectedSample);
+                CurrentRecipe = _conn.GetCurrentRecipeCSV(_selectedSample);
                 InitializeTable(true);
             }
 
@@ -183,17 +185,21 @@ namespace Current_Cycling_Controls {
                 foreach (var p in _recipeProperties.Where(p => p.Name.Equals(r[0]) && p.CanWrite && p.PropertyType != typeof(DateTime))) {
                     if (!GetValueFromString(p.PropertyType, r[1].ToString(), out var newVal)) continue;
                     if (newVal is string) {
-                        if ((string)newVal == "") return;
+                        var str = (string)newVal;
+                        if (str == "") return;
+                        if (str.Contains("/")) {
+                            MessageBox.Show($"CANNOT HAVE back/forward slashes in Sample Name!");
+                            return;
+                        } 
                     }
                     p.SetValue(CurrentRecipe, newVal);
                 }
             }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e) {
+        private void ButtonSave_Click(object sender, EventArgs e) {
             UpdateRecipe();
             Close();
-            //_dataWorker.RunWorkerAsync(1);
         }
 
         private void RunDataWorker(object sender, DoWorkEventArgs e) {
@@ -206,7 +212,7 @@ namespace Current_Cycling_Controls {
                     CurrentRecipe.Selected = true;
                     break;
             }
-            _recipeList = _conn.GetRecipeList<CCRecipe>();
+            _recipeList = _conn.GetRecipeListCSV();
             _dataWorker.ReportProgress(int.Parse(e.Argument.ToString()));
         }
 

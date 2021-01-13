@@ -2265,8 +2265,8 @@ namespace Current_Cycling_Controls {
             // checkBoxPrintPacket
             // 
             this.checkBoxPrintPacket.AutoSize = true;
-            this.checkBoxPrintPacket.Checked = true;
-            this.checkBoxPrintPacket.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPrintPacket.Checked = false;
+            this.checkBoxPrintPacket.CheckState = System.Windows.Forms.CheckState.Unchecked;
             this.checkBoxPrintPacket.Location = new System.Drawing.Point(1151, 760);
             this.checkBoxPrintPacket.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxPrintPacket.Name = "checkBoxPrintPacket";
